@@ -9,9 +9,15 @@ Main goal of the CORONA project is development of flexible, lightweight, configu
 
 ## Advantages
 1 - Including ESB (REST communication)
+
 2 - Configurable
+
 3 - Flexible Error Handling
+
 4 - Lightweight
+
 5 - Open Source
+
 6 - High Speed
+
 7 - Easy to Use
