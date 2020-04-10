@@ -1,0 +1,121 @@
+
+INFO:root:Transaction ID:00 | Tranactaion Date and Time: 2020/03/25 00:39:42 | Transaction Title: Database Prepration | Username: mahyar | Channel ID: DESKTOP-4MSAR08 | IP Address: 127.0.1.1 | Inserted Data: {"server":"127.0.0.1","port":"1515"} | Response:Result: 
+INFO:root:Transaction ID:00 | Tranactaion Date and Time: 2020/03/25 00:40:08 | Transaction Title: Database Prepration | Username: mahyar | Channel ID: DESKTOP-4MSAR08 | IP Address: 127.0.1.1 | Inserted Data: {"provider":"postgres","host":"127.0.0.1","database":"dbtest","username":"postgres","password":"123456"} | Response:Result: b''
+INFO:root:Transaction ID:00 | Tranactaion Date and Time: 2020/03/25 00:40:24 | Transaction Title: Set Administrator | Username: mahyar | Channel ID: DESKTOP-4MSAR08 | IP Address: 127.0.1.1 | Inserted Data: {"firstName":"Mahyar","lastName":"Esteki","personalCode":"12","username":"mahyar","password":"123"} | Response:Result: b''
+ERROR:App:Exception on /UserServices/getToken [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python3.6/dist-packages/flask_cors/decorator.py", line 128, in wrapped_function
+    resp = make_response(f(*args, **kwargs))
+  File "/mnt/d/RoadRunner/RoadRunner/App.py", line 63, in call_function
+    response = flask.Response('{"RetCode":"'+resp[0]+'", "RetMsg":"'+resp[1]+'", "RetMsgFa":"'+resp[2]+'"}')
+IndexError: string index out of range
+ERROR:App:Exception on /UserServices/getToken [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python3.6/dist-packages/flask_cors/decorator.py", line 128, in wrapped_function
+    resp = make_response(f(*args, **kwargs))
+  File "/mnt/d/RoadRunner/RoadRunner/App.py", line 40, in call_function
+    if query[0].ChannelTypeID.IsTokenRequired:
+  File "/usr/local/lib/python3.6/dist-packages/pony/orm/core.py", line 6148, in __getitem__
+    throw(TypeError, 'If you want apply index to a query, convert it to list first')
+  File "/usr/local/lib/python3.6/dist-packages/pony/utils/utils.py", line 106, in throw
+    raise exc
+TypeError: If you want apply index to a query, convert it to list first
+ERROR:root:Transaction ID:00 | Tranactaion Date and Time: 2020/03/25 00:57:40 | Transaction Title: Logging | Username: mahyar | Channel ID: 5000 | IP Address: 127.0.0.1 | Inserted Data: {'username': 'mahyar', 'password': '123'} | Response: | Error Code:SYS500 | Error Message:Internal Error
+Traceback (most recent call last):
+  File "/mnt/d/RoadRunner/RoadRunner/controllers/esb/UserServices.py", line 31, in getToken
+    tokens = Tokens(Token = token, UserID = mylist[0].UserID, GenerationDate = datetime.now())
+  File "/usr/local/lib/python3.6/dist-packages/pony/orm/core.py", line 4668, in __init__
+    avdict[attr] = attr.validate(val, obj, from_db=False)
+  File "/usr/local/lib/python3.6/dist-packages/pony/orm/core.py", line 2526, in validate
+    attr if obj is None or obj._status_ is None else '%r.%s' % (obj, attr.name)))
+  File "/usr/local/lib/python3.6/dist-packages/pony/utils/utils.py", line 106, in throw
+    raise exc
+ValueError: Attribute Tokens.ClientIP is required
+INFO:root:Transaction ID:00 | Tranactaion Date and Time: 2020/03/25 01:03:10 | Transaction Title: Logging | Username: mahyar | Channel ID: 5000 | IP Address: 127.0.0.1 | Inserted Data: {'username': 'mahyar', 'password': '123'} | Response:
+INFO:root:Transaction ID:00 | Tranactaion Date and Time: 2020/03/25 01:03:20 | Transaction Title: CheckToken | Username: unknown | Channel ID: 5000 | IP Address: 127.0.0.1 | Inserted Data: {"token":"95a3512b91474ff4bab34a0b463aa1df" } | Response:
+INFO:root:Transaction ID:00 | Tranactaion Date and Time: 2020/03/25 01:03:20 | Transaction Title: call_function | Username: unknown | Channel ID: 5000 | IP Address: 127.0.0.1 | Inserted Data: {} | Response:
+ERROR:App:Exception on /IsoServices/getBitmap [POST]
+Traceback (most recent call last):
+  File "/mnt/d/RoadRunner/RoadRunner/controllers/esb/IsoServices.py", line 30, in getBitmap
+    systemLog.InsertErrorLog(resp[0], 'GetBitmap', str(body), datetime.now(), str(body["username"]), str(header[str('channelId').capitalize()]), networkManagement.getClientIP(), "")
+TypeError: InsertErrorLog() missing 2 required positional arguments: 'errorCode' and 'errorMessage'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python3.6/dist-packages/flask_cors/decorator.py", line 128, in wrapped_function
+    resp = make_response(f(*args, **kwargs))
+  File "/mnt/d/RoadRunner/RoadRunner/App.py", line 81, in call_function
+    return function_to_call(header, body)
+  File "/mnt/d/RoadRunner/RoadRunner/controllers/esb/IsoServices.py", line 38, in getBitmap
+    systemLog.InsertErrorLog(resp[0], 'GetBitmap', str(body), datetime.now(), str(body["username"]), str(header[str('channelId').capitalize()]), networkManagement.getClientIP(), "")
+TypeError: InsertErrorLog() missing 2 required positional arguments: 'errorCode' and 'errorMessage'
+INFO:root:Transaction ID:00 | Tranactaion Date and Time: 2020/03/25 01:07:13 | Transaction Title: Logging | Username: mahyar | Channel ID: 5000 | IP Address: 127.0.0.1 | Inserted Data: {'username': 'mahyar', 'password': '123'} | Response:
+INFO:root:Transaction ID:00 | Tranactaion Date and Time: 2020/03/25 01:07:15 | Transaction Title: CheckToken | Username: unknown | Channel ID: 5000 | IP Address: 127.0.0.1 | Inserted Data: {"token":"1edde1879dd146169c2efe5800dd5a8f" } | Response:
+INFO:root:Transaction ID:00 | Tranactaion Date and Time: 2020/03/25 01:07:15 | Transaction Title: call_function | Username: unknown | Channel ID: 5000 | IP Address: 127.0.0.1 | Inserted Data: {} | Response:
+INFO:root:Transaction ID:ISO00 | Tranactaion Date and Time: 2020/03/25 01:07:15 | Transaction Title: GetBitmap | Username: mahyar | Channel ID: 5000 | IP Address: 127.0.0.1 | Inserted Data: {'username': 'mahyar', 'channelId': '10001'} | Response:
+ERROR:App:Exception on /UserServices/getToken [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python3.6/dist-packages/flask_cors/decorator.py", line 128, in wrapped_function
+    resp = make_response(f(*args, **kwargs))
+  File "/mnt/d/RoadRunner/RoadRunner/App.py", line 59, in call_function
+    response = flask.Response('{"RetCode":"'+resp[0]+'", "RetMsg":"'+resp[1]+'", "RetMsgFa":"'+resp[2]+'"}')
+IndexError: string index out of range
+ERROR:root:Transaction ID:00 | Tranactaion Date and Time: 2020/03/25 01:17:46 | Transaction Title: call_function | Username: unknown | Channel ID: 5001 | IP Address: 127.0.0.1 | Inserted Data: {} | Response: | Error Code:SEC07 | Error Message:Terminal is connected with invalid IP Address
+NoneType: None

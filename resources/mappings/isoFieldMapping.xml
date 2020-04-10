@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Fields>
+    <Field>
+        <IsoField>2</IsoField>
+        <DatabaseField>PAN</DatabaseField>
+        <JsonField jsonPart="body">AcctNo</JsonField>
+    </Field>
+    <Field>
+        <IsoField>3</IsoField>
+        <DatabaseField>ProcessingCode</DatabaseField>
+        <JsonField jsonPart="head">TransCode</JsonField>
+    </Field>
+    <Field>
+        <IsoField>4</IsoField>
+        <DatabaseField>Amount</DatabaseField>
+        <JsonField jsonPart="body">Amt</JsonField>
+    </Field>
+    <Field>
+        <IsoField>6</IsoField>
+        <DatabaseField>CurrencyAmount</DatabaseField>
+        <JsonField jsonPart="body">CC6</JsonField>
+    </Field>
+    <Field>
+        <IsoField>7</IsoField>
+        <DatabaseField>TransmissionDateTime</DatabaseField>
+        <JsonField jsonPart="head">TransDateTime</JsonField>
+    </Field>
+    <Field>
+        <IsoField>11</IsoField>
+        <DatabaseField>STAN</DatabaseField>
+        <JsonField jsonPart="head">ExSerial</JsonField>
+    </Field>
+    <Field>
+        <IsoField>12</IsoField>
+        <DatabaseField>LocalTransactionTime</DatabaseField>
+        <JsonField jsonPart="head">TransTime</JsonField>
+    </Field>
+    <Field>
+        <IsoField>13</IsoField>
+        <DatabaseField>LocalTransactionDate</DatabaseField>
+        <JsonField jsonPart="head">TransDate</JsonField>
+    </Field>
+    <Field>
+        <IsoField>14</IsoField>
+        <DatabaseField>ExpirationDate</DatabaseField>
+        <JsonField jsonPart="body">ExpirationDate</JsonField>
+    </Field>
+    <Field>
+        <IsoField>15</IsoField>
+        <DatabaseField>SettlementDate</DatabaseField>
+        <JsonField jsonPart="body">GC15</JsonField>
+    </Field>
+    <Field>
+        <IsoField>17</IsoField>
+        <DatabaseField>CaptureDate</DatabaseField>
+        <JsonField jsonPart="body">CC17</JsonField>
+    </Field>
+    <Field>
+        <IsoField>22</IsoField>
+        <DatabaseField>PointOfServiceEntryMode</DatabaseField>
+        <JsonField jsonPart="body">SvcEntry</JsonField>
+    </Field>
+    <Field>
+        <IsoField>24</IsoField>
+        <DatabaseField>FunctionCode</DatabaseField>
+        <JsonField jsonPart="body">ActionCode</JsonField>
+    </Field>
+    <Field>
+        <IsoField>25</IsoField>
+        <DatabaseField>PointOfServiceConditionCode</DatabaseField>
+        <JsonField jsonPart="body">SvcCode</JsonField>
+    </Field>
+    <Field>
+        <IsoField>32</IsoField>
+        <DatabaseField>AcquiringInstitutionIdentificationCode</DatabaseField>
+        <JsonField jsonPart="head">Acceptor</JsonField>
+    </Field>
+    <Field>
+        <IsoField>33</IsoField>
+        <DatabaseField>ForwardingInstitutionIdentificationCode</DatabaseField>
+        <JsonField jsonPart="body">ReceivingInstitutionIdentificationCode</JsonField>
+    </Field>
+    <Field>
+        <IsoField>35</IsoField>
+        <DatabaseField>Track2</DatabaseField>
+        <JsonField jsonPart="body">Track2</JsonField>
+    </Field>
+    <Field>
+        <IsoField>37</IsoField>
+        <DatabaseField>RRN</DatabaseField>
+        <JsonField jsonPart="body">TransSerial</JsonField>
+    </Field>
+    <Field>
+        <IsoField>39</IsoField>
+        <DatabaseField>ResponseCode</DatabaseField>
+        <JsonField jsonPart="head">RetCode</JsonField>
+    </Field>
+    <Field>
+        <IsoField>41</IsoField>
+        <DatabaseField>CardAcceptorTerminalIdentification</DatabaseField>
+        <JsonField jsonPart="head">TermNo</JsonField>
+    </Field>
+    <Field>
+        <IsoField>42</IsoField>
+        <DatabaseField>CardAcceptorCode</DatabaseField>
+        <JsonField jsonPart="body">CommercialCode</JsonField>
+    </Field>
+    <Field>
+        <IsoField>43</IsoField>
+        <DatabaseField>Acceptor</DatabaseField>
+        <JsonField jsonPart="body">GC43</JsonField>
+    </Field>
+    <Field>
+        <IsoField>44</IsoField>
+        <DatabaseField>AdditionalResponseData</DatabaseField>
+        <JsonField jsonPart="head">RetMsg</JsonField>
+    </Field>
+    <Field>
+        <IsoField>48</IsoField>
+        <DatabaseField>AddtionalData</DatabaseField>
+        <JsonField jsonPart="body">KeyValue</JsonField>
+    </Field>
+    <Field>
+        <IsoField>49</IsoField>
+        <DatabaseField>TransactionCurrencyCode</DatabaseField>
+        <JsonField jsonPart="body">Ccy</JsonField>
+    </Field>
+    <Field>
+        <IsoField>50</IsoField>
+        <DatabaseField>SettlementCurrencyCode</DatabaseField>
+        <JsonField jsonPart="body">SetCcy</JsonField>
+    </Field>
+    <Field>
+        <IsoField>51</IsoField>
+        <DatabaseField>BillingCurrencyCode</DatabaseField>
+        <JsonField jsonPart="body">BillCcy</JsonField>
+    </Field>
+    <Field>
+        <IsoField>52</IsoField>
+        <DatabaseField>PinBlock</DatabaseField>
+        <JsonField jsonPart="body">PinBlock</JsonField>
+    </Field>
+    <Field>
+        <IsoField>53</IsoField>
+        <DatabaseField>SecurityRelatedControlInformation</DatabaseField>
+        <JsonField jsonPart="body">SRCI</JsonField>
+    </Field>
+    <Field>
+        <IsoField>54</IsoField>
+        <DatabaseField>AdditionalAmounts</DatabaseField>
+        <JsonField jsonPart="body">Bal</JsonField>
+    </Field>
+    <Field>
+        <IsoField>62</IsoField>
+        <DatabaseField>ReasonCode</DatabaseField>
+        <JsonField jsonPart="body">ReasonCode</JsonField>
+    </Field>
+    <Field>
+        <IsoField>64</IsoField>
+        <DatabaseField>MAC</DatabaseField>
+        <JsonField jsonPart="">MAC</JsonField>
+    </Field>
+    <Field>
+        <IsoField>66</IsoField>
+        <DatabaseField>SettlementCode</DatabaseField>
+        <JsonField jsonPart="body">SettlementCode</JsonField>
+    </Field>
+    <Field>
+        <IsoField>70</IsoField>
+        <DatabaseField>NetworkManagementInformationCode</DatabaseField>
+        <JsonField jsonPart="body">NMIC</JsonField>
+    </Field>
+    <Field>
+        <IsoField>74</IsoField>
+        <DatabaseField>NumberOfCredits</DatabaseField>
+        <JsonField jsonPart="body">NumberOfCredits</JsonField>
+    </Field>
+    <Field>
+        <IsoField>75</IsoField>
+        <DatabaseField>CreditsReversalNumber</DatabaseField>
+        <JsonField jsonPart="body">CreditsReversalNumber</JsonField>
+    </Field>
+    <Field>
+        <IsoField>76</IsoField>
+        <DatabaseField>NumberOfDebits</DatabaseField>
+        <JsonField jsonPart="body">NumberOfDebits</JsonField>
+    </Field>
+    <Field>
+        <IsoField>77</IsoField>
+        <DatabaseField>DebitsReversalNumber</DatabaseField>
+        <JsonField jsonPart="body">DebitsReversalNumber</JsonField>
+    </Field>
+    <Field>
+        <IsoField>78</IsoField>
+        <DatabaseField>TransferNumber</DatabaseField>
+        <JsonField jsonPart="body">TransferNumber</JsonField>
+    </Field>
+    <Field>
+        <IsoField>79</IsoField>
+        <DatabaseField>TransferReversalNumber</DatabaseField>
+        <JsonField jsonPart="body">TransferReversalNumber</JsonField>
+    </Field>
+    <Field>
+        <IsoField>80</IsoField>
+        <DatabaseField>NumberOfInquiries</DatabaseField>
+        <JsonField jsonPart="body">NumberOfInquiries</JsonField>
+    </Field>
+    <Field>
+        <IsoField>81</IsoField>
+        <DatabaseField>NumberOfAuthorizations</DatabaseField>
+        <JsonField jsonPart="body">NumberOfAuthorizations</JsonField>
+    </Field>
+    <Field>
+        <IsoField>82</IsoField>
+        <DatabaseField>CreditsProcessingFeeAmount</DatabaseField>
+        <JsonField jsonPart="body">CreditsProcessingFeeAmount</JsonField>
+    </Field>
+    <Field>
+        <IsoField>83</IsoField>
+        <DatabaseField>CreditsTransactionFeeAmount</DatabaseField>
+        <JsonField jsonPart="body">CreditsTransactionFeeAmount</JsonField>
+    </Field>
+    <Field>
+        <IsoField>84</IsoField>
+        <DatabaseField>DebitsProcessingFeeAmount</DatabaseField>
+        <JsonField jsonPart="body">DebitsProcessingFeeAmount</JsonField>
+    </Field>
+    <Field>
+        <IsoField>85</IsoField>
+        <DatabaseField>DebitsTransactionFeeAmount</DatabaseField>
+        <JsonField jsonPart="body">DebitsTransactionFeeAmount</JsonField>
+    </Field>
+    <Field>
+        <IsoField>86</IsoField>
+        <DatabaseField>TotalAmountOfCredits</DatabaseField>
+        <JsonField jsonPart="body">TotalAmountOfCredits</JsonField>
+    </Field>
+    <Field>
+        <IsoField>87</IsoField>
+        <DatabaseField>CreditsReversalAmount</DatabaseField>
+        <JsonField jsonPart="body">CreditsReversalAmount</JsonField>
+    </Field>
+    <Field>
+        <IsoField>88</IsoField>
+        <DatabaseField>TotalAmountOfDebits</DatabaseField>
+        <JsonField jsonPart="body">TotalAmountOfDebits</JsonField>
+    </Field>
+    <Field>
+        <IsoField>89</IsoField>
+        <DatabaseField>DebitsReversalAmount</DatabaseField>
+        <JsonField jsonPart="body">DebitsReversalAmount</JsonField>
+    </Field>
+    <Field>
+        <IsoField>90</IsoField>
+        <DatabaseField>PrimaryDataElements</DatabaseField>
+        <JsonField jsonPart="body">PrimaryDataElements</JsonField>
+    </Field>
+    <Field>
+        <IsoField>95</IsoField>
+        <DatabaseField>ReplacementAmounts</DatabaseField>
+        <JsonField jsonPart="body">ReplacementAmounts</JsonField>
+    </Field>
+    <Field>
+        <IsoField>96</IsoField>
+        <DatabaseField>MessageSecurityCode</DatabaseField>
+        <JsonField jsonPart="body">MessageSecurityCode</JsonField>
+    </Field>
+    <Field>
+        <IsoField>97</IsoField>
+        <DatabaseField>NetSettlementAmount</DatabaseField>
+        <JsonField jsonPart="body">NetSettlementAmount</JsonField>
+    </Field>
+    <Field>
+        <IsoField>98</IsoField>
+        <DatabaseField>Payee</DatabaseField>
+        <JsonField jsonPart="body">Payee</JsonField>
+    </Field>
+    <Field>
+        <IsoField>99</IsoField>
+        <DatabaseField>SettlementInstitutionIdentificationCode</DatabaseField>
+        <JsonField jsonPart="body">SettlementInstitutionID</JsonField>
+    </Field>
+    <Field>
+        <IsoField>100</IsoField>
+        <DatabaseField>ReceivingInstitutionIdentificationCode</DatabaseField>
+        <JsonField jsonPart="head">BranchNo</JsonField>
+    </Field>
+    <Field>
+        <IsoField>102</IsoField>
+        <DatabaseField>AccountIdentification1</DatabaseField>
+        <JsonField jsonPart="body">FirstAccountNumber</JsonField>
+    </Field>
+    <Field>
+        <IsoField>103</IsoField>
+        <DatabaseField>AccountIdentification2</DatabaseField>
+        <JsonField jsonPart="body">SecondAccountNumber</JsonField>
+    </Field>
+    <Field>
+        <IsoField>121</IsoField>
+        <DatabaseField>PrivateAdditionalData</DatabaseField>
+        <JsonField jsonPart="body">AdditionalCustomInfo</JsonField>
+    </Field>
+    <Field>
+        <IsoField>123</IsoField>
+        <DatabaseField>NewPinBlock</DatabaseField>
+        <JsonField jsonPart="body">NewPinBlock</JsonField>
+    </Field>
+    <Field>
+        <IsoField>124</IsoField>
+        <DatabaseField>SettlementAdditionalData</DatabaseField>
+        <JsonField jsonPart="body">SettlementAdditionalData</JsonField>
+    </Field>
+    <Field>
+        <IsoField>128</IsoField>
+        <DatabaseField>MAC</DatabaseField>
+        <JsonField jsonPart="">MAC</JsonField>
+    </Field>
+</Fields>

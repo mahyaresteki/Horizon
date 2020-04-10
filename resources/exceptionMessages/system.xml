@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<errorMessages>
+    <errorMessage>
+        <code>SYS500</code>
+        <englishMessage>Internal Error</englishMessage>
+        <persianMessage>خطای داخلی</persianMessage>
+    </errorMessage>
+</errorMessages>
