@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="js/jquery.js"></script>
+		<title>Test Road Runner Payment Switch</title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td colspan="2"><label id="lblMsg"></label></td>
+			</tr>
+			<tr>
+				<td>Useranme:</td>
+				<td><input type="text" id="txtUsername"/></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type="password" id="txtPassword"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="button" value="Login" id="btnLogin"/></td>
+			</tr>
+		</table>
+
+		<table>
+			<tr>
+				<td>Token:</td>
+				<td><input type="text" id="txtToken"/></td>
+			</tr>
+			<tr>
+				<td>Transaction Type Code:</td>
+				<td>
+					<select id="cmbTransTypeCode">
+						<option value="0100">Authorization</option>
+						<option value="0200">Finantional</option>
+						<option value="0400">Reversal</option>
+						<option value="0500">Settlement</option>
+						<option value="0600">Administrative</option>
+						<option value="0800">NetworkManagement</option>
+						<option value="0804">KeyExchange</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="button" value="Get Bitmap" id="btnGetBitmap"/></td>
+			</tr>
+			<tr>
+				<td>Bitmap:</td>
+				<td><input type="text" id="txtBitmap"/></td>
+			</tr>
+		</table>
+		
+		
+		<script>
+			$(document).on("click", "#btnLogin", function () {
+				$.ajax({
+						url: 'http://127.0.0.1:1515/UserServices/getToken',
+						type: 'POST',
+						dataType: 'json',
+						crossDomain: true,
+						headers: {
+								'Access-Control-Allow-Origin': '*',
+								"Accept" : "application/json",
+								"channelId":"5001"
+						 },
+						contentType: "application/json; charset=utf-8",
+						data: {"username":$("#txtUsername").val(),"password":$("#txtPassword").val()},
+						success: function (data) {
+							if(data["token"] != null)
+							{
+								$("#lblMsg").html('');
+								$("#txtToken").val(data["token"]);
+							}
+							else{
+								$("#txtToken").val('');
+								$("#lblMsg").text(data["RetMsg"]);
+							}
+						},
+						error: function (data, xmlHttpRequest, errorText, thrownError) {
+							obj = jQuery.parseJSON(data.responseText);
+							if(obj["token"] != null)
+							{
+								$("#lblMsg").html('');
+								$("txtToken").val(obj["token"]);
+							}
+							else{
+								$("#txtToken").val('');
+								$("#lblMsg").text(obj["RetMsg"]);
+							}
+						}
+    				});
+			});
+			
+			$(document).on("click", "#btnGetBitmap", function () {
+				if($("#txtToken").val() != null)
+				{
+					$.ajax({
+						url: 'http://127.0.0.1:1515/IsoServices/getBitmap',
+						type: 'POST',
+						dataType: 'json',
+						crossDomain: true,
+						headers: {
+								'Access-Control-Allow-Origin': '*',
+								"Accept" : "application/json",
+								"token" : $("#txtToken").val(),
+								"username" : $("#txtUsername").val(),
+								"transTypeCode" : $("#cmbTransTypeCode").val(),
+								"channelId":"5001"
+						 },
+						contentType: "application/json; charset=utf-8",
+						data: {"username":$("#txtUsername").val(), "channelId":"10001"},
+						success: function (data) {
+							if(data["Bitmap"] != null)
+							{
+								$("#lblMsg").html('');
+								$("#txtBitmap").val(data["Bitmap"]);
+							}
+							else{
+								$("#txtBitmap").val('');
+								$("#lblMsg").text(data["RetMsg"]);
+							}
+						},
+						error: function (data, xmlHttpRequest, errorText, thrownError) {
+							obj = jQuery.parseJSON(data.responseText);
+							if(obj["token"] != null)
+							{
+								$("#lblMsg").html('');
+								$("txtBitmap").val(obj["Bitmap"]);
+							}
+							else{
+								$("#txtBitmap").val('');
+								$("#lblMsg").text(obj["RetMsg"]);
+							}
+						}
+    				});
+				}
+				else{
+					alert('Token is null!');
+				}
+			});
+		</script>
+	</body>
+</html>
