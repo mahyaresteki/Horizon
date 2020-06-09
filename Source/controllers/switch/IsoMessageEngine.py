@@ -4,6 +4,7 @@ import json
 
 isoFieldMapping = minidom.parse('resources/mappings/isoFieldMapping.xml')
 isoTransactionTypesMapping = minidom.parse('resources/mappings/isoTransactionTypesMapping.xml')
+isoRequestResponseMapping = minidom.parse('resources/mappings/isoRequestResponseMapping.xml')
 
 hexDict =	{
   "0": "0000",
@@ -44,12 +45,14 @@ class IsoMessageEngine:
             bitmap+=hexDict[c]
         return bitmap
 
+
     def GetBitmap(self, transTypeCode):
         config = configparser.ConfigParser()
         config.sections()
         config.read('config/conf.ini')
         bitmap = str(config['Bitmaps'][transTypeCode])
         return bitmap
+
 
     def GetDatabaseTableName(self, transTypeCode):
         itemlist1 = isoTransactionTypesMapping.getElementsByTagName('TransactionType')
@@ -59,6 +62,16 @@ class IsoMessageEngine:
                 tableName = s.getElementsByTagName('DbTableName')[0].childNodes[0].nodeValue
                 break
         return tableName
+
+
+    def GetResponseType(self, transTypeCode):
+        itemlist1 = isoRequestResponseMapping.getElementsByTagName('TransactionType')
+        respType = ""
+        for s in itemlist1:
+            if s.getElementsByTagName('RequestType')[0].childNodes[0].nodeValue == transTypeCode:
+                respType = s.getElementsByTagName('ResponseType')[0].childNodes[0].nodeValue
+                break
+        return respType
 
 
     def GetFeildsDictionary(self, bitmap):

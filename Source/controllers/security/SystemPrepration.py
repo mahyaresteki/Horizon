@@ -78,7 +78,6 @@ class SystemPrepration:
             systemLog.InsertInfoLog('00', 'Database Prepration', '{"provider":"' + provider + '","host":"' + host + '","database":"' + database + '","username":"' + username + '","password":"' + password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: '+str(response.encode("utf-8")))
             print('Database is created successfully!\n')
             self.SetAdministrator()
-            print('All Done! Beep Beep!!!\n')
         except Exception as e:
             response = exceptionHandling.getErrorMessage("SYS500")
             systemLog.InsertErrorLog('00', 'Database Prepration', '{"provider":"' + provider + '","host":"' + host + '","database":"' + database + '","username":"' + username + '","password":"' + password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: ' + str(response.encode("utf-8")))

@@ -56,7 +56,7 @@ if __name__ == "__main__":
     config.read('config/conf.ini')
 
 
-
+print('All Done! Horizon is ready to use.\n')
 app.run(host=config['DEFAULT']['server'], port=config['DEFAULT']['port'])
     
 

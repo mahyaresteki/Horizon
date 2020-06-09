@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TransactionTypes>
+    <TransactionType>
+        <RequestType>0100</RequestType>
+        <ResponseType>0110</ResponseType>
+    </TransactionType>
+    <TransactionType>
+        <RequestType>0200</RequestType>
+        <ResponseType>0210</ResponseType>
+    </TransactionType>
+    <TransactionType>
+        <RequestType>0220</RequestType>
+        <ResponseType>0230</ResponseType>
+    </TransactionType>
+    <TransactionType>
+        <RequestType>0400</RequestType>
+        <ResponseType>0410</ResponseType>
+    </TransactionType>
+    <TransactionType>
+        <RequestType>0420</RequestType>
+        <ResponseType>0430</ResponseType>
+    </TransactionType>
+    <TransactionType>
+        <RequestType>0500</RequestType>
+        <ResponseType>0510</ResponseType>
+    </TransactionType>
+    <TransactionType>
+        <RequestType>0520</RequestType>
+        <ResponseType>0530</ResponseType>
+    </TransactionType>
+    <TransactionType>
+        <RequestType>0600</RequestType>
+        <ResponseType>0610</ResponseType>
+    </TransactionType>
+    <TransactionType>
+        <RequestType>0800</RequestType>
+        <ResponseType>0810</ResponseType>
+    </TransactionType>
+    <TransactionType>
+        <RequestType>0820</RequestType>
+        <ResponseType>0830</ResponseType>
+    </TransactionType>
+    <TransactionType>
+        <RequestType>0804</RequestType>
+        <ResponseType>0814</ResponseType>
+    </TransactionType>
+</TransactionTypes>
