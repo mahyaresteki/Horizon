@@ -25,7 +25,9 @@ class IsoServices:
             bitmap = isoMessageEngine.GetBitmap(header[str('transTypeCode').capitalize()])
             bitmapHex = isoMessageEngine.BitmapToHex(bitmap)
             databaseTableName = isoMessageEngine.GetDatabaseTableName(header[str('transTypeCode').capitalize()])
-            response = flask.Response('{"Bitmap":"' + bitmap + '", "BitmapHex":"' + bitmapHex + '", "TableName":"' + databaseTableName + '" ,"transTypeCode":"'+header[str('transTypeCode').capitalize()]+'", "RetCode":"'+ resp[0]+ '", "RetMsg":"' + resp[1] + '", "RetMsgFa":"' + str(resp[2]) + '"}')
+            messageJsonStructure = json.dumps(isoMessageEngine.GetJsonMessageStructure(bitmap))
+            resText ='{"Bitmap":"' + bitmap + '", "BitmapHex":"' + bitmapHex + '", "TableName":"' + databaseTableName + '" ,"transTypeCode":"'+header[str('transTypeCode').capitalize()]+'", "RetCode":"'+ resp[0]+ '", "RetMsg":"' + resp[1] + '", "RetMsgFa":"' + str(resp[2]) + '", "msgStruc":'+messageJsonStructure[1:-1]+'}'
+            response = flask.Response(resText)
             response.headers["TransDateTime"] = str(datetime.now())
             response.headers["TransDate"] = str(datetime.date(datetime.now()))
             response.headers["TransTime"] = str(datetime.time(datetime.now()))
@@ -49,7 +51,9 @@ class IsoServices:
             bitmap = isoMessageEngine.GetBitmap(respType)
             bitmapHex = isoMessageEngine.BitmapToHex(bitmap)
             databaseTableName = isoMessageEngine.GetDatabaseTableName(respType)
-            response = flask.Response('{"Bitmap":"' + bitmap + '", "BitmapHex":"' + bitmapHex + '", "TableName":"' + databaseTableName + '" ,"transTypeCode":"' + respType + '", "RetCode":"'+ resp[0]+ '", "RetMsg":"' + resp[1] + '", "RetMsgFa":"' + str(resp[2]) + '"}')
+            messageJsonStructure = json.dumps(isoMessageEngine.GetJsonMessageStructure(bitmap))
+            resText ='{"Bitmap":"' + bitmap + '", "BitmapHex":"' + bitmapHex + '", "TableName":"' + databaseTableName + '" ,"transTypeCode":"'+header[str('transTypeCode').capitalize()]+'", "RetCode":"'+ resp[0]+ '", "RetMsg":"' + resp[1] + '", "RetMsgFa":"' + str(resp[2]) + '", "msgStruc":'+messageJsonStructure[1:-1]+'}'
+            response = flask.Response(resText)
             response.headers["TransDateTime"] = str(datetime.now())
             response.headers["TransDate"] = str(datetime.date(datetime.now()))
             response.headers["TransTime"] = str(datetime.time(datetime.now()))

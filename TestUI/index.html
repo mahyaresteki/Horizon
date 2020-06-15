@@ -44,11 +44,65 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="button" value="Get Bitmap" id="btnGetBitmap"/></td>
+				<td><input type="button" value="Get Request Structure" id="btnReqStruc"/></td>
 			</tr>
+		</table>
+		<table>
 			<tr>
-				<td>Bitmap:</td>
-				<td><input type="text" id="txtBitmap"/></td>
+				<td>
+					<table>
+						<tr>
+							<td colspan="2"><h2>Request Structure</h2></td>
+						</tr>
+						<tr>
+							<td>Message Type Code:</td>
+							<td><input type="text" id="txtMsgType"/></td>
+						</tr>
+						<tr>
+							<td>Bitmap:</td>
+							<td><textarea style="width:600px;" id="txtBitmap" name="txtBitmap"></textarea></td>
+						</tr>
+						<tr>
+							<td>Bitmap Hex:</td>
+							<td><textarea style="width:600px;" id="txtBitmapHex" name="txtBitmapHex"></textarea></td>
+						</tr>
+						<tr>
+							<td>JSON Structure:</td>
+							<td><textarea style="width:600px;height:150px" id="txtJsonStruc" name="txtJsonStruc"></textarea></td>
+						</tr>
+						<tr>
+							<td>Table Name:</td>
+							<td><input type="text" id="txtTableName"/></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table>
+						<tr>
+							<td colspan="2"><h2>Response Structure</h2></td>
+						</tr>
+						<tr>
+							<td>Message Type Code:</td>
+							<td><input type="text" id="txtMsgTypeRes"/></td>
+						</tr>
+						<tr>
+							<td>Bitmap:</td>
+							<td><textarea style="width:600px;" id="txtBitmapRes" name="txtBitmapRes"></textarea></td>
+						</tr>
+						<tr>
+							<td>Bitmap Hex:</td>
+							<td><textarea style="width:600px;" id="txtBitmapHexRes" name="txtBitmapHexRes"></textarea></td>
+						</tr>
+						<tr>
+							<td>JSON Structure:</td>
+							<td><textarea style="width:600px;height:150px" id="txtJsonStrucRes" name="txtJsonStrucRes"></textarea></td>
+						</tr>
+						<tr>
+							<td>Table Name:</td>
+							<td><input type="text" id="txtTableNameRes"/></td>
+						</tr>
+					</table>
+				</td>
 			</tr>
 		</table>
 		
@@ -93,11 +147,11 @@
     				});
 			});
 			
-			$(document).on("click", "#btnGetBitmap", function () {
+			$(document).on("click", "#btnReqStruc", function () {
 				if($("#txtToken").val() != null)
 				{
 					$.ajax({
-						url: 'http://127.0.0.1:1515/IsoServices/getBitmap',
+						url: 'http://127.0.0.1:1515/IsoServices/getRequestStructure',
 						type: 'POST',
 						dataType: 'json',
 						crossDomain: true,
@@ -116,10 +170,18 @@
 							{
 								$("#lblMsg").html('');
 								$("#txtBitmap").val(data["Bitmap"]);
+								$("#txtBitmapHex").val(data["BitmapHex"]);
+								$("#txtTableName").val(data["TableName"]);
+								$("#txtMsgType").val(data["transTypeCode"]);
+								$("#txtJsonStruc").val(JSON.stringify(data["msgStruc"]));
 							}
 							else{
 								$("#txtBitmap").val('');
 								$("#lblMsg").text(data["RetMsg"]);
+								$("#txtBitmapHex").val('');
+								$("#txtTableName").val('');
+								$("#txtMsgType").val('');
+								$("#txtJsonStruc").val('');
 							}
 						},
 						error: function (data, xmlHttpRequest, errorText, thrownError) {
@@ -128,10 +190,72 @@
 							{
 								$("#lblMsg").html('');
 								$("txtBitmap").val(obj["Bitmap"]);
+								$("#txtBitmapHex").val(data["BitmapHex"]);
+								$("#txtTableName").val(data["TableName"]);
+								$("#txtMsgType").val(data["transTypeCode"]);
+								$("#txtJsonStruc").val(JSON.stringify(data["msgStruc"]));
 							}
 							else{
 								$("#txtBitmap").val('');
-								$("#lblMsg").text(obj["RetMsg"]);
+								$("#lblMsg").text('');
+								$("#txtTableName").val('');
+								$("#txtMsgType").val('');
+								$("#txtJsonStruc").val('');
+							}
+						}
+    				});
+
+					$.ajax({
+						url: 'http://127.0.0.1:1515/IsoServices/getResponseStructure',
+						type: 'POST',
+						dataType: 'json',
+						crossDomain: true,
+						headers: {
+								'Access-Control-Allow-Origin': '*',
+								"Accept" : "application/json",
+								"token" : $("#txtToken").val(),
+								"username" : $("#txtUsername").val(),
+								"transTypeCode" : $("#cmbTransTypeCode").val(),
+								"channelId":"5001"
+						 },
+						contentType: "application/json; charset=utf-8",
+						data: {"username":$("#txtUsername").val(), "channelId":"10001"},
+						success: function (data) {
+							if(data["Bitmap"] != null)
+							{
+								$("#lblMsg").html('');
+								$("#txtBitmapRes").val(data["Bitmap"]);
+								$("#txtBitmapHexRes").val(data["BitmapHex"]);
+								$("#txtTableNameRes").val(data["TableName"]);
+								$("#txtMsgTypeRes").val(data["transTypeCode"]);
+								$("#txtJsonStrucRes").val(JSON.stringify(data["msgStruc"]));
+							}
+							else{
+								$("#txtBitmapRes").val('');
+								$("#lblMsg").text(data["RetMsg"]);
+								$("#txtBitmapHexRes").val('');
+								$("#txtTableNameRes").val('');
+								$("#txtMsgTypeRes").val('');
+								$("#txtJsonStrucRes").val('');
+							}
+						},
+						error: function (data, xmlHttpRequest, errorText, thrownError) {
+							obj = jQuery.parseJSON(data.responseText);
+							if(obj["token"] != null)
+							{
+								$("#lblMsg").html('');
+								$("txtBitmapRes").val(obj["Bitmap"]);
+								$("#txtBitmapHexRes").val(data["BitmapHex"]);
+								$("#txtTableNameRes").val(data["TableName"]);
+								$("#txtMsgTypeRes").val(data["transTypeCode"]);
+								$("#txtJsonStrucRes").val(JSON.stringify(data["msgStruc"]));
+							}
+							else{
+								$("#txtMsgTypeRes").val('');
+								$("#txtBitmapRes").val('');
+								$("#lblMsgRes").text('');
+								$("#txtTableNameRes").val('');
+								$("#txtJsonStrucRes").val('');
 							}
 						}
     				});
