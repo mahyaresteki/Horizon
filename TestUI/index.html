@@ -5,10 +5,20 @@
 		<script type="text/javascript" src="js/jquery.dform-1.1.0.min.js"></script>
 		<title>Test Road Runner Payment Switch</title>
 	</head>
+	<style type="text/css">
+		input, label {
+			display: block;
+			margin-bottom: 5px;
+		}
+	</style>
 	<body>
 		<table>
 			<tr>
 				<td colspan="2"><label id="lblMsg"></label></td>
+			</tr>
+			<tr>
+				<td>Terminal ID:</td>
+				<td><input type="text" id="txtTerminalId"/></td>
 			</tr>
 			<tr>
 				<td>Useranme:</td>
@@ -75,11 +85,6 @@
 							<td>Table Name:</td>
 							<td><input type="text" id="txtTableName"/></td>
 						</tr>
-						<tr>
-							<td colspan="2">
-								<form id="request-form"></form>
-							</td>
-						</tr>
 					</table>
 				</td>
 				<td>
@@ -107,12 +112,17 @@
 							<td>Table Name:</td>
 							<td><input type="text" id="txtTableNameRes"/></td>
 						</tr>
-						<tr>
-							<td colspan="2">
-								<form id="response-form"></form>
-							</td>
-						</tr>
 					</table>
+				</td>
+			</tr>
+		</table>
+		<table>
+			<tr>
+				<td style="width:750px; vertical-align:text-top;">
+					<form id="request-form"></form>
+				</td>
+				<td style="width:750px; vertical-align:text-top;">
+					<form id="response-form"></form>
 				</td>
 			</tr>
 		</table>
@@ -128,7 +138,7 @@
 						headers: {
 								'Access-Control-Allow-Origin': '*',
 								"Accept" : "application/json",
-								"channelId":"5001"
+								"channelId":$("#txtTerminalId").val()
 						 },
 						contentType: "application/json; charset=utf-8",
 						data: {"username":$("#txtUsername").val(),"password":$("#txtPassword").val()},
@@ -172,7 +182,7 @@
 								"token" : $("#txtToken").val(),
 								"username" : $("#txtUsername").val(),
 								"transTypeCode" : $("#cmbTransTypeCode").val(),
-								"channelId":"5001"
+								"channelId":$("#txtTerminalId").val()
 						 },
 						contentType: "application/json; charset=utf-8",
 						data: {"username":$("#txtUsername").val(), "channelId":"10001"},
@@ -268,10 +278,10 @@
 								"token" : $("#txtToken").val(),
 								"username" : $("#txtUsername").val(),
 								"transTypeCode" : $("#cmbTransTypeCode").val(),
-								"channelId":"5001"
+								"channelId":$("#txtTerminalId").val()
 						 },
 						contentType: "application/json; charset=utf-8",
-						data: {"username":$("#txtUsername").val(), "channelId":"10001"},
+						data: {"username":$("#txtUsername").val(), "channelId":$("#txtTerminalId").val()},
 						success: function (data) {
 							if(data["Bitmap"] != null)
 							{
