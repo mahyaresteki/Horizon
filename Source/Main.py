@@ -44,13 +44,12 @@ if __name__ == "__main__":
     print(config['AppInfo']['appName']+': '+config['AppInfo']['description'])
     print('Published by ' + config['AppInfo']['publisher'])
 
+    systemPrepration = SystemPrepration()
     if config['DEFAULT']['server'] == 'NotSet' or config['DEFAULT']['port'] == 'NotSet':
-        systemPrepration = SystemPrepration()
         systemPrepration.SetWebServer()
     if config['ConnectionString']['host'] == 'NotSet' or config['ConnectionString']['database'] == 'NotSet':
-        systemPrepration = SystemPrepration()
         systemPrepration.SetDatabase()
-
+    systemPrepration.CreateReportFolder()
     config = configparser.ConfigParser()
     config.sections()
     config.read('config/conf.ini')

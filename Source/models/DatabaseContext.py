@@ -1,518 +1,665 @@
 import sys
-from pony.orm import *
+from pony import orm
 from datetime import datetime
 import configparser
 config = configparser.ConfigParser()
 config.sections()
 config.read('config/conf.ini')
 
-db = Database()
+db = orm.Database()
 
-class Roles(db.Entity):
-        _table_ = ('public', 'Roles')
-        RoleID = PrimaryKey(int, auto=True)
-        RoleTitle = Required(str)
-        Description = Optional(str)
-        LatestUpdateDate = Required(datetime)
-        UserRole = Set("Users", reverse="RoleID")
-
-
-class Users(db.Entity):
-        _table_ = ('public', 'Users')
-        UserID = PrimaryKey(int, auto=True)
-        Username = Required(str, unique=True)
-        Password = Required(str)
-        FirstName = Required(str)
-        LastName = Required(str)
-        PersonelCode = Required(str, unique=True)
-        RoleID = Required("Roles", reverse="UserRole")
-        IsActive = Required(bool)
-        LatestUpdateDate = Required(datetime)
-        UserToken = Set("Tokens", reverse="UserID")
+class Countries(db.Entity):
+        _table_ = ('public', 'Branches')
+        CountryID = orm.PrimaryKey(int, auto=True)
+        CountryIsoCode = orm.Required(str, unique=True)
+        CountryName = orm.Required(str)
+        CountryNicename= orm.Required(str)
+        CountryIso3Code = orm.Optional(str, nullable=True)
+        CountryNumCode = orm.Optional(int, nullable=True)
+        CountryPhoneCode = orm.Required(int)
+        StateCountry = orm.Set("States", reverse="CountryID")
 
 
-class Tokens(db.Entity):
-        _table_ = ('public', 'Tokens')
-        TokenID = PrimaryKey(int, auto=True)
-        Token = Required(str, unique=True)
-        ClientIP = Required(str)
-        UserID = Required("Users", reverse="UserToken")
-        GenerationDate = Required(datetime)
-        AuthorizationRequestToken = Set("AuthorizationRequests", reverse="TokenID")
-        FinantionalRequestToken = Set("FinantionalRequests", reverse="TokenID")
-        ReversalRequestToken = Set("ReversalRequests", reverse="TokenID")
-        SettlementRequestToken = Set("SettlementRequests", reverse="TokenID")
-        AdministrativeRequestToken = Set("AdministrativeRequests", reverse="TokenID")
-        NetworkManagementRequestToken = Set("NetworkManagementRequests", reverse="TokenID")
-        KeyExchangeRequestToken = Set("KeyExchangeRequests", reverse="TokenID")
+class States(db.Entity):
+        _table_ = ('public', 'Branches')
+        StateID = orm.PrimaryKey(int, auto=True)
+        CountryID = orm.Required("Countries", reverse="StateCountry")
+        StateName = orm.Required(str)
+        Latitude= orm.Optional(str, nullable=True)
+        Longitude = orm.Optional(str, nullable=True)
+        CityState = orm.Set("Cities", reverse="StateID")
 
 
-class ChannelTypes(db.Entity):
-        _table_ = ('public', 'ChannelTypes')
-        ChannelTypeID = PrimaryKey(int, auto=True)
-        ChannelTypeTitle = Required(str, unique=True)
-        Description = Optional(str)
-        IsTokenRequired = Required(bool)
-        TerminalChannelType = Set("Terminals", reverse="ChannelTypeID")
-        AuthorizationRequestChannelType = Set("AuthorizationRequests", reverse="ChannelTypeID")
-        FinantionalRequestChannelType = Set("FinantionalRequests", reverse="ChannelTypeID")
-        ReversalRequestChannelType = Set("ReversalRequests", reverse="ChannelTypeID")
-        SettlementRequestChannelType = Set("SettlementRequests", reverse="ChannelTypeID")
-        AdministrativeRequestChannelType = Set("AdministrativeRequests", reverse="ChannelTypeID")
-        NetworkManagementRequestChannelType = Set("NetworkManagementRequests", reverse="ChannelTypeID")
-        KeyExchangeRequestChannelType = Set("KeyExchangeRequests", reverse="ChannelTypeID")
+class Cities(db.Entity):
+        _table_ = ('public', 'Branches')
+        CityID = orm.PrimaryKey(int, auto=True)
+        StateID = orm.Required("States", reverse="CityState")
+        CityName = orm.Required(str)
+        Latitude= orm.Optional(str, nullable=True)
+        Longitude = orm.Optional(str, nullable=True)
+        CityState = orm.Set("Cities", reverse="StateID")
+        BranchCity = orm.Set("Branches", reverse="CityID")
 
 
-class Processes(db.Entity):
-        _table_ = ('public', 'Processes')
-        ProcessingCode = PrimaryKey(str)
-        ProcessTitle = Required(str, unique=True)
-        Description = Optional(str)
-        AuthorizationRequestProcess = Set("AuthorizationRequests", reverse="ProcessingCode")
-        FinantionalRequestProcess = Set("FinantionalRequests", reverse="ProcessingCode")
-        ReversalRequestProcess = Set("ReversalRequests", reverse="ProcessingCode")
-        AdministrativeRequestProcess = Set("AdministrativeRequests", reverse="ProcessingCode")
-        AuthorizationResponseProcess = Set("AuthorizationResponses", reverse="ProcessingCode")
-        FinantionalResponseProcess = Set("FinantionalResponses", reverse="ProcessingCode")
-        ReversalResponseProcess = Set("ReversalResponses", reverse="ProcessingCode")
-        AdministrativeResponseProcess = Set("AdministrativeResponses", reverse="ProcessingCode")
+class Currencies(db.Entity):
+        _table_ = ('public', 'Currencies')
+        CurrencyID = orm.PrimaryKey(int, auto=True)
+        CurrencyName = orm.Required(str)
+        CurrencyCode = orm.Required(str)
+        CurrencySymbol = orm.Required(str)
+        IsActive = orm.Required(bool)
+
+
+class Banks(db.Entity):
+        _table_ = ('public', 'Banks')
+        BankID = orm.PrimaryKey(int, auto=True)
+        BankCode = orm.Required(str, unique=True)
+        BankName = orm.Required(str)
+        IsOwner = orm.Required(bool)
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        BankCardPrefix = orm.Set("CardPrefixCodes", reverse="BankID")
+        BankBranches = orm.Set("Branches", reverse="BankID")
 
 
 class Branches(db.Entity):
         _table_ = ('public', 'Branches')
-        BranchCode = PrimaryKey(str)
-        BranchTitle = Required(str, unique=True)
-        Description = Optional(str)
-        AuthorizationRequestBranch = Set("AuthorizationRequests", reverse="BranchCode")
-        FinantionalRequestBranch = Set("FinantionalRequests", reverse="BranchCode")
-        ReversalRequestBranch = Set("ReversalRequests", reverse="BranchCode")
-        SettlementRequestBranch = Set("SettlementRequests", reverse="BranchCode")
-        AdministrativeRequestBranch = Set("AdministrativeRequests", reverse="BranchCode")
-        NetworkManagementRequestBranch = Set("NetworkManagementRequests", reverse="BranchCode")
-        KeyExchangeRequestBranch = Set("KeyExchangeRequests", reverse="BranchCode")
-        TerminalBranch = Set("Terminals", reverse="BranchCode")
+        BranchID = orm.PrimaryKey(int, auto=True)
+        BranchCode = orm.Required(str)
+        CenteralBankID = orm.Required(str, unique=True)
+        BankID = orm.Required("Banks", reverse="BankBranches")
+        CityID = orm.Required("Cities", reverse="BranchCity")
+        Description = orm.Optional(str, nullable=True)
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        AuthorizationRequestBranch = orm.Set("AuthorizationRequests", reverse="BranchCode")
+
+
+
+class CardPrefixCodes(db.Entity):
+        _table_ = ('public', 'Cards')
+        CardID = orm.PrimaryKey(int, auto=True)
+        CardPrefixCode = orm.Required(str, unique=True)
+        BankID = orm.Required("Banks", reverse="BankCardPrefix")
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+
+
+
+class CardTypes(db.Entity):
+        _table_ = ('public', 'Branches')
+        CardTypeID = orm.PrimaryKey(int, auto=True)
+        CardTypeTitle = orm.Required(str)
+
+
+
+class TransTypes(db.Entity):
+        _table_ = ('public', 'TarnsTypes')
+        TransTypeID = orm.PrimaryKey(int, auto=True)
+        TransTypeCode = orm.Required(str, unique=True)
+        TransTypeTitle = orm.Required(str)
+        TransTypeMode = orm.Required(str)
+        DbTableName = orm.Required(str)
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        TransServiceTransType = orm.Set("TransServices", reverse="TransTypeID")
+
+class Services(db.Entity):
+        _table_ = ('public', 'Services')
+        ServiceID = orm.PrimaryKey(int, auto=True)
+        ServiceTitle = orm.Required(str, unique=True)
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        TransServiceService = orm.Set("TransServices", reverse="ServiceID")
+
+
+class TransServices(db.Entity):
+        TransServiceID = orm.PrimaryKey(int, auto=True)
+        ServiceID = orm.Required("Services", reverse="TransServiceService")
+        TransTypeID = orm.Required("TransTypes", reverse="TransServiceTransType")
+        Bitmap = orm.Required(str)
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        RoleAccessesService = orm.Set("RoleAccesses", reverse="TransServiceID")
+        AuthorizationRequestService = orm.Set("AuthorizationRequests", reverse="TransServiceID")
+        FinantionalRequestService = orm.Set("FinantionalRequests", reverse="TransServiceID")
+        ReversalRequestService = orm.Set("ReversalRequests", reverse="TransServiceID")
+        SettlementRequestService = orm.Set("SettlementRequests", reverse="TransServiceID")
+        AdministrativeRequestService = orm.Set("AdministrativeRequests", reverse="TransServiceID")
+        NetworkManagementRequestService = orm.Set("NetworkManagementRequests", reverse="TransServiceID")
+        KeyExchangeRequestService = orm.Set("KeyExchangeRequests", reverse="TransServiceID")
+
+
+class Roles(db.Entity):
+        _table_ = ('public', 'Roles')
+        RoleID = orm.PrimaryKey(int, auto=True)
+        RoleTitle = orm.Required(str)
+        Description = orm.Optional(str, nullable=True)
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        UserRole = orm.Set("Users", reverse="RoleID")
+        RoleAccessesRole = orm.Set("RoleAccesses", reverse="RoleID")
+
+
+class RoleAccesses(db.Entity):
+        _table_ = ('public', 'RoleAccesses')
+        RoleAccessID = orm.PrimaryKey(int, auto=True)
+        RoleID = orm.Required("Roles", reverse="RoleAccessesRole")
+        ServiceID = orm.Required("Services", reverse="RoleAccessesService")
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+
+
+class Users(db.Entity):
+        _table_ = ('public', 'Users')
+        UserID = orm.PrimaryKey(int, auto=True)
+        Username = orm.Required(str, unique=True)
+        Password = orm.Required(str)
+        FirstName = orm.Required(str)
+        LastName = orm.Required(str)
+        PersonelCode = orm.Required(str, unique=True)
+        RoleID = orm.Required("Roles", reverse="UserRole")
+        IsActive = orm.Required(bool)
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        UserToken = orm.Set("Tokens", reverse="UserID")
+
+
+class Tokens(db.Entity):
+        _table_ = ('public', 'Tokens')
+        TokenID = orm.PrimaryKey(int, auto=True)
+        Token = orm.Required(str, unique=True)
+        ClientIP = orm.Required(str)
+        UserID = orm.Required("Users", reverse="UserToken")
+        GenerationDate = orm.Required(datetime)
+        AuthorizationRequestToken = orm.Set("AuthorizationRequests", reverse="TokenID")
+        FinantionalRequestToken = orm.Set("FinantionalRequests", reverse="TokenID")
+        ReversalRequestToken = orm.Set("ReversalRequests", reverse="TokenID")
+        SettlementRequestToken = orm.Set("SettlementRequests", reverse="TokenID")
+        AdministrativeRequestToken = orm.Set("AdministrativeRequests", reverse="TokenID")
+        NetworkManagementRequestToken = orm.Set("NetworkManagementRequests", reverse="TokenID")
+        KeyExchangeRequestToken = orm.Set("KeyExchangeRequests", reverse="TokenID")
+
+
+class ChannelTypes(db.Entity):
+        _table_ = ('public', 'ChannelTypes')
+        ChannelTypeID = orm.PrimaryKey(int, auto=True)
+        ChannelTypeTitle = orm.Required(str, unique=True)
+        Description = orm.Optional(str, nullable=True)
+        IsTokenRequired = orm.Required(bool)
+        HasNoteSituation = orm.Required(bool)
+        HasWithdrawalService = orm.Required(bool)
+        HasDepositService = orm.Required(bool)
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        TerminalChannelType = orm.Set("Terminals", reverse="ChannelTypeID")
+        AuthorizationRequestChannelType = orm.Set("AuthorizationRequests", reverse="ChannelTypeID")
+        FinantionalRequestChannelType = orm.Set("FinantionalRequests", reverse="ChannelTypeID")
+        ReversalRequestChannelType = orm.Set("ReversalRequests", reverse="ChannelTypeID")
+        SettlementRequestChannelType = orm.Set("SettlementRequests", reverse="ChannelTypeID")
+        AdministrativeRequestChannelType = orm.Set("AdministrativeRequests", reverse="ChannelTypeID")
+        NetworkManagementRequestChannelType = orm.Set("NetworkManagementRequests", reverse="ChannelTypeID")
+        KeyExchangeRequestChannelType = orm.Set("KeyExchangeRequests", reverse="ChannelTypeID")
+
+
+class Processes(db.Entity):
+        _table_ = ('public', 'Processes')
+        ProcessingCode = orm.PrimaryKey(str)
+        ProcessTitle = orm.Required(str, unique=True)
+        Description = orm.Optional(str, nullable=True)
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        AuthorizationRequestProcess = orm.Set("AuthorizationRequests", reverse="ProcessingCode")
+        FinantionalRequestProcess = orm.Set("FinantionalRequests", reverse="ProcessingCode")
+        ReversalRequestProcess = orm.Set("ReversalRequests", reverse="ProcessingCode")
+        AdministrativeRequestProcess = orm.Set("AdministrativeRequests", reverse="ProcessingCode")
+        AuthorizationResponseProcess = orm.Set("AuthorizationResponses", reverse="ProcessingCode")
+        FinantionalResponseProcess = orm.Set("FinantionalResponses", reverse="ProcessingCode")
+        ReversalResponseProcess = orm.Set("ReversalResponses", reverse="ProcessingCode")
+        AdministrativeResponseProcess = orm.Set("AdministrativeResponses", reverse="ProcessingCode")
+
+
+class Branches(db.Entity):
+        _table_ = ('public', 'Branches')
+        BranchCode = orm.PrimaryKey(str)
+        BranchTitle = orm.Required(str, unique=True)
+        Description = orm.Optional(str, nullable=True)
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        AuthorizationRequestBranch = orm.Set("AuthorizationRequests", reverse="BranchCode")
+        FinantionalRequestBranch = orm.Set("FinantionalRequests", reverse="BranchCode")
+        ReversalRequestBranch = orm.Set("ReversalRequests", reverse="BranchCode")
+        SettlementRequestBranch = orm.Set("SettlementRequests", reverse="BranchCode")
+        AdministrativeRequestBranch = orm.Set("AdministrativeRequests", reverse="BranchCode")
+        NetworkManagementRequestBranch = orm.Set("NetworkManagementRequests", reverse="BranchCode")
+        KeyExchangeRequestBranch = orm.Set("KeyExchangeRequests", reverse="BranchCode")
+        TerminalBranch = orm.Set("Terminals", reverse="BranchCode")
+
 
 
 class Terminals(db.Entity):
         _table_ = ('public', 'Terminals')
-        TerminalCode = PrimaryKey(str)
-        BranchCode = Required("Branches", reverse="TerminalBranch")
-        ChannelTypeID = Required("ChannelTypes", reverse="TerminalChannelType")
-        IPAddress = Required(str, unique=True)
-        MacKey = Required(str, unique=True)
-        PinKey = Required(str, unique=True)
-        MasterKey = Required(str, unique=True)
-        TopUpKey = Required(str, unique=True)
-        AuthorizationRequestTermial = Set("AuthorizationRequests", reverse="TerminalCode")
-        FinantionalRequestTermial = Set("FinantionalRequests", reverse="TerminalCode")
-        ReversalRequestTermial = Set("ReversalRequests", reverse="TerminalCode")
-        SettlementRequestTermial = Set("SettlementRequests", reverse="TerminalCode")
-        AdministrativeRequestTermial = Set("AdministrativeRequests", reverse="TerminalCode")
-        NetworkManagementRequestTermial = Set("NetworkManagementRequests", reverse="TerminalCode")
-        KeyExchangeRequestTermial = Set("KeyExchangeRequests", reverse="TerminalCode")
+        TerminalCode = orm.PrimaryKey(str)
+        BranchCode = orm.Required("Branches", reverse="TerminalBranch")
+        ChannelTypeID = orm.Required("ChannelTypes", reverse="TerminalChannelType")
+        IPAddress = orm.Required(str, unique=True)
+        MacKey = orm.Required(str, unique=True)
+        PinKey = orm.Required(str, unique=True)
+        MasterKey = orm.Required(str, unique=True)
+        TopUpKey = orm.Required(str, unique=True)
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        AuthorizationRequestTermial = orm.Set("AuthorizationRequests", reverse="TerminalCode")
+        FinantionalRequestTermial = orm.Set("FinantionalRequests", reverse="TerminalCode")
+        ReversalRequestTermial = orm.Set("ReversalRequests", reverse="TerminalCode")
+        SettlementRequestTermial = orm.Set("SettlementRequests", reverse="TerminalCode")
+        AdministrativeRequestTermial = orm.Set("AdministrativeRequests", reverse="TerminalCode")
+        NetworkManagementRequestTermial = orm.Set("NetworkManagementRequests", reverse="TerminalCode")
+        KeyExchangeRequestTermial = orm.Set("KeyExchangeRequests", reverse="TerminalCode")
 
 
 # 0100 Messages
 class AuthorizationRequests(db.Entity):
         _table_ = ('public', 'AuthorizationRequests')
-        AuthorizationRequestID = PrimaryKey(int, auto=True)
-        MessageType = Required(int) # ISO-2
-        PAN = Optional(str) # P-2
-        ProcessingCode = Required("Processes", reverse="AuthorizationRequestProcess") # P-3
-        Amount = Required(int) # P-4
-        TransmissionDateTime = Required(str) # P-7
-        STAN = Required(str) # P-11
-        LocalTransactionTime = Required(str) # P-12
-        LocalTransactionDate = Required(str) # P-13
-        ExpirationDate = Required(str) # P-14
-        PointOfServiceEntryMode = Required(str) # P-22
-        FunctionCode = Required(str) # P-24
-        PointOfServiceConditionCode = Required(str) # P-25
-        AcquiringInstitutionIdentificationCode = Required(int) # P-32
-        Track2 = Optional(str) # P-35
-        RRN = Required(str) # P-37
-        CardAcceptor = Required(str) # P-41
-        CardAcceptorCode = Required(str) # P-42
-        AddtionalData = Optional(str) # P-48
-        TransactionCurrencyCode = Optional(int) # P-49
-        PinBlock = Optional(str) # P-52
-        MAC = Required(str) # P-64
-        ChannelTypeID = Required("ChannelTypes", reverse="AuthorizationRequestChannelType")
-        TerminalCode = Required("Terminals", reverse="AuthorizationRequestTermial")
-        TerminalIpAddress = Required(str)
-        BranchCode = Required("Branches", reverse="AuthorizationRequestBranch") # S-100
-        TokenID = Required("Tokens", reverse="AuthorizationRequestToken")
-        AuthorizationReq = Set("AuthorizationResponses", reverse="AuthorizationRequestID")
+        AuthorizationRequestID = orm.PrimaryKey(int, auto=True)
+        MessageType = orm.Required(int) # ISO-2
+        PAN = orm.Optional(str) # P-2
+        ProcessingCode = orm.Required("Processes", reverse="AuthorizationRequestProcess") # P-3
+        Amount = orm.Required(int) # P-4
+        TransmissionDateTime = orm.Required(str) # P-7
+        STAN = orm.Required(str) # P-11
+        LocalTransactionTime = orm.Required(str) # P-12
+        LocalTransactionDate = orm.Required(str) # P-13
+        ExpirationDate = orm.Required(str) # P-14
+        PointOfServiceEntryMode = orm.Required(str) # P-22
+        FunctionCode = orm.Required(str) # P-24
+        PointOfServiceConditionCode = orm.Required(str) # P-25
+        AcquiringInstitutionIdentificationCode = orm.Required(int) # P-32
+        Track2 = orm.Optional(str) # P-35
+        RRN = orm.Required(str) # P-37
+        CardAcceptor = orm.Required(str) # P-41
+        CardAcceptorCode = orm.Required(str) # P-42
+        AddtionalData = orm.Optional(str) # P-48
+        TransactionCurrencyCode = orm.Optional(int) # P-49
+        PinBlock = orm.Optional(str) # P-52
+        MAC = orm.Required(str) # P-64
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        ServiceID = orm.Required("Services", reverse="AuthorizationRequestService")
+        ChannelTypeID = orm.Required("ChannelTypes", reverse="AuthorizationRequestChannelType")
+        TerminalCode = orm.Required("Terminals", reverse="AuthorizationRequestTermial")
+        TerminalIpAddress = orm.Required(str)
+        BranchCode = orm.Required("Branches", reverse="AuthorizationRequestBranch") # S-100
+        TokenID = orm.Required("Tokens", reverse="AuthorizationRequestToken")
+        AuthorizationReq = orm.Set("AuthorizationResponses", reverse="AuthorizationRequestID")
 
 
 # 0110 Messages
 class AuthorizationResponses(db.Entity):
         _table_ = ('public', 'AuthorizationResponses')
-        AuthorizationResponseID = PrimaryKey(int, auto=True)
-        AuthorizationRequestID = Required("AuthorizationRequests", reverse="AuthorizationReq")
-        MessageType = Required(int) # ISO-2
-        SecondBitmap = Required(bytes) # P-1
-        PAN = Optional(str) # P-2
-        ProcessingCode = Required("Processes", reverse="AuthorizationResponseProcess") # P-3
-        Amount = Required(int) # P-4
-        CurrencyAmount = Optional(int) # P-6
-        TransmissionDateTime = Required(str) # P-7
-        STAN = Required(str) # P-11
-        LocalTransactionTime = Required(str) # P-12
-        LocalTransactionDate = Required(str) # P-13
-        CaptureDate = Required(datetime) # P-17
-        AcquiringInstitutionIdentificationCode = Required(int) # P-32
-        ForwardingInstitutionIdentificationCode = Optional(int) # P-33
-        RRN = Required(str) # P-37
-        ResponseCode = Required(str) # P-39
-        CardAcceptor = Required(str) # P-41
-        CardAcceptorCode = Required(str) # P-42
-        CardAcceptorName = Required(str) # P-43
-        AdditionalResponseData = Required(str) # P-44
-        AddtionalData = Optional(str) # P-48
-        TransactionCurrencyCode = Optional(int) # P-49
-        BillingCurrencyCode = Optional(int) # P-51
-        Payee = Optional(int) # P-98
-        AccountIdentification1 = Optional(str) # S-102
-        AccountIdentification2 = Optional(str) # S-103
-        PrivateAdditionalData = Optional(str) # S-121
-        MAC = Required(int) # S-128
+        AuthorizationResponseID = orm.PrimaryKey(int, auto=True)
+        AuthorizationRequestID = orm.Required("AuthorizationRequests", reverse="AuthorizationReq")
+        MessageType = orm.Required(int) # ISO-2
+        SecondBitmap = orm.Required(bytes) # P-1
+        PAN = orm.Optional(str) # P-2
+        ProcessingCode = orm.Required("Processes", reverse="AuthorizationResponseProcess") # P-3
+        Amount = orm.Required(int) # P-4
+        CurrencyAmount = orm.Optional(int) # P-6
+        TransmissionDateTime = orm.Required(str) # P-7
+        STAN = orm.Required(str) # P-11
+        LocalTransactionTime = orm.Required(str) # P-12
+        LocalTransactionDate = orm.Required(str) # P-13
+        CaptureDate = orm.Required(datetime) # P-17
+        AcquiringInstitutionIdentificationCode = orm.Required(int) # P-32
+        ForwardingInstitutionIdentificationCode = orm.Optional(int) # P-33
+        RRN = orm.Required(str) # P-37
+        ResponseCode = orm.Required(str) # P-39
+        CardAcceptor = orm.Required(str) # P-41
+        CardAcceptorCode = orm.Required(str) # P-42
+        CardAcceptorName = orm.Required(str) # P-43
+        AdditionalResponseData = orm.Required(str) # P-44
+        AddtionalData = orm.Optional(str) # P-48
+        TransactionCurrencyCode = orm.Optional(int) # P-49
+        BillingCurrencyCode = orm.Optional(int) # P-51
+        Payee = orm.Optional(int) # P-98
+        AccountIdentification1 = orm.Optional(str) # S-102
+        AccountIdentification2 = orm.Optional(str) # S-103
+        PrivateAdditionalData = orm.Optional(str) # S-121
+        MAC = orm.Required(int) # S-128
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
         
 
 # 0200 and 220 Messages
 class FinantionalRequests(db.Entity):
         _table_ = ('public', 'FinantionalRequests')
-        FinantionalRequestID = PrimaryKey(int, auto=True)
-        MessageType = Required(int) # ISO-2
-        SecondBitmap = Required(bytes) # P-1
-        PAN = Required(str) # P-2
-        ProcessingCode = Required("Processes", reverse="FinantionalRequestProcess") # P-3
-        Amount = Required(int) # P-4
-        TransmissionDateTime = Required(str) # P-7
-        STAN = Required(str) # P-11
-        LocalTransactionTime = Required(str) # P-12
-        LocalTransactionDate = Required(str) # P-13
-        ExpirationDate = Required(str) # P-14
-        PointOfServiceEntryMode = Required(int) # P-22
-        FunctionCode = Required(int) # P-24
-        PointOfServiceConditionCode = Required(int) # P-25
-        AcquiringInstitutionIdentificationCode = Required(int) # P-32
-        ForwardingInstitutionIdentificationCode = Optional(int) # P-33
-        Track2 = Optional(int) # P-35
-        RRN = Optional(int) # P-37
-        CardAcceptor = Optional(int) # P-41
-        CardAcceptorCode = Required(str) # P-42
-        CardAcceptorName = Required(str) # P-43
-        AddtionalData = Optional(int) # P-48
-        TransactionCurrencyCode = Optional(int) # P-49
-        PinBlock = Optional(int) # P-52
-        Payee = Optional(int) # S-98
-        AccountIdentification1 = Optional(int) # S-102
-        AccountIdentification2 = Optional(int) # S-103
-        PrivateAdditionalData = Optional(str) # S-121
-        NewPinBlock = Optional(int) # S-123
-        MAC = Optional(int) # S-128
-        ChannelTypeID = Required("ChannelTypes", reverse="FinantionalRequestChannelType")
-        TerminalCode = Required("Terminals", reverse="FinantionalRequestTermial")
-        TerminalIpAddress = Required(str)
-        BranchCode = Required("Branches", reverse="FinantionalRequestBranch") # S-100
-        TokenID = Required("Tokens", reverse="FinantionalRequestToken")
-        FinantionalReq = Set("FinantionalResponses", reverse="FinantionalRequestID")
+        FinantionalRequestID = orm.PrimaryKey(int, auto=True)
+        MessageType = orm.Required(int) # ISO-2
+        SecondBitmap = orm.Required(bytes) # P-1
+        PAN = orm.Required(str) # P-2
+        ProcessingCode = orm.Required("Processes", reverse="FinantionalRequestProcess") # P-3
+        Amount = orm.Required(int) # P-4
+        TransmissionDateTime = orm.Required(str) # P-7
+        STAN = orm.Required(str) # P-11
+        LocalTransactionTime = orm.Required(str) # P-12
+        LocalTransactionDate = orm.Required(str) # P-13
+        ExpirationDate = orm.Required(str) # P-14
+        PointOfServiceEntryMode = orm.Required(int) # P-22
+        FunctionCode = orm.Required(int) # P-24
+        PointOfServiceConditionCode = orm.Required(int) # P-25
+        AcquiringInstitutionIdentificationCode = orm.Required(int) # P-32
+        ForwardingInstitutionIdentificationCode = orm.Optional(int) # P-33
+        Track2 = orm.Optional(int) # P-35
+        RRN = orm.Optional(int) # P-37
+        CardAcceptor = orm.Optional(int) # P-41
+        CardAcceptorCode = orm.Required(str) # P-42
+        CardAcceptorName = orm.Required(str) # P-43
+        AddtionalData = orm.Optional(int) # P-48
+        TransactionCurrencyCode = orm.Optional(int) # P-49
+        PinBlock = orm.Optional(int) # P-52
+        Payee = orm.Optional(int) # S-98
+        AccountIdentification1 = orm.Optional(int) # S-102
+        AccountIdentification2 = orm.Optional(int) # S-103
+        PrivateAdditionalData = orm.Optional(str) # S-121
+        NewPinBlock = orm.Optional(int) # S-123
+        MAC = orm.Optional(int) # S-128
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        ServiceID = orm.Required("Services", reverse="FinantionalRequestService")
+        ChannelTypeID = orm.Required("ChannelTypes", reverse="FinantionalRequestChannelType")
+        TerminalCode = orm.Required("Terminals", reverse="FinantionalRequestTermial")
+        TerminalIpAddress = orm.Required(str)
+        BranchCode = orm.Required("Branches", reverse="FinantionalRequestBranch") # S-100
+        TokenID = orm.Required("Tokens", reverse="FinantionalRequestToken")
+        FinantionalReq = orm.Set("FinantionalResponses", reverse="FinantionalRequestID")
         
 
 # 0210 and 0230 Messages
 class FinantionalResponses(db.Entity):
         _table_ = ('public', 'FinantionalResponses')
-        FinantionalResponseID = PrimaryKey(int, auto=True)
-        FinantionalRequestID = Required("FinantionalRequests", reverse="FinantionalReq")
-        MessageType = Required(int) # ISO-2
-        PAN = Optional(str) # P-2
-        ProcessingCode = Required("Processes", reverse="FinantionalResponseProcess") # P-3
-        Amount = Required(int) # P-4
-        CurrencyAmount = Optional(int) # P-6
-        TransmissionDateTime = Required(str) # P-7
-        STAN = Required(str) # P-11
-        LocalTransactionTime = Required(str) # P-12
-        LocalTransactionDate = Required(str) # P-13
-        SettlementDate = Required(datetime) # P-15
-        CaptureDate = Required(datetime) # P-17
-        FunctionCode = Required(int) # P-24
-        AcquiringInstitutionIdentificationCode = Required(int) # P-32
-        ForwardingInstitutionIdentificationCode = Optional(int) # P-33
-        RRN = Optional(int) # P-37
-        ResponseCode = Optional(int) # P-39
-        CardAcceptorTerminalId = Optional(int) # P-41
-        CardAcceptorCode = Optional(int) # P-42
-        AddtionalData = Optional(str) # P-48
-        TransactionCurrencyCode = Optional(int) # P-49
-        AdditionalAmounts = Optional(int) # P-54
-        AccountIdentification1 = Optional(int) # S-102
-        AccountIdentification2 = Optional(int) # S-103
-        PrivateAdditionalData = Optional(int) # S-121
-        MAC = Optional(int) # S-128 
+        FinantionalResponseID = orm.PrimaryKey(int, auto=True)
+        FinantionalRequestID = orm.Required("FinantionalRequests", reverse="FinantionalReq")
+        MessageType = orm.Required(int) # ISO-2
+        PAN = orm.Optional(str) # P-2
+        ProcessingCode = orm.Required("Processes", reverse="FinantionalResponseProcess") # P-3
+        Amount = orm.Required(int) # P-4
+        CurrencyAmount = orm.Optional(int) # P-6
+        TransmissionDateTime = orm.Required(str) # P-7
+        STAN = orm.Required(str) # P-11
+        LocalTransactionTime = orm.Required(str) # P-12
+        LocalTransactionDate = orm.Required(str) # P-13
+        SettlementDate = orm.Required(datetime) # P-15
+        CaptureDate = orm.Required(datetime) # P-17
+        FunctionCode = orm.Required(int) # P-24
+        AcquiringInstitutionIdentificationCode = orm.Required(int) # P-32
+        ForwardingInstitutionIdentificationCode = orm.Optional(int) # P-33
+        RRN = orm.Optional(int) # P-37
+        ResponseCode = orm.Optional(int) # P-39
+        CardAcceptorTerminalId = orm.Optional(int) # P-41
+        CardAcceptorCode = orm.Optional(int) # P-42
+        AddtionalData = orm.Optional(str) # P-48
+        TransactionCurrencyCode = orm.Optional(int) # P-49
+        AdditionalAmounts = orm.Optional(int) # P-54
+        AccountIdentification1 = orm.Optional(int) # S-102
+        AccountIdentification2 = orm.Optional(int) # S-103
+        PrivateAdditionalData = orm.Optional(int) # S-121
+        MAC = orm.Optional(int) # S-128
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow) 
 
 
 # 0400 and 0420 Messages
 class ReversalRequests(db.Entity):
         _table_ = ('public', 'ReversalRequests')
-        ReversalRequestID = PrimaryKey(int, auto=True)
-        MessageType = Required(int) # ISO-2
-        SecondBitmap = Required(bytes) # P-1
-        PAN = Optional(str) # P-2
-        ProcessingCode = Required("Processes", reverse="ReversalRequestProcess") # P-3
-        Amount = Required(int) # P-4
-        CurrencyAmount = Optional(int) # P-6
-        TransmissionDateTime = Required(str) # P-7
-        STAN = Required(str) # P-11
-        LocalTransactionTime = Required(str) # P-12
-        LocalTransactionDate = Required(str) # P-13
-        FunctionCode = Required(int) # P-24
-        PointOfServiceConditionCode = Required(int) # P-25
-        AcquiringInstitutionIdentificationCode = Required(int) # P-32
-        ForwardingInstitutionIdentificationCode = Optional(int) # P-33
-        RRN = Optional(int) # P-37
-        ResponseCode = Optional(int) # P-39
-        CardAcceptor = Optional(int) # P-41
-        CardAcceptorCode = Optional(int) # P-42
-        CardAcceptorName = Required(str) # P-43
-        AddtionalData = Optional(int) # P-48
-        TransactionCurrencyCode = Optional(int) # P-49
-        OriginalData = Optional(str) # S-90
-        ReplacementAmounts = Optional(int) # S-95
-        AccountIdentification1 = Optional(int) # S-102
-        AccountIdentification2 = Optional(int) # S-103
-        MAC = Optional(int) # S-128
-        ChannelTypeID = Required("ChannelTypes", reverse="ReversalRequestChannelType")
-        TerminalCode = Required("Terminals", reverse="ReversalRequestTermial")
-        TerminalIpAddress = Required(str)
-        BranchCode = Required("Branches", reverse="ReversalRequestBranch") # S-100
-        TokenID = Required("Tokens", reverse="ReversalRequestToken")
-        ReversalReq = Set("ReversalResponses", reverse="ReversalRequestID")
+        ReversalRequestID = orm.PrimaryKey(int, auto=True)
+        MessageType = orm.Required(int) # ISO-2
+        SecondBitmap = orm.Required(bytes) # P-1
+        PAN = orm.Optional(str) # P-2
+        ProcessingCode = orm.Required("Processes", reverse="ReversalRequestProcess") # P-3
+        Amount = orm.Required(int) # P-4
+        CurrencyAmount = orm.Optional(int) # P-6
+        TransmissionDateTime = orm.Required(str) # P-7
+        STAN = orm.Required(str) # P-11
+        LocalTransactionTime = orm.Required(str) # P-12
+        LocalTransactionDate = orm.Required(str) # P-13
+        FunctionCode = orm.Required(int) # P-24
+        PointOfServiceConditionCode = orm.Required(int) # P-25
+        AcquiringInstitutionIdentificationCode = orm.Required(int) # P-32
+        ForwardingInstitutionIdentificationCode = orm.Optional(int) # P-33
+        RRN = orm.Optional(int) # P-37
+        ResponseCode = orm.Optional(int) # P-39
+        CardAcceptor = orm.Optional(int) # P-41
+        CardAcceptorCode = orm.Optional(int) # P-42
+        CardAcceptorName = orm.Required(str) # P-43
+        AddtionalData = orm.Optional(int) # P-48
+        TransactionCurrencyCode = orm.Optional(int) # P-49
+        OriginalData = orm.Optional(str) # S-90
+        ReplacementAmounts = orm.Optional(int) # S-95
+        AccountIdentification1 = orm.Optional(int) # S-102
+        AccountIdentification2 = orm.Optional(int) # S-103
+        MAC = orm.Optional(int) # S-128
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        ServiceID = orm.Required("Services", reverse="ReversalRequestService")
+        ChannelTypeID = orm.Required("ChannelTypes", reverse="ReversalRequestChannelType")
+        TerminalCode = orm.Required("Terminals", reverse="ReversalRequestTermial")
+        TerminalIpAddress = orm.Required(str)
+        BranchCode = orm.Required("Branches", reverse="ReversalRequestBranch") # S-100
+        TokenID = orm.Required("Tokens", reverse="ReversalRequestToken")
+        ReversalReq = orm.Set("ReversalResponses", reverse="ReversalRequestID")
 
 
 # 0410 and 0430 Messages
 class ReversalResponses(db.Entity):
         _table_ = ('public', 'ReversalResponses')
-        ReversalResponseID = PrimaryKey(int, auto=True)
-        ReversalRequestID = Required("ReversalRequests", reverse="ReversalReq")
-        SecondBitmap = Required(bytes) # P-1
-        PAN = Optional(str) # P-2
-        ProcessingCode = Required("Processes", reverse="ReversalResponseProcess") # P-3
-        Amount = Required(int) # P-4
-        CurrencyAmount = Optional(int) # P-6
-        TransmissionDateTime = Required(str) # P-7
-        STAN = Required(str) # P-11
-        LocalTransactionTime = Required(str) # P-12
-        LocalTransactionDate = Required(str) # P-13
-        SettlementDate = Required(datetime) # P-15
-        CaptureDate = Required(datetime) # P-17
-        AcquiringInstitutionIdentificationCode = Required(int) # P-32
-        ForwardingInstitutionIdentificationCode = Optional(int) # P-33
-        RRN = Optional(int) # P-37
-        ResponseCode = Optional(int) # P-39
-        CardAcceptor = Optional(int) # P-41
-        CardAcceptorCode = Optional(int) # P-42
-        AddtionalData = Optional(int) # P-48
-        TransactionCurrencyCode = Optional(int) # P-49
-        BillingCurrencyCode = Optional(int) # P-51
-        AdditionalAmounts = Optional(int) # P-54
-        MAC = Required(str) # P-64
+        ReversalResponseID = orm.PrimaryKey(int, auto=True)
+        ReversalRequestID = orm.Required("ReversalRequests", reverse="ReversalReq")
+        SecondBitmap = orm.Required(bytes) # P-1
+        PAN = orm.Optional(str) # P-2
+        ProcessingCode = orm.Required("Processes", reverse="ReversalResponseProcess") # P-3
+        Amount = orm.Required(int) # P-4
+        CurrencyAmount = orm.Optional(int) # P-6
+        TransmissionDateTime = orm.Required(str) # P-7
+        STAN = orm.Required(str) # P-11
+        LocalTransactionTime = orm.Required(str) # P-12
+        LocalTransactionDate = orm.Required(str) # P-13
+        SettlementDate = orm.Required(datetime) # P-15
+        CaptureDate = orm.Required(datetime) # P-17
+        AcquiringInstitutionIdentificationCode = orm.Required(int) # P-32
+        ForwardingInstitutionIdentificationCode = orm.Optional(int) # P-33
+        RRN = orm.Optional(int) # P-37
+        ResponseCode = orm.Optional(int) # P-39
+        CardAcceptor = orm.Optional(int) # P-41
+        CardAcceptorCode = orm.Optional(int) # P-42
+        AddtionalData = orm.Optional(int) # P-48
+        TransactionCurrencyCode = orm.Optional(int) # P-49
+        BillingCurrencyCode = orm.Optional(int) # P-51
+        AdditionalAmounts = orm.Optional(int) # P-54
+        MAC = orm.Required(str) # P-64
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
 
 
 # 0500 and 0520 Messages
 class SettlementRequests(db.Entity):
         _table_ = ('public', 'SettlementRequests')
-        SettlementRequestID = PrimaryKey(int, auto=True)
-        MessageType = Optional(int) # ISO-2
-        SecondBitmap = Required(bytes) # P-1
-        TransmissionDateTime = Required(str) # P-7
-        STAN = Required(str) # P-11
-        SettlementDate = Required(datetime) # P-15
-        CaptureDate = Required(datetime) # P-17
-        AcquiringInstitutionIdentificationCode = Optional(int) # P-32
-        ForwardingInstitutionIdentificationCode = Optional(int) # P-33
-        SettlementCurrencyCode = Optional(int) # P-50
-        NumberOfCredits = Optional(int) # S-74
-        CreditsReversalNumber = Optional(int) # S-75
-        NumberOfDebits = Optional(int) # S-76
-        DebitsReversalNumber = Optional(int) # S-77
-        TransferNumber = Optional(int) # S-78
-        TransferReversalNumber = Optional(int) # S-79
-        NumberOfInquiries = Optional(int) # S-80
-        NumberOfAuthorizations = Optional(int) # S-81
-        CreditsProcessingFeeAmount = Optional(int) # S-82
-        CreditsTransactionFeeAmount = Optional(int) # S-83
-        DebitsProcessingFeeAmount = Optional(int) # S-84
-        DebitsTransactionFeeAmount = Optional(int) # S-85
-        TotalAmountOfCredits = Optional(int) # S-86
-        CreditsReversalAmount = Optional(int) # S-87
-        TotalAmountOfDebits = Optional(int) # S-88
-        DebitsReversalAmount = Optional(int) # S-89
-        NetSettlementAmount = Optional(int) # S-97
-        SettlementInstitutionIdentificationCode = Optional(int) # S-99
-        SettlementAdditionalData = Optional(int) # S-124
-        MAC = Optional(int) # S-128
-        ChannelTypeID = Required("ChannelTypes", reverse="SettlementRequestChannelType")
-        TerminalCode = Required("Terminals", reverse="SettlementRequestTermial")
-        TerminalIpAddress = Required(str)
-        BranchCode = Required("Branches", reverse="SettlementRequestBranch") # S-100
-        TokenID = Required("Tokens", reverse="SettlementRequestToken")
-        SettlementReq = Set("SettlementResponses", reverse="SettlementRequestID")
+        SettlementRequestID = orm.PrimaryKey(int, auto=True)
+        MessageType = orm.Optional(int) # ISO-2
+        SecondBitmap = orm.Required(bytes) # P-1
+        TransmissionDateTime = orm.Required(str) # P-7
+        STAN = orm.Required(str) # P-11
+        SettlementDate = orm.Required(datetime) # P-15
+        CaptureDate = orm.Required(datetime) # P-17
+        AcquiringInstitutionIdentificationCode = orm.Optional(int) # P-32
+        ForwardingInstitutionIdentificationCode = orm.Optional(int) # P-33
+        SettlementCurrencyCode = orm.Optional(int) # P-50
+        NumberOfCredits = orm.Optional(int) # S-74
+        CreditsReversalNumber = orm.Optional(int) # S-75
+        NumberOfDebits = orm.Optional(int) # S-76
+        DebitsReversalNumber = orm.Optional(int) # S-77
+        TransferNumber = orm.Optional(int) # S-78
+        TransferReversalNumber = orm.Optional(int) # S-79
+        NumberOfInquiries = orm.Optional(int) # S-80
+        NumberOfAuthorizations = orm.Optional(int) # S-81
+        CreditsProcessingFeeAmount = orm.Optional(int) # S-82
+        CreditsTransactionFeeAmount = orm.Optional(int) # S-83
+        DebitsProcessingFeeAmount = orm.Optional(int) # S-84
+        DebitsTransactionFeeAmount = orm.Optional(int) # S-85
+        TotalAmountOfCredits = orm.Optional(int) # S-86
+        CreditsReversalAmount = orm.Optional(int) # S-87
+        TotalAmountOfDebits = orm.Optional(int) # S-88
+        DebitsReversalAmount = orm.Optional(int) # S-89
+        NetSettlementAmount = orm.Optional(int) # S-97
+        SettlementInstitutionIdentificationCode = orm.Optional(int) # S-99
+        SettlementAdditionalData = orm.Optional(int) # S-124
+        MAC = orm.Optional(int) # S-128
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        ServiceID = orm.Required("Services", reverse="SettlementRequestService")
+        ChannelTypeID = orm.Required("ChannelTypes", reverse="SettlementRequestChannelType")
+        TerminalCode = orm.Required("Terminals", reverse="SettlementRequestTermial")
+        TerminalIpAddress = orm.Required(str)
+        BranchCode = orm.Required("Branches", reverse="SettlementRequestBranch") # S-100
+        TokenID = orm.Required("Tokens", reverse="SettlementRequestToken")
+        SettlementReq = orm.Set("SettlementResponses", reverse="SettlementRequestID")
 
 
 # 0510 and 0530 Messages
 class SettlementResponses(db.Entity):
         _table_ = ('public', 'SettlementResponses')
-        SettlementResponseID = PrimaryKey(int, auto=True)
-        SettlementRequestID = Required("SettlementRequests", reverse="SettlementReq")
-        MessageType = Optional(int) # ISO-2
-        SecondBitmap = Required(bytes) # P-1
-        TransmissionDateTime = Required(str) # P-7
-        STAN = Required(str) # P-11
-        SettlementDate = Required(datetime) # P-15
-        SettlementCurrencyCode = Optional(int) # P-50
-        SettlementCode = Optional(int) # P-66
-        SettlementInstitutionIdentificationCode = Optional(int) # S-99
-        MAC = Optional(int) # S-128 
+        SettlementResponseID = orm.PrimaryKey(int, auto=True)
+        SettlementRequestID = orm.Required("SettlementRequests", reverse="SettlementReq")
+        MessageType = orm.Optional(int) # ISO-2
+        SecondBitmap = orm.Required(bytes) # P-1
+        TransmissionDateTime = orm.Required(str) # P-7
+        STAN = orm.Required(str) # P-11
+        SettlementDate = orm.Required(datetime) # P-15
+        SettlementCurrencyCode = orm.Optional(int) # P-50
+        SettlementCode = orm.Optional(int) # P-66
+        SettlementInstitutionIdentificationCode = orm.Optional(int) # S-99
+        MAC = orm.Optional(int) # S-128 
 
 
 # 0600 Messages
 class AdministrativeRequests(db.Entity):
         _table_ = ('public', 'AdministrativeRequests')
-        AdministrativeRequestID = PrimaryKey(int, auto=True)
-        MessageType = Required(int) # ISO-2
-        SecondBitmap = Required(bytes) # P-1
-        PAN = Optional(str) # P-2
-        ProcessingCode = Required("Processes", reverse="AdministrativeRequestProcess") # P-3
-        TransmissionDateTime = Required(str) # P-7
-        STAN = Required(str) # P-11
-        LocalTransactionTime = Required(str) # P-12
-        LocalTransactionDate = Required(str) # P-13
-        FunctionCode = Required(int) # P-24
-        PointOfServiceConditionCode = Required(int) # P-25
-        AcquiringInstitutionIdentificationCode = Optional(int) # P-32
-        ForwardingInstitutionIdentificationCode = Optional(int) # P-33
-        CardAcceptor = Optional(int) # P-41
-        CardAcceptorCode = Optional(int) # P-42
-        AdditionalResponseData = Optional(int) # P-44
-        AddtionalData = Optional(int) # P-48
-        AccountIdentification1 = Optional(int) # S-102
-        MAC = Optional(int) # S-128
-        ChannelTypeID = Required("ChannelTypes", reverse="AdministrativeRequestChannelType")
-        TerminalCode = Required("Terminals", reverse="AdministrativeRequestTermial")
-        TerminalIpAddress = Required(str)
-        BranchCode = Required("Branches", reverse="AdministrativeRequestBranch") # S-100
-        TokenID = Required("Tokens", reverse="AdministrativeRequestToken")
-        AdministrativeReq = Set("AdministrativeResponses", reverse="AdministrativeRequestID")
+        AdministrativeRequestID = orm.PrimaryKey(int, auto=True)
+        MessageType = orm.Required(int) # ISO-2
+        SecondBitmap = orm.Required(bytes) # P-1
+        PAN = orm.Optional(str) # P-2
+        ProcessingCode = orm.Required("Processes", reverse="AdministrativeRequestProcess") # P-3
+        TransmissionDateTime = orm.Required(str) # P-7
+        STAN = orm.Required(str) # P-11
+        LocalTransactionTime = orm.Required(str) # P-12
+        LocalTransactionDate = orm.Required(str) # P-13
+        FunctionCode = orm.Required(int) # P-24
+        PointOfServiceConditionCode = orm.Required(int) # P-25
+        AcquiringInstitutionIdentificationCode = orm.Optional(int) # P-32
+        ForwardingInstitutionIdentificationCode = orm.Optional(int) # P-33
+        CardAcceptor = orm.Optional(int) # P-41
+        CardAcceptorCode = orm.Optional(int) # P-42
+        AdditionalResponseData = orm.Optional(int) # P-44
+        AddtionalData = orm.Optional(int) # P-48
+        AccountIdentification1 = orm.Optional(int) # S-102
+        MAC = orm.Optional(int) # S-128
+        ServiceID = orm.Required("Services", reverse="AdministrativeRequestService")
+        ChannelTypeID = orm.Required("ChannelTypes", reverse="AdministrativeRequestChannelType")
+        TerminalCode = orm.Required("Terminals", reverse="AdministrativeRequestTermial")
+        TerminalIpAddress = orm.Required(str)
+        BranchCode = orm.Required("Branches", reverse="AdministrativeRequestBranch") # S-100
+        TokenID = orm.Required("Tokens", reverse="AdministrativeRequestToken")
+        AdministrativeReq = orm.Set("AdministrativeResponses", reverse="AdministrativeRequestID")
 
 
 # 0610 Messages
 class AdministrativeResponses(db.Entity):
         _table_ = ('public', 'AdministrativeResponses')
-        AdministrativeResponseID = PrimaryKey(int, auto=True)
-        AdministrativeRequestID = Required("AdministrativeRequests", reverse="AdministrativeReq")
-        MessageType = Required(int) # ISO-2
-        SecondBitmap = Required(bytes) # P-1
-        PAN = Optional(str) # P-2
-        ProcessingCode = Required("Processes", reverse="AdministrativeResponseProcess") # P-3
-        TransmissionDateTime = Required(str) # P-7
-        STAN = Required(str) # P-11
-        LocalTransactionTime = Required(str) # P-12
-        LocalTransactionDate = Required(str) # P-13
-        FunctionCode = Required(int) # P-24
-        AcquiringInstitutionIdentificationCode = Optional(int) # P-32
-        ForwardingInstitutionIdentificationCode = Optional(int) # P-33
-        RRN = Optional(int) # P-37
-        ResponseCode = Optional(int) # P-39
-        CardAcceptor = Optional(int) # P-41
-        AdditionalResponseData = Optional(int) # P-44
-        PrivateAdditionalData = Optional(int) # S-121
-        MAC = Optional(int) # S-128 
+        AdministrativeResponseID = orm.PrimaryKey(int, auto=True)
+        AdministrativeRequestID = orm.Required("AdministrativeRequests", reverse="AdministrativeReq")
+        MessageType = orm.Required(int) # ISO-2
+        SecondBitmap = orm.Required(bytes) # P-1
+        PAN = orm.Optional(str) # P-2
+        ProcessingCode = orm.Required("Processes", reverse="AdministrativeResponseProcess") # P-3
+        TransmissionDateTime = orm.Required(str) # P-7
+        STAN = orm.Required(str) # P-11
+        LocalTransactionTime = orm.Required(str) # P-12
+        LocalTransactionDate = orm.Required(str) # P-13
+        FunctionCode = orm.Required(int) # P-24
+        AcquiringInstitutionIdentificationCode = orm.Optional(int) # P-32
+        ForwardingInstitutionIdentificationCode = orm.Optional(int) # P-33
+        RRN = orm.Optional(int) # P-37
+        ResponseCode = orm.Optional(int) # P-39
+        CardAcceptor = orm.Optional(int) # P-41
+        AdditionalResponseData = orm.Optional(int) # P-44
+        PrivateAdditionalData = orm.Optional(int) # S-121
+        MAC = orm.Optional(int) # S-128 
 
 
 # 0800 and 0820 Messages
 class NetworkManagementRequests(db.Entity):
         _table_ = ('public', 'NetworkManagementRequests')
-        NetworkManagementRequestID = PrimaryKey(int, auto=True)
-        MessageType = Optional(int) # ISO-2
-        SecondBitmap = Required(bytes) # P-1
-        TransmissionDateTime = Required(str) # P-7
-        STAN = Required(str) # P-11
-        SettlementDate = Required(datetime) # P-15
-        AcquiringInstitutionIdentificationCode = Optional(int) # P-32
-        ForwardingInstitutionIdentificationCode = Optional(int) # P-33
-        AddtionalData = Optional(int) # P-48
-        SecurityRelatedControlInformation = Optional(int) # P-53
-        NetworkManagementInformationCode = Optional(int) # S-70
-        MessageSecurityCode = Optional(int) # S-96
-        MAC = Optional(int) # S-128
-        ChannelTypeID = Required("ChannelTypes", reverse="NetworkManagementRequestChannelType")
-        TerminalCode = Required("Terminals", reverse="NetworkManagementRequestTermial")
-        TerminalIpAddress = Required(str)
-        BranchCode = Required("Branches", reverse="NetworkManagementRequestBranch") # S-100
-        TokenID = Required("Tokens", reverse="NetworkManagementRequestToken")
-        NetworkManagementReq = Set("NetworkManagementResponses", reverse="NetworkManagementRequestID")
+        NetworkManagementRequestID = orm.PrimaryKey(int, auto=True)
+        MessageType = orm.Optional(int) # ISO-2
+        SecondBitmap = orm.Required(bytes) # P-1
+        TransmissionDateTime = orm.Required(str) # P-7
+        STAN = orm.Required(str) # P-11
+        SettlementDate = orm.Required(datetime) # P-15
+        AcquiringInstitutionIdentificationCode = orm.Optional(int) # P-32
+        ForwardingInstitutionIdentificationCode = orm.Optional(int) # P-33
+        AddtionalData = orm.Optional(int) # P-48
+        SecurityRelatedControlInformation = orm.Optional(int) # P-53
+        NetworkManagementInformationCode = orm.Optional(int) # S-70
+        MessageSecurityCode = orm.Optional(int) # S-96
+        MAC = orm.Optional(int) # S-128
+        ServiceID = orm.Required("Services", reverse="NetworkManagementRequestService")
+        ChannelTypeID = orm.Required("ChannelTypes", reverse="NetworkManagementRequestChannelType")
+        TerminalCode = orm.Required("Terminals", reverse="NetworkManagementRequestTermial")
+        TerminalIpAddress = orm.Required(str)
+        BranchCode = orm.Required("Branches", reverse="NetworkManagementRequestBranch") # S-100
+        TokenID = orm.Required("Tokens", reverse="NetworkManagementRequestToken")
+        NetworkManagementReq = orm.Set("NetworkManagementResponses", reverse="NetworkManagementRequestID")
         
 
 # 0810 and 0830 Messages
 class NetworkManagementResponses(db.Entity):
         _table_ = ('public', 'NetworkManagementResponses')
-        NetworkManagementResponseID = PrimaryKey(int, auto=True)
-        NetworkManagementRequestID = Required("NetworkManagementRequests", reverse="NetworkManagementReq")
-        MessageType = Optional(int) # ISO-2
-        SecondBitmap = Required(bytes) # P-1
-        TransmissionDateTime = Required(str) # P-7
-        STAN = Required(str) # P-11
-        SettlementDate = Required(datetime) # P-15
-        AcquiringInstitutionIdentificationCode = Optional(int) # P-32
-        ForwardingInstitutionIdentificationCode = Optional(int) # P-33
-        ResponseCode = Optional(int) # P-39
-        AddtionalData = Optional(int) # P-48
-        NetworkManagementInformationCode = Optional(int) # S-70
-        MessageSecurityCode = Optional(int) # S-96
-        MAC = Optional(int) # S-128
+        NetworkManagementResponseID = orm.PrimaryKey(int, auto=True)
+        NetworkManagementRequestID = orm.Required("NetworkManagementRequests", reverse="NetworkManagementReq")
+        MessageType = orm.Optional(int) # ISO-2
+        SecondBitmap = orm.Required(bytes) # P-1
+        TransmissionDateTime = orm.Required(str) # P-7
+        STAN = orm.Required(str) # P-11
+        SettlementDate = orm.Required(datetime) # P-15
+        AcquiringInstitutionIdentificationCode = orm.Optional(int) # P-32
+        ForwardingInstitutionIdentificationCode = orm.Optional(int) # P-33
+        ResponseCode = orm.Optional(int) # P-39
+        AddtionalData = orm.Optional(int) # P-48
+        NetworkManagementInformationCode = orm.Optional(int) # S-70
+        MessageSecurityCode = orm.Optional(int) # S-96
+        MAC = orm.Optional(int) # S-128
 
 
 # 0804 Messages
 class KeyExchangeRequests(db.Entity):
         _table_ = ('public', 'KeyExchangeRequests')
-        KeyExchangeRequestID = PrimaryKey(int, auto=True)
-        MessageType = Required(int) # ISO-2
-        SecondBitmap = Required(bytes) # P-1
-        TransmissionDateTime = Required(str) # P-7
-        STAN = Required(str) # P-11
-        LocalTransactionTime = Required(str) # P-12
-        LocalTransactionDate = Required(str) # P-13
-        FunctionCode = Required(int) # P-24
-        AcquiringInstitutionIdentificationCode = Optional(int) # P-32
-        CardAcceptor = Optional(int) # P-41
-        CardAcceptorCode = Optional(int) # P-42
-        PrivateAdditionalData = Optional(int) # S-121
-        ChannelTypeID = Required("ChannelTypes", reverse="KeyExchangeRequestChannelType")
-        TerminalCode = Required("Terminals", reverse="KeyExchangeRequestTermial")
-        TerminalIpAddress = Required(str)
-        BranchCode = Required("Branches", reverse="KeyExchangeRequestBranch") # S-100
-        TokenID = Required("Tokens", reverse="KeyExchangeRequestToken")
-        KeyExchangeReq = Set("KeyExchangeResponses", reverse="KeyExchangeRequestID")
+        KeyExchangeRequestID = orm.PrimaryKey(int, auto=True)
+        MessageType = orm.Required(int) # ISO-2
+        SecondBitmap = orm.Required(bytes) # P-1
+        TransmissionDateTime = orm.Required(str) # P-7
+        STAN = orm.Required(str) # P-11
+        LocalTransactionTime = orm.Required(str) # P-12
+        LocalTransactionDate = orm.Required(str) # P-13
+        FunctionCode = orm.Required(int) # P-24
+        AcquiringInstitutionIdentificationCode = orm.Optional(int) # P-32
+        CardAcceptor = orm.Optional(int) # P-41
+        CardAcceptorCode = orm.Optional(int) # P-42
+        PrivateAdditionalData = orm.Optional(int) # S-121
+        ServiceID = orm.Required("Services", reverse="KeyExchangeRequestService")
+        ChannelTypeID = orm.Required("ChannelTypes", reverse="KeyExchangeRequestChannelType")
+        TerminalCode = orm.Required("Terminals", reverse="KeyExchangeRequestTermial")
+        TerminalIpAddress = orm.Required(str)
+        BranchCode = orm.Required("Branches", reverse="KeyExchangeRequestBranch") # S-100
+        TokenID = orm.Required("Tokens", reverse="KeyExchangeRequestToken")
+        KeyExchangeReq = orm.Set("KeyExchangeResponses", reverse="KeyExchangeRequestID")
         
 
 # 0814 Messages
 class KeyExchangeResponses(db.Entity):
         _table_ = ('public', 'KeyExchangeResponses')
-        KeyExchangeResponseID = PrimaryKey(int, auto=True)
-        KeyExchangeRequestID = Required("KeyExchangeRequests", reverse="KeyExchangeReq")
-        MessageType = Required(int) # ISO-2
-        SecondBitmap = Required(bytes) # P-1
-        TransmissionDateTime = Required(str) # P-7
-        STAN = Required(str) # P-11
-        LocalTransactionTime = Required(str) # P-12
-        LocalTransactionDate = Required(str) # P-13
-        FunctionCode = Required(int) # P-24
-        AcquiringInstitutionIdentificationCode = Optional(int) # P-32
-        ResponseCode = Optional(int) # P-39
-        CardAcceptor = Optional(int) # P-41
-        CardAcceptorCode = Optional(int) # P-42
-        AddtionalData = Optional(int) # P-48
+        KeyExchangeResponseID = orm.PrimaryKey(int, auto=True)
+        KeyExchangeRequestID = orm.Required("KeyExchangeRequests", reverse="KeyExchangeReq")
+        MessageType = orm.Required(int) # ISO-2
+        SecondBitmap = orm.Required(bytes) # P-1
+        TransmissionDateTime = orm.Required(str) # P-7
+        STAN = orm.Required(str) # P-11
+        LocalTransactionTime = orm.Required(str) # P-12
+        LocalTransactionDate = orm.Required(str) # P-13
+        FunctionCode = orm.Required(int) # P-24
+        AcquiringInstitutionIdentificationCode = orm.Optional(int) # P-32
+        ResponseCode = orm.Optional(int) # P-39
+        CardAcceptor = orm.Optional(int) # P-41
+        CardAcceptorCode = orm.Optional(int) # P-42
+        AddtionalData = orm.Optional(int) # P-48
 
 if config['ConnectionString']['host'] != 'NotSet' and config['ConnectionString']['database'] != 'NotSet':
     if config['ConnectionString']['provider'] == 'postgres':
@@ -521,4 +668,4 @@ if config['ConnectionString']['host'] != 'NotSet' and config['ConnectionString']
     elif config['ConnectionString']['provider'] == 'mysql':
         isBinded = True
         db.bind(provider=config['ConnectionString']['provider'], host=config['ConnectionString']['host'], user=config['ConnectionString']['user'], passwd=config['ConnectionString']['password'], db=config['ConnectionString']['database'])
-    db.generate_mapping(create_tables=True)
+        db.generate_mapping(create_tables=True)
