@@ -21,5 +21,7 @@ Main goal of the Horizon project is development of flexible, lightweight, config
 
 ## Research Goals and Questions
 1 - Is it possible to deveop a RESTful payment switch based on ISO 8583 which can convert ISO message to REST format and vice versa with minimum process?  
+
 2 - Is it possible to create a payment switch based on ISO 8583 standard which clients can inquery format of specific message (ex: input and output for 0200 request message type) for the switch?
+
 3 - Is it possible to create a flexible RESTful payment switch which aministrators can map ISO fields to JSON parameters without restart or switching off payment gateway or switch?
