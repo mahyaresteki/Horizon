@@ -26,4 +26,4 @@ Main goal of the Horizon project is development of flexible, lightweight, config
 
 3 - Is it possible to create a flexible RESTful payment switch which aministrators can map ISO fields to JSON parameters without restarting or switching off payment gateway or switch?
 
-4 - Is it posible to develop a payment switch which uses RESTful(HTTP) and socket programming (TCP) connection methods at a same time to provide payment services for deferent types of clients (ex: ATM and mobile app server)?  
+4 - Is it posible to develop a payment switch which uses RESTful (HTTP) and socket programming (TCP) connection methods at a same time to provide payment services for deferent types of clients (ex: ATM and mobile app server)?  
