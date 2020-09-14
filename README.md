@@ -2,7 +2,7 @@
 Horizon is research and development project to create an open source payment switch based by Python programming language. It will be a script based payment switch to implement changes with less cost. Horizon can connect to gateways and terminals by REST services. It will send and receive maximum transactions at same time.
 
 ## Project Status
-The project status is "under development".
+The project status is "underdevelopment".
 
 ## Goal of the Project
 Main goal of the Horizon project is development of flexible, lightweight, configurable,  faster and open source ISO-8583 compatible payment acquiree switch for banking and fintech system.
