@@ -19,7 +19,7 @@ exceptionHandling = ExceptionHandling()
 class UserServices:
     def getToken(self, header: dict, body: dict):
         try:
-            with db_session:
+            with orm.db_session:
                 username = str(body['username'])
                 password = hashlib.sha512(str(body['password']).encode('utf-8')).hexdigest()
                 query = Users.select(lambda u: u.Username == str(username) and u.Password == str(password))

@@ -42,7 +42,7 @@ if __name__ == "__main__":
     
     print('')
     print(config['AppInfo']['appName']+': '+config['AppInfo']['description'])
-    print('Published by ' + config['AppInfo']['publisher'])
+    print('Published by ' + config['AppInfo']['publisher']+'\n')
 
     systemPrepration = SystemPrepration()
     if config['DEFAULT']['server'] == 'NotSet' or config['DEFAULT']['port'] == 'NotSet':

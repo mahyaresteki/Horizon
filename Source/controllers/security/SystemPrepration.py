@@ -54,8 +54,12 @@ class SystemPrepration:
     def SetDatabase(self):
         print('Database Installation Step')
         print('==================================')
+        prov = str(input('What is you database? (Press "p" for PostgreSQL or press "m" for MySQL) ')).lower().strip()
+        if prov == 'p':
+            self.provider = 'postgres'
+        elif prov == 'm':
+            self.provider = 'mysql'
         self.host = input('Please insert host IP address: ')
-        self.provider = input('Please insert provider: ')
         self.database = input('Please insert database name: ')
         self.username = input('Please insert username: ')
         self.password = getpass.getpass(prompt='Please insert password: ')
@@ -84,16 +88,18 @@ class SystemPrepration:
             systemLog.InsertInfoLog('00', 'Database Prepration', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: '+str(response[2].encode("utf-8")))
             print('Database is created successfully!\n')
             self.InitData()
+            self.SetOwnerBank()
             self.SetAdministrator()
             self.ImportIntegrationData()
         except Exception as e:
             response = exceptionHandling.getErrorMessage("SYS500")
             systemLog.InsertErrorLog('00', 'Database Prepration', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: ' + str(response[2].encode("utf-8")), str(response[0]), str(response[1]))
 
-
+    
     def InitData(self):
         print('Data Initialization')
         print('==================================')
+        print('Data prepration is in progress. Please Wait...')
         try:
             if str(self.provider) == 'postgres':
                 con = connect(dbname=str(self.database), user=str(self.username), host=str(self.host), password=str(self.password))
@@ -116,9 +122,30 @@ class SystemPrepration:
             systemLog.InsertErrorLog('00', 'Data Initialization', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: ' + str(response[2].encode("utf-8")), str(response[0]), str(response[1]))
 
 
+    def SetOwnerBank(self):
+        print('Set Owner Bank')
+        print('==================================')
+        try:
+            print('All available banks are listed as follows: \n')
+            with orm.db_session:
+                banks = Banks.select()
+                for b in banks:
+                    print(str(b.BankCode) + ' -> '+ b.BankName)
+                bankCode = input('Please insert your bank code based on the abow list: ')
+                bank = Banks.get(BankCode =str(bankCode))
+                bank.set(IsOwner = True, LatestUpdateDate = datetime.now())
+            response = exceptionHandling.getErrorMessage("SYS00")
+            systemLog.InsertInfoLog('00', 'Set Owner Bank', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: '+str(response[2].encode("utf-8")))
+            print('The owner bank is set successfully!\n')
+        except Exception as e:
+            response = exceptionHandling.getErrorMessage("SYS500")
+            systemLog.InsertErrorLog('00', 'Set Owner Bank', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: ' + str(response[2].encode("utf-8")), str(response[0]), str(response[1]))
+
+
     def ImportIntegrationData(self):
         print('Data Integration')
         print('==================================')
+        print('Data prepration is in progress. Please Wait...')
         try:
             reply = str(input('Do you want to perform integration data process?(y/n): ')).lower().strip()
             if reply[0] == 'y':
