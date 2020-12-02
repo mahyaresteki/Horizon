@@ -3,7 +3,7 @@
 	<head>
 		<script src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/jquery.dform-1.1.0.min.js"></script>
-		<title>Test Road Runner Payment Switch</title>
+		<title>Test Horizon Payment Switch</title>
 	</head>
 	<style type="text/css">
 		input, label {
@@ -15,6 +15,14 @@
 		<table>
 			<tr>
 				<td colspan="2"><label id="lblMsg"></label></td>
+			</tr>
+			<tr>
+				<td>Server IP:</td>
+				<td><input type="text" id="txtServerIP" value="172.27.184.238"/></td>
+			</tr>
+			<tr>
+				<td>Server Port:</td>
+				<td><input type="text" id="txtServerPort" value="1515"/></td>
 			</tr>
 			<tr>
 				<td>Terminal ID:</td>
@@ -40,16 +48,16 @@
 				<td><input type="text" id="txtToken"/></td>
 			</tr>
 			<tr>
-				<td>Transaction Type Code:</td>
+				<td>Transaction Type:</td>
 				<td>
 					<select id="cmbTransTypeCode">
-						<option value="0100">Authorization</option>
-						<option value="0200">Finantional</option>
-						<option value="0400">Reversal</option>
-						<option value="0500">Settlement</option>
-						<option value="0600">Administrative</option>
-						<option value="0800">NetworkManagement</option>
-						<option value="0804">KeyExchange</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Service:</td>
+				<td>
+					<select id="cmbServiceCode">
 					</select>
 				</td>
 			</tr>
@@ -131,14 +139,14 @@
 		<script>
 			$(document).on("click", "#btnLogin", function () {
 				$.ajax({
-						url: 'http://127.0.0.1:1515/UserServices/getToken',
+						url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/UserServices/getToken',
 						type: 'POST',
 						dataType: 'json',
 						crossDomain: true,
 						headers: {
 								'Access-Control-Allow-Origin': '*',
 								"Accept" : "application/json",
-								"channelId":$("#txtTerminalId").val()
+								"terminalId":$("#txtTerminalId").val()
 						 },
 						contentType: "application/json; charset=utf-8",
 						data: {"username":$("#txtUsername").val(),"password":$("#txtPassword").val()},
@@ -147,6 +155,28 @@
 							{
 								$("#lblMsg").html('');
 								$("#txtToken").val(data["token"]);
+								$.ajax({
+									url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoServices/getTransTypeList',
+									type: 'POST',
+									dataType: 'json',
+									crossDomain: true,
+									headers: {
+											'Access-Control-Allow-Origin': '*',
+											"Accept" : "application/json",
+											"token" : $("#txtToken").val(),
+											"username" : $("#txtUsername").val(),
+											"terminalId":$("#txtTerminalId").val()
+									 },
+									contentType: "application/json; charset=utf-8",
+									success: function (data) {
+										jQuery.each(data["TransTypes"], function(i, val) {
+											$('#cmbTransTypeCode').append('<option value="'+val["TransTypeCode"]+'"> '+val["TransTypeCode"]+'-'+val["TransTypeTitle"]+' </option>');
+										});
+										$('#cmbTransTypeCode').trigger("change");
+									},
+									error: function (data, xmlHttpRequest, errorText, thrownError) {
+									}
+								});
 							}
 							else{
 								$("#txtToken").val('');
@@ -159,6 +189,28 @@
 							{
 								$("#lblMsg").html('');
 								$("txtToken").val(obj["token"]);
+								$.ajax({
+									url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoServices/getTransTypeList',
+									type: 'POST',
+									dataType: 'json',
+									crossDomain: true,
+									headers: {
+											'Access-Control-Allow-Origin': '*',
+											"Accept" : "application/json",
+											"token" : $("#txtToken").val(),
+											"username" : $("#txtUsername").val(),
+											"terminalId":$("#txtTerminalId").val()
+									 },
+									contentType: "application/json; charset=utf-8",
+									success: function (data) {
+										jQuery.each(data["TransTypes"], function(i, val) {
+											$('#cmbTransTypeCode').append('<option value="'+val["TransTypeCode"]+'"> '+val["TransTypeCode"]+'-'+val["TransTypeTitle"]+' </option>');
+										});
+									},
+									error: function (data, xmlHttpRequest, errorText, thrownError) {
+										
+									}
+								});
 							}
 							else{
 								$("#txtToken").val('');
@@ -168,11 +220,41 @@
     				});
 			});
 			
+			$('#cmbTransTypeCode').on('change', function() {
+				$.ajax({
+					url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoServices/getServiceList',
+					type: 'POST',
+					dataType: 'json',
+					crossDomain: true,
+					headers: {
+						'Access-Control-Allow-Origin': '*',
+						"Accept" : "application/json",
+						"token" : $("#txtToken").val(),
+						"username" : $("#txtUsername").val(),
+						"terminalId":$("#txtTerminalId").val()
+					},
+					contentType: "application/json; charset=utf-8",
+					data:{
+						"transTypeCode":this.value
+					},
+					success: function (data) {
+						console.log(data);
+						$('#cmbServiceCode').find('option').remove();
+						jQuery.each(data["Services"], function(i, val) {
+							$('#cmbServiceCode').append('<option value="'+val["ProcessCode"]+'"> '+val["ProcessCode"]+'-'+val["ServiceTitle"]+' </option>');
+						});
+					},
+					error: function (data, xmlHttpRequest, errorText, thrownError) {
+						console.log(data);
+					}
+				});				
+			});
+			
 			$(document).on("click", "#btnReqStruc", function () {
 				if($("#txtToken").val() != null)
 				{
 					$.ajax({
-						url: 'http://127.0.0.1:1515/IsoServices/getRequestStructure',
+						url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoServices/getRequestStructure',
 						type: 'POST',
 						dataType: 'json',
 						crossDomain: true,
@@ -181,27 +263,26 @@
 								"Accept" : "application/json",
 								"token" : $("#txtToken").val(),
 								"username" : $("#txtUsername").val(),
-								"transTypeCode" : $("#cmbTransTypeCode").val(),
-								"channelId":$("#txtTerminalId").val()
+								"terminalId":$("#txtTerminalId").val()
 						 },
 						contentType: "application/json; charset=utf-8",
-						data: {"username":$("#txtUsername").val(), "channelId":"10001"},
+						data: {"transTypeCode" : $("#cmbTransTypeCode").val(), "processCode": $("#cmbServiceCode").val()},
 						success: function (data) {
 							if(data["Bitmap"] != null)
 							{
 								$("#lblMsg").html('');
-								$("#txtBitmap").val(data["Bitmap"]);
-								$("#txtBitmapHex").val(data["BitmapHex"]);
+								$("#txtBitmap").val(data["BitValue"]);
+								$("#txtBitmapHex").val(data["Bitmap"]);
 								$("#txtTableName").val(data["TableName"]);
-								$("#txtMsgType").val(data["transTypeCode"]);
-								$("#txtJsonStruc").val(JSON.stringify(data["msgStruc"]));
+								$("#txtMsgType").val(data["TransTypeCode"]);
+								$("#txtJsonStruc").val(JSON.stringify(data["MessageRequestStructure"]));
 								var requestObj = [{
 									"type":"fieldset",
             						"caption":"Request Fileds",
 									"html":[]
 								}];
 								x=0;
-								jQuery.each(data["msgStruc"], function(i, val) {
+								jQuery.each(data["MessageRequestStructure"], function(i, val) {
 									console.log(i);
 									if(typeof(val) == 'object')
 									{
@@ -247,28 +328,11 @@
 							}
 						},
 						error: function (data, xmlHttpRequest, errorText, thrownError) {
-							obj = jQuery.parseJSON(data.responseText);
-							if(obj["token"] != null)
-							{
-								$("#lblMsg").html('');
-								$("txtBitmap").val(obj["Bitmap"]);
-								$("#txtBitmapHex").val(data["BitmapHex"]);
-								$("#txtTableName").val(data["TableName"]);
-								$("#txtMsgType").val(data["transTypeCode"]);
-								$("#txtJsonStruc").val(JSON.stringify(data["msgStruc"]));
-							}
-							else{
-								$("#txtBitmap").val('');
-								$("#lblMsg").text('');
-								$("#txtTableName").val('');
-								$("#txtMsgType").val('');
-								$("#txtJsonStruc").val('');
-							}
 						}
     				});
 
 					$.ajax({
-						url: 'http://127.0.0.1:1515/IsoServices/getResponseStructure',
+						url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoServices/getResponseStructure',
 						type: 'POST',
 						dataType: 'json',
 						crossDomain: true,
@@ -277,27 +341,26 @@
 								"Accept" : "application/json",
 								"token" : $("#txtToken").val(),
 								"username" : $("#txtUsername").val(),
-								"transTypeCode" : $("#cmbTransTypeCode").val(),
-								"channelId":$("#txtTerminalId").val()
+								"terminalId":$("#txtTerminalId").val()
 						 },
 						contentType: "application/json; charset=utf-8",
-						data: {"username":$("#txtUsername").val(), "channelId":$("#txtTerminalId").val()},
+						data: {"transTypeCode" : $("#cmbTransTypeCode").val(), "processCode": $("#cmbServiceCode").val()},
 						success: function (data) {
 							if(data["Bitmap"] != null)
 							{
 								$("#lblMsg").html('');
-								$("#txtBitmapRes").val(data["Bitmap"]);
-								$("#txtBitmapHexRes").val(data["BitmapHex"]);
+								$("#txtBitmapRes").val(data["BitValue"]);
+								$("#txtBitmapHexRes").val(data["Bitmap"]);
 								$("#txtTableNameRes").val(data["TableName"]);
-								$("#txtMsgTypeRes").val(data["transTypeCode"]);
-								$("#txtJsonStrucRes").val(JSON.stringify(data["msgStruc"]));
+								$("#txtMsgTypeRes").val(data["TransTypeCode"]);
+								$("#txtJsonStrucRes").val(JSON.stringify(data["MessageResponseStructure"]));
 								var responseObj = [{
 									"type":"fieldset",
             						"caption":"Response Fileds",
 									"html":[]
 								}];
 								x=0;
-								jQuery.each(data["msgStruc"], function(i, val) {
+								jQuery.each(data["MessageResponseStructure"], function(i, val) {
 									console.log(i);
 									if(typeof(val) == 'object')
 									{
