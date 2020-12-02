@@ -29,18 +29,18 @@ class UserServices:
                     if mylist[0].IsActive :
                         token=uuid.uuid4().hex
                         tokens = Tokens(Token = token, UserID = mylist[0].UserID, GenerationDate = datetime.now(), ClientIP = networkManagement.getClientIP())
-                        commit()
+                        orm.commit()
                         resp = exceptionHandling.getErrorMessage('SEC00')
                         response = flask.Response('{"token":"' + token + '", "RetCode":"'+resp[0]+'", "RetMsg":"'+resp[1]+'", "RetMsgFa":"'+resp[2]+'"}')
-                        systemLog.InsertInfoLog('00', 'Logging', str(body), datetime.now(), str(body["username"]), str(header[str('channelId').capitalize()]), networkManagement.getClientIP(), "")
+                        systemLog.InsertInfoLog(resp[0], 'Logging', str(body), datetime.now(), str(body["username"]), str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1])
                     else:
                         resp = exceptionHandling.getErrorMessage('SEC03')
                         response = flask.Response('{"RetCode":"'+resp[0]+'", "RetMsg":"'+resp[1]+'", "RetMsgFa":"'+resp[2]+'"}')
-                        systemLog.InsertErrorLog('00', 'Logging', str(body), datetime.now(), str(body["username"]), str(header[str('channelId').capitalize()]), networkManagement.getClientIP(), "", resp[0], resp[1])
+                        systemLog.InsertErrorLog(resp[0], 'Logging', str(body), datetime.now(), str(body["username"]), str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1])
                 else:
                     resp = exceptionHandling.getErrorMessage('SEC04')
                     response = flask.Response('{"RetCode":"'+resp[0]+'", "RetMsg":"'+resp[1]+'", "RetMsgFa":"'+resp[2]+'"}')
-                    systemLog.InsertErrorLog('00', 'Logging', str(body), datetime.now(), str(body["username"]), str(header[str('channelId').capitalize()]), networkManagement.getClientIP(), "", resp[0], resp[1])
+                    systemLog.InsertErrorLog(resp[0], 'Logging', str(body), datetime.now(), str(body["username"]), str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1])
                 response.headers["TransDateTime"] = str(datetime.now())
                 response.headers["TransDate"] = str(datetime.date(datetime.now()))
                 response.headers["TransTime"] = str(datetime.time(datetime.now()))
@@ -51,5 +51,5 @@ class UserServices:
             response.headers["TransDateTime"] = str(datetime.now())
             response.headers["TransDate"] = str(datetime.date(datetime.now()))
             response.headers["TransTime"] = str(datetime.time(datetime.now()))
-            systemLog.InsertErrorLog('00', 'Logging', str(body), datetime.now(), str(body["username"]), str(header[str('channelId').capitalize()]), networkManagement.getClientIP(), "", resp[0], resp[1])
+            systemLog.InsertErrorLog(resp[0], 'Logging', str(body), datetime.now(), str(body["username"]), str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1])
             return response

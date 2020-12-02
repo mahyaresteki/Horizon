@@ -12,8 +12,8 @@
     </errorMessage>
     <errorMessage>
         <code>SEC02</code>
-        <englishMessage>Token is incorrect</englishMessage>
-        <persianMessage>کاربر غیرفعال است</persianMessage>
+        <englishMessage>Token is invalid.</englishMessage>
+        <persianMessage>توکن نامعتبر است</persianMessage>
     </errorMessage>
     <errorMessage>
         <code>SEC03</code>
@@ -27,11 +27,6 @@
     </errorMessage>
     <errorMessage>
         <code>SEC05</code>
-        <englishMessage>Token is created by another client.</englishMessage>
-        <persianMessage>توکن با استفاده از ترمینال دیگر تولید شده است</persianMessage>
-    </errorMessage>
-    <errorMessage>
-        <code>SEC06</code>
         <englishMessage>Token is created by another user.</englishMessage>
         <persianMessage>توکن با استفاده از کاربر دیگر تولید شده است</persianMessage>
     </errorMessage>

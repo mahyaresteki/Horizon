@@ -1,2 +1,2 @@
-INSERT INTO public."Terminals" (TerminalID, TerminalCode, Branche, ChannelTypeID, IPAddress, MacKey, PinKey, MasterKey, TopUpKey, LatestUpdateDate) 
-    VALUES (1, '5001','1001',(SELECT ChannelTypeID FROM public."ChannelTypes" WHERE ChannelTypeTitle = 'Internet Bank'), '192.168.1.50', '1', '2', '3', '4', CURRENT_TIMESTAMP);
+INSERT INTO public."Terminals" (TerminalID, TerminalCode, BranchID, ChannelTypeID, IPAddress, MacKey, PinKey, MasterKey, TopUpKey, LatestUpdateDate) 
+    VALUES (1, '5001','10760',(SELECT ChannelTypeID FROM public."ChannelTypes" WHERE ChannelTypeTitle = 'Internet Bank'), '192.168.1.52', '1', '2', '3', '4', CURRENT_TIMESTAMP);

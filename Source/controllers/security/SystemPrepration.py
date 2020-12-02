@@ -43,12 +43,12 @@ class SystemPrepration:
         try:
             with open('config/conf.ini', 'w') as configfile:
                 config.write(configfile)
-                response = exceptionHandling.getErrorMessage("SYS00")
-                systemLog.InsertInfoLog('00', 'Database Prepration', '{"server":"' + server + '","port":"' + port + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: '+str(response[1].encode("utf-8")))
+                resp = exceptionHandling.getErrorMessage("SYS00")
+                systemLog.InsertInfoLog(resp[0], 'Database Prepration', '{"server":"' + server + '","port":"' + port + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
                 print('Application is installed successfully!\n')
         except Exception as e:
-            response = exceptionHandling.getErrorMessage("SYS500")
-            systemLog.InsertErrorLog('00', 'Database Prepration', '{"server":"' + server + '","port":"' + port + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: '+str(response[1].encode("utf-8")), str(response[0]), str(response[1]))
+            resp = exceptionHandling.getErrorMessage("SYS500")
+            systemLog.InsertErrorLog(resp[0], 'Database Prepration', '{"server":"' + server + '","port":"' + port + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
 
 
     def SetDatabase(self):
@@ -84,16 +84,16 @@ class SystemPrepration:
                 config.write(configfile)
             db.bind(provider=config['ConnectionString']['provider'], user=config['ConnectionString']['user'], password=config['ConnectionString']['password'], host=config['ConnectionString']['host'], database=config['ConnectionString']['database'])
             db.generate_mapping(create_tables=True)
-            response = exceptionHandling.getErrorMessage("SYS00")
-            systemLog.InsertInfoLog('00', 'Database Prepration', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: '+str(response[2].encode("utf-8")))
+            resp = exceptionHandling.getErrorMessage("SYS00")
+            systemLog.InsertInfoLog(resp[0], 'Database Prepration', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
             print('Database is created successfully!\n')
             self.InitData()
             self.SetOwnerBank()
             self.SetAdministrator()
             self.ImportIntegrationData()
         except Exception as e:
-            response = exceptionHandling.getErrorMessage("SYS500")
-            systemLog.InsertErrorLog('00', 'Database Prepration', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: ' + str(response[2].encode("utf-8")), str(response[0]), str(response[1]))
+            resp = exceptionHandling.getErrorMessage("SYS500")
+            systemLog.InsertErrorLog(resp[0], 'Database Prepration', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
 
     
     def InitData(self):
@@ -114,12 +114,12 @@ class SystemPrepration:
                 sql_file = open('resources/initialData/settingData.sql','r')
                 conn.cursor().execute(sql_file.read())
                 conn.close()
-            response = exceptionHandling.getErrorMessage("SYS00")
-            systemLog.InsertInfoLog('00', 'Data Initialization', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: '+str(response[2].encode("utf-8")))
+            resp = exceptionHandling.getErrorMessage("SYS00")
+            systemLog.InsertInfoLog(resp[0], 'Data Initialization', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
             print('Data is initialized successfully!\n')
         except Exception as e:
-            response = exceptionHandling.getErrorMessage("SYS500")
-            systemLog.InsertErrorLog('00', 'Data Initialization', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: ' + str(response[2].encode("utf-8")), str(response[0]), str(response[1]))
+            resp = exceptionHandling.getErrorMessage("SYS500")
+            systemLog.InsertErrorLog(resp[0], 'Data Initialization', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
 
 
     def SetOwnerBank(self):
@@ -134,12 +134,12 @@ class SystemPrepration:
                 bankCode = input('Please insert your bank code based on the abow list: ')
                 bank = Banks.get(BankCode =str(bankCode))
                 bank.set(IsOwner = True, LatestUpdateDate = datetime.now())
-            response = exceptionHandling.getErrorMessage("SYS00")
-            systemLog.InsertInfoLog('00', 'Set Owner Bank', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: '+str(response[2].encode("utf-8")))
+            resp = exceptionHandling.getErrorMessage("SYS00")
+            systemLog.InsertInfoLog(resp[0], 'Set Owner Bank', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
             print('The owner bank is set successfully!\n')
         except Exception as e:
-            response = exceptionHandling.getErrorMessage("SYS500")
-            systemLog.InsertErrorLog('00', 'Set Owner Bank', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: ' + str(response[2].encode("utf-8")), str(response[0]), str(response[1]))
+            resp = exceptionHandling.getErrorMessage("SYS500")
+            systemLog.InsertErrorLog(resp[0], 'Set Owner Bank', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
 
 
     def ImportIntegrationData(self):
@@ -162,14 +162,14 @@ class SystemPrepration:
                     sql_file = open('resources/initialData/integrationData.sql','r')
                     conn.cursor().execute(sql_file.read())
                     conn.close()
-                response = exceptionHandling.getErrorMessage("SYS00")
-                systemLog.InsertInfoLog('00', 'Data Integration', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: '+str(response[2].encode("utf-8")))
+                resp = exceptionHandling.getErrorMessage("SYS00")
+                systemLog.InsertInfoLog(resp[0], 'Data Integration', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
                 print('Data integration is done successfully!\n')
             else:
                 print('Data integration is ignored...')
         except Exception as e:
-            response = exceptionHandling.getErrorMessage("SYS500")
-            systemLog.InsertErrorLog('00', 'Data Integration', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: ' + str(response[2].encode("utf-8")), str(response[0]), str(response[1]))
+            resp = exceptionHandling.getErrorMessage("SYS500")
+            systemLog.InsertErrorLog(resp[0], 'Data Integration', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
 
 
     def SetAdministrator(self):
@@ -185,12 +185,12 @@ class SystemPrepration:
                 encryptedPassword = hashlib.sha512(str(password).encode('utf-8')).hexdigest()
                 role = list(Roles.select(lambda r: r.RoleTitle == 'Administrator'))[0]
                 Users(FirstName = str(firstName), LastName =str(lastName), Username=str(username), Password=encryptedPassword, RoleID=role.RoleID, PersonelCode=str(personalCode), IsActive=True, LatestUpdateDate = datetime.now() )
-                response = exceptionHandling.getErrorMessage("SYS00")
-                systemLog.InsertInfoLog('00', 'Set Administrator', '{"firstName":"' + firstName + '","lastName":"' + lastName + '","personalCode":"' + personalCode + '","username":"' + username + '","password":"' + password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: '+str(response[2].encode("utf-8")))
+                resp = exceptionHandling.getErrorMessage("SYS00")
+                systemLog.InsertInfoLog(resp[0], 'Set Administrator', '{"firstName":"' + firstName + '","lastName":"' + lastName + '","personalCode":"' + personalCode + '","username":"' + username + '","password":"' + password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
                 print('Administrator is created successfully!\n')
         except Exception as e:
-            response = exceptionHandling.getErrorMessage("SYS500")
-            systemLog.InsertErrorLog('00', 'Set Administrator', '{"firstName":"' + firstName + '","lastName":"' + lastName + '","personalCode":"' + personalCode + '","username":"' + username + '","password":"' + password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), 'Result: ' + str(response[2].encode("utf-8")), str(response[0]), str(response[1]))
+            resp = exceptionHandling.getErrorMessage("SYS500")
+            systemLog.InsertErrorLog(resp[0], 'Set Administrator', '{"firstName":"' + firstName + '","lastName":"' + lastName + '","personalCode":"' + personalCode + '","username":"' + username + '","password":"' + password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
 
     def CreateReportFolder(self):
         print('Creating Report Folder')

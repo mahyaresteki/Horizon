@@ -3,15 +3,15 @@ import logging
 from datetime import datetime
 
 class SystemLog:
-    def InsertInfoLog(self, transactionId, transactionTitle, data, transactionDateTime, username, channelId, ipAddress, response):
+    def InsertInfoLog(self, responseCode, transactionTitle, data, transactionDateTime, username, channelId, ipAddress, responseMessage):
         logging.basicConfig(filename='config/logHistory.log',level=logging.DEBUG)
         log = logging.getLogger('werkzeug')
         log.disabled = True
-        logging.info("ID:" + transactionId + " | Date and Time: " + transactionDateTime.strftime('%Y/%m/%d %H:%M:%S') + " | Title: " + transactionTitle + " | Username: " + username + " | Channel ID: " + channelId  + " | IP Address: " + ipAddress + " | Inserted Data: " + data + " | Response:" + response)
+        logging.info("Response Code:" + responseCode + " | Date and Time: " + transactionDateTime.strftime('%Y/%m/%d %H:%M:%S') + " | Title: " + transactionTitle + " | Username: " + username + " | Channel ID: " + channelId  + " | IP Address: " + ipAddress + " | Inserted Data: " + data + " | Response Message:" + responseMessage)
 
 
-    def InsertErrorLog(self, transactionId, transactionTitle, data, transactionDateTime, username, channelId, ipAddress, response, errorCode, errorMessage):
+    def InsertErrorLog(self, responseCode, transactionTitle, data, transactionDateTime, username, channelId, ipAddress, responseMessage):
         logging.basicConfig(filename='config/logHistory.log',level=logging.DEBUG)
         log = logging.getLogger('werkzeug')
         log.disabled = True
-        logging.error("ID:" + transactionId + " | Date and Time: " + transactionDateTime.strftime('%Y/%m/%d %H:%M:%S') + " | Title: " + transactionTitle + " | Username: " + username + " | Channel ID: " + channelId  + " | IP Address: " + ipAddress + " | Inserted Data: " + data + " | Response:" + response + " | Error Code:" + errorCode + " | Error Message:" + errorMessage, exc_info=True)
+        logging.error("Response Code:" + responseCode + " | Date and Time: " + transactionDateTime.strftime('%Y/%m/%d %H:%M:%S') + " | Title: " + transactionTitle + " | Username: " + username + " | Channel ID: " + channelId  + " | IP Address: " + ipAddress + " | Inserted Data: " + data + " | Response Message:" + responseMessage, exc_info=True)

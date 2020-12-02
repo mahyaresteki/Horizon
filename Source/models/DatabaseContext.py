@@ -106,31 +106,41 @@ class TransTypes(db.Entity):
         TransTypeID = orm.PrimaryKey(int, auto=True)
         TransTypeCode = orm.Required(str, unique=True)
         TransTypeTitle = orm.Required(str)
-        TransTypeMode = orm.Required(str)
         DbTableName = orm.Required(str)
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
         TransServiceTransType = orm.Set("TransServices", reverse="TransTypeID")
+        RequestTransType = orm.Set("TransRequestResponseMapping", reverse="RequestID")
+        ResponseTransType = orm.Set("TransRequestResponseMapping", reverse="ResponseID")
+
+
+
+class TransRequestResponseMapping(db.Entity):
+        _table_ = ('public', 'TransRequestResponseMapping')
+        TransRequestResponsID = orm.PrimaryKey(int, auto=True)
+        RequestID = orm.Required("TransTypes", reverse="RequestTransType")
+        ResponseID = orm.Required("TransTypes", reverse="ResponseTransType")
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
 
 
 
 class Services(db.Entity):
         _table_ = ('public', 'Services')
         ServiceID = orm.PrimaryKey(int, auto=True)
+        ProcessCode = orm.Required(str)
         ServiceTitle = orm.Required(str, unique=True)
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
         TransServiceService = orm.Set("TransServices", reverse="ServiceID")
-        RoleAccessesService = orm.Set("RoleAccesses", reverse="ServiceID")
 
 
 
 class TransServices(db.Entity):
         _table_ = ('public', 'TransServices')
         TransServiceID = orm.PrimaryKey(int, auto=True)
-        ProcessCode = orm.Required(str)
         ServiceID = orm.Required("Services", reverse="TransServiceService")
         TransTypeID = orm.Required("TransTypes", reverse="TransServiceTransType")
-        Bitmap = orm.Required(str)
+        BitValue = orm.Required(str)
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        RoleAccessesTransService = orm.Set("RoleAccesses", reverse="TransServiceID")
         AuthorizationRequestService = orm.Set("AuthorizationRequests", reverse="TransServiceID")
         AuthorizationResponseService = orm.Set("AuthorizationResponses", reverse="TransServiceID")
         FinantionalRequestService = orm.Set("FinantionalRequests", reverse="TransServiceID")
@@ -161,7 +171,7 @@ class RoleAccesses(db.Entity):
         _table_ = ('public', 'RoleAccesses')
         RoleAccessID = orm.PrimaryKey(int, auto=True)
         RoleID = orm.Required("Roles", reverse="RoleAccessesRole")
-        ServiceID = orm.Required("Services", reverse="RoleAccessesService")
+        TransServiceID = orm.Required("TransServices", reverse="RoleAccessesTransService")
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
 
 
