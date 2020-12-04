@@ -7,17 +7,6 @@ The project status is "underdevelopment".
 ## Goal of the Project
 Main goal of the Horizon project is development of flexible, lightweight, configurable,  faster and open source ISO-8583 compatible payment acquiree switch for banking and fintech system.
 
-##Case Study
-Public data of I.R. Iran Central Bank used as sample data for this project (such as settings and basic data). Therefore, Iranian fintech and banking system is case study of this project. 
-
-##Sucurity Concerns
-The following security concerns are considered in this project to prevent any critical issues for any live banking system all around the world.
-
-1 - There is not any integration code between this payment switch and Iranian national banking card network (SHETAB).
-2 - There is not any integration code between this payment switch and international card payment system such as Master Card, Visa Card and PayPal.
-
-If any bank or financial institiute wants to use this payment switch, they have to customise integration layer based on proposed card payment network. 
-
 ## Advantages
 1 - Including ESB (REST communication)
 
@@ -41,3 +30,17 @@ If any bank or financial institiute wants to use this payment switch, they have 
 3 - Is it possible to create a flexible RESTful payment switch which aministrators can map ISO fields to JSON parameters without restarting or switching off payment gateway or switch?
 
 4 - Is it posible to develop a payment switch which uses RESTful (HTTP) and socket programming (TCP) connection methods at a same time to provide payment services for deferent types of clients (ex: ATM and mobile app server)?  
+
+##Team
+Horizon will be developed by MAHEST development team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
+
+##Case Study
+Public data of I.R. Iran Central Bank used as sample data for this project (such as settings and basic data). Therefore, Iranian fintech and banking system is case study of this project. 
+
+##Sucurity Concerns
+The following security concerns are considered in this project to prevent any critical issues for any live banking system all around the world.
+
+1 - There is not any integration code between this payment switch and Iranian national banking card network (SHETAB).
+2 - There is not any integration code between this payment switch and international card payment system such as Master Card, Visa Card and PayPal.
+
+If any bank or financial institiute wants to use this payment switch, they have to customise integration layer based on proposed card payment network. 
