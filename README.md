@@ -37,7 +37,7 @@ Horizon will be developed by MAHEST development team which is managed by [Mahyar
 ## Case Study
 Public data of I.R. Iran Central Bank used as sample data for this project (such as settings and basic data). Therefore, Iranian fintech and banking system is case study of this project. 
 
-## Sucurity Concerns
+## Security Concerns
 The following security concerns are considered in this project to prevent any critical issues for any live banking system all around the world.
 
 1 - There is not any integration code between this payment switch and Iranian national banking card network (SHETAB).
