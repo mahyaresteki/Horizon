@@ -45,3 +45,6 @@ The following security concerns are considered in this project to prevent any cr
 2 - There is not any integration code between this payment switch and international card payment system such as Master Card, Visa Card and PayPal.
 
 If any bank or financial institiute wants to use this payment switch, they have to customise integration layer based on proposed card payment network. 
+
+## Development Philosophy
+Quality management of Horizon project is based on [Kaizen](https://en.wikipedia.org/wiki/Kaizen). Therefore, we will accept any logical and scientific critique or suggestion which helps to improve the project.
