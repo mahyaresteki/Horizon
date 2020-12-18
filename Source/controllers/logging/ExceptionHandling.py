@@ -3,7 +3,7 @@ import json
 import xml.etree.ElementTree as ET
 from models.DatabaseContext import *
 from datetime import datetime
-from controllers.security.SystemLog import SystemLog
+from controllers.logging.SystemLog import SystemLog
 from controllers.security.NetworkManagement import NetworkManagement
 
 errorLists={}

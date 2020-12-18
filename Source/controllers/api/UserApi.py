@@ -8,15 +8,13 @@ from flask_cors import CORS, cross_origin
 import App
 from flask import jsonify
 from datetime import datetime
-from controllers.security.SystemLog import SystemLog
-from controllers.security.NetworkManagement import NetworkManagement
-from controllers.security.ExceptionHandling import ExceptionHandling
+from controllers.struc.GlobalObjects import *
 
 systemLog = SystemLog()
 networkManagement = NetworkManagement()
 exceptionHandling = ExceptionHandling()
 
-class UserServices:
+class UserApi:
     def getToken(self, header: dict, body: dict):
         try:
             with orm.db_session:
@@ -32,15 +30,15 @@ class UserServices:
                         orm.commit()
                         resp = exceptionHandling.getErrorMessage('SEC00')
                         response = flask.Response('{"token":"' + token + '", "RetCode":"'+resp[0]+'", "RetMsg":"'+resp[1]+'", "RetMsgFa":"'+resp[2]+'"}')
-                        systemLog.InsertInfoLog(resp[0], 'Logging', str(body), datetime.now(), str(body["username"]), str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1])
+                        systemLog.InsertInfoLog(resp[0], 'Logging', str(body), datetime.now(), token, str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1])
                     else:
                         resp = exceptionHandling.getErrorMessage('SEC03')
                         response = flask.Response('{"RetCode":"'+resp[0]+'", "RetMsg":"'+resp[1]+'", "RetMsgFa":"'+resp[2]+'"}')
-                        systemLog.InsertErrorLog(resp[0], 'Logging', str(body), datetime.now(), str(body["username"]), str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1])
+                        systemLog.InsertErrorLog(resp[0], 'Logging', str(body), datetime.now(), None, str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1], None)
                 else:
                     resp = exceptionHandling.getErrorMessage('SEC04')
                     response = flask.Response('{"RetCode":"'+resp[0]+'", "RetMsg":"'+resp[1]+'", "RetMsgFa":"'+resp[2]+'"}')
-                    systemLog.InsertErrorLog(resp[0], 'Logging', str(body), datetime.now(), str(body["username"]), str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1])
+                    systemLog.InsertErrorLog(resp[0], 'Logging', str(body), datetime.now(), None, str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1], None)
                 response.headers["TransDateTime"] = str(datetime.now())
                 response.headers["TransDate"] = str(datetime.date(datetime.now()))
                 response.headers["TransTime"] = str(datetime.time(datetime.now()))
@@ -51,5 +49,5 @@ class UserServices:
             response.headers["TransDateTime"] = str(datetime.now())
             response.headers["TransDate"] = str(datetime.date(datetime.now()))
             response.headers["TransTime"] = str(datetime.time(datetime.now()))
-            systemLog.InsertErrorLog(resp[0], 'Logging', str(body), datetime.now(), str(body["username"]), str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1])
+            systemLog.InsertErrorLog(resp[0], 'Logging', str(body), datetime.now(), None, str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1], str(e))
             return response

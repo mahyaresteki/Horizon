@@ -25,7 +25,7 @@ hexDict =	{
   "F": "1111"
 }
 
-class IsoMessageEngine:
+class IsoService:
     def BitValueToBitmap(self, bitValue):
         i = 0
         bitmap=""
@@ -39,6 +39,7 @@ class IsoMessageEngine:
         return bitmap
 
 
+
     def BitmapToBitValue(self, bitmap):
         bitValue=""
         for c in bitmap:
@@ -46,13 +47,15 @@ class IsoMessageEngine:
         return bitValue
 
 
+
     def GetBitValue(self, transTypeCode, processCode):
         bitValue = ''
         with orm.db_session:
-            query = list(TransServices.select(lambda t: t.TransTypeID.TransTypeCode == str(transTypeCode) and t.ServiceID.ProcessCode == str(processCode)))
+            query = list(TransServices.select(lambda t: t.TransTypeID.TransTypeCode == str(transTypeCode) and t.IsoServiceID.ProcessCode == str(processCode)))
             if len(query) > 0:
                bitValue = query[0].BitValue
         return bitValue
+
 
 
     def GetDatabaseTableName(self, transTypeCode):
@@ -64,6 +67,7 @@ class IsoMessageEngine:
         return tableName
 
 
+
     def GetResponseType(self, transTypeCode):
         respType = ""
         with orm.db_session:
@@ -73,10 +77,11 @@ class IsoMessageEngine:
         return respType
 
 
+
     def GetValidTransTypeList(self, roleID):
         tansTypeList = list()
         with orm.db_session:
-            query = list(orm.select(r.TransServiceID.TransTypeID.TransTypeID for r in RoleAccesses if r.RoleID.RoleID == roleID))
+            query = list(orm.select(r.TransServiceID.TransTypeID.TransTypeID for r in IsoRoleAccesses if r.RoleID.RoleID == roleID))
             query2 = list(orm.select(r.RequestID.TransTypeID for r in TransRequestResponseMapping if r.RequestID.TransTypeID in(query)))
             query3 = list(orm.select(tt for tt in TransTypes if tt.TransTypeID in(query2) ))
             for c in query3:
@@ -85,13 +90,16 @@ class IsoMessageEngine:
 
 
 
-    def GetValidServiceList(self, roleID, transTypeCode):
+    def GetValidIsoServiceList(self, roleID, transTypeCode):
         serviceList = list()
         with orm.db_session:
-            query = list(orm.select(r.TransServiceID.ServiceID.ServiceID for r in RoleAccesses if r.RoleID.RoleID == roleID and r.TransServiceID.TransTypeID.TransTypeCode == transTypeCode))
-            query2 = list(orm.select(s for s in Services if s.ServiceID in(query) ))
+            query = list(orm.select(r.TransServiceID.IsoServiceID.IsoServiceID for r in IsoRoleAccesses if r.RoleID.RoleID == roleID and r.TransServiceID.TransTypeID.TransTypeCode == transTypeCode))
+            print(query)
+            query2 = list(orm.select(s for s in IsoServices if s.IsoServiceID in(query)))
+            print(query2)
             for c in query2:
                 serviceList.append({"ProcessCode": c.ProcessCode, "ServiceTitle": c.ServiceTitle})
+        print(serviceList)
         return serviceList
 
 
@@ -110,6 +118,7 @@ class IsoMessageEngine:
                     continue
             i+=1
         return fieldDictionary
+
 
 
     def GetJsonMessageStructure(self, bitValue):

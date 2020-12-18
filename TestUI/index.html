@@ -18,7 +18,7 @@
 			</tr>
 			<tr>
 				<td>Server IP:</td>
-				<td><input type="text" id="txtServerIP" value="172.27.191.135"/></td>
+				<td><input type="text" id="txtServerIP" value="172.24.170.168"/></td>
 			</tr>
 			<tr>
 				<td>Server Port:</td>
@@ -139,7 +139,7 @@
 		<script>
 			$(document).on("click", "#btnLogin", function () {
 				$.ajax({
-						url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/UserServices/getToken',
+						url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/UserApi/getToken',
 						type: 'POST',
 						dataType: 'json',
 						crossDomain: true,
@@ -156,7 +156,7 @@
 								$("#lblMsg").html('');
 								$("#txtToken").val(data["token"]);
 								$.ajax({
-									url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoServices/getTransTypeList',
+									url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoApi/getTransTypeList',
 									type: 'POST',
 									dataType: 'json',
 									crossDomain: true,
@@ -190,7 +190,7 @@
 								$("#lblMsg").html('');
 								$("txtToken").val(obj["token"]);
 								$.ajax({
-									url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoServices/getTransTypeList',
+									url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoApi/getTransTypeList',
 									type: 'POST',
 									dataType: 'json',
 									crossDomain: true,
@@ -222,7 +222,7 @@
 			
 			$('#cmbTransTypeCode').on('change', function() {
 				$.ajax({
-					url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoServices/getServiceList',
+					url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoApi/getIsoServiceList',
 					type: 'POST',
 					dataType: 'json',
 					crossDomain: true,
@@ -254,7 +254,7 @@
 				if($("#txtToken").val() != null)
 				{
 					$.ajax({
-						url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoServices/getRequestStructure',
+						url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoApi/getRequestStructure',
 						type: 'POST',
 						dataType: 'json',
 						crossDomain: true,
@@ -271,6 +271,7 @@
 							if(data["Bitmap"] != null)
 							{
 								$("#lblMsg").html('');
+								$("#request-form").html('');
 								$("#txtBitmap").val(data["BitValue"]);
 								$("#txtBitmapHex").val(data["Bitmap"]);
 								$("#txtTableName").val(data["TableName"]);
@@ -332,7 +333,7 @@
     				});
 
 					$.ajax({
-						url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoServices/getResponseStructure',
+						url: 'http://'+$("#txtServerIP").val()+':'+$("#txtServerPort").val()+'/IsoApi/getResponseStructure',
 						type: 'POST',
 						dataType: 'json',
 						crossDomain: true,
@@ -349,6 +350,7 @@
 							if(data["Bitmap"] != null)
 							{
 								$("#lblMsg").html('');
+								$("#response-form").html('');
 								$("#txtBitmapRes").val(data["BitValue"]);
 								$("#txtBitmapHexRes").val(data["Bitmap"]);
 								$("#txtTableNameRes").val(data["TableName"]);

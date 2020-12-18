@@ -28,7 +28,7 @@ except ImportError:
 import configparser
 import random, threading, webbrowser
 from datetime import datetime
-from controllers.security.SystemPrepration import SystemPrepration
+from controllers.setup.SystemPrepration import SystemPrepration
 from App import *
 
 if __name__ == "__main__":
@@ -44,12 +44,16 @@ if __name__ == "__main__":
     print(config['AppInfo']['appName']+': '+config['AppInfo']['description'])
     print('Published by ' + config['AppInfo']['publisher']+'\n')
 
+    
     systemPrepration = SystemPrepration()
+
+    if config['Security']['reportfoldername'] != 'NotSet':
+        systemPrepration.CreateReportFolder()
     if config['DEFAULT']['server'] == 'NotSet' or config['DEFAULT']['port'] == 'NotSet':
         systemPrepration.SetWebServer()
     if config['ConnectionString']['host'] == 'NotSet' or config['ConnectionString']['database'] == 'NotSet':
         systemPrepration.SetDatabase()
-    systemPrepration.CreateReportFolder()
+
     config = configparser.ConfigParser()
     config.sections()
     config.read('config/conf.ini')
@@ -57,5 +61,3 @@ if __name__ == "__main__":
 
 print('All Done! Horizon is ready to use.\n')
 app.run(host=config['DEFAULT']['server'], port=config['DEFAULT']['port'])
-    
-

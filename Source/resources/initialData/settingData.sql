@@ -50,7 +50,47 @@ INSERT INTO public."Roles" (RoleID, RoleTitle, LatestUpdateDate)
 
 
 
-INSERT INTO public."Services" (ServiceID, ProcessCode, ServiceTitle, LatestUpdateDate) 
+INSERT INTO public."AdministrativeServices" (AdministrativeServiceID, ServiceTitle, LatestUpdateDate) 
+    VALUES (1,'Get Transaction Type List', CURRENT_TIMESTAMP),
+        (2, 'Get Service List', CURRENT_TIMESTAMP),
+        (3, 'Get Request Structure', CURRENT_TIMESTAMP),
+        (4, 'Get Response Structure', CURRENT_TIMESTAMP);
+
+
+
+INSERT INTO public."AdministrativeRoleAccesses" (AdministrativeRoleAccessID, RoleID, AdministrativeServiceID, LatestUpdateDate) 
+    VALUES (1,1,1, CURRENT_TIMESTAMP),
+        (2,1,2, CURRENT_TIMESTAMP),
+        (3,1,3, CURRENT_TIMESTAMP),
+        (4,1,4, CURRENT_TIMESTAMP),
+        (5,2,1, CURRENT_TIMESTAMP),
+        (6,2,2, CURRENT_TIMESTAMP),
+        (7,2,3, CURRENT_TIMESTAMP),
+        (8,2,4, CURRENT_TIMESTAMP),
+        (9,3,1, CURRENT_TIMESTAMP),
+        (10,3,2, CURRENT_TIMESTAMP),
+        (11,3,3, CURRENT_TIMESTAMP),
+        (12,3,4, CURRENT_TIMESTAMP),
+        (13,4,1, CURRENT_TIMESTAMP),
+        (14,4,2, CURRENT_TIMESTAMP),
+        (15,4,3, CURRENT_TIMESTAMP),
+        (16,4,4, CURRENT_TIMESTAMP),
+        (17,5,1, CURRENT_TIMESTAMP),
+        (18,5,2, CURRENT_TIMESTAMP),
+        (19,5,3, CURRENT_TIMESTAMP),
+        (20,5,4, CURRENT_TIMESTAMP),
+        (21,6,1, CURRENT_TIMESTAMP),
+        (23,6,2, CURRENT_TIMESTAMP),
+        (24,6,3, CURRENT_TIMESTAMP),
+        (25,6,4, CURRENT_TIMESTAMP),
+        (26,7,1, CURRENT_TIMESTAMP),
+        (27,7,2, CURRENT_TIMESTAMP),
+        (28,7,3, CURRENT_TIMESTAMP),
+        (29,7,4, CURRENT_TIMESTAMP);
+
+
+
+INSERT INTO public."IsoServices" (IsoServiceID, ProcessCode, ServiceTitle, LatestUpdateDate) 
     VALUES (1, '000000','Service or Product Sale', CURRENT_TIMESTAMP),
         (2, '010000', 'Withdrawal', CURRENT_TIMESTAMP),
         (3, '130000', 'Deduction from the card for recharging electronic wallet', CURRENT_TIMESTAMP),
@@ -80,7 +120,7 @@ INSERT INTO public."Services" (ServiceID, ProcessCode, ServiceTitle, LatestUpdat
 
 
 
-INSERT INTO public."TransServices" (TransServiceID, ServiceID, TransTypeID, BitValue, LatestUpdateDate)
+INSERT INTO public."TransServices" (TransServiceID, IsoServiceID, TransTypeID, BitValue, LatestUpdateDate)
     VALUES (1, 1, 3, '11110110011111001110010011000001101010001110000110111000000001010000000000000000000000000000000000010000000000000000000100000001', CURRENT_TIMESTAMP),
         (2, 1, 4, '11110110011110100000000000000001100011101101000010101000000001010000000000000000000000000000000000010000000000000000000000000001', CURRENT_TIMESTAMP),
         (3, 1, 5, '11110110011110001000010010000001100010001100000010101000000001000000000000000000000000000100000000000000000000000000000000000001', CURRENT_TIMESTAMP),
@@ -228,7 +268,7 @@ INSERT INTO public."TransServices" (TransServiceID, ServiceID, TransTypeID, BitV
 
 
 
-INSERT INTO public."RoleAccesses" (RoleAccessID, RoleID, TransServiceID, LatestUpdateDate) 
+INSERT INTO public."IsoRoleAccesses" (IsoRoleAccessID, RoleID, TransServiceID, LatestUpdateDate) 
     VALUES (1,1,1, CURRENT_TIMESTAMP),
         (2,1,2, CURRENT_TIMESTAMP),
         (3,1,3, CURRENT_TIMESTAMP),

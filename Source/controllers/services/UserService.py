@@ -2,16 +2,14 @@ import sys
 import json
 from models.DatabaseContext import *
 from datetime import datetime
-from controllers.security.SystemLog import SystemLog
-from controllers.security.NetworkManagement import NetworkManagement
-from controllers.security.ExceptionHandling import ExceptionHandling
+from controllers.struc.GlobalObjects import *
 
 
 systemLog = SystemLog()
 networkManagement = NetworkManagement()
 exceptionHandling = ExceptionHandling()
 
-class UserControl:
+class UserService:
     def CheckToken(self, token: str, clientIp: str, terminalId: str):
         try:
             with orm.db_session:
@@ -28,25 +26,24 @@ class UserControl:
                             tokenExpiration = int(config['Security']['tokenexpiration'])
                             if int(dateDiff) < tokenExpiration:
                                 resp = exceptionHandling.getErrorMessage("SEC00")
-                                systemLog.InsertInfoLog(resp[0], 'CheckToken', '{"token":"'+token+'" }', datetime.now(), 'unknown', terminalId, clientIp, resp[1])
+                                systemLog.InsertInfoLog(resp[0], 'CheckToken', '{"token":"'+token+'" }', datetime.now(), token, terminalId, clientIp, resp[1])
                             else:
                                 resp = exceptionHandling.getErrorMessage("SEC01")
-                                systemLog.InsertErrorLog(resp[0], 'CheckToken', '{"token":"'+token+'" }', datetime.now(), 'unknown', terminalId, clientIp, resp[1])
+                                systemLog.InsertErrorLog(resp[0], 'CheckToken', '{"token":"'+token+'" }', datetime.now(), token, terminalId, clientIp, resp[1], None)
                     else:
                         resp = exceptionHandling.getErrorMessage("SEC05")
-                        systemLog.InsertErrorLog(resp[0], 'CheckToken', '{"token":"'+token+'" }', datetime.now(), 'unknown', terminalId, clientIp, resp[1])
+                        systemLog.InsertErrorLog(resp[0], 'CheckToken', '{"token":"'+token+'" }', datetime.now(), token, terminalId, clientIp, resp[1], None)
                 else:
                     resp = exceptionHandling.getErrorMessage("SEC02")
-                    systemLog.InsertErrorLog(resp[0], 'CheckToken', '{"token":"'+token+'" }', datetime.now(), 'unknown', terminalId, clientIp, resp[1])
+                    systemLog.InsertErrorLog(resp[0], 'CheckToken', '{"token":"'+token+'" }', datetime.now(), token, terminalId, clientIp, resp[1], None)
                 response = {"RetCode": resp[0], "RetMsg": resp[1], "RetMsgFa": resp[2]}
                 return response
         except Exception as e:
             resp = exceptionHandling.getErrorMessage("SYS500")
             response={"RetCode": resp[0], "RetMsg": resp[1], "RetMsgFa": resp[2]}
-            systemLog.InsertErrorLog(resp[0], 'CheckToken', '{"token":"'+token+'" }', datetime.now(), 'unknown', terminalId, clientIp, resp[1])
+            systemLog.InsertErrorLog(resp[0], 'CheckToken', '{"token":"'+token+'" }', datetime.now(), token, terminalId, clientIp, resp[1], str(e))
             return response
 
-    
     def getUserRoleID(self, token: str, clientIp: str, terminalId: str):
         try:
             with orm.db_session:
@@ -59,10 +56,10 @@ class UserControl:
                     mylist2 = list(query2)
                     response = {"RoleID": mylist2[0].RoleID.RoleID}
                 resp = exceptionHandling.getErrorMessage("SEC00")
-                systemLog.InsertInfoLog(resp[0], 'getUserRoleID', '{"token":"'+token+'" }', datetime.now(), 'unknown', terminalId, clientIp, "")
+                systemLog.InsertInfoLog(resp[0], 'getUserRoleID', '{"token":"'+token+'" }', datetime.now(), token, terminalId, clientIp, resp[1])
                 return response
         except Exception as e:
             resp = exceptionHandling.getErrorMessage("SYS500")
             response={"RetCode": resp[0], "RetMsg": resp[1], "RetMsgFa": resp[2]}
-            systemLog.InsertErrorLog(resp[0], 'getUserRoleID', '{"token":"'+token+'" }', datetime.now(), 'unknown', terminalId, clientIp, "", resp[0], resp[1])
+            systemLog.InsertErrorLog(resp[0], 'getUserRoleID', '{"token":"'+token+'" }', datetime.now(), token, terminalId, clientIp, resp[1], str(e))
             return response

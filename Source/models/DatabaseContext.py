@@ -21,6 +21,7 @@ class Countries(db.Entity):
         StateCountry = orm.Set("States", reverse="CountryID")
 
 
+
 class States(db.Entity):
         _table_ = ('public', 'States')
         StateID = orm.PrimaryKey(int, auto=True)
@@ -30,6 +31,7 @@ class States(db.Entity):
         Longitude = orm.Optional(str, nullable=True)
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
         CityState = orm.Set("Cities", reverse="StateID")
+
 
 
 class Cities(db.Entity):
@@ -43,6 +45,7 @@ class Cities(db.Entity):
         BranchCity = orm.Set("Branches", reverse="CityID")
 
 
+
 class Currencies(db.Entity):
         _table_ = ('public', 'Currencies')
         CurrencyID = orm.PrimaryKey(int, auto=True)
@@ -51,6 +54,7 @@ class Currencies(db.Entity):
         CurrencySymbol = orm.Required(str)
         IsActive = orm.Required(bool)
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+
 
 
 class Banks(db.Entity):
@@ -62,6 +66,7 @@ class Banks(db.Entity):
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
         BankCardPrefix = orm.Set("CardPrefixCodes", reverse="BankID")
         BankBranch = orm.Set("Branches", reverse="BankID")
+
 
 
 class Branches(db.Entity):
@@ -101,6 +106,7 @@ class CardTypes(db.Entity):
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
 
 
+
 class TransTypes(db.Entity):
         _table_ = ('public', 'TarnsTypes')
         TransTypeID = orm.PrimaryKey(int, auto=True)
@@ -123,24 +129,24 @@ class TransRequestResponseMapping(db.Entity):
 
 
 
-class Services(db.Entity):
-        _table_ = ('public', 'Services')
-        ServiceID = orm.PrimaryKey(int, auto=True)
+class IsoServices(db.Entity):
+        _table_ = ('public', 'IsoServices')
+        IsoServiceID = orm.PrimaryKey(int, auto=True)
         ProcessCode = orm.Required(str)
         ServiceTitle = orm.Required(str, unique=True)
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
-        TransServiceService = orm.Set("TransServices", reverse="ServiceID")
+        TransServiceIsoService = orm.Set("TransServices", reverse="IsoServiceID")
 
 
 
 class TransServices(db.Entity):
         _table_ = ('public', 'TransServices')
         TransServiceID = orm.PrimaryKey(int, auto=True)
-        ServiceID = orm.Required("Services", reverse="TransServiceService")
+        IsoServiceID = orm.Required("IsoServices", reverse="TransServiceIsoService")
         TransTypeID = orm.Required("TransTypes", reverse="TransServiceTransType")
         BitValue = orm.Required(str)
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
-        RoleAccessesTransService = orm.Set("RoleAccesses", reverse="TransServiceID")
+        IsoRoleAccessesTransService = orm.Set("IsoRoleAccesses", reverse="TransServiceID")
         AuthorizationRequestService = orm.Set("AuthorizationRequests", reverse="TransServiceID")
         AuthorizationResponseService = orm.Set("AuthorizationResponses", reverse="TransServiceID")
         FinantionalRequestService = orm.Set("FinantionalRequests", reverse="TransServiceID")
@@ -157,6 +163,25 @@ class TransServices(db.Entity):
         KeyExchangeResponseService = orm.Set("KeyExchangeResponses", reverse="TransServiceID")
 
 
+
+class NonIsoServices(db.Entity):
+        _table_ = ('public', 'NonIsoServices')
+        NonIsoServiceID = orm.PrimaryKey(int, auto=True)
+        ServiceTitle = orm.Required(str, unique=True)
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        NonIsoRoleAccessService = orm.Set("NonIsoRoleAccesses", reverse="NonIsoServiceID")
+
+
+
+class AdministrativeServices(db.Entity):
+        _table_ = ('public', 'AdministrativeServices')
+        AdministrativeServiceID = orm.PrimaryKey(int, auto=True)
+        ServiceTitle = orm.Required(str, unique=True)
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+        AdministrativeRoleAccessService = orm.Set("AdministrativeRoleAccesses", reverse="AdministrativeServiceID")
+
+
+
 class Roles(db.Entity):
         _table_ = ('public', 'Roles')
         RoleID = orm.PrimaryKey(int, auto=True)
@@ -164,15 +189,37 @@ class Roles(db.Entity):
         Description = orm.Optional(str, nullable=True)
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
         UserRole = orm.Set("Users", reverse="RoleID")
-        RoleAccessesRole = orm.Set("RoleAccesses", reverse="RoleID")
+        IsoRoleAccessesRole = orm.Set("IsoRoleAccesses", reverse="RoleID")
+        NonIsoRoleAccessesRole = orm.Set("NonIsoRoleAccesses", reverse="RoleID")
+        AdministrativeRoleAccessesRole = orm.Set("AdministrativeRoleAccesses", reverse="RoleID")
 
 
-class RoleAccesses(db.Entity):
-        _table_ = ('public', 'RoleAccesses')
-        RoleAccessID = orm.PrimaryKey(int, auto=True)
-        RoleID = orm.Required("Roles", reverse="RoleAccessesRole")
-        TransServiceID = orm.Required("TransServices", reverse="RoleAccessesTransService")
+
+class IsoRoleAccesses(db.Entity):
+        _table_ = ('public', 'IsoRoleAccesses')
+        IsoRoleAccessID = orm.PrimaryKey(int, auto=True)
+        RoleID = orm.Required("Roles", reverse="IsoRoleAccessesRole")
+        TransServiceID = orm.Required("TransServices", reverse="IsoRoleAccessesTransService")
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+
+
+
+class NonIsoRoleAccesses(db.Entity):
+        _table_ = ('public', 'NonIsoRoleAccesses')
+        NonIsoRoleAccessID = orm.PrimaryKey(int, auto=True)
+        RoleID = orm.Required("Roles", reverse="NonIsoRoleAccessesRole")
+        NonIsoServiceID = orm.Required("NonIsoServices", reverse="NonIsoRoleAccessService")
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+
+
+
+class AdministrativeRoleAccesses(db.Entity):
+        _table_ = ('public', 'AdministrativeRoleAccesses')
+        AdministrativeRoleAccessID = orm.PrimaryKey(int, auto=True)
+        RoleID = orm.Required("Roles", reverse="AdministrativeRoleAccessesRole")
+        AdministrativeServiceID = orm.Required("AdministrativeServices", reverse="AdministrativeRoleAccessService")
+        LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+
 
 
 class Users(db.Entity):
@@ -189,6 +236,7 @@ class Users(db.Entity):
         UserToken = orm.Set("Tokens", reverse="UserID")
 
 
+
 class Tokens(db.Entity):
         _table_ = ('public', 'Tokens')
         TokenID = orm.PrimaryKey(int, auto=True)
@@ -203,6 +251,7 @@ class Tokens(db.Entity):
         AdministrativeRequestToken = orm.Set("AdministrativeRequests", reverse="TokenID")
         NetworkManagementRequestToken = orm.Set("NetworkManagementRequests", reverse="TokenID")
         KeyExchangeRequestToken = orm.Set("KeyExchangeRequests", reverse="TokenID")
+
 
 
 class ChannelTypes(db.Entity):
@@ -240,6 +289,7 @@ class Terminals(db.Entity):
         KeyExchangeRequestTermial = orm.Set("KeyExchangeRequests", reverse="TerminalCode")
 
 
+
 # 0100 Messages
 class AuthorizationRequests(db.Entity):
         _table_ = ('public', 'AuthorizationRequests')
@@ -271,6 +321,7 @@ class AuthorizationRequests(db.Entity):
         BranchID = orm.Required("Branches", reverse="AuthorizationRequestBranch") # S-100
         TokenID = orm.Required("Tokens", reverse="AuthorizationRequestToken")
         AuthorizationReq = orm.Set("AuthorizationResponses", reverse="AuthorizationRequestID")
+
 
 
 # 0110 Messages
@@ -306,7 +357,8 @@ class AuthorizationResponses(db.Entity):
         PrivateAdditionalData = orm.Optional(str) # S-121
         MAC = orm.Required(int) # S-128
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
-        
+
+
 
 # 0200 and 220 Messages
 class FinantionalRequests(db.Entity):
@@ -347,7 +399,8 @@ class FinantionalRequests(db.Entity):
         BranchID = orm.Required("Branches", reverse="FinantionalRequestBranch") # S-100
         TokenID = orm.Required("Tokens", reverse="FinantionalRequestToken")
         FinantionalReq = orm.Set("FinantionalResponses", reverse="FinantionalRequestID")
-        
+
+
 
 # 0210 and 0230 Messages
 class FinantionalResponses(db.Entity):
@@ -380,6 +433,7 @@ class FinantionalResponses(db.Entity):
         PrivateAdditionalData = orm.Optional(int) # S-121
         MAC = orm.Optional(int) # S-128
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow) 
+
 
 
 # 0400 and 0420 Messages
@@ -420,6 +474,7 @@ class ReversalRequests(db.Entity):
         ReversalReq = orm.Set("ReversalResponses", reverse="ReversalRequestID")
 
 
+
 # 0410 and 0430 Messages
 class ReversalResponses(db.Entity):
         _table_ = ('public', 'ReversalResponses')
@@ -448,6 +503,7 @@ class ReversalResponses(db.Entity):
         AdditionalAmounts = orm.Optional(int) # P-54
         MAC = orm.Required(str) # P-64
         LatestUpdateDate = orm.Required(datetime, default=datetime.utcnow)
+
 
 
 # 0500 and 0520 Messages
@@ -492,6 +548,7 @@ class SettlementRequests(db.Entity):
         SettlementReq = orm.Set("SettlementResponses", reverse="SettlementRequestID")
 
 
+
 # 0510 and 0530 Messages
 class SettlementResponses(db.Entity):
         _table_ = ('public', 'SettlementResponses')
@@ -507,6 +564,7 @@ class SettlementResponses(db.Entity):
         SettlementCode = orm.Optional(int) # P-66
         SettlementInstitutionIdentificationCode = orm.Optional(int) # S-99
         MAC = orm.Optional(int) # S-128 
+
 
 
 # 0600 Messages
@@ -538,6 +596,7 @@ class AdministrativeRequests(db.Entity):
         AdministrativeReq = orm.Set("AdministrativeResponses", reverse="AdministrativeRequestID")
 
 
+
 # 0610 Messages
 class AdministrativeResponses(db.Entity):
         _table_ = ('public', 'AdministrativeResponses')
@@ -560,6 +619,7 @@ class AdministrativeResponses(db.Entity):
         AdditionalResponseData = orm.Optional(int) # P-44
         PrivateAdditionalData = orm.Optional(int) # S-121
         MAC = orm.Optional(int) # S-128 
+
 
 
 # 0800 and 0820 Messages
@@ -586,6 +646,7 @@ class NetworkManagementRequests(db.Entity):
         NetworkManagementReq = orm.Set("NetworkManagementResponses", reverse="NetworkManagementRequestID")
         
 
+
 # 0810 and 0830 Messages
 class NetworkManagementResponses(db.Entity):
         _table_ = ('public', 'NetworkManagementResponses')
@@ -604,6 +665,7 @@ class NetworkManagementResponses(db.Entity):
         NetworkManagementInformationCode = orm.Optional(int) # S-70
         MessageSecurityCode = orm.Optional(int) # S-96
         MAC = orm.Optional(int) # S-128
+
 
 
 # 0804 Messages
@@ -627,7 +689,8 @@ class KeyExchangeRequests(db.Entity):
         BranchID = orm.Required("Branches", reverse="KeyExchangeRequestBranch") # S-100
         TokenID = orm.Required("Tokens", reverse="KeyExchangeRequestToken")
         KeyExchangeReq = orm.Set("KeyExchangeResponses", reverse="KeyExchangeRequestID")
-        
+
+
 
 # 0814 Messages
 class KeyExchangeResponses(db.Entity):
@@ -647,6 +710,8 @@ class KeyExchangeResponses(db.Entity):
         CardAcceptor = orm.Optional(int) # P-41
         CardAcceptorCode = orm.Optional(int) # P-42
         AddtionalData = orm.Optional(int) # P-48
+
+
 
 if config['ConnectionString']['host'] != 'NotSet' and config['ConnectionString']['database'] != 'NotSet':
         if config['ConnectionString']['provider'] == 'postgres':

@@ -10,9 +10,7 @@ from models.DatabaseContext import *
 import hashlib
 import configparser
 from datetime import datetime
-from controllers.security.SystemLog import SystemLog
-from controllers.security.NetworkManagement import NetworkManagement
-from controllers.security.ExceptionHandling import ExceptionHandling
+from controllers.struc.GlobalObjects import *
 import getpass
 import os
 from datetime import datetime
@@ -28,9 +26,12 @@ class SystemPrepration:
     database = ''
     username = ''
 
+
+
     def __init__(self):    
         config.sections()
         config.read('config/conf.ini')
+
 
 
     def SetWebServer(self):
@@ -48,7 +49,8 @@ class SystemPrepration:
                 print('Application is installed successfully!\n')
         except Exception as e:
             resp = exceptionHandling.getErrorMessage("SYS500")
-            systemLog.InsertInstallationErrorLog(resp[0], 'Database Prepration', '{"server":"' + server + '","port":"' + port + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
+            systemLog.InsertInstallationErrorLog(resp[0], 'Database Prepration', '{"server":"' + server + '","port":"' + port + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1], str(e))
+
 
 
     def SetDatabase(self):
@@ -94,9 +96,10 @@ class SystemPrepration:
             self.CreateReportFolder()
         except Exception as e:
             resp = exceptionHandling.getErrorMessage("SYS500")
-            systemLog.InsertInstallationErrorLog(resp[0], 'Database Prepration', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
+            systemLog.InsertInstallationErrorLog(resp[0], 'Database Prepration', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1], str(e))
 
     
+
     def InitData(self):
         print('Data Initialization')
         print('==================================')
@@ -120,7 +123,8 @@ class SystemPrepration:
             print('Data is initialized successfully!\n')
         except Exception as e:
             resp = exceptionHandling.getErrorMessage("SYS500")
-            systemLog.InsertInstallationErrorLog(resp[0], 'Data Initialization', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
+            systemLog.InsertInstallationErrorLog(resp[0], 'Data Initialization', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1], str(e))
+
 
 
     def SetOwnerBank(self):
@@ -143,7 +147,8 @@ class SystemPrepration:
             print('The owner bank is set successfully!\n')
         except Exception as e:
             resp = exceptionHandling.getErrorMessage("SYS500")
-            systemLog.InsertInstallationErrorLog(resp[0], 'Set Owner Bank', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
+            systemLog.InsertInstallationErrorLog(resp[0], 'Set Owner Bank', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1], str(e))
+
 
 
     def ImportIntegrationData(self):
@@ -173,7 +178,8 @@ class SystemPrepration:
                 print('Data integration is ignored...')
         except Exception as e:
             resp = exceptionHandling.getErrorMessage("SYS500")
-            systemLog.InsertInstallationErrorLog(resp[0], 'Data Integration', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
+            systemLog.InsertInstallationErrorLog(resp[0], 'Data Integration', '{"provider":"' + self.provider + '","host":"' + self.host + '","database":"' + self.database + '","username":"' + self.username + '","password":"' + self.password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1], str(e))
+
 
 
     def SetAdministrator(self):
@@ -194,40 +200,34 @@ class SystemPrepration:
                 print('Administrator is created successfully!\n')
         except Exception as e:
             resp = exceptionHandling.getErrorMessage("SYS500")
-            systemLog.InsertInstallationErrorLog(resp[0], 'Set Administrator', '{"firstName":"' + str(firstName).capitalize() + '","lastName":"' + str(lastName).capitalize() + '","personalCode":"' + personalCode + '","username":"' + str(username).lower() + '","password":"' + password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1])
+            systemLog.InsertInstallationErrorLog(resp[0], 'Set Administrator', '{"firstName":"' + str(firstName).capitalize() + '","lastName":"' + str(lastName).capitalize() + '","personalCode":"' + personalCode + '","username":"' + str(username).lower() + '","password":"' + password + '"}', datetime.now(), networkManagement.getHostUsername(), networkManagement.getHostName(), networkManagement.getHostIP(), resp[1], str(e))
+
+
 
     def CreateReportFolder(self):
         print('Creating Report Folder')
         print('==================================')
-        path=app.root_path+'/switchReports/'+ config['Security']['reportFolderName']+'/'+str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+"/"
-        if os.path.exists(path) == False:
-            os.makedirs(path)
-            print('Switch Report folder for current date is created successfully!\n')
-        else:
-            print('Switch Report folder for current date is already exists!\n')
         
-        path=app.root_path+'/switchReports/'+ config['Security']['reportFolderName']+'/'+str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+"/InternalTransactionLog"
+        path=app.root_path+'/switchReports/'+ config['Security']['reportFolderName']+'/JournalLog/'
         if os.path.exists(path) == False:
             os.makedirs(path)
-            dir_list = os.listdir(path)
-            open(path+'/InternalTransactions-'+str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+'.log', 'w')
-            print('Internal transactions log folder is created successfully!\n')
+            print('Journal log folder is created successfully!\n')
         else:
-            print('Internal tranactions log folder for current date is already exists!\n')
-
-        path=app.root_path+'/switchReports/'+ config['Security']['reportFolderName']+'/'+str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+"/OtherTranscationLog"
-        if os.path.exists(path) == False:
-            os.makedirs(path)
-            dir_list = os.listdir(path)
-            open(path+'/OtherTransactions-'+str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+'.log', 'w')
-            print('Other transactions log folder is created successfully!\n')
+            print('Journal log folder is already exists!\n')
+        if os.path.exists(path+'/JournalLog-'+str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+'.log') == False:
+            open(path+'/JournalLog-'+str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+'.log', 'w')
+            print('Journal log file for today is created successfully!\n')
         else:
-            print('Other transcations log folder for current date is already exists!\n')
+            print('Journal log file for today is already exists!\n')
 
-        path=app.root_path+'/switchReports/'+ config['Security']['reportFolderName']+'/'+str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+"/SystemLog"
+        path=app.root_path+'/switchReports/'+ config['Security']['reportFolderName']+'/SystemLog/'
         if os.path.exists(path) == False:
             os.makedirs(path)
-            open(path+'/SystemLog-'+str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+'.log', 'w')
             print('System log folder is created successfully!\n')
         else:
-            print('System log folder for current date is already exists!\n')
+            print('System log folder is already exists!\n')
+        if os.path.exists(path+'/SystemLog-'+str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+'.log') == False:
+            open(path+'/SystemLog-'+str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+'.log', 'w')
+            print('System log file for today is created successfully!\n')
+        else:
+            print('System log file for today is already exists!\n')
