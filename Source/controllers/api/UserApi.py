@@ -1,53 +1,34 @@
-import sys
+import sys, os
 import json
 from models.DatabaseContext import *
-import uuid
-import hashlib
 import flask
 from flask_cors import CORS, cross_origin
 import App
 from flask import jsonify
 from datetime import datetime
 from controllers.struc.GlobalObjects import *
+from controllers.struc.MessageStructure import MessageStructure
 
+userService = UserService()
 systemLog = SystemLog()
 networkManagement = NetworkManagement()
 exceptionHandling = ExceptionHandling()
+messageStructure = MessageStructure()
 
 class UserApi:
     def getToken(self, header: dict, body: dict):
         try:
             with orm.db_session:
                 username = str(body['username'])
-                password = hashlib.sha512(str(body['password']).encode('utf-8')).hexdigest()
-                query = Users.select(lambda u: u.Username == str(username) and u.Password == str(password))
-                mylist = list(query)
-                response=""
-                if len(mylist) > 0:
-                    if mylist[0].IsActive :
-                        token=uuid.uuid4().hex
-                        tokens = Tokens(Token = token, UserID = mylist[0].UserID, GenerationDate = datetime.now(), ClientIP = networkManagement.getClientIP())
-                        orm.commit()
-                        resp = exceptionHandling.getErrorMessage('SEC00')
-                        response = flask.Response('{"token":"' + token + '", "RetCode":"'+resp[0]+'", "RetMsg":"'+resp[1]+'", "RetMsgFa":"'+resp[2]+'"}')
-                        systemLog.InsertInfoLog(resp[0], 'Logging', str(body), datetime.now(), token, str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1])
-                    else:
-                        resp = exceptionHandling.getErrorMessage('SEC03')
-                        response = flask.Response('{"RetCode":"'+resp[0]+'", "RetMsg":"'+resp[1]+'", "RetMsgFa":"'+resp[2]+'"}')
-                        systemLog.InsertErrorLog(resp[0], 'Logging', str(body), datetime.now(), None, str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1], None)
-                else:
-                    resp = exceptionHandling.getErrorMessage('SEC04')
-                    response = flask.Response('{"RetCode":"'+resp[0]+'", "RetMsg":"'+resp[1]+'", "RetMsgFa":"'+resp[2]+'"}')
-                    systemLog.InsertErrorLog(resp[0], 'Logging', str(body), datetime.now(), None, str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1], None)
-                response.headers["TransDateTime"] = str(datetime.now())
-                response.headers["TransDate"] = str(datetime.date(datetime.now()))
-                response.headers["TransTime"] = str(datetime.time(datetime.now()))
-                return response
+                password = str(body['password'])
+                terminalId = str(header[str('terminalId').capitalize()])
+                clientIp = networkManagement.getClientIP()
+                head = userService.getToken(username, password, terminalId, clientIp)
+                return messageStructure.createJSONServiceResponse('getToken', head['RetCode'], None, '"token": "'+head['token']+'"', body, head['token'], terminalId, True, None)
         except Exception as e:
-            resp = exceptionHandling.getErrorMessage('SYS500')
-            response = flask.Response('{"RetCode":"'+resp[0]+'", "RetMsg":"'+resp[1]+'", "RetMsgFa":"'+resp[2]+'"}')
-            response.headers["TransDateTime"] = str(datetime.now())
-            response.headers["TransDate"] = str(datetime.date(datetime.now()))
-            response.headers["TransTime"] = str(datetime.time(datetime.now()))
-            systemLog.InsertErrorLog(resp[0], 'Logging', str(body), datetime.now(), None, str(header[str('terminalId').capitalize()]), networkManagement.getClientIP(), resp[1], str(e))
-            return response
+            terminalId = str(header[str('terminalId').capitalize()])
+            clientIp = networkManagement.getClientIP()
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            error = str(e)+"-(Filename:"+str(fname)+", LineNo:"+str(exc_tb.tb_lineno)+")"
+            return messageStructure.createJSONServiceResponse('getToken', 'SYS500', None, None, body, None, terminalId, False, error)

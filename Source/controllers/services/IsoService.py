@@ -94,12 +94,9 @@ class IsoService:
         serviceList = list()
         with orm.db_session:
             query = list(orm.select(r.TransServiceID.IsoServiceID.IsoServiceID for r in IsoRoleAccesses if r.RoleID.RoleID == roleID and r.TransServiceID.TransTypeID.TransTypeCode == transTypeCode))
-            print(query)
             query2 = list(orm.select(s for s in IsoServices if s.IsoServiceID in(query)))
-            print(query2)
             for c in query2:
                 serviceList.append({"ProcessCode": c.ProcessCode, "ServiceTitle": c.ServiceTitle})
-        print(serviceList)
         return serviceList
 
 

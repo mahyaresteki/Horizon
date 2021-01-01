@@ -40,4 +40,9 @@
         <englishMessage>Terminal code is invalid</englishMessage>
         <persianMessage>کد ترمینال معتبر نیست</persianMessage>
     </errorMessage>
+    <errorMessage>
+        <code>SEC09</code>
+        <englishMessage>User is not authorized</englishMessage>
+        <persianMessage>کاربر مجاز به انجام این عملیات نمی باشد</persianMessage>
+    </errorMessage>
 </errorMessages>

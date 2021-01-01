@@ -18,7 +18,7 @@
 			</tr>
 			<tr>
 				<td>Server IP:</td>
-				<td><input type="text" id="txtServerIP" value="172.24.170.168"/></td>
+				<td><input type="text" id="txtServerIP" value="172.30.214.177"/></td>
 			</tr>
 			<tr>
 				<td>Server Port:</td>
@@ -26,7 +26,7 @@
 			</tr>
 			<tr>
 				<td>Terminal ID:</td>
-				<td><input type="text" id="txtTerminalId"/></td>
+				<td><input type="text" id="txtTerminalId" value="5001"/></td>
 			</tr>
 			<tr>
 				<td>Useranme:</td>
@@ -151,6 +151,7 @@
 						contentType: "application/json; charset=utf-8",
 						data: {"username":$("#txtUsername").val(),"password":$("#txtPassword").val()},
 						success: function (data) {
+							alert(data["token"]);
 							if(data["token"] != null)
 							{
 								$("#lblMsg").html('');
@@ -184,6 +185,7 @@
 							}
 						},
 						error: function (data, xmlHttpRequest, errorText, thrownError) {
+							alert(errorText);
 							obj = jQuery.parseJSON(data.responseText);
 							if(obj["token"] != null)
 							{
