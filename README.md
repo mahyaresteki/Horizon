@@ -34,7 +34,7 @@ Main goal of the Horizon project is development of flexible, lightweight, config
 
 4 - Is it posible to develop a payment switch which uses RESTful (HTTP) and socket programming (TCP) connection methods at a same time to provide payment services for deferent types of clients (ex: ATM and mobile app server)?  
 
-## Team
+## Development Team
 Horizon will be developed by MAHEST development team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
 
 ## Case Study
@@ -49,5 +49,5 @@ The following security concerns are considered in this project to prevent any cr
 
 If any bank or financial institiute wants to use this payment switch, they have to customise integration layer based on proposed card payment network. 
 
-## Development Philosophy
+## Quality Management Philosophy
 Quality management philosophy of Horizon project is based on [Kaizen](https://en.wikipedia.org/wiki/Kaizen). Therefore, we will accept any logical and scientific critique or suggestion which helps to improve the project.
