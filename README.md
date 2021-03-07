@@ -1,5 +1,5 @@
 # Horizon Payment Switch
-Horizon Payment Switch is a research and development project to create a free and open source payment switch based on "Distributed Open Banking Theory". It will be developed by Python programming language. Horizon is a payment approach based on ISO 8583 standard which is following the distributed data management architecture. It will be a script based payment switch to implement changes with minimum cost. Horizon will be connected to any gateway and terminal by REST services. It will try to achieve an appropriate transaction per second (TPS) rate.
+Horizon Payment Switch is a research and development project to create a free and open source payment switch based on "[Distributed Open Banking Theory](https://github.com/mahyaresteki/Horizon/raw/master/Documentation/Distributed_Open_Banking_Theory.pdf)". It will be developed by Python programming language. Horizon is a payment approach based on ISO 8583 standard which is following the distributed data management architecture. It will be a script based payment switch to implement changes with minimum cost. Horizon will be connected to any gateway and terminal by REST services. It will try to achieve an appropriate transaction per second (TPS) rate.
 
 ## Project Status
 The project status is **"underdevelopment"**.
