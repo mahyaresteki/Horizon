@@ -13,7 +13,8 @@ Based on defenitions of [Lawrence Berkeley	National	Laboratory](https://www.sjsu
 Horizon Research Project (HRP) is a free and open source software project that focuses on some research objectives regarding the optimization of bank payment switches. However, the project has aspects of research in the field of “management” and “technology”.
 
 ### Technical Objectives
-1. Is it possible to develop a RESTful payment switch based on ISO 8583 which can convert ISO message to REST format and vice versa with minimum process?  2. Is it possible to create a payment switch based on ISO 8583 standard which clients can inquery format of specific message (ex: input and output for 0200 request message type) for the switch?
+1. Is it possible to develop a RESTful payment switch based on ISO 8583 which can convert ISO message to REST format and vice versa with minimum process? 
+2. Is it possible to create a payment switch based on ISO 8583 standard which clients can inquery format of specific message (ex: input and output for 0200 request message type) for the switch?
 3. Is it possible to create a flexible RESTful payment switch which aministrators can map ISO fields to JSON parameters without restarting or switching off payment gateway or switch?
 4. Is it posible to develop a payment switch which uses RESTful (HTTP) and socket programming (TCP) connection methods at a same time to provide payment services for deferent types of clients (ex: ATM and mobile app server)?
 
