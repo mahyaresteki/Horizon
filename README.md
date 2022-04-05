@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/mahyaresteki/Horizon/master/logo.png" width="100" height="100">
 
-# Horizon Payment Switch
-Horizon Payment Switch is a research and development project to create a free and open source payment switch based on "[Distributed Open Banking Theory](https://github.com/mahyaresteki/Horizon/raw/master/Documentation/Distributed_Open_Banking_Theory.pdf)". It will be developed by Python programming language. Horizon is a payment approach based on ISO 8583 standard which is following the distributed data management architecture. It will be a script based payment switch to implement changes with minimum cost. Horizon will be connected to any gateway and terminal by REST services. It will try to achieve an appropriate transaction per second (TPS) rate.
+# Horizon Research Project (HRP)
+Horizon Research Project (HRP) is a R&D project to create a free and open source payment switch based on "[Distributed Open Banking Theory](https://github.com/mahyaresteki/Horizon/raw/master/Documentation/Distributed_Open_Banking_Theory.pdf)". Horizon is a payment approach based on ISO 8583 standard which is following the distributed data management architecture. It will be a script based payment switch to implement changes with minimum cost. Horizon will be connected to any gateway and terminal by REST services. It will try to achieve an appropriate transaction per second (TPS) rate.
 
 ## Project Status
 The project status is **"underdevelopment"**.
@@ -10,7 +10,7 @@ The project status is **"underdevelopment"**.
 Based on defenitions of [Lawrence Berkeley	National	Laboratory](https://www.sjsu.edu/people/fred.prochaska/courses/ScWk170/s0/Basic-vs.-Applied-Research.pdf), this project is an **"applied research"**.
 
 ## Goal of the Project
-Main goal of the Horizon project is development of flexible, lightweight, configurable,  faster and open source ISO-8583 compatible payment acquiree switch for banking and fintech system.
+Main goal of HRP is development of flexible, lightweight, configurable,  faster and open source ISO-8583 compatible payment acquiree switch for banking and fintech system.
 
 ## Advantages
 1 - Including ESB (REST communication)
