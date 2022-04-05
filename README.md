@@ -32,7 +32,7 @@ Public data of I.R. Iran Central Bank used as sample data for this project (such
 ## Security Concerns
 The following security concerns are considered in this project to prevent any critical issues for any live banking system all around the world.
 1. There is not any integration code between this payment switch and Iranian national banking card networks (SHETAB or SHAPARAK).
-2. There is not any integration code between this payment switch and international card payment system such as Master Card, Visa Card and PayPal.
+2. There is not any integration code between this payment switch and international card payment system such as Master Card, Visa Card and PayPal. 
 If any bank or financial institiute wants to use this payment switch, they have to customise integration layer based on proposed card payment network. 
 
 ## Quality Management Philosophy
