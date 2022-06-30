@@ -7,7 +7,7 @@ Horizon Research Project (HRP) is a R&D project to create a free and open source
 The project status is **"underdevelopment"**.
 
 ## Methodology
-The project fallows [Endurance Software Development Methodology (ESDM)][https://github.com/mahyaresteki/Horizon/blob/master/Documentation/Theory_of_Endurance_Software_Development_Methodology.pdf] as management research section of the proect.
+The project fallows [Endurance Software Development Methodology (ESDM)](https://github.com/mahyaresteki/Horizon/blob/master/Documentation/Theory_of_Endurance_Software_Development_Methodology.pdf) as management research section of the proect.
 
 ## Research Type
 Based on defenitions of [Lawrence Berkeley	National	Laboratory](https://www.sjsu.edu/people/fred.prochaska/courses/ScWk170/s0/Basic-vs.-Applied-Research.pdf), this project is an **"applied research"**.
