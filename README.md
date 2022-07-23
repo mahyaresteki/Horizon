@@ -14,7 +14,7 @@ Horizon Research Project (HRP) is a free project that focuses on “management" 
 3. Can this model become a permanent culture in the organization?
 
 ## Research Team
-Horizon will be developed by MAHEST development team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
+Horizon will be developed by MAHEST research team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
 
 ## Research Progress Philosophy
 Research progress philosophy of Horizon project is based on [Kaizen](https://en.wikipedia.org/wiki/Kaizen). Therefore, we will accept any logical and scientific critique or suggestion which helps to improve the project.
