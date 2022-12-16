@@ -7,7 +7,7 @@ Horizon is a research project to find new management solutions for IT industries
 Based on definitions of [Lawrence Berkeley	National	Laboratory](https://www.sjsu.edu/people/fred.prochaska/courses/ScWk170/s0/Basic-vs.-Applied-Research.pdf), this project is an **"applied research"**.
 
 ## Objectives
-Horizon Research Project (HRP) is a free project that focuses on **“project and strategy management"** fields as below.
+Horizon Research Project (HRP) focuses on the following main objectives.
 
 1. Is it possible to use a methodology in the software development process that in addition to improving the development process and product implementation, the interests of all project stakeholders fairly provided and social principles observed throughout the project?
 2. Is it possible to ensure the human rights of the employees during the project without interfering with the project obligations?
