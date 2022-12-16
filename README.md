@@ -14,9 +14,9 @@ Horizon Research Project (HRP) is a free project that focuses on **“project an
 3. Can this model become a permanent culture in the organization?
 
 ## Research Team
-Horizon will be developed by MAHEST research team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
+Horizon will be developed by ZURVAN research team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
 
-In the Middle Persian language ([Pahlavi](https://en.wikipedia.org/wiki/Middle_Persian)), "MAHEST" means God of kindness or God of the sun.
+In the Middle Persian language ([Pahlavi](https://en.wikipedia.org/wiki/Middle_Persian)), "ZURVAN" means God of time and destiny.
 
 ## Research Progress Philosophy
 The research progress philosophy of the Horizon project is based on [Kaizen](https://en.wikipedia.org/wiki/Kaizen). Therefore, we will accept any logical and scientific critique or suggestion that helps to improve the project.
