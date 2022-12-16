@@ -16,5 +16,7 @@ Horizon Research Project (HRP) is a free project that focuses on **“project an
 ## Research Team
 Horizon will be developed by MAHEST research team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
 
+In the ancient Persian language (Pahlavi), "MAHEST" means God of kindness or God of the sun.
+
 ## Research Progress Philosophy
 The research progress philosophy of the Horizon project is based on [Kaizen](https://en.wikipedia.org/wiki/Kaizen). Therefore, we will accept any logical and scientific critique or suggestion that helps to improve the project.
