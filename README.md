@@ -13,6 +13,10 @@ Horizon Research Project (HRP) focuses on the following main objectives.
 2. Is it possible to ensure the human rights of the employees during the project without interfering with the project obligations?
 3. Can this model become a permanent culture in the organization?
 
+## Articles
+The following articles are available to the public as research output.
+1. [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/Documentation/Theory_of_Endurance_Software_Development_Methodology.pdf)
+
 ## Research Team
 Horizon will be developed by ZURVAN research team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
 
