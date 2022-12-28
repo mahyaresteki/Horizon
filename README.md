@@ -10,7 +10,7 @@ Creating new applications and providing technical solutions always has many fans
 
 Therefore, the Horizon project is a humanitarian research activity aimed at creating methods to improve efficiency without violating the rights of employees.
 
-"It is always possible to produce a good application software. But time is running out to improve people's living conditions."
+**"It is always possible to produce a good application software. But time is running out to improve people's living conditions."**
 
 ## Research Type
 Based on definitions of [Lawrence Berkeley	National	Laboratory](https://www.sjsu.edu/people/fred.prochaska/courses/ScWk170/s0/Basic-vs.-Applied-Research.pdf), this project is an **"applied research"**.
