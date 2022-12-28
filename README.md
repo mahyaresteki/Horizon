@@ -3,6 +3,15 @@
 # Horizon Research Project (HRP)
 Horizon is a research project to find new management solutions for IT industries, which tries to improve the standards of the work environment and the existence of social justice in technology companies.
 
+## Project Story
+At first, the Horizon project was supposed to be a platform for the production of a payment switch with high flexibility. It was decided that any development method and pattern that seems inefficient should be investigated before using or rejecting it. But then something strange happened! During the research, it was found that current development methods in most cases ignore the human rights of developers in order to achieve maximum efficiency.
+
+Creating new applications and providing technical solutions always has many fans and technology companies pay good wages for such systems! But, we chose to walk in a path that others have not yet been willing to talk about. As a result, the Horizon project changed its path towards investigating management deficiencies in the world of technology. The goal of the Horizon project is to create a new management solution based on ethical principles in such a way that in addition to maintaining and improving efficiency, the human rights of the employees involved in the project are also respected.
+
+Therefore, the Horizon project is a humanitarian research activity aimed at creating methods to improve efficiency without violating the rights of employees.
+
+"It is always possible to produce a good application software. But time is running out to improve people's living conditions."
+
 ## Research Type
 Based on definitions of [Lawrence Berkeley	National	Laboratory](https://www.sjsu.edu/people/fred.prochaska/courses/ScWk170/s0/Basic-vs.-Applied-Research.pdf), this project is an **"applied research"**.
 
