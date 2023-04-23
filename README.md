@@ -24,7 +24,8 @@ Horizon Research Project (HRP) focuses on the following main objectives.
 
 ## Articles
 The following articles are available to the public as research output.
-1. [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/Documentation/Theory_of_Endurance_Software_Development_Methodology.pdf)
+1. [Deceptive Virtualization Theory](https://github.com/mahyaresteki/Horizon/blob/master/Documentation/Theories/Deceptive_Virtualization_Theory.pdf)
+2. [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/Documentation/Theories/Theory_of_Endurance_Software_Development_Methodology.pdf)
 
 ## Research Team
 Horizon will be developed by ZURVAN research team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
