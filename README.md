@@ -22,11 +22,14 @@ Horizon Research Project (HRP) focuses on the following main objectives.
 2. Is it possible to ensure the human rights of the employees during the project without interfering with the project obligations?
 3. Can this model become a permanent culture in the organization?
 
-## Articles
+## Documentaion
 ### Theories
 The following articles are available to the public as theories of the project.
 1. [Deceptive Virtualization Theory](https://github.com/mahyaresteki/Horizon/blob/master/Documentation/Theories/Deceptive_Virtualization_Theory.pdf)
 2. [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/Documentation/Theories/Theory_of_Endurance_Software_Development_Methodology.pdf)
+### Technical Documentation
+Horizon system is modeled in [UML 2.0](https://en.wikipedia.org/wiki/Unified_Modeling_Language) format by [PlantUML](https://plantuml.com/) as follows.
+[Project Modeling](https://github.com/mahyaresteki/Horizon/tree/master/HorizonUml)
 
 ## Research Team
 Horizon will be developed by ZURVAN research team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
