@@ -29,6 +29,7 @@ The following articles are available to the public as theories of the project.
 2. [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/Documentation/Theories/Theory_of_Endurance_Software_Development_Methodology.pdf)
 ### Technical Documentation
 Horizon system is modeled in [UML 2.0](https://en.wikipedia.org/wiki/Unified_Modeling_Language) format by [PlantUML](https://plantuml.com/) as follows.
+
 [Project Modeling](https://github.com/mahyaresteki/Horizon/tree/master/HorizonUml)
 
 ## Research Team
