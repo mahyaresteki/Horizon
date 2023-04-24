@@ -22,7 +22,7 @@ Horizon Research Project (HRP) focuses on the following main objectives.
 2. Is it possible to ensure the human rights of the employees during the project without interfering with the project obligations?
 3. Can this model become a permanent culture in the organization?
 
-## Documentaion
+## Documentation
 ### Theories
 The following articles are available to the public as theories of the project.
 1. [Deceptive Virtualization Theory](https://github.com/mahyaresteki/Horizon/blob/master/Documentation/Theories/Deceptive_Virtualization_Theory.pdf)
