@@ -1,0 +1,28 @@
+@startuml
+
+:User: as User
+:Staff: as Staff
+:Manager: as Manager
+:Technical Staff: as TechnicalStaff
+:Manager: as Manager
+:Technical Manager: as TechnicalManager
+:Senior Manager: as SeniorManager
+:Project Manager: as PMO
+:Financial Manager: as Fmanager
+:Administrator: as Admin
+:Human Resource: as HR
+:Accountant: as Accountant
+
+
+User <|--- Admin
+User <|-- Manager
+User <|-- Staff
+Staff <|-- TechnicalStaff
+Staff <|-- HR
+Staff <|-- Accountant
+Manager <|-- SeniorManager
+Manager <|-- TechnicalManager
+Manager <|-- PMO
+Manager <|-- Fmanager
+
+@enduml

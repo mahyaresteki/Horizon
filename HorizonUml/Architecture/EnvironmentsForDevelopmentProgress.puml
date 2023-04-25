@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+
+!include <tupadr3/common>
+!include <tupadr3/font-awesome/desktop>
+!include <tupadr3/font-awesome-5/github>
+
+title Development and Deployment Environments for Horizon Project
+
+FA_DESKTOP(contributer1, "Contributer 1")
+FA_DESKTOP(contributer2, "Contributer 2")
+FA_DESKTOP(contributer3, "Contributer 3")
+FA_DESKTOP(contributerN, "Contributer N")
+
+FA_DESKTOP(teamLead, "Final Test by Team Lead")
+FA5_GITHUB(github, "Publish on GitHub")
+
+contributer1 --> teamLead
+contributer2 --> teamLead
+contributer3 --> teamLead
+contributerN --> teamLead
+teamLead --> github
+
+@enduml
