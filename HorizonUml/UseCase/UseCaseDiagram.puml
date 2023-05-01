@@ -1,4 +1,5 @@
 @startuml
+left to right direction
 
 :Technical Staff: as TechnicalStaff
 :Technical Manager: as TechnicalManager
@@ -9,11 +10,31 @@
 :Human Resource: as HR
 :Accountant: as Accountant
 
-package "User Management"{
+package "Authentication"{
+    usecase "Role Management" as roleManagement
+    usecase "Role Registration" as roleRegistration
+    usecase "Role Registration" as roleUpdate
+    usecase "Role Activation" as roleActivation
+    usecase "User Management" as userManagement
     usecase "User Registration" as userRegistration
     usecase "User Activation" as userActivation
     usecase "Update Profile" as updateProfile
     usecase "Change Password" as changePassword
+    usecase "Login" as login 
+    usecase "Sign Out" as signOut 
 }
+
+userManagement .> roleManagement
+
+roleManagement ..> roleRegistration : <<include>>
+roleManagement ..> roleUpdate : <<include>>
+roleManagement ..> roleActivation : <<include>>
+userManagement ..> userRegistration :<<include>>
+userManagement ..> userActivation :<<include>>
+userManagement ..> updateProfile :<<include>>
+userManagement ..> changePassword :<<include>>
+
+userRegistration <.. login
+login <.. signOut
 
 @enduml
