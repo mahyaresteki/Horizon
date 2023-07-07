@@ -10,18 +10,25 @@ left to right direction
 :Human Resource: as HR
 :Accountant: as Accountant
 
-package "Authentication"{
+package "Auth"{
     usecase "Role Management" as roleManagement
     usecase "Role Registration" as roleRegistration
-    usecase "Role Registration" as roleUpdate
+    usecase "Role Update" as roleUpdate
     usecase "Role Activation" as roleActivation
     usecase "User Management" as userManagement
     usecase "User Registration" as userRegistration
     usecase "User Activation" as userActivation
     usecase "Update Profile" as updateProfile
+    usecase "View Profile" as viewProfile
     usecase "Change Password" as changePassword
-    usecase "Login" as login 
-    usecase "Sign Out" as signOut 
+    usecase "Authenitication" as authentication
+    usecase "Login" as login
+    usecase "Create Token" as createToken
+    usecase "Authorization" as authorization
+    usecase "Grant Role" as grantRole
+    usecase "User Restriction" as userRestriction
+    usecase "Check User Role Grant" as checkGrant
+
 }
 
 userManagement .> roleManagement
@@ -32,9 +39,19 @@ roleManagement ..> roleActivation : <<include>>
 userManagement ..> userRegistration :<<include>>
 userManagement ..> userActivation :<<include>>
 userManagement ..> updateProfile :<<include>>
+userManagement ..> viewProfile :<<include>>
 userManagement ..> changePassword :<<include>>
 
-userRegistration <.. login
-login <.. signOut
+authentication ..> userRegistration
+authentication ..> login : <<include>>
+authentication ..> createToken : <<include>>
+
+authorization ..>  roleManagement
+authorization ..> authentication 
+authorization ..> userManagement
+
+grantRole <.. authorization : <<include>>
+userRestriction <.. authorization : <<include>>
+checkGrant <.. authorization : <<include>>
 
 @enduml
