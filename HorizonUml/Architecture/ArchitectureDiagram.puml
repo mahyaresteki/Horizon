@@ -1,0 +1,58 @@
+@startuml
+left to right direction
+
+!include <tupadr3/common>
+!include <tupadr3/font-awesome/desktop>
+!include <tupadr3/font-awesome/server>
+!include <tupadr3/font-awesome/database>
+!include <tupadr3/font-awesome/users>
+!include <tupadr3/font-awesome/mobile>
+!include <tupadr3/font-awesome/bank>
+!include <tupadr3/font-awesome/cloud>
+!include <tupadr3/font-awesome/chrome>
+!include <tupadr3/font-awesome/cubes>
+!include <tupadr3/font-awesome/cogs>
+!include <tupadr3/devicons/postgresql>
+!include <tupadr3/devicons/python>
+!include <tupadr3/devicons/django>
+!include <tupadr3/devicons/nginx>
+!include <office/Concepts/firewall_orange>
+
+title Architecture of Horizon System
+
+package "Organization Network Zone" as HorizonSystem{
+    DEV_DJANGO(django, "Web Franework")
+    DEV_PYTHON(python, "Programming SDK")
+    DEV_NGINX(webServer1, "Web Server 1")
+    DEV_NGINX(webServer2, "Web Server 2")
+    FA_SERVER(appServer, "App Server")
+    FA_SERVER(apiGateway, "API Gateway")
+    OFF_FIREWALL_ORANGE(firewall,"Firewall")
+    DEV_POSTGRESQL(databaseServer, "Database Server")
+    FA_DATABASE(database, "Horizon Database")
+    FA_CUBES(apis, "APIs")
+    FA_COGS(webApp, "Web App")
+    FA_DESKTOP(userStation, "User Station")
+}
+
+FA_CLOUD(internet, "Internet")
+FA_CHROME(client, "Client's Browser")
+FA_MOBILE(mobileApp, "Mobile App")
+
+client <--> internet
+mobileApp <--> internet
+internet <--> firewall
+firewall <--> appServer
+firewall <--> apiGateway
+databaseServer <--> database
+webServer2 <--> apis
+apis <-> django
+django <-> webApp
+webServer1 <--> webApp
+apis <--> databaseServer
+webApp <--> databaseServer
+appServer <--> webServer1
+apiGateway <--> webServer2
+python <--> django
+userStation <-> firewall
+@enduml
