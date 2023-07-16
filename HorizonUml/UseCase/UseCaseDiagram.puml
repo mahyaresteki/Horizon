@@ -3,6 +3,7 @@ left to right direction
 
 skinparam useCaseBackgroundColor #Business
 
+:User: as User
 :Technical Staff: as TechnicalStaff
 :Technical Manager: as TechnicalManager
 :Senior Manager: as SeniorManager
@@ -14,23 +15,10 @@ skinparam useCaseBackgroundColor #Business
 
 package "Auth"{
     usecase "Role Management" as roleManagement
-    usecase "Role Registration" as roleRegistration
-    usecase "Role Update" as roleUpdate
-    usecase "Role Activation" as roleActivation
     usecase "User Management" as userManagement
-    usecase "User Registration" as userRegistration
-    usecase "User Activation" as userActivation
-    usecase "Update Profile" as updateProfile
-    usecase "View Profile" as viewProfile
-    usecase "Change Password" as changePassword
+    usecase "Profile Management" as profileManagement
     usecase "Authenitication" as authentication
-    usecase "Login" as login
-    usecase "Create Token" as createToken
     usecase "Authorization" as authorization
-    usecase "Grant Role" as grantRole
-    usecase "User Restriction" as userRestriction
-    usecase "Check User Role Grant" as checkGrant
-
 }
 
 package "Organization"{
@@ -69,26 +57,17 @@ package "Project"{
 
 
 userManagement .> roleManagement
-
-roleManagement ..> roleRegistration : <<include>>
-roleManagement ..> roleUpdate : <<include>>
-roleManagement ..> roleActivation : <<include>>
-userManagement ..> userRegistration :<<include>>
-userManagement ..> userActivation :<<include>>
-userManagement ..> updateProfile :<<include>>
-userManagement ..> viewProfile :<<include>>
-userManagement ..> changePassword :<<include>>
-authentication ..> userRegistration
-authentication ..> login : <<include>>
-authentication ..> createToken : <<include>>
 authorization ..>  roleManagement
 authorization ..> authentication 
 authorization ..> userManagement
-grantRole <.. authorization : <<include>>
-userRestriction <.. authorization : <<include>>
-checkGrant <.. authorization : <<include>>
+profileManagement ..> userManagement
+profileManagement ..> authentication
 
-
+User -- authentication
+User -- authorization
+User -- profileManagement
+roleManagement -- Admin
+userManagement -- Admin
 
 organizationManagement ..> organizationRegistration : <<include>>
 organizationManagement ..> organizationUpdate : <<include>>
