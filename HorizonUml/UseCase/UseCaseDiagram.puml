@@ -23,13 +23,7 @@ package "Auth"{
 
 package "Organization"{
     usecase "Organization Management" as organizationManagement
-    usecase "Organization Registration" as organizationRegistration
-    usecase "Organization Update" as organizationUpdate
-    usecase "Organization Activation" as organizationActivation
     usecase "Department Management" as departmentManagement
-    usecase "Department Registration" as departmentRegistration
-    usecase "Department Update" as departmentUpdate
-    usecase "Department Activation" as departmentActivation
 }
 
 package "Staff"{
@@ -68,13 +62,6 @@ User -- authorization
 User -- profileManagement
 roleManagement -- Admin
 userManagement -- Admin
-
-organizationManagement ..> organizationRegistration : <<include>>
-organizationManagement ..> organizationUpdate : <<include>>
-organizationManagement ..> organizationActivation : <<include>>
-departmentManagement ..> departmentRegistration : <<include>>
-departmentManagement ..> departmentUpdate : <<include>>
-departmentManagement ..> departmentActivation : <<include>>
 
 staffManagement ..> userManagement
 staffManagement ..> positionManagement

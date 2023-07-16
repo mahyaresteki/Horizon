@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+
+skinparam useCaseBackgroundColor #Business
+
+:Human Resource: as HR
+
+package "Organization"{
+    usecase "Organization Management" as organizationManagement
+    usecase "Organization Registration" as organizationRegistration
+    usecase "Organization Update" as organizationUpdate
+    usecase "Organization Activation" as organizationActivation
+    usecase "Organization List" as organizationList
+    usecase "Organization View" as organizationView
+    usecase "Organization Search" as organizationSearch
+    usecase "Department Management" as departmentManagement
+    usecase "Department Registration" as departmentRegistration
+    usecase "Department Update" as departmentUpdate
+    usecase "Department Activation" as departmentActivation
+    usecase "Department List" as departmentList
+    usecase "Department View" as departmentView
+    usecase "Department Search" as departmentSearch
+}
+
+HR -- departmentManagement
+HR -- organizationManagement
+
+departmentManagement ..> organizationManagement
+
+organizationManagement ..> organizationRegistration : <<include>>
+organizationManagement ..> organizationUpdate : <<include>>
+organizationManagement ..> organizationActivation : <<include>>
+organizationManagement ..> organizationList : <<include>>
+organizationManagement ..> organizationView : <<include>>
+organizationManagement ..> organizationSearch : <<include>>
+departmentManagement ..> departmentRegistration : <<include>>
+departmentManagement ..> departmentUpdate : <<include>>
+departmentManagement ..> departmentActivation : <<include>>
+departmentManagement ..> departmentList : <<include>>
+departmentManagement ..> departmentView : <<include>>
+departmentManagement ..> departmentSearch : <<include>>
+
+
+@enduml
