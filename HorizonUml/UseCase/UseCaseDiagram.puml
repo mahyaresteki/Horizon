@@ -1,6 +1,8 @@
 @startuml
 left to right direction
 
+skinparam useCaseBackgroundColor #Business
+
 :Technical Staff: as TechnicalStaff
 :Technical Manager: as TechnicalManager
 :Senior Manager: as SeniorManager
@@ -31,6 +33,41 @@ package "Auth"{
 
 }
 
+package "Organization"{
+    usecase "Organization Management" as organizationManagement
+    usecase "Organization Registration" as organizationRegistration
+    usecase "Organization Update" as organizationUpdate
+    usecase "Organization Activation" as organizationActivation
+    usecase "Department Management" as departmentManagement
+    usecase "Department Registration" as departmentRegistration
+    usecase "Department Update" as departmentUpdate
+    usecase "Department Activation" as departmentActivation
+}
+
+package "Staff"{
+    usecase "Position Management" as positionManagement
+    usecase "Position Registration" as positionRegistration
+    usecase "Position Update" as positionUpdate
+    usecase "Position Activation" as positionActivation
+    usecase "Staff Management" as staffManagement
+    usecase "Staff Registration" as staffRegistration
+    usecase "Staff Update" as staffUpdate
+    usecase "Staff Activation" as staffActivation
+}
+
+package "Project"{
+    usecase "Project Management" as projectManagement
+    usecase "Project Registration" as projectRegistration
+    usecase "Project Update" as projectUpdate
+    usecase "Project Activation" as projectActivation
+    usecase "Project Team Management" as projectTeamManagement
+    usecase "Team Member Registration" as teamMemberRegistration
+    usecase "Team Member Update" as teamMemberUpdate
+    usecase "Team Member Activation" as teamMemberActivation
+}
+
+
+
 userManagement .> roleManagement
 
 roleManagement ..> roleRegistration : <<include>>
@@ -41,17 +78,47 @@ userManagement ..> userActivation :<<include>>
 userManagement ..> updateProfile :<<include>>
 userManagement ..> viewProfile :<<include>>
 userManagement ..> changePassword :<<include>>
-
 authentication ..> userRegistration
 authentication ..> login : <<include>>
 authentication ..> createToken : <<include>>
-
 authorization ..>  roleManagement
 authorization ..> authentication 
 authorization ..> userManagement
-
 grantRole <.. authorization : <<include>>
 userRestriction <.. authorization : <<include>>
 checkGrant <.. authorization : <<include>>
+
+
+
+organizationManagement ..> organizationRegistration : <<include>>
+organizationManagement ..> organizationUpdate : <<include>>
+organizationManagement ..> organizationActivation : <<include>>
+departmentManagement ..> departmentRegistration : <<include>>
+departmentManagement ..> departmentUpdate : <<include>>
+departmentManagement ..> departmentActivation : <<include>>
+
+staffManagement ..> userManagement
+staffManagement ..> positionManagement
+staffManagement ..> departmentManagement
+positionManagement ..> departmentManagement
+departmentManagement ..> organizationManagement
+projectManagement ..> organizationManagement
+projectTeamManagement ..> projectManagement
+projectTeamManagement ..> positionManagement
+projectTeamManagement ..> staffManagement
+
+staffRegistration <.. staffManagement : <<include>>
+staffUpdate <.. staffManagement : <<include>>
+staffActivation <.. staffManagement : <<include>>
+positionRegistration <.. positionManagement : <<include>>
+positionUpdate <.. positionManagement : <<include>>
+positionActivation <.. positionManagement : <<include>>
+
+projectRegistration <.. projectManagement : <<include>>
+projectUpdate <.. projectManagement : <<include>>
+projectActivation <.. projectManagement : <<include>>
+teamMemberRegistration <.. projectTeamManagement : <<include>>
+teamMemberUpdate <.. projectTeamManagement : <<include>>
+teamMemberActivation <.. projectTeamManagement : <<include>>
 
 @enduml

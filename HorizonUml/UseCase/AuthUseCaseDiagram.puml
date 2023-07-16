@@ -1,0 +1,68 @@
+@startuml
+left to right direction
+
+skinparam useCaseBackgroundColor #Business
+
+:User: as User
+:Administrator: as Admin
+
+package "Auth"{
+    usecase "Profile Management" as profileManagement
+    usecase "Role Management" as roleManagement
+    usecase "Role Registration" as roleRegistration
+    usecase "Role Update" as roleUpdate
+    usecase "Role Activation" as roleActivation
+    usecase "User Management" as userManagement
+    usecase "User Registration" as userRegistration
+    usecase "User Activation" as userActivation
+    usecase "User Update" as userUpdate
+    usecase "User Search" as userSearch
+    usecase "User List" as userList
+    usecase "Update Profile" as updateProfile
+    usecase "View Profile" as viewProfile
+    usecase "Change Password" as changePassword
+    usecase "Authenitication" as authentication
+    usecase "Login" as login
+    usecase "Create Token" as createToken
+    usecase "Authorization" as authorization
+    usecase "Grant Role" as grantRole
+    usecase "User Restriction" as userRestriction
+    usecase "Check User Role Grant" as checkGrant
+
+}
+User <|--Admin
+Admin -- userManagement
+Admin -- roleManagement
+User -- authentication
+User -- authorization
+User -- profileManagement
+
+profileManagement .> userManagement
+roleManagement <. userManagement 
+
+
+userManagement ..> userRegistration : <<include>>
+userManagement ..> userActivation : <<include>>
+userManagement ..> changePassword : <<include>>
+userManagement ..> userSearch : <<include>>
+userManagement ..> userUpdate : <<include>>
+userManagement ..> userList : <<include>>
+
+profileManagement ..> updateProfile :<<include>>
+profileManagement ..> viewProfile :<<include>>
+
+roleManagement ..> roleRegistration : <<include>>
+roleManagement ..> roleUpdate : <<include>>
+roleManagement ..> roleActivation : <<include>>
+
+authentication ..> userRegistration
+authentication ..> login : <<include>>
+authentication ..> createToken : <<include>>
+authorization ..>  roleManagement
+authorization ..> authentication 
+authorization ..> userManagement
+grantRole <.. authorization : <<include>>
+userRestriction <.. authorization : <<include>>
+checkGrant <.. authorization : <<include>>
+
+@enduml
