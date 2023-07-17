@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/mahyaresteki/Horizon/master/logo.png" width="200" height="120" style="margin-left:auto; margin-right:auto">
 
 # Horizon Research Project (HRP)
-Horizon is a research project to find new management solutions for IT industries, which tries to improve the standards of the work environment and the existence of social justice in technology companies.
+Horizon is a research project to find new "social-oriented" management solutions for IT industries, which tries to improve the standards of the work environment and the existence of social justice in technology companies.
 
 ## Story of the Project
 At first, the Horizon project was supposed to be a platform for the production of a payment switch with high flexibility. It was decided that any development method and pattern that seems inefficient should be investigated before using or rejecting it. But then something strange happened! During the research, it was found that current development methods in most cases ignore the human rights of developers in order to achieve maximum efficiency.
