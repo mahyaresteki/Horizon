@@ -2,20 +2,21 @@
 left to right direction
 
 skinparam useCaseBackgroundColor #Business
+skinparam actorBackgroundColor #Business
 
 title Overall Use Case Diagram
 
 note "This diagram shows relationships \n between usecases and domains in a snapshot." as a
 
 :User: as User
-:Technical Staff: as TechnicalStaff
-:Technical Manager: as TechnicalManager
 :Senior Manager: as SeniorManager
 :Project Manager: as PMO
 :Financial Manager: as Fmanager
 :Administrator: as Admin
 :Human Resource: as HR
 :Accountant: as Accountant
+:Technical Staff: as TechnicalStaff
+:DevOps Manager: as DevOpsManager
 
 package "Auth"{
     usecase "Role Management" as roleManagement
@@ -38,14 +39,11 @@ package "Staff"{
 package "Project"{
     usecase "Project Management" as projectManagement
     usecase "Project Team Management" as projectTeamManagement
+    usecase "Release Management" as releaseManagement
+    usecase "Issue Management" as issueManagement
+    usecase "Meeting Management" as meetingManagement
+    usecase "Timesheet Management" as timesheetManagement
 }
-
-userManagement .> roleManagement
-authorization ..>  roleManagement
-authorization ..> authentication 
-authorization ..> userManagement
-profileManagement ..> userManagement
-profileManagement ..> authentication
 
 User -- authentication
 User -- authorization
@@ -58,15 +56,12 @@ departmentManagement -- HR
 organizationManagement -- HR
 PMO -- projectManagement
 PMO -- projectTeamManagement
+PMO -- releaseManagement
 
-staffManagement ..> userManagement
-staffManagement .> positionManagement
-staffManagement ..> departmentManagement
-positionManagement ..> departmentManagement
-departmentManagement .> organizationManagement
-projectManagement ..> organizationManagement
-projectTeamManagement .> projectManagement
-projectTeamManagement ..> positionManagement
-projectTeamManagement ..> staffManagement
+releaseManagement -- DevOpsManager
+issueManagement -- TechnicalStaff
+meetingManagement -- TechnicalStaff
+timesheetManagement -- TechnicalStaff
+
 
 @enduml
