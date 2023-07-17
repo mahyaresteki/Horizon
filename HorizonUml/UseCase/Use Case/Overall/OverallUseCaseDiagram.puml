@@ -6,8 +6,6 @@ skinparam actorBackgroundColor #Business
 
 title Overall Use Case Diagram
 
-note "This diagram shows relationships \n between usecases and domains in a snapshot." as a
-
 :User: as User
 :Senior Manager: as SeniorManager
 :Project Manager: as PMO
@@ -17,6 +15,8 @@ note "This diagram shows relationships \n between usecases and domains in a snap
 :Accountant: as Accountant
 :Technical Staff: as TechnicalStaff
 :DevOps Manager: as DevOpsManager
+:Logestics Manager: as LogesticsManager
+:Product Manager: as ProductManager
 
 package "Auth"{
     usecase "Role Management" as roleManagement
@@ -34,6 +34,13 @@ package "Organization"{
 package "Staff"{
     usecase "Position Management" as positionManagement
     usecase "Staff Management" as staffManagement
+    usecase "Attendance Management" as attendanceManagement
+    usecase "Sallary Management" as sallaryManagement
+}
+
+package "Resources"{
+    usecase "Asset Management" as assetManagement
+    usecase "Calendar Management" as calendarManagement
 }
 
 package "Project"{
@@ -45,23 +52,57 @@ package "Project"{
     usecase "Timesheet Management" as timesheetManagement
 }
 
+package "Reporting"{
+    usecase "Business Intelligence (BI) Reports" as biReport
+    usecase "Projects Reports" as projectReport
+    usecase "Financial Reports" as financialReport
+    usecase "Log Reports" as logReport
+}
+
+
+package "Financial"{
+    usecase "Project Costing" as costing
+    usecase "Bugget Management" as bugget
+    usecase "Product Pricing" as pricing
+}
+
+
+
 User -- authentication
 User -- authorization
 User -- profileManagement
 roleManagement -- Admin
 userManagement -- Admin
 staffManagement -- HR
+staffManagement -- Accountant
+sallaryManagement -- Accountant
+Accountant -- costing
+Accountant -- pricing
+Accountant -- bugget
+pricing -- ProductManager
+ProductManager -- issueManagement
+costing -- PMO
+SeniorManager -- bugget
 positionManagement -- HR
 departmentManagement -- HR
 organizationManagement -- HR
 PMO -- projectManagement
 PMO -- projectTeamManagement
 PMO -- releaseManagement
+HR -- calendarManagement
+assetManagement -- PMO
+calendarManagement -- PMO
+LogesticsManager -- assetManagement
 
 releaseManagement -- DevOpsManager
 issueManagement -- TechnicalStaff
 meetingManagement -- TechnicalStaff
 timesheetManagement -- TechnicalStaff
 
+Admin -- logReport
+Fmanager -- financialReport
+SeniorManager -- financialReport
+SeniorManager -- biReport
+projectReport -- PMO
 
 @enduml

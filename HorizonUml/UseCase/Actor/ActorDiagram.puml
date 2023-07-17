@@ -19,6 +19,8 @@ title Hierarchy of Actors
 :Developer: as Developer
 :Tester: as Tester
 :Analyzer: as Analyzer
+:Logestics Manager: as LogesticsManager
+:Product Manager: as ProductManager
 
 User <|--- Admin
 User <|-- Staff
@@ -36,5 +38,7 @@ Manager <|-- PMO
 Manager <|-- Fmanager
 Manager <|-- DevOpsManager
 Manager <|-- HR
+Manager <|-- LogesticsManager
+Manager <|-- ProductManager
 
 @enduml
