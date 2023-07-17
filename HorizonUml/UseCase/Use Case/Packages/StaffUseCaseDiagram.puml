@@ -1,0 +1,45 @@
+@startuml
+left to right direction
+
+skinparam useCaseBackgroundColor #Business
+
+title Staff Management Package
+
+:Human Resource: as HR
+
+package "Staff"{
+    usecase "Position Management" as positionManagement
+    usecase "Position Registration" as positionRegistration
+    usecase "Position Update" as positionUpdate
+    usecase "Position Activation" as positionActivation
+    usecase "Position List" as positionList
+    usecase "Position View" as positionView
+    usecase "Position Search" as positionSearch
+    usecase "Staff Management" as staffManagement
+    usecase "Staff Registration" as staffRegistration
+    usecase "Staff Update" as staffUpdate
+    usecase "Staff Activation" as staffActivation
+    usecase "Staff List" as staffList
+    usecase "Staff View" as staffView
+    usecase "Staff Search" as staffSearch
+}
+
+staffManagement -- HR
+positionManagement -- HR
+
+staffManagement .> positionManagement
+
+staffRegistration <.. staffManagement : <<include>>
+staffUpdate <.. staffManagement : <<include>>
+staffActivation <.. staffManagement : <<include>>
+staffList <.. staffManagement : <<include>>
+staffView <.. staffManagement : <<include>>
+staffSearch <.. staffManagement : <<include>>
+positionRegistration <.. positionManagement : <<include>>
+positionUpdate <.. positionManagement : <<include>>
+positionActivation <.. positionManagement : <<include>>
+positionList <.. positionManagement : <<include>>
+positionView <.. positionManagement : <<include>>
+positionSearch <.. positionManagement : <<include>>
+
+@enduml

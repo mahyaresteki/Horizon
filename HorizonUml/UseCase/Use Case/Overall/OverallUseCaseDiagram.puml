@@ -3,6 +3,10 @@ left to right direction
 
 skinparam useCaseBackgroundColor #Business
 
+title Overall Use Case Diagram
+
+note "This diagram shows relationships \n between usecases and domains in a snapshot." as a
+
 :User: as User
 :Technical Staff: as TechnicalStaff
 :Technical Manager: as TechnicalManager
@@ -28,27 +32,13 @@ package "Organization"{
 
 package "Staff"{
     usecase "Position Management" as positionManagement
-    usecase "Position Registration" as positionRegistration
-    usecase "Position Update" as positionUpdate
-    usecase "Position Activation" as positionActivation
     usecase "Staff Management" as staffManagement
-    usecase "Staff Registration" as staffRegistration
-    usecase "Staff Update" as staffUpdate
-    usecase "Staff Activation" as staffActivation
 }
 
 package "Project"{
     usecase "Project Management" as projectManagement
-    usecase "Project Registration" as projectRegistration
-    usecase "Project Update" as projectUpdate
-    usecase "Project Activation" as projectActivation
     usecase "Project Team Management" as projectTeamManagement
-    usecase "Team Member Registration" as teamMemberRegistration
-    usecase "Team Member Update" as teamMemberUpdate
-    usecase "Team Member Activation" as teamMemberActivation
 }
-
-
 
 userManagement .> roleManagement
 authorization ..>  roleManagement
@@ -62,29 +52,21 @@ User -- authorization
 User -- profileManagement
 roleManagement -- Admin
 userManagement -- Admin
+staffManagement -- HR
+positionManagement -- HR
+departmentManagement -- HR
+organizationManagement -- HR
+PMO -- projectManagement
+PMO -- projectTeamManagement
 
 staffManagement ..> userManagement
-staffManagement ..> positionManagement
+staffManagement .> positionManagement
 staffManagement ..> departmentManagement
 positionManagement ..> departmentManagement
-departmentManagement ..> organizationManagement
+departmentManagement .> organizationManagement
 projectManagement ..> organizationManagement
-projectTeamManagement ..> projectManagement
+projectTeamManagement .> projectManagement
 projectTeamManagement ..> positionManagement
 projectTeamManagement ..> staffManagement
-
-staffRegistration <.. staffManagement : <<include>>
-staffUpdate <.. staffManagement : <<include>>
-staffActivation <.. staffManagement : <<include>>
-positionRegistration <.. positionManagement : <<include>>
-positionUpdate <.. positionManagement : <<include>>
-positionActivation <.. positionManagement : <<include>>
-
-projectRegistration <.. projectManagement : <<include>>
-projectUpdate <.. projectManagement : <<include>>
-projectActivation <.. projectManagement : <<include>>
-teamMemberRegistration <.. projectTeamManagement : <<include>>
-teamMemberUpdate <.. projectTeamManagement : <<include>>
-teamMemberActivation <.. projectTeamManagement : <<include>>
 
 @enduml

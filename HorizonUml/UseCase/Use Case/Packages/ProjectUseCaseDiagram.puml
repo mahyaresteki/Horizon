@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+
+skinparam useCaseBackgroundColor #Business
+
+title Project Management Package
+
+:Project Manager: as PMO
+
+package "Project"{
+    usecase "Project Management" as projectManagement
+    usecase "Project Registration" as projectRegistration
+    usecase "Project Update" as projectUpdate
+    usecase "Project Activation" as projectActivation
+    usecase "Project List" as projectList
+    usecase "Project View" as projectView
+    usecase "Project Search" as projectSearch
+    usecase "Project Team Management" as projectTeamManagement
+    usecase "Team Member Add" as teamMemberAdd
+    usecase "Team Member Update" as teamMemberUpdate
+    usecase "Team Member Remove" as teamMemberRemove
+    usecase "Team Member Team List" as teamMemberList
+    usecase "Team Member View" as teamMemberView
+    usecase "Team Member Search" as teamMemberSearch
+}
+
+projectManagement -- PMO
+projectTeamManagement -- PMO
+
+projectTeamManagement .> projectManagement
+
+projectRegistration <.. projectManagement : <<include>>
+projectUpdate <.. projectManagement : <<include>>
+projectActivation <.. projectManagement : <<include>>
+projectList <.. projectManagement : <<include>>
+projectView <.. projectManagement : <<include>>
+projectSearch <.. projectManagement : <<include>>
+teamMemberAdd <.. projectTeamManagement : <<include>>
+teamMemberUpdate <.. projectTeamManagement : <<include>>
+teamMemberRemove <.. projectTeamManagement : <<include>>
+teamMemberList <.. projectTeamManagement : <<include>>
+teamMemberView <.. projectTeamManagement : <<include>>
+teamMemberSearch <.. projectTeamManagement : <<include>>
+@enduml

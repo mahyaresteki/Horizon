@@ -3,6 +3,8 @@ left to right direction
 
 skinparam useCaseBackgroundColor #Business
 
+title Orfanization Management Package
+
 :Human Resource: as HR
 
 package "Organization"{
@@ -25,7 +27,7 @@ package "Organization"{
 HR -- departmentManagement
 HR -- organizationManagement
 
-departmentManagement ..> organizationManagement
+departmentManagement .> organizationManagement
 
 organizationManagement ..> organizationRegistration : <<include>>
 organizationManagement ..> organizationUpdate : <<include>>
