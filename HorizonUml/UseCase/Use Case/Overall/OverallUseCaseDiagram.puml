@@ -68,41 +68,41 @@ package "Financial"{
 
 
 
-User -- authentication
-User -- authorization
-User -- profileManagement
-roleManagement -- Admin
-userManagement -- Admin
-staffManagement -- HR
-staffManagement -- Accountant
-sallaryManagement -- Accountant
-Accountant -- costing
-Accountant -- pricing
-Accountant -- bugget
-pricing -- ProductManager
-ProductManager -- issueManagement
-costing -- PMO
-SeniorManager -- bugget
-positionManagement -- HR
-departmentManagement -- HR
-organizationManagement -- HR
-PMO -- projectManagement
-PMO -- projectTeamManagement
-PMO -- releaseManagement
-HR -- calendarManagement
-assetManagement -- PMO
-calendarManagement -- PMO
-LogesticsManager -- assetManagement
+User --> authentication
+User --> authorization
+User --> profileManagement
+roleManagement <-- Admin
+userManagement <-- Admin
+staffManagement <-- HR
+staffManagement <-- Accountant
+sallaryManagement <-- Accountant
+Accountant --> costing
+Accountant --> pricing
+Accountant --> bugget
+pricing <-- ProductManager
+ProductManager --> issueManagement
+costing <-- PMO
+SeniorManager --> bugget
+positionManagement <-- HR
+departmentManagement <-- HR
+organizationManagement <-- HR
+PMO --> projectManagement
+PMO --> projectTeamManagement
+PMO --> releaseManagement
+HR --> calendarManagement
+assetManagement <-- PMO
+calendarManagement <-- PMO
+LogesticsManager --> assetManagement
 
-releaseManagement -- DevOpsManager
-issueManagement -- TechnicalStaff
-meetingManagement -- TechnicalStaff
-timesheetManagement -- TechnicalStaff
+releaseManagement <-- DevOpsManager
+issueManagement <-- TechnicalStaff
+meetingManagement <-- TechnicalStaff
+timesheetManagement <-- TechnicalStaff
 
-Admin -- logReport
-Fmanager -- financialReport
-SeniorManager -- financialReport
-SeniorManager -- biReport
-projectReport -- PMO
+Admin --> logReport
+Fmanager --> financialReport
+SeniorManager --> financialReport
+SeniorManager --> biReport
+projectReport <-- PMO
 
 @enduml
