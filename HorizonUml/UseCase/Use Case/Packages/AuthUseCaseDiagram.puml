@@ -4,7 +4,7 @@ left to right direction
 skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 
-title Authentication and Authorization Management Package
+title Horizon Research Project: Authentication and Authorization Management Package
 
 :User: as User
 :Administrator: as Admin

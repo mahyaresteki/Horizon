@@ -4,9 +4,12 @@ left to right direction
 skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 
-title Project Management Package
+title Horizon Research Project: Project Management Package
 
 :Project Manager: as PMO
+:DevOps Manager: as DevOpsManager
+:Product Manager: as ProductManager
+:Staff: as Staff
 
 package "Project"{
     usecase "Project Management" as projectManagement
@@ -23,12 +26,66 @@ package "Project"{
     usecase "Team Member Team List" as teamMemberList
     usecase "Team Member View" as teamMemberView
     usecase "Team Member Search" as teamMemberSearch
+    usecase "Release Management" as releaseManagement
+    usecase "Release Add" as releaseAdd
+    usecase "Release Update" as releaseUpdate
+    usecase "Release Remove" as releaseRemove
+    usecase "Release List" as releaseList
+    usecase "Release Issue List" as releaseIssueList
+    usecase "Release Publish" as releasePublish
+    usecase "Release View" as releaseView
+    usecase "Release Search" as projectSearch
+    usecase "Issue Management" as issueManagement
+    usecase "Meeting Management" as meetingManagement
+    usecase "Timesheet Management" as timesheetManagement
+    usecase "Meeting Add" as meetingAdd
+    usecase "Meeting Update" as meetingUpdate
+    usecase "Meeting Cancel" as meetingCancel
+    usecase "Meeting List" as meetingList
+    usecase "Meeting View" as meetingView
+    usecase "Meeting Search" as meetingSearch
+    usecase "Meeting Add Comment" as meetingAddComment
+    usecase "Meeting Edit Comment" as meetingEditComment
+    usecase "Meeting Delete Comment" as meetingDeleteComment
+    usecase "Assign People to Meeting" as assignPeopleToMeeting
+    usecase "Meeting Attendance" as meetingAttendace
+    usecase "Attach Minutes Content" as attachMinutesContent
+    usecase "Issue Add" as issueAdd
+    usecase "Issue Update" as issueUpdate
+    usecase "Issue Remve" as issueCancel
+    usecase "Issue List" as issueList
+    usecase "Issue View" as issueView
+    usecase "Issue Search" as issueSearch
+    usecase "Issue Change State" as issueChangeState
+    usecase "Assign Issue to Staff" as assignIssueToStaff
+    usecase "Assign Issue to Release" as assignIssueToRelease
+    usecase "Issue Add Comment" as issueAddComment
+    usecase "Issue Edit Comment" as issueEditComment
+    usecase "Issue Delete Comment" as issueDeleteComment
+    usecase "Timesheet Add" as timesheetAdd
+    usecase "Timesheet Edit" as timesheetEdit
+    usecase "Timesheet Delete" as timesheetDelete
+    usecase "Timesheet List" as timesheetList
+    usecase "Timesheet View" as timesheetView
 }
 
+projectManagement -- ProductManager
 projectManagement -- PMO
 projectTeamManagement -- PMO
+releaseManagement -- PMO
+releaseManagement -- ProductManager
+releaseManagement -- DevOpsManager
+issueManagement -- Staff
+timesheetManagement -- Staff
+meetingManagement -- Staff
 
-projectTeamManagement .> projectManagement
+projectTeamManagement ..> projectManagement
+releaseManagement ..> projectManagement
+issueManagement ..> projectManagement
+issueManagement ..> projectTeamManagement
+timesheetManagement ..> issueManagement
+meetingManagement ..> projectManagement
+
 
 projectRegistration <.. projectManagement : <<include>>
 projectUpdate <.. projectManagement : <<include>>
@@ -42,4 +99,41 @@ teamMemberRemove <.. projectTeamManagement : <<include>>
 teamMemberList <.. projectTeamManagement : <<include>>
 teamMemberView <.. projectTeamManagement : <<include>>
 teamMemberSearch <.. projectTeamManagement : <<include>>
+releaseAdd <.. releaseManagement : <<include>>
+releaseUpdate <.. releaseManagement : <<include>>
+releaseRemove <.. releaseManagement : <<include>>
+releaseList <.. releaseManagement : <<include>>
+releaseIssueList <.. releaseManagement : <<include>>
+releasePublish <.. releaseManagement : <<include>>
+releaseView <.. releaseManagement : <<include>>
+meetingAdd <.. meetingManagement : <<include>>
+meetingUpdate <.. meetingManagement : <<include>>
+meetingCancel <.. meetingManagement : <<include>>
+meetingList <.. meetingManagement : <<include>>
+meetingSearch <.. meetingManagement : <<include>>
+assignPeopleToMeeting <.. meetingManagement : <<include>>
+meetingAttendace <.. meetingManagement : <<include>>
+attachMinutesContent <.. meetingManagement : <<include>>
+meetingView <.. meetingManagement : <<include>>
+meetingAddComment <.. meetingManagement : <<include>>
+meetingEditComment <.. meetingManagement : <<include>>
+meetingDeleteComment <.. meetingManagement : <<include>>
+issueAdd <.. issueManagement : <<include>>
+issueUpdate <.. issueManagement : <<include>>
+issueCancel <.. issueManagement : <<include>>
+issueList <.. issueManagement : <<include>>
+issueView <.. issueManagement : <<include>>
+issueSearch <.. issueManagement : <<include>>
+issueChangeState <.. issueManagement : <<include>>
+assignIssueToStaff <.. issueManagement : <<include>>
+assignIssueToRelease <.. issueManagement : <<include>>
+issueAddComment <.. issueManagement : <<include>>
+issueEditComment <.. issueManagement : <<include>>
+issueDeleteComment <.. issueManagement : <<include>>
+timesheetAdd <.. timesheetManagement : <<include>>
+timesheetEdit  <.. timesheetManagement : <<include>>
+timesheetDelete  <.. timesheetManagement : <<include>>
+timesheetList  <.. timesheetManagement : <<include>>
+timesheetView  <.. timesheetManagement : <<include>>
+
 @enduml

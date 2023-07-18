@@ -2,7 +2,7 @@
 
 skinparam actorBackgroundColor #Business
 
-title Hierarchy of Actors
+title Horizon Research Project: Hierarchy of Actors
 
 :User: as User
 :Staff: as Staff
@@ -21,6 +21,9 @@ title Hierarchy of Actors
 :Analyzer: as Analyzer
 :Logestics Manager: as LogesticsManager
 :Product Manager: as ProductManager
+:Support: as Support
+:Security: as Security
+:Database Admin: as DbAdmin
 
 User <|--- Admin
 User <|-- Staff
@@ -32,6 +35,9 @@ Staff <|---- Manager
 TechnicalStaff <|-- Developer
 TechnicalStaff <|-- Tester
 TechnicalStaff <|-- Analyzer
+TechnicalStaff <|-- Support
+TechnicalStaff <|-- Security
+TechnicalStaff <|-- DbAdmin
 
 Manager <|-- SeniorManager
 Manager <|-- PMO

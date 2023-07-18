@@ -4,7 +4,7 @@ left to right direction
 skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 
-title Overall Use Case Diagram
+title Horizon Research Project: Overall Use Case Diagram
 
 :User: as User
 :Senior Manager: as SeniorManager
@@ -13,10 +13,12 @@ title Overall Use Case Diagram
 :Administrator: as Admin
 :Human Resource: as HR
 :Accountant: as Accountant
-:Technical Staff: as TechnicalStaff
+:Staff: as Staff
 :DevOps Manager: as DevOpsManager
 :Logestics Manager: as LogesticsManager
 :Product Manager: as ProductManager
+:Staff: as Staff
+
 
 package "Auth"{
     usecase "Role Management" as roleManagement
@@ -31,7 +33,7 @@ package "Organization"{
     usecase "Department Management" as departmentManagement
 }
 
-package "Staff"{
+package "HR Management"{
     usecase "Position Management" as positionManagement
     usecase "Staff Management" as staffManagement
     usecase "Attendance Management" as attendanceManagement
@@ -71,6 +73,7 @@ package "Financial"{
 User --> authentication
 User --> authorization
 User --> profileManagement
+Staff --> attendanceManagement
 roleManagement <-- Admin
 userManagement <-- Admin
 staffManagement <-- HR
@@ -80,7 +83,6 @@ Accountant --> costing
 Accountant --> pricing
 Accountant --> bugget
 pricing <-- ProductManager
-ProductManager --> issueManagement
 costing <-- PMO
 SeniorManager --> bugget
 positionManagement <-- HR
@@ -89,15 +91,18 @@ organizationManagement <-- HR
 PMO --> projectManagement
 PMO --> projectTeamManagement
 PMO --> releaseManagement
+PMO --> meetingManagement
+ProductManager --> releaseManagement
+ProductManager --> projectManagement
 HR --> calendarManagement
 assetManagement <-- PMO
 calendarManagement <-- PMO
 LogesticsManager --> assetManagement
 
 releaseManagement <-- DevOpsManager
-issueManagement <-- TechnicalStaff
-meetingManagement <-- TechnicalStaff
-timesheetManagement <-- TechnicalStaff
+issueManagement <-- Staff
+meetingManagement <-- Staff
+timesheetManagement <-- Staff
 
 Admin --> logReport
 Fmanager --> financialReport
