@@ -21,23 +21,23 @@ left to right direction
 title Architecture of Horizon System
 
 package "Organization Network Zone" as HorizonSystem{
-    DEV_DJANGO(django, "Web Franework")
-    DEV_PYTHON(python, "Programming SDK")
-    DEV_NGINX(webServer1, "Web Server 1")
-    DEV_NGINX(webServer2, "Web Server 2")
-    FA_SERVER(appServer, "App Server")
-    FA_SERVER(apiGateway, "API Gateway")
-    OFF_FIREWALL_ORANGE(firewall,"Firewall")
-    DEV_POSTGRESQL(databaseServer, "Database Server")
-    FA_DATABASE(database, "Horizon Database")
-    FA_CUBES(apis, "APIs")
-    FA_COGS(webApp, "Web App")
-    FA_DESKTOP(userStation, "User Station")
+    DEV_DJANGO(django, "Web Franework") #BUSINESS
+    DEV_PYTHON(python, "Programming SDK") #BUSINESS
+    DEV_NGINX(webServer1, "Web Server 1") #BUSINESS
+    DEV_NGINX(webServer2, "Web Server 2") #BUSINESS
+    FA_SERVER(appServer, "App Server") #BUSINESS
+    FA_SERVER(apiGateway, "API Gateway") #BUSINESS
+    OFF_FIREWALL_ORANGE(firewall,"Firewall") #BUSINESS
+    DEV_POSTGRESQL(databaseServer, "Database Server") #BUSINESS
+    FA_DATABASE(database, "Horizon Database") #BUSINESS
+    FA_CUBES(apis, "APIs") #BUSINESS
+    FA_COGS(webApp, "Web App") #BUSINESS
+    FA_DESKTOP(userStation, "User Station") #BUSINESS
 }
 
-FA_CLOUD(internet, "Internet")
-FA_CHROME(client, "Client's Browser")
-FA_MOBILE(mobileApp, "Mobile App")
+FA_CLOUD(internet, "Internet") #BUSINESS
+FA_CHROME(client, "Client's Browser") #BUSINESS
+FA_MOBILE(mobileApp, "Mobile App") #BUSINESS
 
 client <--> internet
 mobileApp <--> internet

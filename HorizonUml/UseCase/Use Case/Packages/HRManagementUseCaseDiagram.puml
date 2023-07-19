@@ -7,12 +7,14 @@ skinparam actorBackgroundColor #Business
 title Horizon Research Project: HR Management Package
 
 :Human Resource: as HR
+:Staff: as Staff
 
 package "HR Management"{
     usecase "Position Management" as positionManagement
     usecase "Position Registration" as positionRegistration
     usecase "Position Update" as positionUpdate
     usecase "Position Activation" as positionActivation
+    usecase "Set Salary Range of The Position" as setPositionSalaryrange
     usecase "Position List" as positionList
     usecase "Position View" as positionView
     usecase "Position Search" as positionSearch
@@ -23,12 +25,40 @@ package "HR Management"{
     usecase "Staff List" as staffList
     usecase "Staff View" as staffView
     usecase "Staff Search" as staffSearch
+    usecase "Staff Resume" as staffResume
+    usecase "Attendance Management" as attendanceManagement
+    usecase "Attendance Add" as attendanceAdd
+    usecase "Attendance Update" as AttendanceUpdate
+    usecase "Attendance Remove" as AttendanceRemove
+    usecase "Attendance List" as attendanceList
+    usecase "Attendance View" as attendanceView
+    usecase "Attendance Search" as attendanceSearch
+    usecase "Leave Add" as leaveAdd
+    usecase "Leave Update" as leaveUpdate
+    usecase "Leave Remove" as leaveRemove
+    usecase "Leave List" as leaveList
+    usecase "Leave View" as leaveView
+    usecase "Leave Search" as leaveSearch
+    usecase "Mission Add" as missionAdd
+    usecase "Mission Update" as missionUpdate
+    usecase "Mission Remove" as missionRemove
+    usecase "Mission List" as missionList
+    usecase "Mission View" as missionView
+    usecase "Mission Search" as missionSearch
+    usecase "Calulate Total Mission Time" as totalMissionTime
+    usecase "Calulate Total Leave Time" as totalLeaveTime
+    usecase "Calulate Total Overtime" as totalOvertime
+    usecase "Calulate Total Work Dificit Time" as totalWorkDificitTime
+    
 }
 
 staffManagement -- HR
 positionManagement -- HR
+staffManagement -- Staff
+attendanceManagement -- Staff
 
-staffManagement .> positionManagement
+staffManagement ..> positionManagement
+attendanceManagement ..> staffManagement
 
 staffRegistration <.. staffManagement : <<include>>
 staffUpdate <.. staffManagement : <<include>>
@@ -36,11 +66,36 @@ staffActivation <.. staffManagement : <<include>>
 staffList <.. staffManagement : <<include>>
 staffView <.. staffManagement : <<include>>
 staffSearch <.. staffManagement : <<include>>
+staffResume <.. staffManagement : <<include>>
 positionRegistration <.. positionManagement : <<include>>
 positionUpdate <.. positionManagement : <<include>>
 positionActivation <.. positionManagement : <<include>>
 positionList <.. positionManagement : <<include>>
 positionView <.. positionManagement : <<include>>
 positionSearch <.. positionManagement : <<include>>
+setPositionSalaryrange <.. positionManagement : <<include>>
+staffManagement <.. positionManagement : <<include>>
 
+attendanceAdd <.. attendanceManagement : <<include>>
+AttendanceUpdate <.. attendanceManagement : <<include>>
+AttendanceRemove <.. attendanceManagement : <<include>>
+attendanceList <.. attendanceManagement : <<include>>
+attendanceView <.. attendanceManagement : <<include>>
+attendanceSearch <.. attendanceManagement : <<include>>
+leaveAdd <.. attendanceManagement : <<include>>
+leaveUpdate <.. attendanceManagement : <<include>>
+leaveRemove <.. attendanceManagement : <<include>>
+leaveList <.. attendanceManagement : <<include>>
+leaveView <.. attendanceManagement : <<include>>
+leaveSearch <.. attendanceManagement : <<include>>
+missionAdd <.. attendanceManagement : <<include>>
+missionUpdate <.. attendanceManagement : <<include>>
+missionRemove <.. attendanceManagement : <<include>>
+missionList <.. attendanceManagement : <<include>>
+missionView <.. attendanceManagement : <<include>>
+missionSearch <.. attendanceManagement : <<include>>
+totalMissionTime <.. attendanceManagement : <<include>>
+totalLeaveTime <.. attendanceManagement : <<include>>
+totalOvertime <.. attendanceManagement : <<include>>
+totalWorkDificitTime <.. attendanceManagement : <<include>>
 @enduml

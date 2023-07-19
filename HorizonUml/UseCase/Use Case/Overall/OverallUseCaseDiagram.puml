@@ -17,7 +17,6 @@ title Horizon Research Project: Overall Use Case Diagram
 :DevOps Manager: as DevOpsManager
 :Logestics Manager: as LogesticsManager
 :Product Manager: as ProductManager
-:Staff: as Staff
 
 
 package "Auth"{
@@ -37,12 +36,10 @@ package "HR Management"{
     usecase "Position Management" as positionManagement
     usecase "Staff Management" as staffManagement
     usecase "Attendance Management" as attendanceManagement
-    usecase "Sallary Management" as sallaryManagement
 }
 
 package "Resources"{
     usecase "Asset Management" as assetManagement
-    usecase "Calendar Management" as calendarManagement
 }
 
 package "Project"{
@@ -66,6 +63,7 @@ package "Financial"{
     usecase "Project Costing" as costing
     usecase "Bugget Management" as bugget
     usecase "Product Pricing" as pricing
+    usecase "Salary Management" as salaryManagement
 }
 
 
@@ -77,8 +75,8 @@ Staff --> attendanceManagement
 roleManagement <-- Admin
 userManagement <-- Admin
 staffManagement <-- HR
-staffManagement <-- Accountant
-sallaryManagement <-- Accountant
+staffManagement <-- Staff
+Accountant --> salaryManagement
 Accountant --> costing
 Accountant --> pricing
 Accountant --> bugget
@@ -109,5 +107,6 @@ Fmanager --> financialReport
 SeniorManager --> financialReport
 SeniorManager --> biReport
 projectReport <-- PMO
+salaryManagement <-- Fmanager
 
 @enduml

@@ -1,0 +1,43 @@
+@startuml
+left to right direction
+
+skinparam useCaseBackgroundColor #Business
+skinparam actorBackgroundColor #Business
+
+title Horizon Research Project: HR Management Package
+
+:Financial Manager: as Fmanager
+:Human Resource: as HR
+:Accountant: as Accountant
+:Senior Manager: as SeniorManager
+
+
+package "Financial"{
+    usecase "Project Costing" as costing
+    usecase "Activity Based Costing" as abc
+    usecase "Direct Costing" as directCosting
+    usecase "Bugget Management" as bugget
+    usecase "Operational Budgeting" as buggeting
+    usecase "Product Pricing" as pricing
+    usecase "Salary Management" as salaryManagement
+    usecase "Monthly Salary Calulation" as monthlySalaryCalculation
+    usecase "Annually Salary Calulation" as annuallySalaryCalculation
+    usecase "Print Bill Salary" as printBillSalary
+}
+
+salaryManagement -- Accountant
+salaryManagement -- Fmanager
+salaryManagement -- HR
+costing -- Accountant
+pricing -- Accountant
+bugget -- Fmanager
+bugget -- SeniorManager
+
+monthlySalaryCalculation <.. salaryManagement : <<include>>
+annuallySalaryCalculation <.. salaryManagement : <<include>>
+printBillSalary <.. salaryManagement : <<include>>
+buggeting <.. bugget : <<include>>
+directCosting <.. costing : <<include>>
+abc <.. costing : <<include>>
+
+@enduml
