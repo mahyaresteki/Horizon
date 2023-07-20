@@ -1,0 +1,80 @@
+@startuml
+
+skinparam interface{
+  BackgroundColor #Black
+}
+
+skinparam component{
+  BackgroundColor #Orange
+}
+
+skinparam file{
+  BackgroundColor #lightsalmon
+}
+
+skinparam package{
+  BackgroundColor #lightblue
+}
+
+skinparam node{
+  BackgroundColor #Yellow
+}
+
+skinparam database{
+  BackgroundColor #Lightgreen
+}
+
+title Horizon Project: Deployment Diagram
+
+package "App Layer" as appLayer{
+    node "App Server" as appServer <<device>>{
+        port "443" as app443
+        portout "any" as appAny
+        component "Python 3" as python3<<sdk>>
+        component "Apache Web Server" as webServer <<web server>>
+        component "django" as django <<web framework>>
+        component "psycopg2" as psycopg2 <<data provider>>
+    }
+}
+
+package "Database Layer" as DatabaseLayer{
+    node "Database Server" as databaseServer <<device>>{
+        port "5432" as pogresql5432
+        component "PostgreSQL" as rdbms <<web server>>
+    }
+}
+
+package "Security Layer" as SecurityLayer{
+    node "Firewall Server" as firewallServer <<device>>{
+        port "443" as firewall443
+        port "5432" as firewall5432
+        portout "any" as firewallAny1
+        portout "any" as firewallAny2
+        component "Firewall App" as firewallApp <<service>>
+    }
+}
+
+package "User Layer" as UserLayer{
+    node "Client PC" as client <<device>>{
+        component "PostgreSQL" <<web server>>
+    }
+}
+
+artifact "Main Database" as mainDb
+artifact "Horizon App" as horizonApp
+artifact "Horizon APIs" as horizonApis
+
+mainDb ..> rdbms : <<deploy>>
+horizonApp ..>  webServer: <<deploy>>
+horizonApis ..>  webServer: <<deploy>>
+horizonApp ..> mainDb : <<use>>
+horizonApis  ..> mainDb : <<use>>
+client --> firewall443 : HTTPS
+firewallAny1 --> app443 : HTTPS
+appAny --> firewall5432 : ODBC
+firewallAny2 --> pogresql5432 : ODBC
+webServer ..> python3 : <<use>>
+python3 ..> django : <<use>>
+python3 ..> psycopg2 : <<use>>
+
+@enduml
