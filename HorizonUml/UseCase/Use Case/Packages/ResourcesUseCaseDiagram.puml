@@ -7,7 +7,8 @@ skinparam actorBackgroundColor #Business
 title Horizon Research Project: Resources Package
 
 :Financial Manager: as Fmanager
-:Logistics Manager: as Lmanager
+:Logistics Manager: as LogesticsManager
+:Project Manager: as PMO
 
 package "Resources"{
     usecase "Asset Management" as assetManagement
@@ -20,8 +21,9 @@ package "Resources"{
     usecase "Asset Search" as assetSearch
 }
 
-assetManagement <-- Lmanager
+assetManagement <-- LogesticsManager
 assetManagement <-- Fmanager
+assetManagement <-- PMO
 
 assetRegistration <.. assetManagement : <<include>>
 assetUpdate  <.. assetManagement : <<include>>

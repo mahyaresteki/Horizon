@@ -96,6 +96,7 @@ HR --> calendarManagement
 assetManagement <-- PMO
 calendarManagement <-- PMO
 LogesticsManager --> assetManagement
+Fmanager --> assetManagement
 
 releaseManagement <-- DevOpsManager
 issueManagement <-- Staff
