@@ -1,0 +1,34 @@
+@startuml
+left to right direction
+
+skinparam useCaseBackgroundColor #Business
+skinparam actorBackgroundColor #Business
+
+title Horizon Research Project: Resources Package
+
+:Financial Manager: as Fmanager
+:Logistics Manager: as Lmanager
+
+package "Resources"{
+    usecase "Asset Management" as assetManagement
+    usecase "Asset Add" as assetRegistration
+    usecase "Asset Update" as assetUpdate
+    usecase "Asset Activation" as assetActivation
+    usecase "Asset Assign to the Project" as assetAssignToProject
+    usecase "Asset List" as assetList
+    usecase "Asset View" as assetView
+    usecase "Asset Search" as assetSearch
+}
+
+assetManagement <-- Lmanager
+assetManagement <-- Fmanager
+
+assetRegistration <.. assetManagement : <<include>>
+assetUpdate  <.. assetManagement : <<include>>
+assetActivation  <.. assetManagement : <<include>>
+assetAssignToProject  <.. assetManagement : <<include>>
+assetList  <.. assetManagement : <<include>>
+assetView  <.. assetManagement : <<include>>
+assetSearch  <.. assetManagement : <<include>>
+
+@enduml

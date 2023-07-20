@@ -4,7 +4,7 @@ left to right direction
 skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 
-title Horizon Research Project: HR Management Package
+title Horizon Research Project: Financial Package
 
 :Financial Manager: as Fmanager
 :Human Resource: as HR
