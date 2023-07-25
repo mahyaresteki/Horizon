@@ -10,8 +10,8 @@ entity "SCH_AUTH.TBL_ROLE" as role {
   --
   *NAME : varchar(50)
   *CODE : varchar(20) <<unique>>
-  *ISACTIVE: char(1)
-  EXPIREDATE: date
+  *ISACTIVE : char(1)
+  EXPIREDATE : date
   *CREATEDAT : date <<default: now()>>
   *CREATEDBY : integer(10)
   MODIFIEDAT : date
@@ -23,7 +23,7 @@ entity "SCH_AUTH.TBL_ACTION" as action {
   --
   *NAME : varchar(50)
   *CODE : varchar(20) <<unique>>
-  *ISACTIVE: char(1)
+  *ISACTIVE : char(1)
   *CREATEDAT : date <<default: now()>>
   *CREATEDBY : integer(10)
   MODIFIEDAT : date
@@ -41,7 +41,95 @@ entity "SCH_AUTH.TBL_ROLEACTION" as roleAction {
   MODIFIEDBY : integer(10)
 }
 
+entity "SCH_AUTH.TBL_USER" as user {
+  *ID : integer(10) <<generated>>
+  --
+  *USERNAME : varchar(20) <<unique>>
+  *PASSWORD : varchar(255)
+  STAFF : integer(10) <<FK>>
+  *ISACTIVE : char(1)
+  *CREATEDAT : date <<default: now()>>
+  *CREATEDBY : integer(10)
+  MODIFIEDAT : date
+  MODIFIEDBY : integer(10)
+}
+
+entity "SCH_AUTH.TBL_USERROLE" as userRole {
+  *ID : integer(10) <<generated>>
+  --
+  *USER : integer(10) <<FK>>
+  *ROLE : integer(10) <<FK>>
+  *ISACTIVE : char(1)
+  *CREATEDAT : date <<default: now()>>
+  *CREATEDBY : integer(10)
+  MODIFIEDAT : date
+  MODIFIEDBY : integer(10)
+}
+
+entity "SCH_ORGANIZATION.TBL_ORGANIZATION" as organization {
+  *ID : integer(10) <<generated>>
+  --
+  *NAME : varchar(50)
+  *CODE : varchar(20) <<unique>>
+  *ISACTIVE : char(1)
+  PARENTID : integer(20) <<FK>>
+  *CREATEDAT : date <<default: now()>>
+  *CREATEDBY : integer(10)
+  MODIFIEDAT : date
+  MODIFIEDBY : integer(10)
+}
+
+entity "SCH_ORGANIZATION.TBL_DEPARTMENT" as department {
+  *ID : integer(10) <<generated>>
+  --
+  *NAME : varchar(50)
+  *CODE : varchar(20) <<unique>>
+  *ISACTIVE : char(1)
+  *ORGANIZATION : integer(10) 
+  PARENTID : integer(20) <<FK>>
+  *CREATEDAT : date <<default: now()>>
+  *CREATEDBY : integer(10)
+  MODIFIEDAT : date
+  MODIFIEDBY : integer(10)
+}
+
+entity "SCH_HR.TBL_POSITION" as position {
+  *ID : integer(10) <<generated>>
+  --
+  *NAME : varchar(50)
+  *CODE : varchar(20) <<unique>>
+  *ISACTIVE : char(1)
+  *DEPARTMENT : integer(10) 
+  *CREATEDAT : date <<default: now()>>
+  *CREATEDBY : integer(10)
+  MODIFIEDAT : date
+  MODIFIEDBY : integer(10)
+}
+
+entity "SCH_HR.TBL_STAFF" as staff {
+  *ID : integer(10) <<generated>>
+  --
+  *FIRSTNAME : varchar(50)
+  *LASTNAME : varchar(50)
+  *CODE : varchar(20) <<unique>>
+  *ISACTIVE : char(1)
+  *POSITION : integer(10) <<FK>>
+  *DEPARTMENT : integer(10) 
+  *CREATEDAT : date <<default: now()>>
+  *CREATEDBY : integer(10)
+  MODIFIEDAT : date
+  MODIFIEDBY : integer(10)
+}
+
 role ||..o{ roleAction
 action ||..o{ roleAction
+user ||..o{ userRole
+role ||..o{ userRole
+organization |o..o{ organization
+organization ||..o{ department
+department |o..o{ department
+department ||..o{ position
+position ||..o{ staff
+staff |o..o{ user
 
 @enduml
