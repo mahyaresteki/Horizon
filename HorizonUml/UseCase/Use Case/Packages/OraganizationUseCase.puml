@@ -3,10 +3,12 @@ left to right direction
 
 skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
+skinparam Shadowing True
 
 title Horizon Research Project: Orfanization Management Package
 
 :Human Resource: as HR
+:Network Manager: as NetworkManager
 
 package "Organization"{
     usecase "Organization Management" as organizationManagement
@@ -23,12 +25,30 @@ package "Organization"{
     usecase "Department List" as departmentList
     usecase "Department View" as departmentView
     usecase "Department Search" as departmentSearch
+    usecase "Building Management" as buildingManagement
+    usecase "Building Add" as buildingAdd
+    usecase "Building Update" as buildingUpdate
+    usecase "Building Activation" as buildingActivation
+    usecase "Building List" as buildingList
+    usecase "Building View" as buildingView
+    usecase "Building Search" as buildingSearch
+    usecase "Work Stattion Management" as workStationManagement
+    usecase "Work Stattion Add" as workStationAdd
+    usecase "Work Stattion Update" as workStationUpdate
+    usecase "Work Stattion Activation" as workStationActivation
+    usecase "Work Stattion List" as workStationList
+    usecase "Work Stattion View" as workStationView
+    usecase "Work Stattion Search" as workStationSearch
 }
 
 HR -- departmentManagement
 HR -- organizationManagement
+HR -- buildingManagement
+NetworkManager -- workStationManagement
 
 departmentManagement .> organizationManagement
+buildingManagement <. workStationManagement
+buildingManagement .> organizationManagement
 
 organizationManagement ..> organizationRegistration : <<include>>
 organizationManagement ..> organizationUpdate : <<include>>
@@ -42,6 +62,18 @@ departmentManagement ..> departmentActivation : <<include>>
 departmentManagement ..> departmentList : <<include>>
 departmentManagement ..> departmentView : <<include>>
 departmentManagement ..> departmentSearch : <<include>>
+buildingManagement ..> buildingAdd : <<include>>
+buildingManagement ..> buildingUpdate : <<include>>
+buildingManagement ..> buildingActivation : <<include>>
+buildingManagement ..> buildingList : <<include>>
+buildingManagement ..> buildingView : <<include>>
+buildingManagement ..> buildingSearch : <<include>>
+workStationManagement ..> workStationAdd : <<include>>
+workStationManagement ..> workStationUpdate : <<include>>
+workStationManagement ..> workStationActivation : <<include>>
+workStationManagement ..> workStationList : <<include>>
+workStationManagement ..> workStationView : <<include>>
+workStationManagement ..> workStationSearch : <<include>>
 
 
 @enduml

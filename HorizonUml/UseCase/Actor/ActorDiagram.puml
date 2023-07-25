@@ -1,6 +1,7 @@
 @startuml
 
 skinparam actorBackgroundColor #Business
+skinparam Shadowing True
 
 title Horizon Research Project: Hierarchy of Actors
 
@@ -20,6 +21,7 @@ title Horizon Research Project: Hierarchy of Actors
 :Tester: as Tester
 :Analyzer: as Analyzer
 :Logestics Manager: as LogesticsManager
+:Network Manager: as NetworkManager
 :Product Manager: as ProductManager
 :Support: as Support
 :Security: as Security
@@ -46,5 +48,6 @@ Manager <|-- DevOpsManager
 Manager <|-- HR
 Manager <|-- LogesticsManager
 Manager <|-- ProductManager
+Manager <|-- NetworkManager
 
 @enduml

@@ -2,6 +2,7 @@
 hide circle
 skinparam classBackgroundColor #Business
 skinparam linetype ortho
+skinparam Shadowing True
 
 title Horizon Project: Entity Relationship Diagram
 
@@ -87,7 +88,7 @@ entity "SCH_ORGANIZATION.TBL_BUILDING" as building {
   *CODE : varchar(20) <<unique>>
   *ISACTIVE : char(1)
   *ORGANIZATION : integer(20) <<FK>>
-  *FLOORNO : integer(10)
+  *FLOORCOUNT : integer(10)
   POSTALCODE : varchar(10)
   ADDRESS : varchar(255)
   PHONENUMBER : varchar(20)
@@ -98,7 +99,21 @@ entity "SCH_ORGANIZATION.TBL_BUILDING" as building {
   MODIFIEDBY : integer(10)
 }
 
-
+entity "SCH_ORGANIZATION.TBL_WORKSTATION" as workStation {
+  *ID : integer(10) <<generated>>
+  --
+  *NAME : varchar(50)
+  *CODE : varchar(20) <<unique>>
+  *ISACTIVE : char(1)
+  *IP : varchar(20) <<unique>>
+  *BUILDING : integer(10) <<FK>>
+  *FLOORNO : integer(10)
+  *STAFF : integer(10) <<FK>>
+  *CREATEDAT : date <<default: now()>>
+  *CREATEDBY : integer(10)
+  MODIFIEDAT : date
+  MODIFIEDBY : integer(10)
+}
 
 
 entity "SCH_ORGANIZATION.TBL_DEPARTMENT" as department {
@@ -148,7 +163,10 @@ action ||..o{ roleAction
 user ||..o{ userRole
 role ||..o{ userRole
 organization |o..o{ organization
+organization ||..o{ building
 organization ||..o{ department
+building ||..o{ workStation
+staff ||..o{ workStation
 department |o..o{ department
 department ||..o{ position
 position ||..o{ staff

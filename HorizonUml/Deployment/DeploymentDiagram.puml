@@ -1,5 +1,7 @@
 @startuml
 
+skinparam Shadowing True
+
 skinparam interface{
   BackgroundColor #Black
 }

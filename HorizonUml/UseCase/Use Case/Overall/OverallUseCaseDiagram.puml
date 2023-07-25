@@ -3,12 +3,14 @@ left to right direction
 
 skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
+skinparam Shadowing True
 
 title Horizon Research Project: Overall Use Case Diagram
 
 :User: as User
 :Senior Manager: as SeniorManager
 :Project Manager: as PMO
+:Network Manager: as NetworkManager
 :Financial Manager: as Fmanager
 :Administrator: as Admin
 :Human Resource: as HR
@@ -29,6 +31,8 @@ package "Auth"{
 
 package "Organization"{
     usecase "Organization Management" as organizationManagement
+    usecase "Building Management" as buildingManagement
+    usecase "Work Stattion Management" as workStationManagement
     usecase "Department Management" as departmentManagement
 }
 
@@ -86,6 +90,7 @@ SeniorManager --> bugget
 positionManagement <-- HR
 departmentManagement <-- HR
 organizationManagement <-- HR
+buildingManagement <-- HR
 PMO --> projectManagement
 PMO --> projectTeamManagement
 PMO --> releaseManagement
@@ -109,5 +114,6 @@ SeniorManager --> financialReport
 SeniorManager --> biReport
 projectReport <-- PMO
 salaryManagement <-- Fmanager
+NetworkManager --> workStationManagement
 
 @enduml

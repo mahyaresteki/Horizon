@@ -3,6 +3,7 @@ left to right direction
 
 skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
+skinparam Shadowing True
 
 title Horizon Research Project: Project Management Package
 
