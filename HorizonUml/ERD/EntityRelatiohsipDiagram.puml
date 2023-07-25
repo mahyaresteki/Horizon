@@ -1,0 +1,47 @@
+@startuml
+hide circle
+skinparam classBackgroundColor #Business
+skinparam linetype ortho
+
+title Horizon Project: Entity Relationship Diagram
+
+entity "SCH_AUTH.TBL_ROLE" as role {
+  *ID : integer(10) <<generated>>
+  --
+  *NAME : varchar(50)
+  *CODE : varchar(20) <<unique>>
+  *ISACTIVE: char(1)
+  EXPIREDATE: date
+  *CREATEDAT : date <<default: now()>>
+  *CREATEDBY : integer(10)
+  MODIFIEDAT : date
+  MODIFIEDBY : integer(10)
+}
+
+entity "SCH_AUTH.TBL_ACTION" as action {
+  *ID : integer(10) <<generated>>
+  --
+  *NAME : varchar(50)
+  *CODE : varchar(20) <<unique>>
+  *ISACTIVE: char(1)
+  *CREATEDAT : date <<default: now()>>
+  *CREATEDBY : integer(10)
+  MODIFIEDAT : date
+  MODIFIEDBY : integer(10)
+}
+
+entity "SCH_AUTH.TBL_ROLEACTION" as roleAction {
+  *ID : integer(10) <<generated>>
+  --
+  *ROLE : integer(10) <<FK>>
+  *ACTION : integer(10) <<FK>>
+  *CREATEDAT : date <<default: now()>>
+  *CREATEDBY : integer(10)
+  MODIFIEDAT : date
+  MODIFIEDBY : integer(10)
+}
+
+role ||..o{ roleAction
+action ||..o{ roleAction
+
+@enduml
