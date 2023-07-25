@@ -79,6 +79,28 @@ entity "SCH_ORGANIZATION.TBL_ORGANIZATION" as organization {
   MODIFIEDBY : integer(10)
 }
 
+
+entity "SCH_ORGANIZATION.TBL_BUILDING" as building {
+  *ID : integer(10) <<generated>>
+  --
+  *NAME : varchar(50)
+  *CODE : varchar(20) <<unique>>
+  *ISACTIVE : char(1)
+  *ORGANIZATION : integer(20) <<FK>>
+  *FLOORNO : integer(10)
+  POSTALCODE : varchar(10)
+  ADDRESS : varchar(255)
+  PHONENUMBER : varchar(20)
+  FAXNUMBER : varchar(20)
+  *CREATEDAT : date <<default: now()>>
+  *CREATEDBY : integer(10)
+  MODIFIEDAT : date
+  MODIFIEDBY : integer(10)
+}
+
+
+
+
 entity "SCH_ORGANIZATION.TBL_DEPARTMENT" as department {
   *ID : integer(10) <<generated>>
   --
