@@ -15,26 +15,37 @@ left to right direction
 !include <tupadr3/font-awesome/cubes>
 !include <tupadr3/font-awesome/cogs>
 !include <tupadr3/devicons/postgresql>
-!include <tupadr3/devicons/python>
-!include <tupadr3/devicons/django>
 !include <tupadr3/devicons/nginx>
 !include <office/Concepts/firewall_orange>
 
 title Architecture of Horizon System
 
 package "Organization Network Zone" as HorizonSystem{
-    DEV_DJANGO(django, "Web Franework") #BUSINESS
-    DEV_PYTHON(python, "Programming SDK") #BUSINESS
-    DEV_NGINX(webServer1, "Web Server 1") #BUSINESS
-    DEV_NGINX(webServer2, "Web Server 2") #BUSINESS
-    FA_SERVER(appServer, "App Server") #BUSINESS
-    FA_SERVER(apiGateway, "API Gateway") #BUSINESS
-    OFF_FIREWALL_ORANGE(firewall,"Firewall") #BUSINESS
-    DEV_POSTGRESQL(databaseServer, "Database Server") #BUSINESS
-    FA_DATABASE(database, "Horizon Database") #BUSINESS
-    FA_CUBES(apis, "APIs") #BUSINESS
-    FA_COGS(webApp, "Web App") #BUSINESS
-    FA_DESKTOP(userStation, "User Station") #BUSINESS
+    package "Microservice Layer" as microserviceLayer{
+        FA_COGS(authMicroservice, "Authentication Microservice") #BUSINESS
+        FA_COGS(financialMicroservice, "Finantial Management Microservice") #BUSINESS
+        FA_COGS(hrMicroservice, "HR Management Microservice") #BUSINESS
+        FA_COGS(organizationMicroservice, "Organization Management Microservice") #BUSINESS
+        FA_COGS(projectMicroservice, "Project Management Microservice") #BUSINESS
+        FA_COGS(resourceMicroservice, "Resource Management Microservice") #BUSINESS
+    }
+    package "API Layer" as apiLayer{
+        DEV_NGINX(webServer1, "Load Balancer") #BUSINESS
+        FA_CUBES(apis, "APIs") #BUSINESS
+    }
+    package "App Layer" as appLayer{
+        FA_SERVER(mobileAppServer, "Mobile App Server") #BUSINESS
+        FA_SERVER(webAppServer, "Web App Server") #BUSINESS
+    }
+    package "Security Layer" as securityLayer{
+        OFF_FIREWALL_ORANGE(firewall,"Firewall") #BUSINESS
+    }
+    package "Data Layer" as dataLayer{
+        DEV_POSTGRESQL(databaseServer, "Database Server") #BUSINESS
+        FA_DATABASE(database, "Horizon Database") #BUSINESS
+    }
+    
+    FA_DESKTOP(userStation, "Intranet Clients") #BUSINESS
 }
 
 FA_CLOUD(internet, "Internet") #BUSINESS
@@ -44,17 +55,23 @@ FA_MOBILE(mobileApp, "Mobile App") #BUSINESS
 client <--> internet
 mobileApp <--> internet
 internet <--> firewall
-firewall <--> appServer
-firewall <--> apiGateway
+firewall <--> mobileAppServer
+firewall <--> webAppServer
 databaseServer <--> database
-webServer2 <--> apis
-apis <-> django
-django <-> webApp
-webServer1 <--> webApp
-apis <--> databaseServer
-webApp <--> databaseServer
-appServer <--> webServer1
-apiGateway <--> webServer2
-python <--> django
+webServer1 <--> apis
+apis <--> authMicroservice
+apis <--> financialMicroservice
+apis <--> hrMicroservice
+apis <--> organizationMicroservice
+apis <--> projectMicroservice
+apis <--> resourceMicroservice
+authMicroservice <--> databaseServer
+financialMicroservice <--> databaseServer
+hrMicroservice <--> databaseServer
+organizationMicroservice <--> databaseServer
+projectMicroservice <--> databaseServer
+resourceMicroservice <--> databaseServer
+mobileAppServer <--> webServer1
+webAppServer <--> webServer1
 userStation <-> firewall
 @enduml

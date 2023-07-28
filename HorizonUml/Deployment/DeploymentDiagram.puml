@@ -1,6 +1,7 @@
 @startuml
 
 skinparam Shadowing True
+skinparam titleFontSize 72
 
 skinparam interface{
   BackgroundColor #Black
@@ -28,15 +29,85 @@ skinparam database{
 
 title Horizon Project: Deployment Diagram
 
-package "App Layer" as appLayer{
-    node "App Server" as appServer <<device>>{
-        port "443" as app443
-        portout "any" as appAny
-        component "Python 3" as python3<<sdk>>
-        component "Apache Web Server" as webServer <<web server>>
-        component "django" as django <<web framework>>
-        component "psycopg2" as psycopg2 <<data provider>>
+package "API Layer" as apiLayer{
+
+    node "Load Balnacer" as loadBalancer <<device>>{
+        port "443" as lb443
+        portout "any" as lbAny
+        component "Nginx" as webServer2 <<load balancer>>
     }
+
+    node "API Server" as apiServer <<device>>{
+        port "443" as api443
+        portout "any" as apiAny
+        component "Python 3.x" as python3 <<sdk>>
+        component "Nginx" as webServer <<web Server>>
+        component "flask" as flask <<web framework>>
+        component "flask-resx" as flaskrestx <<API framework>>
+    }
+}
+
+package "Microservice Layer" as microserviceLayer{
+    node "Virtual Machine 1" as vm1 <<vritual machine>>{
+        port "443" as docker443_1
+        portout "any" as dockerAny_1
+        component "docker" as docker_1 <<container>>
+        component "Python 3.x" as python3_1<<sdk>>
+        component "flask" as flask_1 <<web framework>>
+        component "SQLAlchamey" as sqlalchamey_1 <<ORM framework>>
+        component "psycopg2" as psycopg2_1 <<data provider>>
+    }
+
+    node "Virtual Machine 2" as vm2 <<vritual machine>>{
+        port "443" as docker443_2
+        portout "any" as dockerAny_2
+        component "docker" as docker_2 <<container>>
+        component "Python 3.x" as python3_2<<sdk>>
+        component "flask" as flask_2 <<web framework>>
+        component "SQLAlchamey" as sqlalchamey_2 <<ORM framework>>
+        component "psycopg2" as psycopg2_2 <<data provider>>
+    }
+
+    node "Virtual Machine 3" as vm3 <<vritual machine>>{
+        port "443" as docker443_3
+        portout "any" as dockerAny_3
+        component "docker" as docker_3 <<container>>
+        component "Python 3.x" as python3_3 <<sdk>>
+        component "flask" as flask_3 <<web framework>>
+        component "SQLAlchamey" as sqlalchamey_3 <<ORM framework>>
+        component "psycopg2" as psycopg2_3 <<data provider>>
+    }
+
+    node "Virtual Machine 4" as vm4 <<vritual machine>>{
+        port "443" as docker443_4
+        portout "any" as dockerAny_4
+        component "docker" as docker_4 <<container>>
+        component "Python 3.x" as python3_4 <<sdk>>
+        component "flask" as flask_4 <<web framework>>
+        component "SQLAlchamey" as sqlalchamey_4 <<ORM framework>>
+        component "psycopg2" as psycopg2_4 <<data provider>>
+    }
+
+    node "Virtual Machine 5" as vm5 <<vritual machine>>{
+        port "443" as docker443_5
+        portout "any" as dockerAny_5
+        component "docker" as docker_5 <<container>>
+        component "Python 3.x" as python3_5<<sdk>>
+        component "flask" as flask_5 <<web framework>>
+        component "SQLAlchamey" as sqlalchamey_5 <<ORM framework>>
+        component "psycopg2" as psycopg2_5 <<data provider>>
+    }
+
+    node "Virtual Machine 6" as vm6 <<vritual machine>>{
+        port "443" as docker443_6
+        portout "any" as dockerAny_6
+        component "docker" as docker_6 <<container>>
+        component "Python 3.x" as python3_6 <<sdk>>
+        component "flask" as flask_6 <<web framework>>
+        component "SQLAlchamey" as sqlalchamey_6 <<ORM framework>>
+        component "psycopg2" as psycopg2_6 <<data provider>>
+    }
+
 }
 
 package "Database Layer" as DatabaseLayer{
@@ -46,37 +117,116 @@ package "Database Layer" as DatabaseLayer{
     }
 }
 
-package "Security Layer" as SecurityLayer{
+package "Database Security Layer" as DatabaseSecurityLayer{
     node "Firewall Server" as firewallServer <<device>>{
-        port "443" as firewall443
         port "5432" as firewall5432
-        portout "any" as firewallAny1
-        portout "any" as firewallAny2
+        portout "any" as firewallAny
         component "Firewall App" as firewallApp <<service>>
     }
 }
 
 package "User Layer" as UserLayer{
     node "Client PC" as client <<device>>{
-        component "PostgreSQL" <<web server>>
+        portout "any" as clientAny
+        component "Chrome or Firefox" <<web browser>>
+    }
+}
+
+package "App Layer" as AppLayer{
+    node "App Server" as appServer <<device>>{
+        port "443" as appServer443
+        portout "any" as appServerAny
+        component "Nginx" as webServer1 <<web server>>
     }
 }
 
 artifact "Main Database" as mainDb
 artifact "Horizon App" as horizonApp
 artifact "Horizon APIs" as horizonApis
+artifact "Authentication Microservice" as authMicroservices
+artifact "HR Management Microservice" as hrMicroservices
+artifact "Organization Management Microservice" as orgMicroservices
+artifact "Project Management Microservice" as proMicroservices
+artifact "Resource Management Microservice" as resMicroservices
+artifact "Finantial Management Microservice" as finMicroservices
 
+horizonApp ..>  webServer1: <<deploy>>
 mainDb ..> rdbms : <<deploy>>
-horizonApp ..>  webServer: <<deploy>>
 horizonApis ..>  webServer: <<deploy>>
-horizonApp ..> mainDb : <<use>>
-horizonApis  ..> mainDb : <<use>>
-client --> firewall443 : HTTPS
-firewallAny1 --> app443 : HTTPS
-appAny --> firewall5432 : ODBC
-firewallAny2 --> pogresql5432 : ODBC
+horizonApp ..>  horizonApis: <<use>>
+
+horizonApis ..> authMicroservices : <<use>>
+horizonApis ..> orgMicroservices : <<use>>
+horizonApis ..> hrMicroservices : <<use>>
+horizonApis ..> proMicroservices : <<use>>
+horizonApis ..> finMicroservices : <<use>>
+horizonApis ..> resMicroservices : <<use>>
+authMicroservices ..> mainDb : <<use>>
+orgMicroservices ..> mainDb : <<use>>
+hrMicroservices ..> mainDb : <<use>>
+proMicroservices ..> mainDb : <<use>>
+finMicroservices ..> mainDb : <<use>>
+resMicroservices ..> mainDb : <<use>>
+
 webServer ..> python3 : <<use>>
-python3 ..> django : <<use>>
-python3 ..> psycopg2 : <<use>>
+python3 ..> flask : <<use>>
+python3 ..> flaskrestx  : <<use>>
+
+python3_1 ..> flask_1 : <<use>>
+python3_1 ..> psycopg2_1 : <<use>>
+python3_1 ..> sqlalchamey_1  : <<use>>
+docker_1 ..> python3_1 : <<use>>
+authMicroservices ..> docker_1 : <<deploy>>
+
+python3_2 ..> flask_2 : <<use>>
+python3_2 ..> psycopg2_2 : <<use>>
+python3_2 ..> sqlalchamey_2  : <<use>>
+docker_2 ..> python3_2 : <<use>>
+orgMicroservices ..> docker_2 : <<deploy>>
+
+python3_3 ..> flask_3 : <<use>>
+python3_3 ..> psycopg2_3 : <<use>>
+python3_3 ..> sqlalchamey_3  : <<use>>
+docker_3 ..> python3_3 : <<use>>
+hrMicroservices ..> docker_3 : <<deploy>>
+
+python3_4 ..> flask_4 : <<use>>
+python3_4 ..> psycopg2_4 : <<use>>
+python3_4 ..> sqlalchamey_4  : <<use>>
+docker_4 ..> python3_4 : <<use>>
+proMicroservices ..> docker_4 : <<deploy>>
+
+python3_5 ..> flask_5 : <<use>>
+python3_5 ..> psycopg2_5 : <<use>>
+python3_5 ..> sqlalchamey_5  : <<use>>
+docker_5 ..> python3_5 : <<use>>
+finMicroservices ..> docker_5 : <<deploy>>
+
+python3_6 ..> flask_6 : <<use>>
+python3_6 ..> psycopg2_6 : <<use>>
+python3_6 ..> sqlalchamey_6  : <<use>>
+docker_6 ..> python3_6 : <<use>>
+resMicroservices ..> docker_6 : <<deploy>>
+
+clientAny -- appServer443 : HTTPS
+appServerAny -- lb443 : HTTPS
+
+lbAny -- api443 : HTTPS
+apiAny -- docker443_1 : HTTPS
+apiAny -- docker443_2 : HTTPS
+apiAny -- docker443_3 : HTTPS
+apiAny -- docker443_4 : HTTPS
+apiAny -- docker443_5 : HTTPS
+apiAny -- docker443_6 : HTTPS
+
+dockerAny_1 -- firewall5432 : ODBC 
+dockerAny_2 -- firewall5432 : ODBC
+dockerAny_3 -- firewall5432 : ODBC
+dockerAny_4 -- firewall5432 : ODBC
+dockerAny_5 -- firewall5432 : ODBC
+dockerAny_6 -- firewall5432 : ODBC
+firewallAny -- pogresql5432 : ODBC
+
+
 
 @enduml
