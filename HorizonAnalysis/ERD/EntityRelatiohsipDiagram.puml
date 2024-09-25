@@ -6,65 +6,148 @@ skinparam Shadowing True
 
 title Horizon Project: Entity Relationship Diagram
 
-entity "SCH_AUTH.TBL_ROLE" as role {
-  *ID : integer(10) <<generated>>
+entity "Auth.Role" as role {
+  *ID : bigint(19) <<generated epochdate>>
   --
-  *NAME : varchar(50)
-  *CODE : varchar(20) <<unique>>
-  *ISACTIVE : char(1)
-  EXPIREDATE : date
-  *CREATEDAT : date <<default: now()>>
-  *CREATEDBY : integer(10)
-  MODIFIEDAT : date
-  MODIFIEDBY : integer(10)
+  *Title : nvarchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : nvarchar(4000)
+  *IsActive : char(1)
+  *IsDeleted : char(1)
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
 }
 
-entity "SCH_AUTH.TBL_ACTION" as action {
-  *ID : integer(10) <<generated>>
+entity "Auth.Group" as role {
+  *ID : bigint(19) <<generated epochdate>>
   --
-  *NAME : varchar(50)
-  *CODE : varchar(20) <<unique>>
-  *ISACTIVE : char(1)
-  *CREATEDAT : date <<default: now()>>
-  *CREATEDBY : integer(10)
-  MODIFIEDAT : date
-  MODIFIEDBY : integer(10)
+  *Title : nvarchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : nvarchar(4000)
+  *IsActive : char(1)
+  *IsDeleted : char(1)
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
 }
 
-entity "SCH_AUTH.TBL_ROLEACTION" as roleAction {
-  *ID : integer(10) <<generated>>
+entity "Auth.Permission" as action {
+  *ID : bigint(19) <<generated epochdate>>
   --
-  *ROLE : integer(10) <<FK>>
-  *ACTION : integer(10) <<FK>>
-  *CREATEDAT : date <<default: now()>>
-  *CREATEDBY : integer(10)
-  MODIFIEDAT : date
-  MODIFIEDBY : integer(10)
+  *Title : nvarchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : nvarchar(4000)
+  *IsActive : char(1)
+  *IsDeleted : char(1)
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
 }
 
-entity "SCH_AUTH.TBL_USER" as user {
-  *ID : integer(10) <<generated>>
+entity "Auth.Form" as action {
+  *ID : bigint(19) <<generated epochdate>>
   --
-  *USERNAME : varchar(20) <<unique>>
-  *PASSWORD : varchar(255)
-  STAFF : integer(10) <<FK>>
-  *ISACTIVE : char(1)
-  *CREATEDAT : date <<default: now()>>
-  *CREATEDBY : integer(10)
-  MODIFIEDAT : date
-  MODIFIEDBY : integer(10)
+  *Title : nvarchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : nvarchar(4000)
+  *IsActive : char(1)
+  *IsDeleted : char(1)
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
 }
 
-entity "SCH_AUTH.TBL_USERROLE" as userRole {
+entity "Auth.FormPermission" as action {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *FormId : integer(10) <<FK>>
+  *PermissionId : integer(10) <<FK>>
+  *IsActive : char(1)
+  *IsDeleted : char(1)
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Auth.RolePermission" as roleAction {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *RoleId : integer(10) <<FK>>
+  *FormPermissionId : integer(10) <<FK>>
+  *ActiveFrom : datetime
+  ActiveTo : datetime
+  *IsActive : char(1)
+  *IsDeleted : char(1)
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Auth.GroupPermission" as roleAction {
+  *ID : integer(10) <<generated>>
+  --
+  *GroupId : integer(10) <<FK>>
+  *FormPermissionId : integer(10) <<FK>>
+  *IsActive : char(1)
+  *IsDeleted : char(1)
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Auth.Profile" as profile {
+  *ID : integer(10) <<generated>>
+  --
+  FirstName : nvarchar(200)
+  LastName : nvarchar(200)
+  *Gender : char(1)
+  Avatar : text
+  *IsActive : char(1)
+  *IsDeleted : char(1)
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Auth.Users" as user {
+  *ID : integer(10) <<generated>>
+  --
+  ProfileId :
+  *ActiveFrom :
+  ActiveTo :
+  LastLogInDate : datetime
+  WrongLogInCount :
+  *Username : varchar(20) <<unique>>
+  *Pass : varchar(255)
+  PassSalt
+  *IsActive : char(1)
+  *IsDeleted : char(1)
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Auth.UserRole" as userRole {
   *ID : integer(10) <<generated>>
   --
   *USER : integer(10) <<FK>>
   *ROLE : integer(10) <<FK>>
-  *ISACTIVE : char(1)
-  *CREATEDAT : date <<default: now()>>
-  *CREATEDBY : integer(10)
-  MODIFIEDAT : date
-  MODIFIEDBY : integer(10)
+  *IsActive : char(1)
+  *IsDeleted : char(1)
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
 }
 
 entity "SCH_ORGANIZATION.TBL_ORGANIZATION" as organization {
