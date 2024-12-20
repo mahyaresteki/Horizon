@@ -292,7 +292,7 @@ entity "HumanResource.ProfileAddressBook" as profileAddressBook {
   ModifiedBy : bigint(19)
 }
 
-entity "HumanResource.ProfilePahoneBook" as profilePahoneBook {
+entity "HumanResource.ProfilePhoneBook" as profilePhoneBook {
   *ID : bigint(19) <<generated epochdate>>
   --
   *ProfileId : bigint(19) <<FK>>
