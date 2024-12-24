@@ -3,36 +3,9 @@ hide circle
 skinparam classBackgroundColor #Business
 skinparam linetype ortho
 skinparam Shadowing True
+skinparam TitleFontSize 36pt
 
-title Horizon Project: Entity Relationship Diagram
-
-entity "General.PhoneType" as phoneType {
-  *ID : bigint(19) <<generated epochdate>>
-  --
-  *Title : nvarchar(200)
-  *Code : varchar(20) <<unique>>
-  Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
-}
-
-entity "General.AddressType" as pddressType {
-  *ID : bigint(19) <<generated epochdate>>
-  --
-  *Title : nvarchar(200)
-  *Code : varchar(20) <<unique>>
-  Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
-}
+title Horizon Project \n Entity Relationship Diagram \n Version 24.12.25
 
 entity "General.EducationLevel" as educationLevel {
   *ID : bigint(19) <<generated epochdate>>
@@ -48,7 +21,7 @@ entity "General.EducationLevel" as educationLevel {
   ModifiedBy : bigint(19)
 }
 
-entity "Auth.Role" as role {
+entity "Authentication.Role" as role {
   *ID : bigint(19) <<generated epochdate>>
   --
   *Title : nvarchar(200)
@@ -62,7 +35,7 @@ entity "Auth.Role" as role {
   ModifiedBy : bigint(19)
 }
 
-entity "Auth.Group" as role {
+entity "Authentication.Groups" as groups {
   *ID : bigint(19) <<generated epochdate>>
   --
   *Title : nvarchar(200)
@@ -76,7 +49,7 @@ entity "Auth.Group" as role {
   ModifiedBy : bigint(19)
 }
 
-entity "Auth.Permission" as action {
+entity "Authentication.Permission" as permission {
   *ID : bigint(19) <<generated epochdate>>
   --
   *Title : nvarchar(200)
@@ -90,7 +63,7 @@ entity "Auth.Permission" as action {
   ModifiedBy : bigint(19)
 }
 
-entity "Auth.Form" as action {
+entity "Authentication.Form" as form {
   *ID : bigint(19) <<generated epochdate>>
   --
   *Title : nvarchar(200)
@@ -104,7 +77,7 @@ entity "Auth.Form" as action {
   ModifiedBy : bigint(19)
 }
 
-entity "Auth.FormPermission" as action {
+entity "Authentication.FormPermission" as formPermission {
   *ID : bigint(19) <<generated epochdate>>
   --
   *FormId : bigint(19) <<FK>>
@@ -117,7 +90,7 @@ entity "Auth.FormPermission" as action {
   ModifiedBy : bigint(19)
 }
 
-entity "Auth.RolePermission" as roleAction {
+entity "Authentication.RolePermission" as rolePermission {
   *ID : bigint(19) <<generated epochdate>>
   --
   *RoleId : integer(10) <<FK>>
@@ -132,7 +105,7 @@ entity "Auth.RolePermission" as roleAction {
   ModifiedBy : bigint(19)
 }
 
-entity "Auth.GroupPermission" as roleAction {
+entity "Authentication.GroupPermission" as groupPermission {
   *ID : bigint(19) <<generated epochdate>>
   --
   *GroupId : bigint(19) <<FK>>
@@ -145,13 +118,11 @@ entity "Auth.GroupPermission" as roleAction {
   ModifiedBy : bigint(19)
 }
 
-entity "Auth.Profile" as profile {
+entity "Authentication.UserPermission" as userPermission {
   *ID : bigint(19) <<generated epochdate>>
   --
-  FirstName : nvarchar(200)
-  LastName : nvarchar(200)
-  *Gender : char(1) <<true=1, false=0>>
-  Avatar : text
+  *UserId : bigint(19) <<FK>>
+  *PermissionId : bigint(19) <<FK>>
   *IsActive : char(1) <<true=1, false=0>>
   *IsDeleted : char(1) <<true=1, false=0>>
   *CreatedAt : datetime <<default: now()>>
@@ -160,9 +131,28 @@ entity "Auth.Profile" as profile {
   ModifiedBy : bigint(19)
 }
 
+entity "Authentication.Profile" as profile {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *FirstName : nvarchar(200)
+  *LastName : nvarchar(200)
+  *Gender : char(1) <<true=1, false=0>>
+  Avatar : text
+  Birthday : date
+  PhoneNumber : nvarchar(20)
+  MobileNumber : nvarchar(20)
+  EmailAddress : nvarchar(200)
+  Address : nvarchar(4000)
+  PostalCode : varchar(20)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
 
-
-entity "Auth.Users" as user {
+entity "Authentication.Users" as user {
   *ID : bigint(19) <<generated epochdate>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -181,11 +171,24 @@ entity "Auth.Users" as user {
   ModifiedBy : bigint(19)
 }
 
-entity "Auth.UserRole" as userRole {
+entity "Authentication.UserRole" as userRole {
   *ID : bigint(19) <<generated epochdate>>
   --
   *UserId : bigint(19) <<FK>>
   *RoleId : bigint(19) <<FK>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Authentication.UserGroup" as userGroup {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *UserId : bigint(19) <<FK>>
+  *GroupId : bigint(19) <<FK>>
   *IsActive : char(1) <<true=1, false=0>>
   *IsDeleted : char(1) <<true=1, false=0>>
   *CreatedAt : datetime <<default: now()>>
@@ -230,13 +233,12 @@ entity "HumanResource.Building" as building {
 }
 
 entity "HumanResource.Department" as department {
-  *ID : integer(10) <<generated>>
+  *ID : integer(10) <<generated epochdate>>
   --
-  *NAME : varchar(50)
-  *CODE : varchar(20) <<unique>>
-  *ISACTIVE : char(1)
-  *ORGANIZATION : integer(10) 
-  PARENTID : integer(20) <<FK>>
+  *Title : varchar(50)
+  *Code : varchar(20) <<unique>>
+  *CompanyId : integer(10) 
+  ParentId : integer(20) <<FK>>
   *IsActive : char(1) <<true=1, false=0>>
   *IsDeleted : char(1) <<true=1, false=0>>
   *CreatedAt : datetime <<default: now()>>
@@ -246,12 +248,12 @@ entity "HumanResource.Department" as department {
 }
 
 entity "HumanResource.Position" as position {
-  *ID : integer(10) <<generated>>
+  *ID : integer(10) <<generated epochdate>>
   --
-  *NAME : varchar(50)
-  *CODE : varchar(20) <<unique>>
-  *ISACTIVE : char(1)
-  *DEPARTMENT : integer(10) 
+  *Title : varchar(50)
+  *Code : varchar(20) <<unique>>
+  *DepartmentId : bigint(19) <<FK>>
+  ParentId : bigint(19) <<FK>>
   *IsActive : char(1) <<true=1, false=0>>
   *IsDeleted : char(1) <<true=1, false=0>>
   *CreatedAt : datetime <<default: now()>>
@@ -261,14 +263,13 @@ entity "HumanResource.Position" as position {
 }
 
 entity "HumanResource.Staff" as staff {
-  *ID : integer(10) <<generated>>
+  *ID : integer(10) <<generated epochdate>>
   --
-  *FIRSTNAME : varchar(50)
-  *LASTNAME : varchar(50)
-  *CODE : varchar(20) <<unique>>
-  *ISACTIVE : char(1)
-  *POSITION : integer(10) <<FK>>
-  *DEPARTMENT : integer(10) 
+  *ProfileId : bigint(19) <<FK>>
+  *ComapnyId : bigint(19) <<FK>>
+  *StaffNumber : nvarchar(20) <<unique>>
+  StartDate : datetime
+  EndDate : datetime
   *IsActive : char(1) <<true=1, false=0>>
   *IsDeleted : char(1) <<true=1, false=0>>
   *CreatedAt : datetime <<default: now()>>
@@ -277,30 +278,15 @@ entity "HumanResource.Staff" as staff {
   ModifiedBy : bigint(19)
 }
 
-entity "HumanResource.ProfileAddressBook" as profileAddressBook {
-  *ID : bigint(19) <<generated epochdate>>
+entity "HumanResource.StaffPsition" as staffPosition {
+  *ID : integer(10) <<generated epochdate>>
   --
-  *ProfileId : bigint(19) <<FK>>
-  *AddressTypeId : bigint(19) <<FK>>
-  *Address : nvarchar(4000)
-  PostalCode : varchar(20)
+  *StaffId : bigint(19) <<FK>>
+  *PositionId : bigint(19) <<FK>>
+  StartDate : datetime
+  EndDate : datetime
   *IsActive : char(1) <<true=1, false=0>>
   *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
-}
-
-entity "HumanResource.ProfilePhoneBook" as profilePhoneBook {
-  *ID : bigint(19) <<generated epochdate>>
-  --
-  *ProfileId : bigint(19) <<FK>>
-  *AddressTypeId : bigint(19) <<FK>>
-  *Address : nvarchar(4000)
-  PostalCode : varchar(20)
-  *IsActive : char(1)
-  *IsDeleted : char(1)
   *CreatedAt : datetime <<default: now()>>
   *CreatedBy : bigint(19)
   ModifiedAt : timestamp
@@ -311,11 +297,13 @@ entity "HumanResource.ProfileEducation" as profileEducation {
   *ID : bigint(19) <<generated epochdate>>
   --
   *ProfileId : bigint(19) <<FK>>
-  *AddressTypeId : bigint(19) <<FK>>
-  *Address : nvarchar(4000)
-  PostalCode : varchar(20)
-  *IsActive : char(1)
-  *IsDeleted : char(1)
+  *EducatioLevelId : bigint(19) <<FK>>
+  *Title : nvarchar(200)
+  CollegeName : nvarchar(200)
+  StartDate : date
+  EndDate : date
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
   *CreatedAt : datetime <<default: now()>>
   *CreatedBy : bigint(19)
   ModifiedAt : timestamp
@@ -326,11 +314,13 @@ entity "HumanResource.ProfileJobExperience" as profileJobExperience {
   *ID : bigint(19) <<generated epochdate>>
   --
   *ProfileId : bigint(19) <<FK>>
-  *AddressTypeId : bigint(19) <<FK>>
-  *Address : nvarchar(4000)
-  PostalCode : varchar(20)
-  *IsActive : char(1)
-  *IsDeleted : char(1)
+  *JobTitle : nvarchar(200)
+  *CompanyName : nvarchar(200)
+  StartDate : date
+  EndDate : date
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
   *CreatedAt : datetime <<default: now()>>
   *CreatedBy : bigint(19)
   ModifiedAt : timestamp
@@ -341,11 +331,13 @@ entity "HumanResource.ProfileCertificate" as profileCertificate {
   *ID : bigint(19) <<generated epochdate>>
   --
   *ProfileId : bigint(19) <<FK>>
-  *AddressTypeId : bigint(19) <<FK>>
-  *Address : nvarchar(4000)
-  PostalCode : varchar(20)
-  *IsActive : char(1)
-  *IsDeleted : char(1)
+  *Title : nvarchar(200)
+  InstituteName : nvarchar(200)
+  StartDate : date
+  EndDate : date
+  HasCertificate : char(1) <<true=1, false=0>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
   *CreatedAt : datetime <<default: now()>>
   *CreatedBy : bigint(19)
   ModifiedAt : timestamp
@@ -353,19 +345,31 @@ entity "HumanResource.ProfileCertificate" as profileCertificate {
 }
 
 
-
-role ||..o{ roleAction
-action ||..o{ roleAction
+form ||..o{ formPermission
+permission ||..o{ formPermission
+role ||..o{ rolePermission
+permission ||..o{ rolePermission
+groups ||..o{ groupPermission
+permission ||..o{ groupPermission
+user ||..o{ userPermission
+permission ||..o{ userPermission
 user ||..o{ userRole
 role ||..o{ userRole
-organization |o..o{ organization
-organization ||..o{ building
-organization ||..o{ department
-building ||..o{ workStation
-staff ||..o{ workStation
-department |o..o{ department
+user ||..o{ userGroup
+groups ||..o{ userGroup
+company |o..o{ company
+company ||..o{ building
+company ||..o{ department
+position |o..o{ position
 department ||..o{ position
-position ||..o{ staff
-staff |o..o{ user
+company ||..o{ staff
+profile ||..o{ staff
+position ||..o{ staffPosition
+staff ||..o{ staffPosition
+profile ||..o{ user
+profile ||..o{ profileEducation
+educationLevel ||..o{ profileEducation
+profile ||..o{ profileCertificate
+profile ||..o{ profileJobExperience
 
 @enduml
