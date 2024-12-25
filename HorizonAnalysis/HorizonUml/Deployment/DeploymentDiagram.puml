@@ -1,7 +1,7 @@
 @startuml
 
 skinparam Shadowing True
-skinparam titleFontSize 72
+skinparam titleFontSize 72pt
 
 skinparam interface{
   BackgroundColor #Black
@@ -140,33 +140,9 @@ package "App Layer" as AppLayer{
     }
 }
 
-artifact "Main Database" as mainDb
-artifact "Horizon App" as horizonApp
-artifact "Horizon APIs" as horizonApis
-artifact "Authentication Microservice" as authMicroservices
-artifact "HR Management Microservice" as hrMicroservices
-artifact "Organization Management Microservice" as orgMicroservices
-artifact "Project Management Microservice" as proMicroservices
-artifact "Resource Management Microservice" as resMicroservices
-artifact "Finantial Management Microservice" as finMicroservices
 
-horizonApp ..>  webServer1: <<deploy>>
-mainDb ..> rdbms : <<deploy>>
-horizonApis ..>  webServer: <<deploy>>
-horizonApp ..>  horizonApis: <<use>>
 
-horizonApis ..> authMicroservices : <<use>>
-horizonApis ..> orgMicroservices : <<use>>
-horizonApis ..> hrMicroservices : <<use>>
-horizonApis ..> proMicroservices : <<use>>
-horizonApis ..> finMicroservices : <<use>>
-horizonApis ..> resMicroservices : <<use>>
-authMicroservices ..> mainDb : <<use>>
-orgMicroservices ..> mainDb : <<use>>
-hrMicroservices ..> mainDb : <<use>>
-proMicroservices ..> mainDb : <<use>>
-finMicroservices ..> mainDb : <<use>>
-resMicroservices ..> mainDb : <<use>>
+
 
 webServer ..> python3 : <<use>>
 python3 ..> flask : <<use>>
@@ -176,37 +152,31 @@ python3_1 ..> flask_1 : <<use>>
 python3_1 ..> psycopg2_1 : <<use>>
 python3_1 ..> sqlalchamey_1  : <<use>>
 docker_1 ..> python3_1 : <<use>>
-authMicroservices ..> docker_1 : <<deploy>>
 
 python3_2 ..> flask_2 : <<use>>
 python3_2 ..> psycopg2_2 : <<use>>
 python3_2 ..> sqlalchamey_2  : <<use>>
 docker_2 ..> python3_2 : <<use>>
-orgMicroservices ..> docker_2 : <<deploy>>
 
 python3_3 ..> flask_3 : <<use>>
 python3_3 ..> psycopg2_3 : <<use>>
 python3_3 ..> sqlalchamey_3  : <<use>>
 docker_3 ..> python3_3 : <<use>>
-hrMicroservices ..> docker_3 : <<deploy>>
 
 python3_4 ..> flask_4 : <<use>>
 python3_4 ..> psycopg2_4 : <<use>>
 python3_4 ..> sqlalchamey_4  : <<use>>
 docker_4 ..> python3_4 : <<use>>
-proMicroservices ..> docker_4 : <<deploy>>
 
 python3_5 ..> flask_5 : <<use>>
 python3_5 ..> psycopg2_5 : <<use>>
 python3_5 ..> sqlalchamey_5  : <<use>>
 docker_5 ..> python3_5 : <<use>>
-finMicroservices ..> docker_5 : <<deploy>>
 
 python3_6 ..> flask_6 : <<use>>
 python3_6 ..> psycopg2_6 : <<use>>
 python3_6 ..> sqlalchamey_6  : <<use>>
 docker_6 ..> python3_6 : <<use>>
-resMicroservices ..> docker_6 : <<deploy>>
 
 clientAny -- appServer443 : HTTPS
 appServerAny -- lb443 : HTTPS

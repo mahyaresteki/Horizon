@@ -1,5 +1,6 @@
 @startuml
 skinparam Shadowing True
+skinparam TitleFontSize 24pt
 
 left to right direction
 

@@ -1,0 +1,56 @@
+@startuml
+
+skinparam Shadowing True
+skinparam titleFontSize 24pt
+
+skinparam interface{
+  BackgroundColor #Black
+}
+
+skinparam component{
+  BackgroundColor #Orange
+}
+
+skinparam file{
+  BackgroundColor #lightsalmon
+}
+
+skinparam package{
+  BackgroundColor #lightblue
+}
+
+skinparam node{
+  BackgroundColor #Yellow
+}
+
+skinparam database{
+  BackgroundColor #Lightgreen
+}
+
+title Horizon Project: Component Diagram
+
+artifact "Main Database" as mainDb
+artifact "Horizon App" as horizonApp
+artifact "Horizon APIs" as horizonApis
+artifact "Authentication Services" as authServices
+artifact "HR Management Services" as hrServices
+artifact "Organization Management Services" as orgServices
+artifact "Project Management Microservice" as proServices
+artifact "Resource Management Microservice" as resServices
+artifact "Finantial Management Microservice" as finServices
+
+
+horizonApp ..>  horizonApis: <<use>>
+horizonApis ..> authServices : <<use>>
+horizonApis ..> orgServices : <<use>>
+horizonApis ..> hrServices : <<use>>
+horizonApis ..> proServices : <<use>>
+horizonApis ..> finServices : <<use>>
+horizonApis ..> resServices : <<use>>
+authServices ..> mainDb : <<use>>
+orgServices ..> mainDb : <<use>>
+hrServices ..> mainDb : <<use>>
+proServices ..> mainDb : <<use>>
+finServices ..> mainDb : <<use>>
+resServices ..> mainDb : <<use>>
+@enduml

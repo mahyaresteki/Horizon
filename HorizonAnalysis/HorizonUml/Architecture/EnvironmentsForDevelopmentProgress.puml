@@ -1,6 +1,7 @@
 @startuml
 left to right direction
 skinparam Shadowing True
+skinparam TitleFontSize 24pt
 
 !include <tupadr3/common>
 !include <tupadr3/font-awesome/desktop>
@@ -12,14 +13,15 @@ FA_DESKTOP(contributer1, "Contributer 1") #BUSINESS
 FA_DESKTOP(contributer2, "Contributer 2") #BUSINESS
 FA_DESKTOP(contributer3, "Contributer 3") #BUSINESS
 FA_DESKTOP(contributerN, "Contributer N") #BUSINESS
-
+FA5_GITHUB(githubDev, "Publish on GitHub Develop Branch") #BUSINESS
 FA_DESKTOP(teamLead, "Final Test by Team Lead") #BUSINESS
-FA5_GITHUB(github, "Publish on GitHub") #BUSINESS
+FA5_GITHUB(github, "Publish on GitHub Master Branch") #BUSINESS
 
-contributer1 --> teamLead
-contributer2 --> teamLead
-contributer3 --> teamLead
-contributerN --> teamLead
-teamLead --> github
+contributer1 --> githubDev : push
+contributer2 --> githubDev : push
+contributer3 --> githubDev : push
+contributerN --> githubDev : push
+githubDev --> teamLead : pull
+teamLead --> github : push
 
 @enduml
