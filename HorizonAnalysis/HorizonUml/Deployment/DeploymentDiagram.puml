@@ -1,7 +1,7 @@
 @startuml
 
 skinparam Shadowing True
-skinparam titleFontSize 72pt
+skinparam titleFontSize 36pt
 
 skinparam interface{
   BackgroundColor #Black
@@ -27,17 +27,11 @@ skinparam database{
   BackgroundColor #Lightgreen
 }
 
-title Horizon Project: Deployment Diagram
+title Horizon Project: Deployment Diagram \n Version 24.12.27
 
 package "API Layer" as apiLayer{
 
-    node "Load Balnacer" as loadBalancer <<device>>{
-        port "443" as lb443
-        portout "any" as lbAny
-        component "Nginx" as webServer2 <<load balancer>>
-    }
-
-    node "API Server" as apiServer <<device>>{
+    node "Load Balnacer and API Manager" as apiServer <<device>>{
         port "443" as api443
         portout "any" as apiAny
         component "Python 3.x" as python3 <<sdk>>
@@ -48,7 +42,7 @@ package "API Layer" as apiLayer{
 }
 
 package "Microservice Layer" as microserviceLayer{
-    node "Virtual Machine 1" as vm1 <<vritual machine>>{
+    node "Virtual Machine 1: Mirror 1" as vm1 <<vritual machine>>{
         port "443" as docker443_1
         portout "any" as dockerAny_1
         component "docker" as docker_1 <<container>>
@@ -58,7 +52,7 @@ package "Microservice Layer" as microserviceLayer{
         component "psycopg2" as psycopg2_1 <<data provider>>
     }
 
-    node "Virtual Machine 2" as vm2 <<vritual machine>>{
+    node "Virtual Machine 2: Mirror 2" as vm2 <<vritual machine>>{
         port "443" as docker443_2
         portout "any" as dockerAny_2
         component "docker" as docker_2 <<container>>
@@ -67,53 +61,12 @@ package "Microservice Layer" as microserviceLayer{
         component "SQLAlchamey" as sqlalchamey_2 <<ORM framework>>
         component "psycopg2" as psycopg2_2 <<data provider>>
     }
-
-    node "Virtual Machine 3" as vm3 <<vritual machine>>{
-        port "443" as docker443_3
-        portout "any" as dockerAny_3
-        component "docker" as docker_3 <<container>>
-        component "Python 3.x" as python3_3 <<sdk>>
-        component "flask" as flask_3 <<web framework>>
-        component "SQLAlchamey" as sqlalchamey_3 <<ORM framework>>
-        component "psycopg2" as psycopg2_3 <<data provider>>
-    }
-
-    node "Virtual Machine 4" as vm4 <<vritual machine>>{
-        port "443" as docker443_4
-        portout "any" as dockerAny_4
-        component "docker" as docker_4 <<container>>
-        component "Python 3.x" as python3_4 <<sdk>>
-        component "flask" as flask_4 <<web framework>>
-        component "SQLAlchamey" as sqlalchamey_4 <<ORM framework>>
-        component "psycopg2" as psycopg2_4 <<data provider>>
-    }
-
-    node "Virtual Machine 5" as vm5 <<vritual machine>>{
-        port "443" as docker443_5
-        portout "any" as dockerAny_5
-        component "docker" as docker_5 <<container>>
-        component "Python 3.x" as python3_5<<sdk>>
-        component "flask" as flask_5 <<web framework>>
-        component "SQLAlchamey" as sqlalchamey_5 <<ORM framework>>
-        component "psycopg2" as psycopg2_5 <<data provider>>
-    }
-
-    node "Virtual Machine 6" as vm6 <<vritual machine>>{
-        port "443" as docker443_6
-        portout "any" as dockerAny_6
-        component "docker" as docker_6 <<container>>
-        component "Python 3.x" as python3_6 <<sdk>>
-        component "flask" as flask_6 <<web framework>>
-        component "SQLAlchamey" as sqlalchamey_6 <<ORM framework>>
-        component "psycopg2" as psycopg2_6 <<data provider>>
-    }
-
 }
 
 package "Database Layer" as DatabaseLayer{
     node "Database Server" as databaseServer <<device>>{
         port "5432" as pogresql5432
-        component "PostgreSQL" as rdbms <<web server>>
+        component "PostgreSQL" as rdbms <<rdbms>>
     }
 }
 
@@ -158,43 +111,15 @@ python3_2 ..> psycopg2_2 : <<use>>
 python3_2 ..> sqlalchamey_2  : <<use>>
 docker_2 ..> python3_2 : <<use>>
 
-python3_3 ..> flask_3 : <<use>>
-python3_3 ..> psycopg2_3 : <<use>>
-python3_3 ..> sqlalchamey_3  : <<use>>
-docker_3 ..> python3_3 : <<use>>
-
-python3_4 ..> flask_4 : <<use>>
-python3_4 ..> psycopg2_4 : <<use>>
-python3_4 ..> sqlalchamey_4  : <<use>>
-docker_4 ..> python3_4 : <<use>>
-
-python3_5 ..> flask_5 : <<use>>
-python3_5 ..> psycopg2_5 : <<use>>
-python3_5 ..> sqlalchamey_5  : <<use>>
-docker_5 ..> python3_5 : <<use>>
-
-python3_6 ..> flask_6 : <<use>>
-python3_6 ..> psycopg2_6 : <<use>>
-python3_6 ..> sqlalchamey_6  : <<use>>
-docker_6 ..> python3_6 : <<use>>
-
 clientAny -- appServer443 : HTTPS
-appServerAny -- lb443 : HTTPS
+appServerAny -- api443 : HTTPS
 
-lbAny -- api443 : HTTPS
 apiAny -- docker443_1 : HTTPS
 apiAny -- docker443_2 : HTTPS
-apiAny -- docker443_3 : HTTPS
-apiAny -- docker443_4 : HTTPS
-apiAny -- docker443_5 : HTTPS
-apiAny -- docker443_6 : HTTPS
 
 dockerAny_1 -- firewall5432 : ODBC 
 dockerAny_2 -- firewall5432 : ODBC
-dockerAny_3 -- firewall5432 : ODBC
-dockerAny_4 -- firewall5432 : ODBC
-dockerAny_5 -- firewall5432 : ODBC
-dockerAny_6 -- firewall5432 : ODBC
+
 firewallAny -- pogresql5432 : ODBC
 
 

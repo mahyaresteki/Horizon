@@ -27,30 +27,70 @@ skinparam database{
   BackgroundColor #Lightgreen
 }
 
-title Horizon Project: Component Diagram
-
-artifact "Main Database" as mainDb
-artifact "Horizon App" as horizonApp
-artifact "Horizon APIs" as horizonApis
-artifact "Authentication Services" as authServices
-artifact "HR Management Services" as hrServices
-artifact "Organization Management Services" as orgServices
-artifact "Project Management Microservice" as proServices
-artifact "Resource Management Microservice" as resServices
-artifact "Finantial Management Microservice" as finServices
+title Horizon Project: Component Diagram \n Version 24.12.27
 
 
-horizonApp ..>  horizonApis: <<use>>
-horizonApis ..> authServices : <<use>>
-horizonApis ..> orgServices : <<use>>
-horizonApis ..> hrServices : <<use>>
-horizonApis ..> proServices : <<use>>
-horizonApis ..> finServices : <<use>>
-horizonApis ..> resServices : <<use>>
-authServices ..> mainDb : <<use>>
-orgServices ..> mainDb : <<use>>
-hrServices ..> mainDb : <<use>>
-proServices ..> mainDb : <<use>>
-finServices ..> mainDb : <<use>>
-resServices ..> mainDb : <<use>>
+
+
+component "Chrome or Firefox" as browser <<web browser>>
+component "Nginx" as webServer1 <<web server>>{
+  portin "443" as ws1443
+  artifact "Horizon App" as horizonApp
+}
+component "Nginx" as webServer <<web Server>>{
+  portin "443" as ws443
+  artifact "Horizon APIs" as horizonApis
+  artifact "Administration Services" as adminServices
+  artifact "HR Management Services" as hrServices
+  artifact "Project Management Services" as proServices
+  artifact "Quality Management Services" as qcServices
+  artifact "Productivity Assessment Services" as paServices
+}
+
+database "PostgreSQL" as rdbms <<rdbms>>{
+  portin "5432" as pogresql5432
+  artifact "Main Database" as mainDb
+}
+
+component "Python 3.x" as python3<<sdk>>
+component "flask" as flask <<web framework>>
+component "SQLAlchamey" as sqlalchamey <<ORM framework>>
+component "psycopg2" as psycopg2 <<data provider>>
+() "User Access" as userAccess
+() "HTTPS" as https1
+() "HTTPS" as https2
+() "TCP" as tcp
+
+userAccess - browser
+https1 -- ws1443
+ws1443 --> horizonApp
+browser --> https1
+https2 -- ws443
+horizonApp -->  https2
+horizonApis .> flask : <<user>>
+ws443 --> horizonApis 
+horizonApis --> adminServices
+horizonApis --> hrServices
+horizonApis --> proServices
+horizonApis --> qcServices
+horizonApis --> paServices 
+
+
+adminServices --> sqlalchamey
+hrServices --> sqlalchamey
+proServices --> sqlalchamey
+qcServices --> sqlalchamey
+paServices --> sqlalchamey
+
+flask .> python3 : <<use>>
+sqlalchamey .> python3 : <<use>>
+psycopg2 .> python3 : <<use>>
+
+
+sqlalchamey --> psycopg2
+
+psycopg2 --> tcp
+
+tcp -- pogresql5432
+pogresql5432 --> mainDb
 @enduml

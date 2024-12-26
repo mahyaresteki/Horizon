@@ -19,16 +19,15 @@ left to right direction
 !include <tupadr3/devicons/nginx>
 !include <office/Concepts/firewall_orange>
 
-title Architecture of Horizon System
+title Architecture of Horizon System \n Version 24.12.27
 
 package "Organization Network Zone" as HorizonSystem{
     package "Microservice Layer" as microserviceLayer{
-        FA_COGS(authMicroservice, "Authentication Microservice") #BUSINESS
-        FA_COGS(financialMicroservice, "Finantial Management Microservice") #BUSINESS
-        FA_COGS(hrMicroservice, "HR Management Microservice") #BUSINESS
-        FA_COGS(organizationMicroservice, "Organization Management Microservice") #BUSINESS
-        FA_COGS(projectMicroservice, "Project Management Microservice") #BUSINESS
-        FA_COGS(resourceMicroservice, "Resource Management Microservice") #BUSINESS
+        FA_COGS(adminService, "Administration Services") #BUSINESS
+        FA_COGS(paService, "Productivity Assessment Services") #BUSINESS
+        FA_COGS(hrService, "Human Resource Management Microservice") #BUSINESS
+        FA_COGS(qcService, "Quality Management Services") #BUSINESS
+        FA_COGS(projectService, "Project Management Microservice") #BUSINESS
     }
     package "API Layer" as apiLayer{
         DEV_NGINX(webServer1, "Load Balancer") #BUSINESS
@@ -60,18 +59,16 @@ firewall <--> mobileAppServer
 firewall <--> webAppServer
 databaseServer <--> database
 webServer1 <--> apis
-apis <--> authMicroservice
-apis <--> financialMicroservice
-apis <--> hrMicroservice
-apis <--> organizationMicroservice
-apis <--> projectMicroservice
-apis <--> resourceMicroservice
-authMicroservice <--> databaseServer
-financialMicroservice <--> databaseServer
-hrMicroservice <--> databaseServer
-organizationMicroservice <--> databaseServer
-projectMicroservice <--> databaseServer
-resourceMicroservice <--> databaseServer
+apis <--> adminService
+apis <--> paService
+apis <--> hrService
+apis <--> qcService
+apis <--> projectService
+adminService <--> databaseServer
+paService <--> databaseServer
+hrService <--> databaseServer
+qcService <--> databaseServer
+projectService <--> databaseServer
 mobileAppServer <--> webServer1
 webAppServer <--> webServer1
 userStation <-> firewall
