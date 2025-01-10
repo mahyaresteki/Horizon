@@ -30,7 +30,11 @@ The following articles are available to the public as theories of the project.
 ### Technical Documentation
 Horizon system is modeled in [UML 2.0](https://en.wikipedia.org/wiki/Unified_Modeling_Language) format by [PlantUML](https://plantuml.com/) as follows.
 
-[Project Modeling](https://github.com/mahyaresteki/Horizon/tree/master/HorizonUml/out)
+[Project Modeling](https://github.com/mahyaresteki/Horizon/tree/master/HorizonModeling/HorizonUml/out)
+
+Moreover, it is prototyped by [Pencil](https://pencil.evolus.vn/) application as follows.
+
+[UI Sketch](https://github.com/mahyaresteki/Horizon/tree/master/HorizonModeling/HorizonUiSketch) 
 
 ## Research Team
 Horizon will be developed by ZURVAN research team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
