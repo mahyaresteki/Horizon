@@ -2,43 +2,61 @@
 
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
+skinparam TitleFontSize 24pt
 
-title Horizon Research Project: Hierarchy of Actors
+title Horizon Research Project (HRP) \n Hierarchy of Actors \n Version 25.1.3
 
 :User: as User
 :Staff: as Staff
 :Manager: as Manager
 :Technical Staff: as TechnicalStaff
+:Logistics Staff: as LogisticsStaff
+:Marketing Staff: as MarketingStaff
+:Product Management Staff: as ProductManagementStaff
+:Administrative Staff: as AdministrativeStaff
 :Manager: as Manager
 :Senior Manager: as SeniorManager
 :Project Manager: as PMO
 :Financial Manager: as Fmanager
-:Administrator: as Admin
+:System Administrator: as Admin
 :Human Resource: as HR
 :Accountant: as Accountant
+:POM Staff: as PMOStaff
+:Quality Control Staff: as QCStaff
+:Human Resource Staff: as HRStaff
 :DevOps Manager: as DevOpsManager
 :Developer: as Developer
 :Tester: as Tester
+:Network Technition: as NetworkStaff
 :Analyzer: as Analyzer
 :Logestics Manager: as LogesticsManager
 :Network Manager: as NetworkManager
 :Product Manager: as ProductManager
 :Support: as Support
 :Security: as Security
-:Database Admin: as DbAdmin
+:Database Administrator: as DbAdmin
 
 User <|--- Admin
 User <|-- Staff
 
 Staff <|-- TechnicalStaff
-Staff <|-- Accountant
+Staff <|-- AdministrativeStaff
 Staff <|---- Manager
 
+AdministrativeStaff <|-- Accountant
+AdministrativeStaff <|-- HRStaff
+AdministrativeStaff <|-- PMOStaff
+AdministrativeStaff <|-- LogisticsStaff
+AdministrativeStaff <|-- MarketingStaff
+AdministrativeStaff <|-- ProductManagementStaff
+
 TechnicalStaff <|-- Developer
-TechnicalStaff <|-- Tester
+TechnicalStaff <|-- QCStaff
+QCStaff <|-- Tester
 TechnicalStaff <|-- Analyzer
 TechnicalStaff <|-- Support
 TechnicalStaff <|-- Security
+TechnicalStaff <|-- NetworkStaff
 TechnicalStaff <|-- DbAdmin
 
 Manager <|-- SeniorManager

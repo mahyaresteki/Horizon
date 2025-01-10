@@ -27,7 +27,7 @@ skinparam database{
   BackgroundColor #Lightgreen
 }
 
-title Horizon Project: Component Diagram \n Version 24.12.27
+title Horizon Research Project (HRP) \n Component Diagram \n Version 25.2.10
 
 
 
@@ -43,6 +43,7 @@ component "Nginx" as webServer <<web Server>>{
   artifact "Administration Services" as adminServices
   artifact "HR Management Services" as hrServices
   artifact "Project Management Services" as proServices
+  artifact "Finance Management Services" as hrServices
   artifact "Quality Management Services" as qcServices
   artifact "Productivity Assessment Services" as paServices
 }

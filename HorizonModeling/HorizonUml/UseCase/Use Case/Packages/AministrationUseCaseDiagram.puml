@@ -5,7 +5,7 @@ skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 
-title Horizon Research Project: Authentication and Authorization Management Package
+title Horizon Research Project \n Administration Use Cases \n Version 25.1.10
 
 :User: as User
 :Administrator: as Admin
@@ -16,6 +16,14 @@ package "Auth"{
     usecase "Role Registration" as roleRegistration
     usecase "Role Update" as roleUpdate
     usecase "Role Activation" as roleActivation
+    usecase "Role Search" as roleSearch
+    usecase "Role List" as roleList
+    usecase "Group Management" as groupManagement
+    usecase "Group Registration" as groupRegistration
+    usecase "Group Update" as groupUpdate
+    usecase "Group Activation" as groupActivation
+    usecase "Group Search" as groupSearch
+    usecase "Group List" as groupList
     usecase "User Management" as userManagement
     usecase "User Registration" as userRegistration
     usecase "User Activation" as userActivation
@@ -37,12 +45,14 @@ package "Auth"{
 User <|--Admin
 Admin -- userManagement
 Admin -- roleManagement
+Admin -- groupActivationManagement
 User -- authentication
 User -- authorization
 User -- profileManagement
 
 userManagement <. profileManagement 
 roleManagement <. userManagement 
+groupManagement <. userManagement 
 
 
 userManagement ..> userRegistration : <<include>>
@@ -58,6 +68,15 @@ profileManagement ..> viewProfile :<<include>>
 roleManagement ..> roleRegistration : <<include>>
 roleManagement ..> roleUpdate : <<include>>
 roleManagement ..> roleActivation : <<include>>
+roleManagement ..> roleList : <<include>>
+roleManagement ..> roleSearch : <<include>>
+
+groupManagement ..> groupRegistration : <<include>>
+groupManagement ..> groupUpdate : <<include>>
+groupManagement ..> groupActivation : <<include>>
+groupManagement ..> groupList : <<include>>
+groupManagement ..> groupSearch : <<include>>
+
 
 authentication ..> userRegistration
 authentication ..> login : <<include>>

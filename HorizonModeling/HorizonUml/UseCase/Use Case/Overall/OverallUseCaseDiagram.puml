@@ -5,7 +5,7 @@ skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 
-title Horizon Research Project: Overall Use Case Diagram
+title Horizon Research Project (HRP) \n Overall Use Case Diagram \n Version 25.1.10
 
 :User: as User
 :Senior Manager: as SeniorManager
@@ -21,8 +21,9 @@ title Horizon Research Project: Overall Use Case Diagram
 :Product Manager: as ProductManager
 
 
-package "Auth"{
+package "Administration"{
     usecase "Role Management" as roleManagement
+    usecase "Group Management" as groupManagement
     usecase "User Management" as userManagement
     usecase "Profile Management" as profileManagement
     usecase "Authenitication" as authentication
@@ -42,7 +43,7 @@ package "HR Management"{
     usecase "Attendance Management" as attendanceManagement
 }
 
-package "Resources"{
+package "Asset"{
     usecase "Asset Management" as assetManagement
 }
 
@@ -77,6 +78,7 @@ User --> authorization
 User --> profileManagement
 Staff --> attendanceManagement
 roleManagement <-- Admin
+groupManagement <-- Admin
 userManagement <-- Admin
 staffManagement <-- HR
 staffManagement <-- Staff

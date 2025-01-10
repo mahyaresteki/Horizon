@@ -5,7 +5,7 @@ skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 
-title Horizon Research Project: Financial Package
+title Horizon Research Project \n Financial Package \n Version 25.1.10
 
 :Financial Manager: as Fmanager
 :Human Resource: as HR

@@ -7,7 +7,7 @@ skinparam TitleFontSize 24pt
 !include <tupadr3/font-awesome/desktop>
 !include <tupadr3/font-awesome-5/github>
 
-title Development and Deployment Environments for Horizon Project
+title Horizon Research Project (HRP) \n Development and Deployment Environments \n Version 25.1.10
 
 FA_DESKTOP(contributer1, "Contributer 1") #BUSINESS
 FA_DESKTOP(contributer2, "Contributer 2") #BUSINESS

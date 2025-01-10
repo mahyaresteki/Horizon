@@ -5,9 +5,10 @@ skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 
-title Horizon Research Project: HR Management Package
+title Horizon Research Project \n HR Management Package \n Version 25.1.10
 
 :Human Resource: as HR
+:Network Manager: as NetworkManager
 :Staff: as Staff
 
 package "HR Management"{
@@ -52,6 +53,71 @@ package "HR Management"{
     usecase "Calulate Total Work Dificit Time" as totalWorkDificitTime
     
 }
+
+package "Organization"{
+    usecase "Organization Management" as organizationManagement
+    usecase "Organization Registration" as organizationRegistration
+    usecase "Organization Update" as organizationUpdate
+    usecase "Organization Activation" as organizationActivation
+    usecase "Organization List" as organizationList
+    usecase "Organization View" as organizationView
+    usecase "Organization Search" as organizationSearch
+    usecase "Department Management" as departmentManagement
+    usecase "Department Registration" as departmentRegistration
+    usecase "Department Update" as departmentUpdate
+    usecase "Department Activation" as departmentActivation
+    usecase "Department List" as departmentList
+    usecase "Department View" as departmentView
+    usecase "Department Search" as departmentSearch
+    usecase "Building Management" as buildingManagement
+    usecase "Building Add" as buildingAdd
+    usecase "Building Update" as buildingUpdate
+    usecase "Building Activation" as buildingActivation
+    usecase "Building List" as buildingList
+    usecase "Building View" as buildingView
+    usecase "Building Search" as buildingSearch
+    usecase "Work Stattion Management" as workStationManagement
+    usecase "Work Stattion Add" as workStationAdd
+    usecase "Work Stattion Update" as workStationUpdate
+    usecase "Work Stattion Activation" as workStationActivation
+    usecase "Work Stattion List" as workStationList
+    usecase "Work Stattion View" as workStationView
+    usecase "Work Stattion Search" as workStationSearch
+}
+
+HR -- departmentManagement
+HR -- organizationManagement
+HR -- buildingManagement
+NetworkManager -- workStationManagement
+
+departmentManagement .> organizationManagement
+buildingManagement <. workStationManagement
+buildingManagement .> organizationManagement
+
+organizationManagement ..> organizationRegistration : <<include>>
+organizationManagement ..> organizationUpdate : <<include>>
+organizationManagement ..> organizationActivation : <<include>>
+organizationManagement ..> organizationList : <<include>>
+organizationManagement ..> organizationView : <<include>>
+organizationManagement ..> organizationSearch : <<include>>
+departmentManagement ..> departmentRegistration : <<include>>
+departmentManagement ..> departmentUpdate : <<include>>
+departmentManagement ..> departmentActivation : <<include>>
+departmentManagement ..> departmentList : <<include>>
+departmentManagement ..> departmentView : <<include>>
+departmentManagement ..> departmentSearch : <<include>>
+buildingManagement ..> buildingAdd : <<include>>
+buildingManagement ..> buildingUpdate : <<include>>
+buildingManagement ..> buildingActivation : <<include>>
+buildingManagement ..> buildingList : <<include>>
+buildingManagement ..> buildingView : <<include>>
+buildingManagement ..> buildingSearch : <<include>>
+workStationManagement ..> workStationAdd : <<include>>
+workStationManagement ..> workStationUpdate : <<include>>
+workStationManagement ..> workStationActivation : <<include>>
+workStationManagement ..> workStationList : <<include>>
+workStationManagement ..> workStationView : <<include>>
+workStationManagement ..> workStationSearch : <<include>>
 
 staffManagement -- HR
 positionManagement -- HR
