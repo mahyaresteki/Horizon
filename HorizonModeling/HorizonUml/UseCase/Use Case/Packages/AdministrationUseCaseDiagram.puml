@@ -5,7 +5,7 @@ skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 
-title Horizon Research Project \n Administration Use Cases \n Version 25.1.10
+title Horizon Research Project (HRP) \n Administration Use Cases \n Version 25.1.10
 
 :User: as User
 :Administrator: as Admin

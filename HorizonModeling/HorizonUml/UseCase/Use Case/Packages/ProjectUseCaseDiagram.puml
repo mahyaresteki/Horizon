@@ -5,7 +5,7 @@ skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 
-title Horizon Research Project \n Project Management Usecases \n Version 25.1.10
+title Horizon Research Project (HRP) \n Project Management Usecases \n Version 25.1.10
 
 :Project Manager: as PMO
 :DevOps Manager: as DevOpsManager

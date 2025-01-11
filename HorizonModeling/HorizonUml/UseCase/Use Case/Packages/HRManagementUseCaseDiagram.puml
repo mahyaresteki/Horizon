@@ -5,7 +5,7 @@ skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 
-title Horizon Research Project \n HR Management Package \n Version 25.1.10
+title Horizon Research Project (HRP) \n HR Management Package \n Version 25.1.11
 
 :Human Resource: as HR
 :Network Manager: as NetworkManager
@@ -35,18 +35,21 @@ package "HR Management"{
     usecase "Attendance List" as attendanceList
     usecase "Attendance View" as attendanceView
     usecase "Attendance Search" as attendanceSearch
+    usecase "Leave Management" as leaveManagement
     usecase "Leave Add" as leaveAdd
     usecase "Leave Update" as leaveUpdate
     usecase "Leave Remove" as leaveRemove
     usecase "Leave List" as leaveList
     usecase "Leave View" as leaveView
     usecase "Leave Search" as leaveSearch
+    usecase "Mission Management" as missionManagement
     usecase "Mission Add" as missionAdd
     usecase "Mission Update" as missionUpdate
     usecase "Mission Remove" as missionRemove
     usecase "Mission List" as missionList
     usecase "Mission View" as missionView
     usecase "Mission Search" as missionSearch
+    usecase "Attendance Report" as attendanceReport
     usecase "Calulate Total Mission Time" as totalMissionTime
     usecase "Calulate Total Leave Time" as totalLeaveTime
     usecase "Calulate Total Overtime" as totalOvertime
@@ -149,20 +152,23 @@ AttendanceRemove <.. attendanceManagement : <<include>>
 attendanceList <.. attendanceManagement : <<include>>
 attendanceView <.. attendanceManagement : <<include>>
 attendanceSearch <.. attendanceManagement : <<include>>
-leaveAdd <.. attendanceManagement : <<include>>
-leaveUpdate <.. attendanceManagement : <<include>>
-leaveRemove <.. attendanceManagement : <<include>>
-leaveList <.. attendanceManagement : <<include>>
-leaveView <.. attendanceManagement : <<include>>
-leaveSearch <.. attendanceManagement : <<include>>
-missionAdd <.. attendanceManagement : <<include>>
-missionUpdate <.. attendanceManagement : <<include>>
-missionRemove <.. attendanceManagement : <<include>>
-missionList <.. attendanceManagement : <<include>>
-missionView <.. attendanceManagement : <<include>>
-missionSearch <.. attendanceManagement : <<include>>
-totalMissionTime <.. attendanceManagement : <<include>>
-totalLeaveTime <.. attendanceManagement : <<include>>
-totalOvertime <.. attendanceManagement : <<include>>
-totalWorkDificitTime <.. attendanceManagement : <<include>>
+leaveManagement <.. attendanceManagement : <<include>>
+leaveAdd <.. leaveManagement : <<include>>
+leaveUpdate <.. leaveManagement : <<include>>
+leaveRemove <.. leaveManagement : <<include>>
+leaveList <.. leaveManagement : <<include>>
+leaveView <.. leaveManagement : <<include>>
+leaveSearch <.. leaveManagement : <<include>>
+missionManagement <.. attendanceManagement : <<include>>
+missionAdd <.. missionManagement : <<include>>
+missionUpdate <.. missionManagement : <<include>>
+missionRemove <.. missionManagement : <<include>>
+missionList <.. missionManagement : <<include>>
+missionView <.. missionManagement : <<include>>
+missionSearch <.. missionManagement : <<include>>
+attendanceReport <.. attendanceManagement : <<include>>
+totalMissionTime <.. attendanceReport : <<include>>
+totalLeaveTime <.. attendanceReport : <<include>>
+totalOvertime <.. attendanceReport : <<include>>
+totalWorkDificitTime <.. attendanceReport : <<include>>
 @enduml

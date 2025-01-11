@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 36pt
 
-title Horizon Project \n Entity Relationship Diagram \n Version 24.12.25
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 24.12.25
 
 entity "General.EducationLevel" as educationLevel {
   *ID : bigint(19) <<generated epochdate>>
