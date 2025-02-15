@@ -25,8 +25,12 @@ Horizon Research Project (HRP) focuses on the following main objectives.
 ## Documentation
 ### Theories
 The following articles are available to the public as theories of the project.
-1. [Deceptive Virtualization Theory](https://github.com/mahyaresteki/Horizon/blob/master/Theories/Deceptive_Virtualization_Theory.pdf)
-2. [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/Theories/Theory_of_Endurance_Software_Development_Methodology.pdf)
+####Worldview Theory
+[Social-Oriented Philosophy] (https://github.com/mahyaresteki/Horizon/blob/master/Theories/Social_Oriented_Philosophy.pdf)
+#### Theory About The Problem
+[Deceptive Virtualization Theory](https://github.com/mahyaresteki/Horizon/blob/master/Theories/Deceptive_Virtualization_Theory.pdf)
+#### Therory About The Soltion
+[Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/Theories/Theory_of_Endurance_Software_Development_Methodology.pdf)
 ### Technical Documentation
 Horizon system is modeled in [UML 2.0](https://en.wikipedia.org/wiki/Unified_Modeling_Language) format by [PlantUML](https://plantuml.com/) as follows.
 
