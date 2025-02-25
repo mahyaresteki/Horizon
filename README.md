@@ -10,6 +10,16 @@ The primary goal of this project is to simultaneously improve operational effici
 
 Insights from this research project will support senior managers in optimizing business performance by enhancing both individual and organizational well-being.
 
+## How Does Horizon System Work?
+Horizon System assesses job satisfaction and performance using a combination of qualitative and quantitative methods. Key approaches include:
+
+1. Employee Surveys & Feedback: Regular surveys help gather insights on job satisfaction, workplace culture, and team dynamics.
+2. Project Workflow Analysis: By tracking task completion times, collaboration patterns, and workload distribution, the system identifies areas for improvement.
+3. Performance Metrics: The system evaluates productivity trends and employee engagement based on real work data.
+Ethical & Social Impact Indicators – Workplace inclusivity, work-life balance, and adherence to labor rights standards are measured to ensure a fair work environment.
+
+By integrating these methods, Horizon System provides actionable insights for both employees and managers, fostering a healthier and more efficient work environment.
+
 ## Story of the Project
 At first, the Horizon project was supposed to be a platform for the production of a payment switch with high flexibility. It was decided that any development method and pattern that seems inefficient should be investigated before using or rejecting it. But then something strange happened! During the research, it was found that current development methods in most cases ignore the human rights of developers in order to achieve maximum efficiency.
 
