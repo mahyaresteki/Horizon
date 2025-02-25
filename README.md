@@ -3,6 +3,11 @@
 # Horizon Research Project (HRP)
 Horizon is a research project to find new "social-oriented" management solutions for IT industries, which tries to improve the standards of the work environment and the existence of social justice in technology companies.
 
+## What is Horizon System?
+Horizon system is the idea of ​​developing an organizational software to improve the performance and job satisfaction of personnel in technology companies. This software aims to measure the satisfaction of employees with their work in the company based on comprehensive indicators by examining the process of implementing a project's tasks, in addition to closely monitoring their performance.
+
+The main goal of this project is to simultaneously improve the performance and level of social and ethical indicators in technology companies. This system will help employers and employees to develop their interests in line with each other to achieve mutual interaction and satisfaction in teamwork. This trend will ultimately lead to simultaneous improvements in labor and human rights standards in technology companies. The ideas from this research project will help senior managers improve their business performance by expanding both individual and organizational benefits.
+
 ## Story of the Project
 At first, the Horizon project was supposed to be a platform for the production of a payment switch with high flexibility. It was decided that any development method and pattern that seems inefficient should be investigated before using or rejecting it. But then something strange happened! During the research, it was found that current development methods in most cases ignore the human rights of developers in order to achieve maximum efficiency.
 
