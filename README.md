@@ -4,9 +4,11 @@
 Horizon is a research project to find new "social-oriented" management solutions for IT industries, which tries to improve the standards of the work environment and the existence of social justice in technology companies.
 
 ## What is Horizon System?
-Horizon system is the idea of ​​developing an organizational software to improve the performance and job satisfaction of personnel in technology companies. This software aims to measure the satisfaction of employees with their work in the company based on comprehensive indicators by examining the process of implementing a project's tasks, in addition to closely monitoring their performance.
+Horizon System is an organizational software designed to enhance both job satisfaction and performance in technology companies. By analyzing project workflows and employee engagement, this system evaluates job satisfaction based on comprehensive indicators while also monitoring work performance.
 
-The main goal of this project is to simultaneously improve the performance and level of social and ethical indicators in technology companies. This system will help employers and employees to develop their interests in line with each other to achieve mutual interaction and satisfaction in teamwork. This trend will ultimately lead to simultaneous improvements in labor and human rights standards in technology companies. The ideas from this research project will help senior managers improve their business performance by expanding both individual and organizational benefits.
+The primary goal of this project is to simultaneously improve operational efficiency and ethical standards within tech companies. Horizon System helps align the interests of employers and employees, fostering a collaborative environment where mutual satisfaction and productivity grow hand in hand. Ultimately, this approach contributes to elevating labor rights and human rights standards in the industry.
+
+Insights from this research project will support senior managers in optimizing business performance by enhancing both individual and organizational well-being.
 
 ## Story of the Project
 At first, the Horizon project was supposed to be a platform for the production of a payment switch with high flexibility. It was decided that any development method and pattern that seems inefficient should be investigated before using or rejecting it. But then something strange happened! During the research, it was found that current development methods in most cases ignore the human rights of developers in order to achieve maximum efficiency.
