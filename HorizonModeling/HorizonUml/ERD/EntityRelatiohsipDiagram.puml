@@ -5,14 +5,80 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 36pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 24.12.25
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.15
 
-entity "General.EducationLevel" as educationLevel {
+entity "Basic.EducationLevel" as educationLevel {
   *ID : bigint(19) <<generated epochdate>>
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
   Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Basic.Priority" as priority {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *Title : nvarchar(200)
+  *Code : varchar(20) <<unique>>
+  *Ordering : integer
+  *Color : nvarchar(7)
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Basic.IssueType" as issueType {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *Title : nvarchar(200)
+  *Code : varchar(20) <<unique>>
+  *Icon : nvarchar(1000)
+  *Color : nvarchar(7)
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Basic.Status" as status {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *Title : nvarchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : nvarchar(4000)
+  *Color : nvarchar(7)
+  IsToDo : char(1) <<true=1, false=0>>
+  IsInProgress : char(1) <<true=1, false=0>>
+  IsDone : char(1) <<true=1, false=0>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Basic.Resolvation" as resolvation {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *Title : nvarchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : nvarchar(4000)
+  *Color : nvarchar(7)
+  IsResolved : char(1) <<true=1, false=0>>
   *IsActive : char(1) <<true=1, false=0>>
   *IsDeleted : char(1) <<true=1, false=0>>
   *CreatedAt : datetime <<default: now()>>
@@ -345,6 +411,89 @@ entity "HumanResource.ProfileCertificate" as profileCertificate {
 }
 
 
+entity "ProjectManagement.Project" as project {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ConstructorCompnayId : bigint(19) <<FK>>
+  *Code : nvarchar(20) <<unique>>
+  *Title : nvarchar(200)
+  Description : nvarchar(4000)
+  StartDate : date
+  EndDate : date
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "ProjectManagement.ProjectWorkflow" as projectWorkflow {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ProjectId : bigint(19) <<FK>>
+  *Code : nvarchar(20) <<unique>>
+  *Title : nvarchar(200)
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+
+entity "ProjectManagement.ProjectWorkflowStatus" as projectWorkflowStatus {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ProjectWorkflowId : bigint(19) <<FK>>
+  *StatusId : bigint(19) <<FK>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "ProjectManagement.ProjectWorkflowProgress" as projectWorkflowProgress {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  StartProjectWorkflowStatusId : bigint(19) <<FK>>
+  IsFromStartPoint : char(1) <<true=1, false=0>>
+  CanBeStartedFromAnyStatus : char(1) <<true=1, false=0>>
+  EndProjectWorkflowStatusId : bigint(19) <<FK>>
+  IsToEndPoint : char(1) <<true=1, false=0>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "ProjectManagement.Issue" as issue {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ProjectId : bigint(19) <<FK>>
+  AssineeeId : bigint(19) <<FK>>
+  *Code : nvarchar(20) <<unique>>
+  *Title : nvarchar(200)
+  Description : nvarchar(4000)
+  DueDate : date
+  PriorityId : bigint(19) <<FK>>
+  IssueTypeId : bigint(19) <<FK>>
+  CuurentStatusId : bigint(19) <<FK>>
+  CurrentResolvationId : bigint(19) <<FK>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
 form ||..o{ formPermission
 permission ||..o{ formPermission
 role ||..o{ rolePermission
@@ -371,5 +520,15 @@ profile ||..o{ profileEducation
 educationLevel ||..o{ profileEducation
 profile ||..o{ profileCertificate
 profile ||..o{ profileJobExperience
+project ||..o{ issue
+issueType ||..o{ issue
+priority ||..o{ issue
+staff ||..o{ issue
+status ||..o{ issue
+resolvation ||..o{ issue
+project ||..o{ projectWorkflow
+projectWorkflow ||..o{ projectWorkflowStatus
+projectWorkflowStatus ||..o{ projectWorkflowProgress
+projectWorkflowStatus ||..o{ projectWorkflowProgress
 
 @enduml
