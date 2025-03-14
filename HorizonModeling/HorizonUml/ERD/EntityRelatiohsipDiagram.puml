@@ -494,6 +494,38 @@ entity "ProjectManagement.Issue" as issue {
   ModifiedBy : bigint(19)
 }
 
+entity "ProjectManagement.IssueComment" as issueComment {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *IssueId : bigint(19) <<FK>>
+  Comment : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+
+entity "ProjectManagement.ProjectMeeting" as projectMeeting {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ProjectId : bigint(19) <<FK>>
+  *MeetingDate : date
+  *Title : nvarchar(200)
+  *Location : nvarchar(200)
+  Description : nvarchar(4000)
+  StartTime : time
+  EndTime : time
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
 form ||..o{ formPermission
 permission ||..o{ formPermission
 role ||..o{ rolePermission
@@ -530,5 +562,7 @@ project ||..o{ projectWorkflow
 projectWorkflow ||..o{ projectWorkflowStatus
 projectWorkflowStatus ||..o{ projectWorkflowProgress
 projectWorkflowStatus ||..o{ projectWorkflowProgress
+issue ||..o{ issueComment
+project ||..o{ projectMeeting
 
 @enduml
