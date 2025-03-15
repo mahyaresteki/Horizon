@@ -129,6 +129,22 @@ entity "Basic.FileExtention" as fileExtention {
   ModifiedBy : bigint(19)
 }
 
+entity "Basic.TimeUnit" as timeUnit {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *Title : nvarchar(200)
+  *Code : varchar(20) <<unique>>
+  BasedOnMiliscond : bigint(19)
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+
 entity "Authentication.Role" as role {
   *ID : bigint(19) <<generated epochdate>>
   --
@@ -580,6 +596,24 @@ entity "ProjectManagement.IssueAttachment" as issueAttachment {
 }
 
 
+entity "ProjectManagement.WorkLog" as workLog {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *IssueId : bigint(19) <<FK>>
+  *LogDate : date
+  *StartWorkTime : time
+  WorkingDuration : float 
+  TimeUnitId : bigint(19) <<FK>>
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+
 entity "ProjectManagement.WorkflowEligibleFileExtention" as workflowEligibleFileExtention {
   *ID : bigint(19) <<generated epochdate>>
   --
@@ -714,4 +748,11 @@ documentType ||..o{ document
 fileExtention ||..o{ document
 projectWorkflow ||..o{ workflowEligibleFileExtention
 fileExtention ||..o{ workflowEligibleFileExtention
+issue ||..o{ workLog
+timeUnit ||..o{ workLog
+issue ||..o{  issueWorkflowHistory
+status ||..o{ issueWorkflowHistory
+status ||..o{ issueWorkflowHistory
+projectWorkflowProgress ||..o{ issueWorkflowHistory
+resolvation ||..o{ issueWorkflowHistory
 @enduml
