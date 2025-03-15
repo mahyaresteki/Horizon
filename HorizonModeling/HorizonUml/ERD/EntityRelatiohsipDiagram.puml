@@ -3,9 +3,9 @@ hide circle
 skinparam classBackgroundColor #Business
 skinparam linetype ortho
 skinparam Shadowing True
-skinparam TitleFontSize 36pt
+skinparam TitleFontSize 48pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.15
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.16
 
 entity "Basic.EducationLevel" as educationLevel {
   *ID : bigint(19) <<generated epochdate>>
@@ -79,6 +79,48 @@ entity "Basic.Resolvation" as resolvation {
   Description : nvarchar(4000)
   *Color : nvarchar(7)
   IsResolved : char(1) <<true=1, false=0>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Basic.MeetingType" as meetingType {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *Title : nvarchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Basic.DocumentType" as documentType {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *Title : nvarchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Basic.FileExtention" as fileExtention {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *Title : nvarchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : nvarchar(4000)
   *IsActive : char(1) <<true=1, false=0>>
   *IsDeleted : char(1) <<true=1, false=0>>
   *CreatedAt : datetime <<default: now()>>
@@ -410,6 +452,22 @@ entity "HumanResource.ProfileCertificate" as profileCertificate {
   ModifiedBy : bigint(19)
 }
 
+entity "DMS.Document" as document {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *TableName : nvarchar(250)
+  *TableId : bigint(19)
+  *DocumentTypeId : bigint(19) <<FK>>
+  *FileExtentionId : bigint(19) <<FK>>
+  *FileAddress: nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
 
 entity "ProjectManagement.Project" as project {
   *ID : bigint(19) <<generated epochdate>>
@@ -460,6 +518,7 @@ entity "ProjectManagement.ProjectWorkflowStatus" as projectWorkflowStatus {
 entity "ProjectManagement.ProjectWorkflowProgress" as projectWorkflowProgress {
   *ID : bigint(19) <<generated epochdate>>
   --
+  *Title : nvarchar(250)
   StartProjectWorkflowStatusId : bigint(19) <<FK>>
   IsFromStartPoint : char(1) <<true=1, false=0>>
   CanBeStartedFromAnyStatus : char(1) <<true=1, false=0>>
@@ -498,7 +557,20 @@ entity "ProjectManagement.IssueComment" as issueComment {
   *ID : bigint(19) <<generated epochdate>>
   --
   *IssueId : bigint(19) <<FK>>
-  Comment : nvarchar(4000)
+  *Comment : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "ProjectManagement.IssueAttachment" as issueAttachment {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *IssueId : bigint(19) <<FK>>
+  *DocumentId : bigint(19) <<FK>>
   *IsActive : char(1) <<true=1, false=0>>
   *IsDeleted : char(1) <<true=1, false=0>>
   *CreatedAt : datetime <<default: now()>>
@@ -508,16 +580,82 @@ entity "ProjectManagement.IssueComment" as issueComment {
 }
 
 
+entity "ProjectManagement.WorkflowEligibleFileExtention" as workflowEligibleFileExtention {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *WorkflowId : bigint(19) <<FK>>
+  *FileExtentionId : bigint(19) <<FK>>
+  MaxFileSizeForUpload : integer
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+
+entity "ProjectManagement.IssueWorkflowHistory" as issueWorkflowHistory {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *IssueId : bigint(19) <<FK>>
+  *StartStatusId : bigint(19) <<FK>>
+  *EndStatusId : bigint(19) <<FK>>
+  *ProjectWorkflowProgressId : bigint(19) <<FK>>
+  ResolvationId : bigint(19) <<FK>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
 entity "ProjectManagement.ProjectMeeting" as projectMeeting {
   *ID : bigint(19) <<generated epochdate>>
   --
   *ProjectId : bigint(19) <<FK>>
+  *MeetingTypeId : bigint(19) <<FK>>
   *MeetingDate : date
   *Title : nvarchar(200)
   *Location : nvarchar(200)
+  MinutesDocumentId : bigint(19) <<FK>>
   Description : nvarchar(4000)
-  StartTime : time
-  EndTime : time
+  ScheduleStartTime : time
+  ScheduleEndTime : time
+  ActualStartTime : time
+  ActualEndTime : time
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "ProjectManagement.MeetingInvitees" as meetingInvitees {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ProjectMeetingId : bigint(19) <<FK>>
+  *StaffId : bigint(19) <<FK>>
+  IsAttanded : char(1)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+
+entity "ProjectManagement.MeetingMinutes" as meetingMinutes {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ProjectMeetingId : bigint(19) <<FK>>
+  *Resolution : nvarchar(4000)
+  ResponsibleDepartmentId : bigint(19) <<FK>>
+  IssueId : bigint(19) <<FK>>
+  DueDate : datetime
   *IsActive : char(1) <<true=1, false=0>>
   *IsDeleted : char(1) <<true=1, false=0>>
   *CreatedAt : datetime <<default: now()>>
@@ -564,5 +702,16 @@ projectWorkflowStatus ||..o{ projectWorkflowProgress
 projectWorkflowStatus ||..o{ projectWorkflowProgress
 issue ||..o{ issueComment
 project ||..o{ projectMeeting
-
+staff ||..o{ meetingInvitees
+projectMeeting ||..o{ meetingInvitees
+department ||..o{ meetingMinutes
+projectMeeting ||..o{ meetingMinutes
+issue ||..o{ issueAttachment
+document ||..o{ issueAttachment
+document ||..o{ projectMeeting
+meetingType ||..o{ projectMeeting
+documentType ||..o{ document
+fileExtention ||..o{ document
+projectWorkflow ||..o{ workflowEligibleFileExtention
+fileExtention ||..o{ workflowEligibleFileExtention
 @enduml
