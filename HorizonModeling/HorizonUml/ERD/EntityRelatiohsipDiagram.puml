@@ -3,9 +3,9 @@ hide circle
 skinparam classBackgroundColor #Business
 skinparam linetype ortho
 skinparam Shadowing True
-skinparam TitleFontSize 48pt
+skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.16
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.21
 
 entity "Basic.EducationLevel" as educationLevel {
   *ID : bigint(19) <<generated epochdate>>
@@ -468,6 +468,95 @@ entity "HumanResource.ProfileCertificate" as profileCertificate {
   ModifiedBy : bigint(19)
 }
 
+entity "HumanResource.Questionnaire" as questionnaire {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *Title : nvarchar(200)
+  Description : nvarchar(4000)
+  *TotalScore : integer
+  *AcceptableScore : integer
+  *WarningScore : integer
+  *DisasterScore : integer
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "HumanResource.QuestionnaireTargetDepartment" as questionnaireTargetDepartment {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *QuestionnaireId : bigint(19) <<FK>>
+  *DepoartmentId : bigint(19) <<FK>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "HumanResource.Question" as question {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *QuestionnaireId : bigint(19) <<FK>>
+  *Question : nvarchar(4000)
+  *Score : integer
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "HumanResource.QuestionOption" as questionOption {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *QuestionId : bigint(19) <<FK>>
+  *Title : nvarchar(4000)
+  *Score : integer
+  IsDescriptionRequired : char(1) <<true=1, false=0>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+
+entity "HumanResource.QuestionnaireResult" as questionnaireResult {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *QuestionnaireId : bigint(19) <<FK>>
+  *StaffId : bigint(19) <<FK>>
+  *TotalScore : integer
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "HumanResource.QuestionnaireResultDetail" as questionnaireResultDetail {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *QuestionnaireResultId : bigint(19) <<FK>>
+  *QuestionId : bigint(19) <<FK>>
+  *QuestionOptionId : bigint(19) <<FK>>
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
 entity "DMS.Document" as document {
   *ID : bigint(19) <<generated epochdate>>
   --
@@ -755,4 +844,13 @@ status ||..o{ issueWorkflowHistory
 status ||..o{ issueWorkflowHistory
 projectWorkflowProgress ||..o{ issueWorkflowHistory
 resolvation ||..o{ issueWorkflowHistory
+questionnaire ||..o{ questionnaireTargetDepartment
+department ||..o{ questionnaireTargetDepartment
+questionnaire ||..o{ question
+question ||..o{ questionOption
+questionnaire ||..o{ questionnaireResult
+staff ||..o{ questionnaireResult
+questionnaireResult ||..o{ questionnaireResultDetail
+question ||..o{ questionnaireResultDetail
+questionOption ||..o{ questionnaireResultDetail
 @enduml
