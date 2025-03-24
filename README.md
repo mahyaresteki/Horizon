@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/mahyaresteki/Horizon/master/logo.png" width="200" height="120" style="margin-left:auto; margin-right:auto">
+<img src="https://raw.githubusercontent.com/mahyaresteki/Horizon/master/logo.png" width="200" height="200" style="margin-left:auto; margin-right:auto">
 
 # Horizon Research Project (HRP)
 Horizon is a research project to find new "social-oriented" management solutions for IT industries, which tries to improve the standards of the work environment and the existence of social justice in technology companies.
