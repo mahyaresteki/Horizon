@@ -19,7 +19,7 @@ left to right direction
 !include <tupadr3/devicons/nginx>
 !include <office/Concepts/firewall_orange>
 
-title Horizon Research Project (HRP) \n Architecture \n Version 24.12.27
+title Horizon Research Project (HRP) \n Project Schema \n Version 25.3.24
 
 package "Organization Network Zone" as HorizonSystem{
     package "Microservice Layer" as microserviceLayer{
