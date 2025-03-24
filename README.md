@@ -46,7 +46,7 @@ The following articles are available to the public as theories of the project.
 2. Theory About The Problem: [Deceptive Virtualization Theory](https://github.com/mahyaresteki/Horizon/blob/master/Theories/Deceptive_Virtualization_Theory.pdf)
 3. Therory About The Soltion: [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/Theories/Theory_of_Endurance_Software_Development_Methodology.pdf)
 
-### Technical Documentation
+### Modeling
 1. Modeling Language: Horizon system is modeled in [UML 2.0](https://en.wikipedia.org/wiki/Unified_Modeling_Language) format by [PlantUML](https://plantuml.com/). Please [click here](https://github.com/mahyaresteki/Horizon/tree/master/HorizonModeling/HorizonUml/out) to see the modeling diagrams.
 2. Prototyping: the project is prototyped by [Pencil](https://pencil.evolus.vn/) application. Please [click here](https://github.com/mahyaresteki/Horizon/tree/master/HorizonModeling/HorizonUiSketch) to see created prototypes.
 
