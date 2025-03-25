@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/mahyaresteki/Horizon/master/logo.png" width="120" height="120" style="margin-left:auto; margin-right:auto">
 
 # Horizon Research Project (HRP)
-Horizon is a research project to find new "social-oriented" management solutions for IT industries, which tries to improve the standards of the work environment and the existence of social justice in technology companies.
+Horizon is a web-based application designed to manage project information, human resources, and technology-related assets in companies. It aims to improve employee satisfaction, accelerate project progress, and boost productivity in task management. By organizing information efficiently, Horizon helps technology companies balance individual and collective interests, creating a healthier and more productive work environment.
 
 ## What is Horizon System?
 Horizon System is an organizational software designed to enhance both job satisfaction and performance in technology companies. By analyzing project workflows and employee engagement, this system evaluates job satisfaction based on comprehensive indicators while also monitoring work performance.
@@ -40,15 +40,19 @@ Horizon Research Project (HRP) focuses on the following main objectives.
 3. Can this model become a permanent culture in the organization?
 
 ## Documentation
-### Theories
+### Theories Articles
 The following articles are available to the public as theories of the project.
 1. Worldview Theory: [Social-Oriented Philosophy](https://github.com/mahyaresteki/Horizon/blob/master/Theories/Social_Oriented_Philosophy.pdf)
 2. Theory About The Problem: [Deceptive Virtualization Theory](https://github.com/mahyaresteki/Horizon/blob/master/Theories/Deceptive_Virtualization_Theory.pdf)
 3. Therory About The Soltion: [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/Theories/Theory_of_Endurance_Software_Development_Methodology.pdf)
 
-### Modeling
-1. Modeling Language: Horizon system is modeled in [UML 2.0](https://en.wikipedia.org/wiki/Unified_Modeling_Language) format by [PlantUML](https://plantuml.com/). Please [click here](https://github.com/mahyaresteki/Horizon/tree/master/HorizonModeling/HorizonUml/out) to see the modeling diagrams.
-2. Prototyping: the project is prototyped by [Pencil](https://pencil.evolus.vn/) application. Please [click here](https://github.com/mahyaresteki/Horizon/tree/master/HorizonModeling/HorizonUiSketch) to see created prototypes.
+### Modeling Outputs
+1. **Modeling Language:** Horizon system is modeled in [UML 2.0](https://en.wikipedia.org/wiki/Unified_Modeling_Language) format by [PlantUML](https://plantuml.com/). Please [click here](https://github.com/mahyaresteki/Horizon/tree/master/HorizonModeling/HorizonUml/out) to see the modeling diagrams.
+2. **Prototyping:** the project is prototyped by [Pencil](https://pencil.evolus.vn/) application. Please [click here](https://github.com/mahyaresteki/Horizon/tree/master/HorizonModeling/HorizonUiSketch) to see created prototypes.
+
+### Technical Documents
+The list of technical documentation for the project is as follows:
+1. **Project Architecture:** This document contains necessary information about the overall structure, architecture, and infrastructure of the project. [Click here](https://github.com/mahyaresteki/Horizon/blob/master/TechnicalDocuments/Project_Achitecture.pdf) to view it.
 
 ## Research Team
 Horizon will be developed by ZURVAN research team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
