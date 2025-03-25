@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/mahyaresteki/Horizon/master/logo.png" width="120" height="120" style="margin-left:auto; margin-right:auto">
 
 # Horizon Research Project (HRP)
-Horizon is a web-based application designed to manage project information, human resources, and technology-related assets in companies. It aims to improve employee satisfaction, accelerate project progress, and boost productivity in task management. By organizing information efficiently, Horizon helps technology companies balance individual and collective interests, creating a healthier and more productive work environment.
+Horizon is a web-based application designed to manage project information, human resources, and allocated resources in companies. It aims to improve employee satisfaction, accelerate project progress, and boost productivity in task management. By organizing information efficiently, Horizon helps technology companies balance individual and collective interests, creating a healthier and more productive work environment.
 
 ## What is Horizon System?
 Horizon System is an organizational software designed to enhance both job satisfaction and performance in technology companies. By analyzing project workflows and employee engagement, this system evaluates job satisfaction based on comprehensive indicators while also monitoring work performance.
@@ -51,6 +51,12 @@ Based on definitions of [Lawrence Berkeley	National	Laboratory](https://www.sjsu
 6. **Improving Transparency and Access to Project and Resource Information**
 	* Reducing human errors and rework
 	* Establishing a reliable data source for management decision-making
+
+## Current Status
+This project is currently in the research and documentation phase. No coding tasks are open yet.
+
+## How to Contribute
+At this stage, contributions are welcome in the form of research, documentation, and theoretical discussion.
 
 ## Documentation
 ### Theories Articles
