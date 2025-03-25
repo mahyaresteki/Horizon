@@ -33,24 +33,24 @@ Therefore, the Horizon project is a humanitarian research activity aimed at crea
 Based on definitions of [Lawrence Berkeley	National	Laboratory](https://www.sjsu.edu/people/fred.prochaska/courses/ScWk170/s0/Basic-vs.-Applied-Research.pdf), this project is an **"applied research"**.
 
 ## Objectives
-1. Enhancing Employee Satisfaction
-Providing transparency in processes and information
-Preventing confusion in task and resource allocation
-2. Facilitating and Accelerating Project Progress
-Centralized management of project-related information
-Improving coordination between teams and project members
-3. Increasing Productivity in Task Management
-Minimizing resource and time waste
-Providing tools for performance monitoring and evaluation
-4. Optimizing the Management of Human Resources and Project Resources
-Smart allocation of resources (human, time, equipment, and budget)
-Monitoring resource usage throughout project execution
-5. Balancing Individual and Collective Interests within the Organization
-Reducing conflicts caused by poor resource and information management
-Strengthening the sense of belonging and contribution among employees
-6. Improving Transparency and Access to Project and Resource Information
-Reducing human errors and rework
-Establishing a reliable data source for management decision-making
+1. **Enhancing Employee Satisfaction**
+	* Providing transparency in processes and information	
+	* Preventing confusion in task and resource allocation
+2. **Facilitating and Accelerating Project Progress**
+	* Centralized management of project-related information
+	* Improving coordination between teams and project members
+3. **Increasing Productivity in Task Management**
+	* Minimizing resource and time waste
+	* Providing tools for performance monitoring and evaluation
+4. **Optimizing the Management of Human Resources and Project Resources**
+	* Smart allocation of resources (human, time, equipment, and budget)
+	* Monitoring resource usage throughout project execution
+5. **Balancing Individual and Collective Interests within the Organization**
+	* Reducing conflicts caused by poor resource and information management
+	* Strengthening the sense of belonging and contribution among employees
+6. **Improving Transparency and Access to Project and Resource Information**
+	* Reducing human errors and rework
+	* Establishing a reliable data source for management decision-making
 
 ## Documentation
 ### Theories Articles
