@@ -67,6 +67,23 @@ The following articles are available to the public as theories of the project.
 The list of technical documentation for the project is as follows:
 1. **Project Architecture:** This document contains necessary information about the overall structure, architecture, and infrastructure of the project. [Click here](https://github.com/mahyaresteki/Horizon/blob/master/TechnicalDocuments/Project_Achitecture.pdf) to view it.
 
+## Use of AI Assistants in the Horizon Project
+As part of the Horizon project development, AI assistants were used to improve the quality and efficiency of both content creation and design tasks. The following tools were utilized:
+
+### ChatGPT – AI Assistant for Content Writing
+We used ChatGPT to assist in drafting, editing, and refining textual content for the project. This AI model helped:
+* Enhance clarity and coherence in descriptions
+* Maintain a consistent and professional tone
+* Generate structured content such as objectives, summaries, and feature explanations
+ChatGPT supported the writing process while ensuring conceptual accuracy and alignment with the project’s goals.
+
+### Recraft – AI Assistant for Logo Design
+For the project’s visual identity, Recraft (an AI-powered design tool) was used to:
+* Generate logo design ideas aligned with the project’s theme and values
+* Explore various creative concepts quickly and efficiently
+* Refine and finalize the logo based on iterative AI-generated suggestions
+Recraft enabled the team to experiment with visual directions and produce a logo that represents Horizon’s mission and identity.
+
 ## Research Team
 Horizon will be developed by ZURVAN research team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
 
