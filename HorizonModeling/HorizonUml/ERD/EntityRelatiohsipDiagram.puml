@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.21
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.28
 
 entity "Basic.EducationLevel" as educationLevel {
   *ID : bigint(19) <<generated epochdate>>
@@ -145,7 +145,7 @@ entity "Basic.TimeUnit" as timeUnit {
 }
 
 
-entity "Authentication.Role" as role {
+entity "UserManagement.Role" as role {
   *ID : bigint(19) <<generated epochdate>>
   --
   *Title : nvarchar(200)
@@ -159,7 +159,7 @@ entity "Authentication.Role" as role {
   ModifiedBy : bigint(19)
 }
 
-entity "Authentication.Groups" as groups {
+entity "UserManagement.Groups" as groups {
   *ID : bigint(19) <<generated epochdate>>
   --
   *Title : nvarchar(200)
@@ -173,7 +173,7 @@ entity "Authentication.Groups" as groups {
   ModifiedBy : bigint(19)
 }
 
-entity "Authentication.Permission" as permission {
+entity "UserManagement.Permission" as permission {
   *ID : bigint(19) <<generated epochdate>>
   --
   *Title : nvarchar(200)
@@ -187,7 +187,7 @@ entity "Authentication.Permission" as permission {
   ModifiedBy : bigint(19)
 }
 
-entity "Authentication.Form" as form {
+entity "UserManagement.Form" as form {
   *ID : bigint(19) <<generated epochdate>>
   --
   *Title : nvarchar(200)
@@ -201,7 +201,7 @@ entity "Authentication.Form" as form {
   ModifiedBy : bigint(19)
 }
 
-entity "Authentication.FormPermission" as formPermission {
+entity "UserManagement.FormPermission" as formPermission {
   *ID : bigint(19) <<generated epochdate>>
   --
   *FormId : bigint(19) <<FK>>
@@ -214,7 +214,7 @@ entity "Authentication.FormPermission" as formPermission {
   ModifiedBy : bigint(19)
 }
 
-entity "Authentication.RolePermission" as rolePermission {
+entity "UserManagement.RolePermission" as rolePermission {
   *ID : bigint(19) <<generated epochdate>>
   --
   *RoleId : integer(10) <<FK>>
@@ -229,7 +229,7 @@ entity "Authentication.RolePermission" as rolePermission {
   ModifiedBy : bigint(19)
 }
 
-entity "Authentication.GroupPermission" as groupPermission {
+entity "UserManagement.GroupPermission" as groupPermission {
   *ID : bigint(19) <<generated epochdate>>
   --
   *GroupId : bigint(19) <<FK>>
@@ -242,7 +242,7 @@ entity "Authentication.GroupPermission" as groupPermission {
   ModifiedBy : bigint(19)
 }
 
-entity "Authentication.UserPermission" as userPermission {
+entity "UserManagement.UserPermission" as userPermission {
   *ID : bigint(19) <<generated epochdate>>
   --
   *UserId : bigint(19) <<FK>>
@@ -255,7 +255,7 @@ entity "Authentication.UserPermission" as userPermission {
   ModifiedBy : bigint(19)
 }
 
-entity "Authentication.Profile" as profile {
+entity "UserManagement.Profile" as profile {
   *ID : bigint(19) <<generated epochdate>>
   --
   *FirstName : nvarchar(200)
@@ -276,7 +276,7 @@ entity "Authentication.Profile" as profile {
   ModifiedBy : bigint(19)
 }
 
-entity "Authentication.Users" as user {
+entity "UserManagement.Users" as user {
   *ID : bigint(19) <<generated epochdate>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -295,7 +295,7 @@ entity "Authentication.Users" as user {
   ModifiedBy : bigint(19)
 }
 
-entity "Authentication.UserRole" as userRole {
+entity "UserManagement.UserRole" as userRole {
   *ID : bigint(19) <<generated epochdate>>
   --
   *UserId : bigint(19) <<FK>>
@@ -308,7 +308,7 @@ entity "Authentication.UserRole" as userRole {
   ModifiedBy : bigint(19)
 }
 
-entity "Authentication.UserGroup" as userGroup {
+entity "UserManagement.UserGroup" as userGroup {
   *ID : bigint(19) <<generated epochdate>>
   --
   *UserId : bigint(19) <<FK>>
@@ -468,6 +468,82 @@ entity "HumanResource.ProfileCertificate" as profileCertificate {
   ModifiedBy : bigint(19)
 }
 
+entity "HumanResource.WorkingTimeTable" as workingTimeTable {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *CompanyId : bigint(19) <<FK>>
+  *WorkingDay : integer <<Monday=1, Tuesday=2, Wednesday=3, Thursday=4, Friday=5, Saturday=6, Sunday=7>>
+  *StartTime : time
+  *EndTime : time
+  FloatingStartTime : time
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "HumanResource.Holidaies" as holidaies {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *CompanyId : bigint(19) <<FK>>
+  HolidayDate : date
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "HumanResource.Attendance" as attendance {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *StaffId : bigint(19) <<FK>>
+  WorkingDate : date
+  EnteranceType : char(1) <<enter=1, exit=2>>
+  EnternaceTime : time
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "HumanResource.Leave" as leave {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *StaffId : bigint(19) <<FK>>
+  LeaveType : char(1) <<fulltime=1, parttime=2>>
+  LeavingStartDate : datetime
+  LeavingEndDate : datetime
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "HumanResource.WorkMission" as workMission {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *StaffId : bigint(19) <<FK>>
+  MissionStartDate : datetime
+  MissionEndDate : datetime
+  MissionLocation : nvarchar(200)
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
 entity "HumanResource.Questionnaire" as questionnaire {
   *ID : bigint(19) <<generated epochdate>>
   --
@@ -527,7 +603,6 @@ entity "HumanResource.QuestionOption" as questionOption {
   ModifiedBy : bigint(19)
 }
 
-
 entity "HumanResource.QuestionnaireResult" as questionnaireResult {
   *ID : bigint(19) <<generated epochdate>>
   --
@@ -573,7 +648,6 @@ entity "DMS.Document" as document {
   ModifiedBy : bigint(19)
 }
 
-
 entity "ProjectManagement.Project" as project {
   *ID : bigint(19) <<generated epochdate>>
   --
@@ -583,6 +657,33 @@ entity "ProjectManagement.Project" as project {
   Description : nvarchar(4000)
   StartDate : date
   EndDate : date
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "ProjectManagement.ProjectStaffMember" as projectStaffMember {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ProjectId : bigint(19) <<FK>>
+  *StaffId : bigint(19) <<FK>>
+  *IsProjectManager : char(1) <<true=1, false=0>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "ProjectManagement.ProjectDepartmentMember" as projectDepartmentMember {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ProjectId : bigint(19) <<FK>>
+  *DepartmentId : bigint(19) <<FK>>
   *IsActive : char(1) <<true=1, false=0>>
   *IsDeleted : char(1) <<true=1, false=0>>
   *CreatedAt : datetime <<default: now()>>
@@ -684,6 +785,34 @@ entity "ProjectManagement.IssueAttachment" as issueAttachment {
   ModifiedBy : bigint(19)
 }
 
+entity "ProjectManagement.Release" as release {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ProjectId : bigint(19) <<FK>>
+  *VersionNumber : nvarchar(20) <<unique>>
+  ReleaseDate : date
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "ProjectManagement.ReleaseIssue" as releaseIssue {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ReleaseId : bigint(19) <<FK>>
+  *IssueId : bigint(19) <<FK>>
+  IsFinalized : char(1) <<true=1, false=0>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
 
 entity "ProjectManagement.WorkLog" as workLog {
   *ID : bigint(19) <<generated epochdate>>
@@ -853,4 +982,16 @@ staff ||..o{ questionnaireResult
 questionnaireResult ||..o{ questionnaireResultDetail
 question ||..o{ questionnaireResultDetail
 questionOption ||..o{ questionnaireResultDetail
+project ||..o{ release
+release ||..o{ releaseIssue
+issue ||..o{ releaseIssue
+project ||..o{ projectStaffMember
+staff ||..o{ projectStaffMember
+project ||..o{ projectDepartmentMember
+department ||..o{ projectDepartmentMember
+company ||..o{ workingTimeTable
+company ||..o{ holidaies
+staff ||..o{ attendance
+staff ||..o{ leave
+staff ||..o{ workMission
 @enduml
