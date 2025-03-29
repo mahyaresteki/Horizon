@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.28
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.29
 
 entity "Basic.EducationLevel" as educationLevel {
   *ID : bigint(19) <<generated epochdate>>
@@ -102,6 +102,20 @@ entity "Basic.MeetingType" as meetingType {
 }
 
 entity "Basic.DocumentType" as documentType {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *Title : nvarchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Basic.ContractType" as contractType {
   *ID : bigint(19) <<generated epochdate>>
   --
   *Title : nvarchar(200)
@@ -916,6 +930,121 @@ entity "ProjectManagement.MeetingMinutes" as meetingMinutes {
   ModifiedBy : bigint(19)
 }
 
+entity "Finance.StaffContract" as staffContract {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *StaffId : bigint(19) <<FK>>
+  *ContractTypeId : bigint(19) <<FK>>
+  *StartDate : date
+  *EndDate : date
+  *Title : nvarchar(200)
+  Description : nvarchar(4000)
+  AutoRenewal : char(1) <<true=1, false=0>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Finance.ContractSallaryItem" as contractSallaryItem {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ContractId : bigint(19) <<FK>>
+  *Title : nvarchar(200)
+  *Amount : numeric(22,2)
+  Description : nvarchar(4000)
+  *PaymentDuration : char(1) <<hourly=1, daily=2, weekly=3, monthly=4, seasonal=5, annoual=6>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Finance.Supplier" as supplier {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *Title : bigint(19) <<FK>>
+  Description : nvarchar(4000)
+  Address : nvarchar(4000)
+  PhoneNumber : nvarchar(20)
+  MobileNumber : nvarchar(20)
+  Email : nvarchar(100)
+  PostalCode : nvarchar(20)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Finance.CostReceipt" as costReceipt {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *SupplierId : bigint(19) <<FK>>
+  *DocumentId : bigint(19) <<FK>>
+  *ReceiptDate : bigint(19) <<FK>>
+  *TotalAmount : numeric(22,2)
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Finance.CostReceiptItem" as costReceiptItem {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *CostReceiptId : bigint(19) <<FK>>
+  *ItemTitle : bigint(19) <<FK>>
+  *UnitAmount : numeric(22,2)
+  *Quantity : float
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Finance.ProjectDirectCostItem" as projectDirectCostItem {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ProjectId : bigint(19) <<FK>>
+  *CostReceiptItemId : bigint(19) <<FK>>
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Finance.CostPaymentReceipt" as costPaymentReceipt {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *CostReceiptId : bigint(19) <<FK>>
+  *DocumentId : bigint(19) <<FK>>
+  *Amount : numeric(22,2)
+  *PaymentDate : date
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+
 form ||..o{ formPermission
 permission ||..o{ formPermission
 role ||..o{ rolePermission
@@ -994,4 +1123,15 @@ company ||..o{ holidaies
 staff ||..o{ attendance
 staff ||..o{ leave
 staff ||..o{ workMission
+contractType ||..o{ staffContract
+staff ||..o{ staffContract
+staffContract ||..o{ contractSallaryItem
+supplier ||..o{ costReceipt
+document ||..o{ costReceipt
+costReceipt ||..o{ costReceiptItem
+costReceiptItem ||..o{ projectDirectCostItem
+project ||..o{ projectDirectCostItem
+costReceiptItem ||..o{ projectDirectCostItem
+costReceipt ||..o{ costPaymentReceipt
+document ||..o{ costPaymentReceipt
 @enduml
