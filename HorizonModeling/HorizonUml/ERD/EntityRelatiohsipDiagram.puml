@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.29
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.30
 
 entity "Basic.EducationLevel" as educationLevel {
   *ID : bigint(19) <<generated epochdate>>
@@ -955,7 +955,25 @@ entity "Finance.ContractSallaryItem" as contractSallaryItem {
   *Title : nvarchar(200)
   *Amount : numeric(22,2)
   Description : nvarchar(4000)
-  *PaymentDuration : char(1) <<hourly=1, daily=2, weekly=3, monthly=4, seasonal=5, annoual=6>>
+  *BaseTimeCalculation : char(1) <<hourly=1, daily=2, weekly=3, monthly=4, seasonal=5, annoual=6>>
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Finance.ContractDeductionItem" as contractDeductionItem {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ContractId : bigint(19) <<FK>>
+  *Title : nvarchar(200)
+  *CalculationType : <<percentage=1, fixedAmount=2>>
+  DeductionPercentage : numeric(3,2) <<from 0 until 100>>
+  FixedAmount : numeric(22,2)
+  Description : nvarchar(4000)
+  *BaseTimeCalculation : char(1) <<hourly=1, daily=2, weekly=3, monthly=4, seasonal=5, annoual=6>>
   *IsActive : char(1) <<true=1, false=0>>
   *IsDeleted : char(1) <<true=1, false=0>>
   *CreatedAt : datetime <<default: now()>>
@@ -1032,6 +1050,22 @@ entity "Finance.CostPaymentReceipt" as costPaymentReceipt {
   *ID : bigint(19) <<generated epochdate>>
   --
   *CostReceiptId : bigint(19) <<FK>>
+  *DocumentId : bigint(19) <<FK>>
+  *Amount : numeric(22,2)
+  *PaymentDate : date
+  Description : nvarchar(4000)
+  *IsActive : char(1) <<true=1, false=0>>
+  *IsDeleted : char(1) <<true=1, false=0>>
+  *CreatedAt : datetime <<default: now()>>
+  *CreatedBy : bigint(19)
+  ModifiedAt : timestamp
+  ModifiedBy : bigint(19)
+}
+
+entity "Finance.SallaryPaymentReceipt" as sallaryPaymentReceipt {
+  *ID : bigint(19) <<generated epochdate>>
+  --
+  *ContractId : bigint(19) <<FK>>
   *DocumentId : bigint(19) <<FK>>
   *Amount : numeric(22,2)
   *PaymentDate : date
@@ -1134,4 +1168,7 @@ project ||..o{ projectDirectCostItem
 costReceiptItem ||..o{ projectDirectCostItem
 costReceipt ||..o{ costPaymentReceipt
 document ||..o{ costPaymentReceipt
+staffContract ||..o{ contractDeductionItem
+document ||..o{ sallaryPaymentReceipt
+contract ||..o{ sallaryPaymentReceipt
 @enduml
