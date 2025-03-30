@@ -1,5 +1,10 @@
 CREATE SCHEMA Basic;
 CREATE SCHEMA UserManagement;
+CREATE SCHEMA HumanResource;
+CREATE SCHEMA DocumentManagement;
+CREATE SCHEMA ProjectManagement;
+CREATE SCHEMA Finance;
+
 
 CREATE TABLE Basic.EducationLevel(
     Id serial PRIMARY KEY NOT NULL, 
