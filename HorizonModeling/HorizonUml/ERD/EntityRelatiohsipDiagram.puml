@@ -625,7 +625,7 @@ entity "HumanResource.QuestionnaireResultDetail" as questionnaireResultDetail {
   ModifierId : bigint(19)
 }
 
-entity "DMS.Document" as document {
+entity "DocumentManagement.Document" as document {
   *Id : bigint(19) <<serial>>
   --
   *TableName : nvarchar(250)
@@ -641,7 +641,7 @@ entity "DMS.Document" as document {
   ModifierId : bigint(19)
 }
 
-entity "DMS.ProjectWorkflowDocumentType" as projectWorkflowDocumentType {
+entity "DocumentManagement.ProjectWorkflowDocumentType" as projectWorkflowDocumentType {
   *Id : bigint(19) <<serial>>
   --
   *DocumentTypeId : bigint(19) <<FK>>

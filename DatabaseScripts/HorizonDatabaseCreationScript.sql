@@ -185,3 +185,58 @@ CREATE TABLE UserManagement.Permission(
     ModifyDate timestamp,
 	ModifierId bigint
 );
+
+CREATE TABLE UserManagement.Form(
+    Id serial PRIMARY KEY NOT NULL, 
+    Code varchar(10) NOT NULL UNIQUE,
+    Title varchar(200) NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint
+);
+
+CREATE TABLE UserManagement.FormPermission(
+    Id serial PRIMARY KEY NOT NULL, 
+    FormId bigint NOT NULL,
+	PermissionId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (FormId) REFERENCES Form(Id),
+    FOREIGN KEY (PermissionId) REFERENCES Permission(Id)
+);
+
+CREATE TABLE UserManagement.RolePermission(
+    Id serial PRIMARY KEY NOT NULL, 
+    FormPermissionId bigint NOT NULL,
+	RoleId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (RoleId) REFERENCES Role(Id),
+    FOREIGN KEY (FormPermissionId) REFERENCES FormPermission(Id)
+);
+
+CREATE TABLE UserManagement.GroupPermission(
+    Id serial PRIMARY KEY NOT NULL, 
+    FormPermissionId bigint NOT NULL,
+	GroupId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (GroupId) REFERENCES Groups(Id),
+    FOREIGN KEY (FormPermissionId) REFERENCES FormPermission(Id)
+);
