@@ -42,7 +42,7 @@ entity "Basic.IssueType" as issueType {
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
-  *Icon : nvarchar(1000)
+  *IconAddress : nvarchar(1000)
   *Color : nvarchar(7)
   Description : nvarchar(4000)
   *IsActive : boolean <<default: true>>
@@ -60,9 +60,9 @@ entity "Basic.Status" as status {
   *Code : varchar(20) <<unique>>
   Description : nvarchar(4000)
   *Color : nvarchar(7)
-  IsToDo : boolean
-  IsInProgress : boolean
-  IsDone : boolean
+  *IsToDo : boolean
+  *IsInProgress : boolean
+  *IsDone : boolean
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -78,7 +78,7 @@ entity "Basic.Resolvation" as resolvation {
   *Code : varchar(20) <<unique>>
   Description : nvarchar(4000)
   *Color : nvarchar(7)
-  IsResolved : boolean
+  *IsResolved : boolean
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
