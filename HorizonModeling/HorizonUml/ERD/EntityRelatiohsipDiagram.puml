@@ -8,273 +8,273 @@ skinparam TitleFontSize 72pt
 title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.30
 
 entity "Basic.EducationLevel" as educationLevel {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Basic.Priority" as priority {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
   *Ordering : integer
   *Color : nvarchar(7)
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Basic.IssueType" as issueType {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
   *Icon : nvarchar(1000)
   *Color : nvarchar(7)
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Basic.Status" as status {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
   Description : nvarchar(4000)
   *Color : nvarchar(7)
-  IsToDo : char(1) <<true=1, false=0>>
-  IsInProgress : char(1) <<true=1, false=0>>
-  IsDone : char(1) <<true=1, false=0>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  IsToDo : boolean
+  IsInProgress : boolean
+  IsDone : boolean
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Basic.Resolvation" as resolvation {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
   Description : nvarchar(4000)
   *Color : nvarchar(7)
-  IsResolved : char(1) <<true=1, false=0>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  IsResolved : boolean
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Basic.MeetingType" as meetingType {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Basic.DocumentType" as documentType {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
-}
-
-entity "Basic.ContractType" as contractType {
-  *ID : bigint(19) <<generated epochdate>>
-  --
-  *Title : nvarchar(200)
-  *Code : varchar(20) <<unique>>
-  Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Basic.FileExtention" as fileExtention {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Basic.ContractType" as contractType {
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : nvarchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : nvarchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Basic.TimeUnit" as timeUnit {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
   BasedOnMiliscond : bigint(19)
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 
 entity "UserManagement.Role" as role {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "UserManagement.Groups" as groups {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "UserManagement.Permission" as permission {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "UserManagement.Form" as form {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(200)
   *Code : varchar(20) <<unique>>
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "UserManagement.FormPermission" as formPermission {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *FormId : bigint(19) <<FK>>
   *PermissionId : bigint(19) <<FK>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "UserManagement.RolePermission" as rolePermission {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *RoleId : integer(10) <<FK>>
   *FormPermissionId : integer(10) <<FK>>
   *ActiveFrom : datetime
   ActiveTo : datetime
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "UserManagement.GroupPermission" as groupPermission {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *GroupId : bigint(19) <<FK>>
   *FormPermissionId : bigint(19) <<FK>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "UserManagement.UserPermission" as userPermission {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *UserId : bigint(19) <<FK>>
   *PermissionId : bigint(19) <<FK>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "UserManagement.Profile" as profile {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *FirstName : nvarchar(200)
   *LastName : nvarchar(200)
-  *Gender : char(1) <<true=1, false=0>>
+  *Gender : enum <<male, female>>
   Avatar : text
   Birthday : date
   PhoneNumber : nvarchar(20)
@@ -282,16 +282,16 @@ entity "UserManagement.Profile" as profile {
   EmailAddress : nvarchar(200)
   Address : nvarchar(4000)
   PostalCode : varchar(20)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "UserManagement.Users" as user {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
   *ActiveFrom : datetime
@@ -301,138 +301,117 @@ entity "UserManagement.Users" as user {
   *Username : varchar(20) <<unique>>
   *Pass : varchar(255)
   PassSalt : varchar(50)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "UserManagement.UserRole" as userRole {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *UserId : bigint(19) <<FK>>
   *RoleId : bigint(19) <<FK>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "UserManagement.UserGroup" as userGroup {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *UserId : bigint(19) <<FK>>
   *GroupId : bigint(19) <<FK>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.Company" as company {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : varchar(50)
   *Code : varchar(20) <<unique>>
   ParentId : bigint(19) <<FK>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
-}
-
-
-entity "HumanResource.Building" as building {
-  *ID : bigint(19) <<generated epochdate>>
-  --
-  *NAME : varchar(50)
-  *CODE : varchar(20) <<unique>>
-  *ISACTIVE : char(1)
-  *ORGANIZATION : integer(20) <<FK>>
-  *FLOORCOUNT : integer(10)
-  POSTALCODE : varchar(10)
-  ADDRESS : varchar(255)
-  PHONENUMBER : varchar(20)
-  FAXNUMBER : varchar(20)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.Department" as department {
-  *ID : integer(10) <<generated epochdate>>
+  *Id : integer(10) <<serial>>
   --
   *Title : varchar(50)
   *Code : varchar(20) <<unique>>
   *CompanyId : integer(10) 
   ParentId : integer(20) <<FK>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.Position" as position {
-  *ID : integer(10) <<generated epochdate>>
+  *Id : integer(10) <<serial>>
   --
   *Title : varchar(50)
   *Code : varchar(20) <<unique>>
   *DepartmentId : bigint(19) <<FK>>
   ParentId : bigint(19) <<FK>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.Staff" as staff {
-  *ID : integer(10) <<generated epochdate>>
+  *Id : integer(10) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
   *ComapnyId : bigint(19) <<FK>>
   *StaffNumber : nvarchar(20) <<unique>>
   StartDate : datetime
   EndDate : datetime
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.StaffPsition" as staffPosition {
-  *ID : integer(10) <<generated epochdate>>
+  *Id : integer(10) <<serial>>
   --
   *StaffId : bigint(19) <<FK>>
   *PositionId : bigint(19) <<FK>>
   StartDate : datetime
   EndDate : datetime
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.ProfileEducation" as profileEducation {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
   *EducatioLevelId : bigint(19) <<FK>>
@@ -440,16 +419,16 @@ entity "HumanResource.ProfileEducation" as profileEducation {
   CollegeName : nvarchar(200)
   StartDate : date
   EndDate : date
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.ProfileJobExperience" as profileJobExperience {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
   *JobTitle : nvarchar(200)
@@ -457,109 +436,109 @@ entity "HumanResource.ProfileJobExperience" as profileJobExperience {
   StartDate : date
   EndDate : date
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.ProfileCertificate" as profileCertificate {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
   *Title : nvarchar(200)
   InstituteName : nvarchar(200)
   StartDate : date
   EndDate : date
-  HasCertificate : char(1) <<true=1, false=0>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  HasCertificate : boolean
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.WorkingTimeTable" as workingTimeTable {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *CompanyId : bigint(19) <<FK>>
-  *WorkingDay : integer <<Monday=1, Tuesday=2, Wednesday=3, Thursday=4, Friday=5, Saturday=6, Sunday=7>>
+  *WorkingDay : enum <<Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday>>
   *StartTime : time
   *EndTime : time
   FloatingStartTime : time
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.Holidaies" as holidaies {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *CompanyId : bigint(19) <<FK>>
   HolidayDate : date
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.Attendance" as attendance {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *StaffId : bigint(19) <<FK>>
   WorkingDate : date
-  EnteranceType : char(1) <<enter=1, exit=2>>
+  EnteranceType : enum <<enter, exit>>
   EnternaceTime : time
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.Leave" as leave {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *StaffId : bigint(19) <<FK>>
-  LeaveType : char(1) <<fulltime=1, parttime=2>>
+  LeaveType : enum <<fulltime, parttime>>
   LeavingStartDate : datetime
   LeavingEndDate : datetime
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.WorkMission" as workMission {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *StaffId : bigint(19) <<FK>>
   MissionStartDate : datetime
   MissionEndDate : datetime
   MissionLocation : nvarchar(200)
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.Questionnaire" as questionnaire {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(200)
   Description : nvarchar(4000)
@@ -567,103 +546,118 @@ entity "HumanResource.Questionnaire" as questionnaire {
   *AcceptableScore : integer
   *WarningScore : integer
   *DisasterScore : integer
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.QuestionnaireTargetDepartment" as questionnaireTargetDepartment {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *QuestionnaireId : bigint(19) <<FK>>
   *DepoartmentId : bigint(19) <<FK>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.Question" as question {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *QuestionnaireId : bigint(19) <<FK>>
   *Question : nvarchar(4000)
   *Score : integer
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.QuestionOption" as questionOption {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *QuestionId : bigint(19) <<FK>>
   *Title : nvarchar(4000)
   *Score : integer
-  IsDescriptionRequired : char(1) <<true=1, false=0>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  IsDescriptionRequired : boolean
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.QuestionnaireResult" as questionnaireResult {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *QuestionnaireId : bigint(19) <<FK>>
   *StaffId : bigint(19) <<FK>>
   *TotalScore : integer
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "HumanResource.QuestionnaireResultDetail" as questionnaireResultDetail {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *QuestionnaireResultId : bigint(19) <<FK>>
   *QuestionId : bigint(19) <<FK>>
   *QuestionOptionId : bigint(19) <<FK>>
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "DMS.Document" as document {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *TableName : nvarchar(250)
   *TableId : bigint(19)
   *DocumentTypeId : bigint(19) <<FK>>
   *FileExtentionId : bigint(19) <<FK>>
   *FileAddress: nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
+entity "DMS.ProjectWorkflowDocumentType" as projectWorkflowDocumentType {
+  *Id : bigint(19) <<serial>>
+  --
+  *DocumentTypeId : bigint(19) <<FK>>
+  *ProjectWorkflowId : bigint(19) <<FK>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+
+
 entity "ProjectManagement.Project" as project {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ConstructorCompnayId : bigint(19) <<FK>>
   *Code : nvarchar(20) <<unique>>
@@ -671,89 +665,89 @@ entity "ProjectManagement.Project" as project {
   Description : nvarchar(4000)
   StartDate : date
   EndDate : date
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "ProjectManagement.ProjectStaffMember" as projectStaffMember {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
   *StaffId : bigint(19) <<FK>>
-  *IsProjectManager : char(1) <<true=1, false=0>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsProjectManager : boolean
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "ProjectManagement.ProjectDepartmentMember" as projectDepartmentMember {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
   *DepartmentId : bigint(19) <<FK>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "ProjectManagement.ProjectWorkflow" as projectWorkflow {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
   *Code : nvarchar(20) <<unique>>
   *Title : nvarchar(200)
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 
 entity "ProjectManagement.ProjectWorkflowStatus" as projectWorkflowStatus {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ProjectWorkflowId : bigint(19) <<FK>>
   *StatusId : bigint(19) <<FK>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "ProjectManagement.ProjectWorkflowProgress" as projectWorkflowProgress {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : nvarchar(250)
   StartProjectWorkflowStatusId : bigint(19) <<FK>>
-  IsFromStartPoint : char(1) <<true=1, false=0>>
-  CanBeStartedFromAnyStatus : char(1) <<true=1, false=0>>
+  IsFromStartPoint : boolean
+  CanBeStartedFromAnyStatus : boolean
   EndProjectWorkflowStatusId : bigint(19) <<FK>>
-  IsToEndPoint : char(1) <<true=1, false=0>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  IsToEndPoint : boolean
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "ProjectManagement.Issue" as issue {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
   AssineeeId : bigint(19) <<FK>>
@@ -765,71 +759,71 @@ entity "ProjectManagement.Issue" as issue {
   IssueTypeId : bigint(19) <<FK>>
   CuurentStatusId : bigint(19) <<FK>>
   CurrentResolvationId : bigint(19) <<FK>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "ProjectManagement.IssueComment" as issueComment {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *IssueId : bigint(19) <<FK>>
   *Comment : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "ProjectManagement.IssueAttachment" as issueAttachment {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *IssueId : bigint(19) <<FK>>
   *DocumentId : bigint(19) <<FK>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "ProjectManagement.Release" as release {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
   *VersionNumber : nvarchar(20) <<unique>>
   ReleaseDate : date
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "ProjectManagement.ReleaseIssue" as releaseIssue {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ReleaseId : bigint(19) <<FK>>
   *IssueId : bigint(19) <<FK>>
-  IsFinalized : char(1) <<true=1, false=0>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  IsFinalized : boolean
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "ProjectManagement.WorkLog" as workLog {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *IssueId : bigint(19) <<FK>>
   *LogDate : date
@@ -837,48 +831,48 @@ entity "ProjectManagement.WorkLog" as workLog {
   WorkingDuration : float 
   TimeUnitId : bigint(19) <<FK>>
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 
 entity "ProjectManagement.WorkflowEligibleFileExtention" as workflowEligibleFileExtention {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *WorkflowId : bigint(19) <<FK>>
   *FileExtentionId : bigint(19) <<FK>>
   MaxFileSizeForUpload : integer
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 
 entity "ProjectManagement.IssueWorkflowHistory" as issueWorkflowHistory {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *IssueId : bigint(19) <<FK>>
   *StartStatusId : bigint(19) <<FK>>
   *EndStatusId : bigint(19) <<FK>>
   *ProjectWorkflowProgressId : bigint(19) <<FK>>
   ResolvationId : bigint(19) <<FK>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "ProjectManagement.ProjectMeeting" as projectMeeting {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
   *MeetingTypeId : bigint(19) <<FK>>
@@ -891,47 +885,47 @@ entity "ProjectManagement.ProjectMeeting" as projectMeeting {
   ScheduleEndTime : time
   ActualStartTime : time
   ActualEndTime : time
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "ProjectManagement.MeetingInvitees" as meetingInvitees {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ProjectMeetingId : bigint(19) <<FK>>
   *StaffId : bigint(19) <<FK>>
-  IsAttanded : char(1)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsAttanded : boolean
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 
 entity "ProjectManagement.MeetingMinutes" as meetingMinutes {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ProjectMeetingId : bigint(19) <<FK>>
   *Resolution : nvarchar(4000)
   ResponsibleDepartmentId : bigint(19) <<FK>>
   IssueId : bigint(19) <<FK>>
   DueDate : datetime
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Finance.StaffContract" as staffContract {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *StaffId : bigint(19) <<FK>>
   *ContractTypeId : bigint(19) <<FK>>
@@ -939,33 +933,33 @@ entity "Finance.StaffContract" as staffContract {
   *EndDate : date
   *Title : nvarchar(200)
   Description : nvarchar(4000)
-  AutoRenewal : char(1) <<true=1, false=0>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  AutoRenewal : boolean
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Finance.ContractSallaryItem" as contractSallaryItem {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ContractId : bigint(19) <<FK>>
   *Title : nvarchar(200)
   *Amount : numeric(22,2)
   Description : nvarchar(4000)
-  *BaseTimeCalculation : char(1) <<hourly=1, daily=2, weekly=3, monthly=4, seasonal=5, annoual=6>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *CalculationTimeUnitId : bigint(19) <<FK>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Finance.ContractDeductionItem" as contractDeductionItem {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ContractId : bigint(19) <<FK>>
   *Title : nvarchar(200)
@@ -973,17 +967,17 @@ entity "Finance.ContractDeductionItem" as contractDeductionItem {
   DeductionPercentage : numeric(3,2) <<from 0 until 100>>
   FixedAmount : numeric(22,2)
   Description : nvarchar(4000)
-  *BaseTimeCalculation : char(1) <<hourly=1, daily=2, weekly=3, monthly=4, seasonal=5, annoual=6>>
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *CalculationTimeUnitId : bigint(19) <<FK>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Finance.Supplier" as supplier {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *Title : bigint(19) <<FK>>
   Description : nvarchar(4000)
@@ -992,90 +986,90 @@ entity "Finance.Supplier" as supplier {
   MobileNumber : nvarchar(20)
   Email : nvarchar(100)
   PostalCode : nvarchar(20)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Finance.CostReceipt" as costReceipt {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *SupplierId : bigint(19) <<FK>>
   *DocumentId : bigint(19) <<FK>>
   *ReceiptDate : bigint(19) <<FK>>
   *TotalAmount : numeric(22,2)
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Finance.CostReceiptItem" as costReceiptItem {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *CostReceiptId : bigint(19) <<FK>>
   *ItemTitle : bigint(19) <<FK>>
   *UnitAmount : numeric(22,2)
   *Quantity : float
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Finance.ProjectDirectCostItem" as projectDirectCostItem {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
   *CostReceiptItemId : bigint(19) <<FK>>
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Finance.CostPaymentReceipt" as costPaymentReceipt {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *CostReceiptId : bigint(19) <<FK>>
   *DocumentId : bigint(19) <<FK>>
   *Amount : numeric(22,2)
   *PaymentDate : date
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 entity "Finance.SallaryPaymentReceipt" as sallaryPaymentReceipt {
-  *ID : bigint(19) <<generated epochdate>>
+  *Id : bigint(19) <<serial>>
   --
   *ContractId : bigint(19) <<FK>>
   *DocumentId : bigint(19) <<FK>>
   *Amount : numeric(22,2)
   *PaymentDate : date
   Description : nvarchar(4000)
-  *IsActive : char(1) <<true=1, false=0>>
-  *IsDeleted : char(1) <<true=1, false=0>>
-  *CreatedAt : datetime <<default: now()>>
-  *CreatedBy : bigint(19)
-  ModifiedAt : timestamp
-  ModifiedBy : bigint(19)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
 }
 
 
@@ -1092,7 +1086,6 @@ role ||..o{ userRole
 user ||..o{ userGroup
 groups ||..o{ userGroup
 company |o..o{ company
-company ||..o{ building
 company ||..o{ department
 position |o..o{ position
 department ||..o{ position
@@ -1160,6 +1153,7 @@ staff ||..o{ workMission
 contractType ||..o{ staffContract
 staff ||..o{ staffContract
 staffContract ||..o{ contractSallaryItem
+timeUnit ||..o{ contractSallaryItem
 supplier ||..o{ costReceipt
 document ||..o{ costReceipt
 costReceipt ||..o{ costReceiptItem
@@ -1169,6 +1163,9 @@ costReceiptItem ||..o{ projectDirectCostItem
 costReceipt ||..o{ costPaymentReceipt
 document ||..o{ costPaymentReceipt
 staffContract ||..o{ contractDeductionItem
+timeUnit ||..o{ contractDeductionItem
 document ||..o{ sallaryPaymentReceipt
 contract ||..o{ sallaryPaymentReceipt
+projectWorkflow ||..o{ projectWorkflowDocumentType
+documentType ||..o{ projectWorkflowDocumentType
 @enduml
