@@ -211,8 +211,8 @@ CREATE TABLE UserManagement.FormPermission(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (FormId) REFERENCES Form(Id),
-    FOREIGN KEY (PermissionId) REFERENCES Permission(Id)
+	FOREIGN KEY (FormId) REFERENCES UserManagement.Form(Id),
+    FOREIGN KEY (PermissionId) REFERENCES UserManagement.Permission(Id)
 );
 
 CREATE TABLE UserManagement.RolePermission(
@@ -225,8 +225,8 @@ CREATE TABLE UserManagement.RolePermission(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (RoleId) REFERENCES Role(Id),
-    FOREIGN KEY (FormPermissionId) REFERENCES FormPermission(Id)
+	FOREIGN KEY (RoleId) REFERENCES UserManagement.Role(Id),
+    FOREIGN KEY (FormPermissionId) REFERENCES UserManagement.FormPermission(Id)
 );
 
 CREATE TABLE UserManagement.GroupPermission(
@@ -239,8 +239,8 @@ CREATE TABLE UserManagement.GroupPermission(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (GroupId) REFERENCES Groups(Id),
-    FOREIGN KEY (FormPermissionId) REFERENCES FormPermission(Id)
+	FOREIGN KEY (GroupId) REFERENCES UserManagement.Groups(Id),
+    FOREIGN KEY (FormPermissionId) REFERENCES UserManagement.FormPermission(Id)
 );
 
 CREATE TABLE UserManagement.Profile(
@@ -280,7 +280,7 @@ CREATE TABLE UserManagement.Users(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (ProfileId) REFERENCES Profile(Id)
+	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
 );
 
 CREATE TABLE UserManagement.UserPermission(
@@ -293,8 +293,8 @@ CREATE TABLE UserManagement.UserPermission(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (UserId) REFERENCES Users(Id),
-    FOREIGN KEY (FormPermissionId) REFERENCES FormPermission(Id)
+	FOREIGN KEY (UserId) REFERENCES UserManagement.Users(Id),
+    FOREIGN KEY (FormPermissionId) REFERENCES UserManagement.FormPermission(Id)
 );
 
 CREATE TABLE UserManagement.UserRole(
@@ -307,8 +307,8 @@ CREATE TABLE UserManagement.UserRole(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (RoleId) REFERENCES Role(Id),
-    FOREIGN KEY (UserId) REFERENCES Users(Id)
+	FOREIGN KEY (RoleId) REFERENCES UserManagement.Role(Id),
+    FOREIGN KEY (UserId) REFERENCES UserManagement.Users(Id)
 );
 
 CREATE TABLE UserManagement.UserGroup(
@@ -321,8 +321,8 @@ CREATE TABLE UserManagement.UserGroup(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (GroupId) REFERENCES Groups(Id),
-    FOREIGN KEY (UserId) REFERENCES Users(Id)
+	FOREIGN KEY (GroupId) REFERENCES UserManagement.Groups(Id),
+    FOREIGN KEY (UserId) REFERENCES UserManagement.Users(Id)
 );
 
 
@@ -338,7 +338,7 @@ CREATE TABLE HumanResource.Company(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (ParentId) REFERENCES Company(Id)
+	FOREIGN KEY (ParentId) REFERENCES HumanResource.Company(Id)
 );
 
 CREATE TABLE HumanResource.Department(
@@ -354,8 +354,8 @@ CREATE TABLE HumanResource.Department(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (ParentId) REFERENCES Department(Id),
-	FOREIGN KEY (CompanyId) REFERENCES Company(Id)
+	FOREIGN KEY (ParentId) REFERENCES HumanResource.Department(Id),
+	FOREIGN KEY (CompanyId) REFERENCES HumanResource.Company(Id)
 );
 
 CREATE TABLE HumanResource.Position(
@@ -371,8 +371,8 @@ CREATE TABLE HumanResource.Position(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (ParentId) REFERENCES Position(Id),
-	FOREIGN KEY (DepartmentId) REFERENCES Department(Id)
+	FOREIGN KEY (ParentId) REFERENCES HumanResource.Position(Id),
+	FOREIGN KEY (DepartmentId) REFERENCES HumanResource.Department(Id)
 );
 
 CREATE TABLE HumanResource.Staff(
@@ -389,8 +389,8 @@ CREATE TABLE HumanResource.Staff(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (ProfileId) REFERENCES Profile(Id),
-	FOREIGN KEY (CompnayId) REFERENCES Company(Id)
+	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id),
+	FOREIGN KEY (CompanyId) REFERENCES HumanResource.Company(Id)
 );
 
 CREATE TABLE HumanResource.StaffPosition(
@@ -406,6 +406,6 @@ CREATE TABLE HumanResource.StaffPosition(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (StaffId) REFERENCES Staff(Id),
-	FOREIGN KEY (PositionId) REFERENCES Position(Id)
+	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id),
+	FOREIGN KEY (PositionId) REFERENCES HumanResource.Position(Id)
 );
