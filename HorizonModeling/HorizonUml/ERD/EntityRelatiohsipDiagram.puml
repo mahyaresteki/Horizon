@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.30
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.31
 
 entity "Basic.EducationLevel" as educationLevel {
   *Id : bigint(19) <<serial>>
@@ -280,7 +280,7 @@ entity "UserManagement.Profile" as profile {
   PhoneNumber : nvarchar(20)
   MobileNumber : nvarchar(20)
   EmailAddress : nvarchar(200)
-  Address : nvarchar(4000)
+  Address : nvarchar(1000)
   PostalCode : varchar(20)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -294,11 +294,12 @@ entity "UserManagement.Users" as user {
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
-  *ActiveFrom : datetime
-  ActiveTo : datetime
-  LastLogInDate : datetime
-  WrongLogInCount : integer(10)
-  *Username : varchar(20) <<unique>>
+  *ActiveFrom : timestamp
+  ActiveTo : timestamp
+  LastLogInDate : timestamp
+  LogInCount : integer(10) <<default: 0>>
+  WrongLogInCount : integer(10) <<default: 0>>
+  *Username : varchar(200) <<unique>>
   *Pass : varchar(255)
   PassSalt : varchar(50)
   *IsActive : boolean <<default: true>>
@@ -341,6 +342,7 @@ entity "HumanResource.Company" as company {
   *Title : varchar(50)
   *Code : varchar(20) <<unique>>
   ParentId : bigint(19) <<FK>>
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -354,8 +356,9 @@ entity "HumanResource.Department" as department {
   --
   *Title : varchar(50)
   *Code : varchar(20) <<unique>>
-  *CompanyId : integer(10) 
+  *CompanyId : integer(10)  
   ParentId : integer(20) <<FK>>
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -371,6 +374,7 @@ entity "HumanResource.Position" as position {
   *Code : varchar(20) <<unique>>
   *DepartmentId : bigint(19) <<FK>>
   ParentId : bigint(19) <<FK>>
+  Description : nvarchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -385,8 +389,9 @@ entity "HumanResource.Staff" as staff {
   *ProfileId : bigint(19) <<FK>>
   *ComapnyId : bigint(19) <<FK>>
   *StaffNumber : nvarchar(20) <<unique>>
-  StartDate : datetime
-  EndDate : datetime
+  StartDate : date
+  EndDate : date
+  Description : nvarchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -402,6 +407,7 @@ entity "HumanResource.StaffPsition" as staffPosition {
   *PositionId : bigint(19) <<FK>>
   StartDate : datetime
   EndDate : datetime
+  Description : nvarchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -419,6 +425,7 @@ entity "HumanResource.ProfileEducation" as profileEducation {
   CollegeName : nvarchar(200)
   StartDate : date
   EndDate : date
+  Description : nvarchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -453,6 +460,7 @@ entity "HumanResource.ProfileCertificate" as profileCertificate {
   StartDate : date
   EndDate : date
   HasCertificate : boolean
+  Description : nvarchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
