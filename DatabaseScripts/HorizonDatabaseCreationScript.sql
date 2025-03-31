@@ -325,6 +325,23 @@ CREATE TABLE UserManagement.UserGroup(
     FOREIGN KEY (UserId) REFERENCES UserManagement.Users(Id)
 );
 
+CREATE TABLE DocumentManagement.Document(
+    Id serial PRIMARY KEY NOT NULL, 
+    TableId bigint NOT NULL,
+    TableName varchar(255) NOT NULL,
+	FileAddress varchar(4000) NOT NULL,
+	DocumentTypeId bigint NOT NULL,
+	FileExtentionId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (DocumentTypeId) REFERENCES Basic.DocumentType(Id),
+	FOREIGN KEY (FileExtention) REFERENCES Basic.FileExtention(Id)
+);
+
 
 CREATE TABLE HumanResource.Company(
     Id serial PRIMARY KEY NOT NULL, 
@@ -408,4 +425,60 @@ CREATE TABLE HumanResource.StaffPosition(
 	ModifierId bigint,
 	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id),
 	FOREIGN KEY (PositionId) REFERENCES HumanResource.Position(Id)
+);
+
+CREATE TABLE HumanResource.ProfileEducation(
+    Id serial PRIMARY KEY NOT NULL, 
+	ProfileId bigint Not Null,
+	EducationLevelId bigint NOT NULL,
+	DocumentId bigint,
+	Title varchar(255) NOT NULL,
+	CollageName varchar(255),
+	StartDate date,
+	EndDate date,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id),
+	FOREIGN KEY (DocumentId) REFERENCES DocumentManagement.Document(Id),
+	FOREIGN KEY (EducationLevelId) REFERENCES Basic.EducationLevel(Id)
+);
+
+CREATE TABLE HumanResource.ProfileJobExperience(
+    Id serial PRIMARY KEY NOT NULL, 
+	ProfileId bigint Not Null,
+	JobTitle varchar(255) NOT NULL,
+	CompanyName varchar(255) NOT NULL,
+	StartDate date,
+	EndDate date,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
+);
+
+CREATE TABLE HumanResource.ProfileCertificate(
+    Id serial PRIMARY KEY NOT NULL, 
+	ProfileId bigint Not Null,
+	Title varchar(255) NOT NULL,
+	InstituteNmae varchar(255) NOT NULL,
+	HasCertificate boolean NOT NULL,
+	StartDate date,
+	EndDate date,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
 );

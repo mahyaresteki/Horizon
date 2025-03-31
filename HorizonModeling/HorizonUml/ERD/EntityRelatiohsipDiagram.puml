@@ -5,14 +5,14 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.3.31
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.4.1
 
 entity "Basic.EducationLevel" as educationLevel {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Code : varchar(20) <<unique>>
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -24,11 +24,11 @@ entity "Basic.EducationLevel" as educationLevel {
 entity "Basic.Priority" as priority {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Code : varchar(20) <<unique>>
   *Ordering : integer
-  *Color : nvarchar(7)
-  Description : nvarchar(4000)
+  *Color : varchar(7)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -40,11 +40,11 @@ entity "Basic.Priority" as priority {
 entity "Basic.IssueType" as issueType {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Code : varchar(20) <<unique>>
-  *IconAddress : nvarchar(1000)
-  *Color : nvarchar(7)
-  Description : nvarchar(4000)
+  *IconAddress : varchar(1000)
+  *Color : varchar(7)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -56,10 +56,10 @@ entity "Basic.IssueType" as issueType {
 entity "Basic.Status" as status {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Code : varchar(20) <<unique>>
-  Description : nvarchar(4000)
-  *Color : nvarchar(7)
+  Description : varchar(4000)
+  *Color : varchar(7)
   *IsToDo : boolean
   *IsInProgress : boolean
   *IsDone : boolean
@@ -74,10 +74,10 @@ entity "Basic.Status" as status {
 entity "Basic.Resolvation" as resolvation {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Code : varchar(20) <<unique>>
-  Description : nvarchar(4000)
-  *Color : nvarchar(7)
+  Description : varchar(4000)
+  *Color : varchar(7)
   *IsResolved : boolean
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -90,9 +90,9 @@ entity "Basic.Resolvation" as resolvation {
 entity "Basic.MeetingType" as meetingType {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Code : varchar(20) <<unique>>
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -104,9 +104,9 @@ entity "Basic.MeetingType" as meetingType {
 entity "Basic.DocumentType" as documentType {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Code : varchar(20) <<unique>>
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -118,9 +118,9 @@ entity "Basic.DocumentType" as documentType {
 entity "Basic.FileExtention" as fileExtention {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Code : varchar(20) <<unique>>
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -132,9 +132,9 @@ entity "Basic.FileExtention" as fileExtention {
 entity "Basic.ContractType" as contractType {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Code : varchar(20) <<unique>>
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -146,10 +146,10 @@ entity "Basic.ContractType" as contractType {
 entity "Basic.TimeUnit" as timeUnit {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Code : varchar(20) <<unique>>
   BasedOnMiliscond : bigint(19)
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -162,9 +162,9 @@ entity "Basic.TimeUnit" as timeUnit {
 entity "UserManagement.Role" as role {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Code : varchar(20) <<unique>>
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -176,9 +176,9 @@ entity "UserManagement.Role" as role {
 entity "UserManagement.Groups" as groups {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Code : varchar(20) <<unique>>
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -190,9 +190,9 @@ entity "UserManagement.Groups" as groups {
 entity "UserManagement.Permission" as permission {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Code : varchar(20) <<unique>>
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -204,9 +204,9 @@ entity "UserManagement.Permission" as permission {
 entity "UserManagement.Form" as form {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Code : varchar(20) <<unique>>
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -272,15 +272,15 @@ entity "UserManagement.UserPermission" as userPermission {
 entity "UserManagement.Profile" as profile {
   *Id : bigint(19) <<serial>>
   --
-  *FirstName : nvarchar(200)
-  *LastName : nvarchar(200)
+  *FirstName : varchar(200)
+  *LastName : varchar(200)
   *Gender : enum <<male, female>>
   Avatar : text
   Birthday : date
-  PhoneNumber : nvarchar(20)
-  MobileNumber : nvarchar(20)
-  EmailAddress : nvarchar(200)
-  Address : nvarchar(1000)
+  PhoneNumber : varchar(20)
+  MobileNumber : varchar(20)
+  EmailAddress : varchar(200)
+  Address : varchar(1000)
   PostalCode : varchar(20)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -374,7 +374,7 @@ entity "HumanResource.Position" as position {
   *Code : varchar(20) <<unique>>
   *DepartmentId : bigint(19) <<FK>>
   ParentId : bigint(19) <<FK>>
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -388,10 +388,10 @@ entity "HumanResource.Staff" as staff {
   --
   *ProfileId : bigint(19) <<FK>>
   *ComapnyId : bigint(19) <<FK>>
-  *StaffNumber : nvarchar(20) <<unique>>
+  *StaffNumber : varchar(20) <<unique>>
   StartDate : date
   EndDate : date
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -407,7 +407,7 @@ entity "HumanResource.StaffPsition" as staffPosition {
   *PositionId : bigint(19) <<FK>>
   StartDate : datetime
   EndDate : datetime
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -421,11 +421,12 @@ entity "HumanResource.ProfileEducation" as profileEducation {
   --
   *ProfileId : bigint(19) <<FK>>
   *EducatioLevelId : bigint(19) <<FK>>
-  *Title : nvarchar(200)
-  CollegeName : nvarchar(200)
+  DocumentId : bigint(19) <<FK>>
+  *Title : varchar(255)
+  CollegeName : varchar(255)
   StartDate : date
   EndDate : date
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -438,11 +439,11 @@ entity "HumanResource.ProfileJobExperience" as profileJobExperience {
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
-  *JobTitle : nvarchar(200)
-  *CompanyName : nvarchar(200)
+  *JobTitle : varchar(200)
+  *CompanyName : varchar(200)
   StartDate : date
   EndDate : date
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -455,12 +456,12 @@ entity "HumanResource.ProfileCertificate" as profileCertificate {
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
-  *Title : nvarchar(200)
-  InstituteName : nvarchar(200)
+  *Title : varchar(200)
+  *InstituteName : varchar(200)
   StartDate : date
   EndDate : date
   HasCertificate : boolean
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -520,7 +521,7 @@ entity "HumanResource.Leave" as leave {
   LeaveType : enum <<fulltime, parttime>>
   LeavingStartDate : datetime
   LeavingEndDate : datetime
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -535,8 +536,8 @@ entity "HumanResource.WorkMission" as workMission {
   *StaffId : bigint(19) <<FK>>
   MissionStartDate : datetime
   MissionEndDate : datetime
-  MissionLocation : nvarchar(200)
-  Description : nvarchar(4000)
+  MissionLocation : varchar(200)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -548,8 +549,8 @@ entity "HumanResource.WorkMission" as workMission {
 entity "HumanResource.Questionnaire" as questionnaire {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(200)
-  Description : nvarchar(4000)
+  *Title : varchar(200)
+  Description : varchar(4000)
   *TotalScore : integer
   *AcceptableScore : integer
   *WarningScore : integer
@@ -579,7 +580,7 @@ entity "HumanResource.Question" as question {
   *Id : bigint(19) <<serial>>
   --
   *QuestionnaireId : bigint(19) <<FK>>
-  *Question : nvarchar(4000)
+  *Question : varchar(4000)
   *Score : integer
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -593,7 +594,7 @@ entity "HumanResource.QuestionOption" as questionOption {
   *Id : bigint(19) <<serial>>
   --
   *QuestionId : bigint(19) <<FK>>
-  *Title : nvarchar(4000)
+  *Title : varchar(4000)
   *Score : integer
   IsDescriptionRequired : boolean
   *IsActive : boolean <<default: true>>
@@ -624,7 +625,7 @@ entity "HumanResource.QuestionnaireResultDetail" as questionnaireResultDetail {
   *QuestionnaireResultId : bigint(19) <<FK>>
   *QuestionId : bigint(19) <<FK>>
   *QuestionOptionId : bigint(19) <<FK>>
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -636,11 +637,11 @@ entity "HumanResource.QuestionnaireResultDetail" as questionnaireResultDetail {
 entity "DocumentManagement.Document" as document {
   *Id : bigint(19) <<serial>>
   --
-  *TableName : nvarchar(250)
+  *TableName : varchar(255)
   *TableId : bigint(19)
   *DocumentTypeId : bigint(19) <<FK>>
   *FileExtentionId : bigint(19) <<FK>>
-  *FileAddress: nvarchar(4000)
+  *FileAddress: varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -668,9 +669,9 @@ entity "ProjectManagement.Project" as project {
   *Id : bigint(19) <<serial>>
   --
   *ConstructorCompnayId : bigint(19) <<FK>>
-  *Code : nvarchar(20) <<unique>>
-  *Title : nvarchar(200)
-  Description : nvarchar(4000)
+  *Code : varchar(20) <<unique>>
+  *Title : varchar(200)
+  Description : varchar(4000)
   StartDate : date
   EndDate : date
   *IsActive : boolean <<default: true>>
@@ -712,9 +713,9 @@ entity "ProjectManagement.ProjectWorkflow" as projectWorkflow {
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
-  *Code : nvarchar(20) <<unique>>
-  *Title : nvarchar(200)
-  Description : nvarchar(4000)
+  *Code : varchar(20) <<unique>>
+  *Title : varchar(200)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -740,7 +741,7 @@ entity "ProjectManagement.ProjectWorkflowStatus" as projectWorkflowStatus {
 entity "ProjectManagement.ProjectWorkflowProgress" as projectWorkflowProgress {
   *Id : bigint(19) <<serial>>
   --
-  *Title : nvarchar(250)
+  *Title : varchar(250)
   StartProjectWorkflowStatusId : bigint(19) <<FK>>
   IsFromStartPoint : boolean
   CanBeStartedFromAnyStatus : boolean
@@ -759,9 +760,9 @@ entity "ProjectManagement.Issue" as issue {
   --
   *ProjectId : bigint(19) <<FK>>
   AssineeeId : bigint(19) <<FK>>
-  *Code : nvarchar(20) <<unique>>
-  *Title : nvarchar(200)
-  Description : nvarchar(4000)
+  *Code : varchar(20) <<unique>>
+  *Title : varchar(200)
+  Description : varchar(4000)
   DueDate : date
   PriorityId : bigint(19) <<FK>>
   IssueTypeId : bigint(19) <<FK>>
@@ -779,7 +780,7 @@ entity "ProjectManagement.IssueComment" as issueComment {
   *Id : bigint(19) <<serial>>
   --
   *IssueId : bigint(19) <<FK>>
-  *Comment : nvarchar(4000)
+  *Comment : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -805,9 +806,9 @@ entity "ProjectManagement.Release" as release {
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
-  *VersionNumber : nvarchar(20) <<unique>>
+  *VersionNumber : varchar(20) <<unique>>
   ReleaseDate : date
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -838,7 +839,7 @@ entity "ProjectManagement.WorkLog" as workLog {
   *StartWorkTime : time
   WorkingDuration : float 
   TimeUnitId : bigint(19) <<FK>>
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -885,10 +886,10 @@ entity "ProjectManagement.ProjectMeeting" as projectMeeting {
   *ProjectId : bigint(19) <<FK>>
   *MeetingTypeId : bigint(19) <<FK>>
   *MeetingDate : date
-  *Title : nvarchar(200)
-  *Location : nvarchar(200)
+  *Title : varchar(200)
+  *Location : varchar(200)
   MinutesDocumentId : bigint(19) <<FK>>
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   ScheduleStartTime : time
   ScheduleEndTime : time
   ActualStartTime : time
@@ -920,7 +921,7 @@ entity "ProjectManagement.MeetingMinutes" as meetingMinutes {
   *Id : bigint(19) <<serial>>
   --
   *ProjectMeetingId : bigint(19) <<FK>>
-  *Resolution : nvarchar(4000)
+  *Resolution : varchar(4000)
   ResponsibleDepartmentId : bigint(19) <<FK>>
   IssueId : bigint(19) <<FK>>
   DueDate : datetime
@@ -939,8 +940,8 @@ entity "Finance.StaffContract" as staffContract {
   *ContractTypeId : bigint(19) <<FK>>
   *StartDate : date
   *EndDate : date
-  *Title : nvarchar(200)
-  Description : nvarchar(4000)
+  *Title : varchar(200)
+  Description : varchar(4000)
   AutoRenewal : boolean
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -954,9 +955,9 @@ entity "Finance.ContractSallaryItem" as contractSallaryItem {
   *Id : bigint(19) <<serial>>
   --
   *ContractId : bigint(19) <<FK>>
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *Amount : numeric(22,2)
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *CalculationTimeUnitId : bigint(19) <<FK>>
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -970,11 +971,11 @@ entity "Finance.ContractDeductionItem" as contractDeductionItem {
   *Id : bigint(19) <<serial>>
   --
   *ContractId : bigint(19) <<FK>>
-  *Title : nvarchar(200)
+  *Title : varchar(200)
   *CalculationType : <<percentage=1, fixedAmount=2>>
   DeductionPercentage : numeric(3,2) <<from 0 until 100>>
   FixedAmount : numeric(22,2)
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *CalculationTimeUnitId : bigint(19) <<FK>>
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -988,12 +989,12 @@ entity "Finance.Supplier" as supplier {
   *Id : bigint(19) <<serial>>
   --
   *Title : bigint(19) <<FK>>
-  Description : nvarchar(4000)
-  Address : nvarchar(4000)
-  PhoneNumber : nvarchar(20)
-  MobileNumber : nvarchar(20)
-  Email : nvarchar(100)
-  PostalCode : nvarchar(20)
+  Description : varchar(4000)
+  Address : varchar(4000)
+  PhoneNumber : varchar(20)
+  MobileNumber : varchar(20)
+  Email : varchar(100)
+  PostalCode : varchar(20)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -1009,7 +1010,7 @@ entity "Finance.CostReceipt" as costReceipt {
   *DocumentId : bigint(19) <<FK>>
   *ReceiptDate : bigint(19) <<FK>>
   *TotalAmount : numeric(22,2)
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -1025,7 +1026,7 @@ entity "Finance.CostReceiptItem" as costReceiptItem {
   *ItemTitle : bigint(19) <<FK>>
   *UnitAmount : numeric(22,2)
   *Quantity : float
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -1039,7 +1040,7 @@ entity "Finance.ProjectDirectCostItem" as projectDirectCostItem {
   --
   *ProjectId : bigint(19) <<FK>>
   *CostReceiptItemId : bigint(19) <<FK>>
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -1055,7 +1056,7 @@ entity "Finance.CostPaymentReceipt" as costPaymentReceipt {
   *DocumentId : bigint(19) <<FK>>
   *Amount : numeric(22,2)
   *PaymentDate : date
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -1071,7 +1072,7 @@ entity "Finance.SallaryPaymentReceipt" as sallaryPaymentReceipt {
   *DocumentId : bigint(19) <<FK>>
   *Amount : numeric(22,2)
   *PaymentDate : date
-  Description : nvarchar(4000)
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -1176,4 +1177,5 @@ document ||..o{ sallaryPaymentReceipt
 contract ||..o{ sallaryPaymentReceipt
 projectWorkflow ||..o{ projectWorkflowDocumentType
 documentType ||..o{ projectWorkflowDocumentType
+document ||..o{ profileEducation
 @enduml
