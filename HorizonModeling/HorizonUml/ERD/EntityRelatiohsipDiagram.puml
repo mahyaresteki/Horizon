@@ -505,9 +505,9 @@ entity "HumanResource.Attendance" as attendance {
   *Id : bigint(19) <<serial>>
   --
   *StaffId : bigint(19) <<FK>>
-  WorkingDate : date
-  EnteranceType : enum <<enter, exit>>
-  EnternaceTime : time
+  *WorkingDate : date
+  *EnteranceType : enum <<enter, exit>>
+  *EnternaceTime : time
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -521,8 +521,10 @@ entity "HumanResource.Leave" as leave {
   --
   *StaffId : bigint(19) <<FK>>
   LeaveType : enum <<fulltime, parttime>>
-  LeavingStartDate : datetime
-  LeavingEndDate : datetime
+  *LeavingStartDate : date
+  LeavingEndDate : date
+  *LeavingStartTime : time
+  *LeavingEndTime : time
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -536,9 +538,11 @@ entity "HumanResource.WorkMission" as workMission {
   *Id : bigint(19) <<serial>>
   --
   *StaffId : bigint(19) <<FK>>
-  MissionStartDate : datetime
-  MissionEndDate : datetime
-  MissionLocation : varchar(200)
+  *MissionStartDate : date
+  MissionEndDate : date
+  *MissionStartTime : time
+  *MissionEndTime : time
+  MissionLocation : varchar(255)
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>

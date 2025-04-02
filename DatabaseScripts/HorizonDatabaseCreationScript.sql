@@ -5,8 +5,10 @@ CREATE SCHEMA DocumentManagement;
 CREATE SCHEMA ProjectManagement;
 CREATE SCHEMA Finance;
 
-CREATE TYPE gender AS ENUM ('male', 'female');
+CREATE TYPE gender AS ENUM ('Male', 'Female');
 CREATE TYPE weekday AS ENUM ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+CREATE TYPE enterancetype AS ENUM ('Enter', 'Exit');
+CREATE TYPE leavetype AS ENUM ('FullTime', 'PartTime');
 
 
 CREATE TABLE Basic.EducationLevel(
@@ -516,4 +518,56 @@ CREATE TABLE HumanResource.Holidaies(
 	ModifierId bigint,
 	FOREIGN KEY (CompanyId) REFERENCES HumanResource.Company(Id),
 	UNIQUE (CompnayId, HolidayDate)
+);
+
+CREATE TABLE HumanResource.Attendance(
+    Id serial PRIMARY KEY NOT NULL, 
+	StaffId bigint Not Null,
+	WorkingDate date NOT NULL,
+	EnteranceType enterancetype NOT NULL,
+	EnternaceTime time NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id)
+);
+
+CREATE TABLE HumanResource.Leave(
+    Id serial PRIMARY KEY NOT NULL, 
+	StaffId bigint Not Null,
+	LeaveType leavetype NOT NULL,
+	LeavingStartDate date NOT NULL,
+	LeavingEndDate date,
+	LeavingStartTime time NOT NULL,
+	LeavingEndTime time NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id)
+);
+
+
+CREATE TABLE HumanResource.WorkMission(
+    Id serial PRIMARY KEY NOT NULL, 
+	StaffId bigint Not Null,
+	MissionStartDate date NOT NULL,
+	MissionEndDate date,
+	MissionStartTime time NOT NULL,
+	MissionEndTime time NOT NULL,
+	MissionLocation varchar(255),
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id)
 );
