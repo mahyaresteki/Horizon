@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.4.1
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.4.2
 
 entity "Basic.EducationLevel" as educationLevel {
   *Id : bigint(19) <<serial>>
@@ -470,14 +470,15 @@ entity "HumanResource.ProfileCertificate" as profileCertificate {
   ModifierId : bigint(19)
 }
 
-entity "HumanResource.WorkingTimeTable" as workingTimeTable {
+entity "HumanResource.WorkingTimeTable" as workingTimeTable { 
   *Id : bigint(19) <<serial>>
   --
-  *CompanyId : bigint(19) <<FK>>
-  *WorkingDay : enum <<Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday>>
+  *CompanyId : bigint(19) <<FK>> <<composite unique>>
+  *WorkingDay : enum <<Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday>> <<composite unique>>
   *StartTime : time
   *EndTime : time
   FloatingStartTime : time
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -489,8 +490,9 @@ entity "HumanResource.WorkingTimeTable" as workingTimeTable {
 entity "HumanResource.Holidaies" as holidaies {
   *Id : bigint(19) <<serial>>
   --
-  *CompanyId : bigint(19) <<FK>>
-  HolidayDate : date
+  *CompanyId : bigint(19) <<FK>> <<composite unique>>
+  HolidayDate : date <<composite unique>> 
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>

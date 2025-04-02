@@ -6,6 +6,7 @@ CREATE SCHEMA ProjectManagement;
 CREATE SCHEMA Finance;
 
 CREATE TYPE gender AS ENUM ('male', 'female');
+CREATE TYPE weekday AS ENUM ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
 
 
 CREATE TABLE Basic.EducationLevel(
@@ -481,4 +482,38 @@ CREATE TABLE HumanResource.ProfileCertificate(
     ModifyDate timestamp,
 	ModifierId bigint,
 	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
+);
+
+
+CREATE TABLE HumanResource.WorkingTimeTable(
+    Id serial PRIMARY KEY NOT NULL, 
+	CompnayId bigint Not Null,
+	WorkingDay weekday NOT NULL,
+	StartTime time NOT NULL,
+	EndTime time NOT NULL,
+	FloatingStartTime time,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (CompanyId) REFERENCES HumanResource.Company(Id),
+	UNIQUE (CompnayId, WorkingDay)
+);
+
+CREATE TABLE HumanResource.Holidaies(
+    Id serial PRIMARY KEY NOT NULL, 
+	CompnayId bigint Not Null,
+	HolidayDate date NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (CompanyId) REFERENCES HumanResource.Company(Id),
+	UNIQUE (CompnayId, HolidayDate)
 );
