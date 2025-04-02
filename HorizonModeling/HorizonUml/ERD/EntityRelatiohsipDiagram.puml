@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.4.2
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.4.3
 
 entity "Basic.EducationLevel" as educationLevel {
   *Id : bigint(19) <<serial>>
@@ -555,12 +555,13 @@ entity "HumanResource.WorkMission" as workMission {
 entity "HumanResource.Questionnaire" as questionnaire {
   *Id : bigint(19) <<serial>>
   --
+  *CompanyId : bigint(19) <<FK>>
   *Title : varchar(200)
-  Description : varchar(4000)
   *TotalScore : integer
   *AcceptableScore : integer
   *WarningScore : integer
   *DisasterScore : integer
+  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -588,6 +589,9 @@ entity "HumanResource.Question" as question {
   *QuestionnaireId : bigint(19) <<FK>>
   *Question : varchar(4000)
   *Score : integer
+  *ّIsDescriptive : boolean
+  *IsSingleChoice : boolean
+  *IsMultiChoice : boolean
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -602,7 +606,7 @@ entity "HumanResource.QuestionOption" as questionOption {
   *QuestionId : bigint(19) <<FK>>
   *Title : varchar(4000)
   *Score : integer
-  IsDescriptionRequired : boolean
+  *IsDescriptionRequired : boolean
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -630,7 +634,22 @@ entity "HumanResource.QuestionnaireResultDetail" as questionnaireResultDetail {
   --
   *QuestionnaireResultId : bigint(19) <<FK>>
   *QuestionId : bigint(19) <<FK>>
-  *QuestionOptionId : bigint(19) <<FK>>
+  Score : integer
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "HumanResource.QuestionnaireChoosedOptionResultDetail" as questionnairChoosedOptionResultDetail {
+  *Id : bigint(19) <<serial>>
+  --
+  *QuestionnaireResultDetailId : bigint(19) <<FK>>
+  *ChoosedOptionId : bigint(19) <<FK>>
+  Score : integer
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -1152,7 +1171,8 @@ questionnaire ||..o{ questionnaireResult
 staff ||..o{ questionnaireResult
 questionnaireResult ||..o{ questionnaireResultDetail
 question ||..o{ questionnaireResultDetail
-questionOption ||..o{ questionnaireResultDetail
+questionnaireResultDetail ||..o{ questionnairChoosedOptionResultDetail
+questionOption ||..o{ questionnairChoosedOptionResultDetail
 project ||..o{ release
 release ||..o{ releaseIssue
 issue ||..o{ releaseIssue
@@ -1184,4 +1204,5 @@ contract ||..o{ sallaryPaymentReceipt
 projectWorkflow ||..o{ projectWorkflowDocumentType
 documentType ||..o{ projectWorkflowDocumentType
 document ||..o{ profileEducation
+company ||..o{ questionnaire
 @enduml

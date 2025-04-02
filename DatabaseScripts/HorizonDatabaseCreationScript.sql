@@ -5,6 +5,7 @@ CREATE SCHEMA DocumentManagement;
 CREATE SCHEMA ProjectManagement;
 CREATE SCHEMA Finance;
 
+
 CREATE TYPE gender AS ENUM ('Male', 'Female');
 CREATE TYPE weekday AS ENUM ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
 CREATE TYPE enterancetype AS ENUM ('Enter', 'Exit');
@@ -570,4 +571,117 @@ CREATE TABLE HumanResource.WorkMission(
     ModifyDate timestamp,
 	ModifierId bigint,
 	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id)
+);
+
+CREATE TABLE HumanResource.Questionnaire(
+    Id serial PRIMARY KEY NOT NULL, 
+	CompanyId bigint NOT Null,
+	Title varchar(255) NOT NULL
+	TotalScore int NOT NULL,
+	AcceptableScore int NOT NULL,
+	WarningScore int NOT NULL,
+	DisasterScore int NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (CompanyId) REFERENCES HumanResource.Company(Id)
+);
+
+CREATE TABLE HumanResource.QuestionnaireTargetDepartment(
+    Id serial PRIMARY KEY NOT NULL, 
+	QuestionnaireId bigint NOT Null,
+	DepartmentId bigint NOT Null,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (QuestionnaireId) REFERENCES HumanResource.Questionnaire(Id),
+	FOREIGN KEY (DepartmentId) REFERENCES HumanResource.Department(Id)
+);
+
+CREATE TABLE HumanResource.Question(
+    Id serial PRIMARY KEY NOT NULL, 
+	QuestionnaireId bigint NOT Null,
+	Score int NOT NULL,
+	Question varchar(4000) NOT NULL,
+	IsDescriptive boolean NOT NULL,
+	IsSingleChoice boolean NOT NULL,
+	IsMultiChoice boolean NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (QuestionnaireId) REFERENCES HumanResource.Questionnaire(Id)
+);
+
+CREATE TABLE HumanResource.QuestionOption(
+    Id serial PRIMARY KEY NOT NULL, 
+	QuestionId bigint NOT Null,
+	Score int NOT NULL,
+	Title varchar(4000) NOT NULL,
+	IsDescriptionRequired boolean NOT NULL
+	IsSingleChoice boolean NOT NULL,
+	IsMultiChoice boolean NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (QuestionId) REFERENCES HumanResource.Question(Id)
+);
+
+CREATE TABLE HumanResource.QuestionnaireResult(
+    Id serial PRIMARY KEY NOT NULL, 
+	QuestionnaireId bigint NOT Null,
+	StaffId bigint NOT Null,
+	TotalScore int NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (QuestionnaireId) REFERENCES HumanResource.Questionnaire(Id),
+	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id)
+);
+
+CREATE TABLE HumanResource.QuestionnaireResultDetail(
+    Id serial PRIMARY KEY NOT NULL, 
+	QuestionnaireResultId bigint NOT Null,
+	QuestionId bigint NOT Null,
+	Score int,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (QuestionnaireResultId) REFERENCES HumanResource.QuestionnaireResult(Id),
+	FOREIGN KEY (QuestionId) REFERENCES HumanResource.Question(Id)
+);
+
+CREATE TABLE HumanResource.QuestionnaireChoosedOptionResultDetail(
+    Id serial PRIMARY KEY NOT NULL, 
+	QuestionnaireResultDetailId bigint NOT Null,
+	QuestionOptionId bigint NOT Null,
+	Score int,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (QuestionnaireResultDetailId) REFERENCES HumanResource.QuestionnaireResultDetail(Id),
+	FOREIGN KEY (QuestionOptionId) REFERENCES HumanResource.QuestionOption(Id)
 );
