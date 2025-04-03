@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.4.3
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.4.4
 
 entity "Basic.EducationLevel" as educationLevel {
   *Id : bigint(19) <<serial>>
@@ -693,7 +693,7 @@ entity "DocumentManagement.ProjectWorkflowDocumentType" as projectWorkflowDocume
 entity "ProjectManagement.Project" as project {
   *Id : bigint(19) <<serial>>
   --
-  *ConstructorCompnayId : bigint(19) <<FK>>
+  *CompnayId : bigint(19) <<FK>>
   *Code : varchar(20) <<unique>>
   *Title : varchar(200)
   Description : varchar(4000)
@@ -710,8 +710,8 @@ entity "ProjectManagement.Project" as project {
 entity "ProjectManagement.ProjectStaffMember" as projectStaffMember {
   *Id : bigint(19) <<serial>>
   --
-  *ProjectId : bigint(19) <<FK>>
-  *StaffId : bigint(19) <<FK>>
+  *ProjectId : bigint(19) <<FK>> <<composite unique>>
+  *StaffId : bigint(19) <<FK>> <<composite unique>>
   *IsProjectManager : boolean
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -724,8 +724,8 @@ entity "ProjectManagement.ProjectStaffMember" as projectStaffMember {
 entity "ProjectManagement.ProjectDepartmentMember" as projectDepartmentMember {
   *Id : bigint(19) <<serial>>
   --
-  *ProjectId : bigint(19) <<FK>>
-  *DepartmentId : bigint(19) <<FK>>
+  *ProjectId : bigint(19) <<FK>> <<composite unique>>
+  *DepartmentId : bigint(19) <<FK>> <<composite unique>>
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>

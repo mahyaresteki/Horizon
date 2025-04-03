@@ -685,3 +685,80 @@ CREATE TABLE HumanResource.QuestionnaireChoosedOptionResultDetail(
 	FOREIGN KEY (QuestionnaireResultDetailId) REFERENCES HumanResource.QuestionnaireResultDetail(Id),
 	FOREIGN KEY (QuestionOptionId) REFERENCES HumanResource.QuestionOption(Id)
 );
+
+CREATE TABLE ProjectManagement.Project(
+    Id serial PRIMARY KEY NOT NULL, 
+	CompanyId bigint NOT NULL,
+	Title varchar(255) NOT NULL,
+	Code varchar(20) NOT NULL UNIQUE,
+	StartDate date,
+	EndDate date,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (CompanyId) REFERENCES HumanResource.Company(Id)
+);
+
+CREATE TABLE ProjectManagement.ProjectStaffMember(
+    Id serial PRIMARY KEY NOT NULL, 
+	ProjectId bigint NOT NULL,
+	StaffId bigint NOT NULL,
+	IsProjectManager boolean NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id),
+	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id),
+	UNIQUE (ProjectId, StaffId)
+);
+
+CREATE TABLE ProjectManagement.ProjectDepartmentMember(
+    Id serial PRIMARY KEY NOT NULL, 
+	ProjectId bigint NOT NULL,
+	DepartmentId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id),
+	FOREIGN KEY (DepartmentId) REFERENCES HumanResource.Department(Id),
+	UNIQUE (ProjectId, DepartmentId)
+);
+
+CREATE TABLE ProjectManagement.ProjectWorkflow(
+    Id serial PRIMARY KEY NOT NULL, 
+	ProjectId bigint NOT NULL,
+	Title varchar(255) NOT NULL,
+	Code varchar(20) NOT NULL UNIQUE,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id)
+);
+
+CREATE TABLE ProjectManagement.ProjectWorkflowStatus(
+    Id serial PRIMARY KEY NOT NULL, 
+	ProjectWorkflowId bigint NOT NULL,
+	StatusId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProjectWorkflowId) REFERENCES ProjectManagement.ProjectWorkflow(Id),
+	FOREIGN KEY (StatusId) REFERENCES Basic.Status(Id)
+);
