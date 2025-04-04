@@ -14,7 +14,7 @@ CREATE TYPE leavetype AS ENUM ('FullTime', 'PartTime');
 
 CREATE TABLE Basic.EducationLevel(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
@@ -27,7 +27,7 @@ CREATE TABLE Basic.EducationLevel(
 
 CREATE TABLE Basic.Priority(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Ordering int NOT NULL,
 	Color varchar(7) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE Basic.Priority(
 
 CREATE TABLE Basic.IssueType(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	IconAddress varchar(1000) NOT NULL,
 	Color varchar(7) NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE Basic.IssueType(
 
 CREATE TABLE Basic.Status(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Color varchar(7) NOT NULL,
 	IsToDo boolean NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE Basic.Status(
 
 CREATE TABLE Basic.Resolvation(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Color varchar(7) NOT NULL,
 	IsResolved boolean NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE Basic.Resolvation(
 
 CREATE TABLE Basic.MeetingType(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
@@ -102,7 +102,7 @@ CREATE TABLE Basic.MeetingType(
 
 CREATE TABLE Basic.DocumentType(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
@@ -115,7 +115,7 @@ CREATE TABLE Basic.DocumentType(
 
 CREATE TABLE Basic.FileExtention(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
@@ -128,7 +128,7 @@ CREATE TABLE Basic.FileExtention(
 
 CREATE TABLE Basic.ContractType(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
@@ -141,7 +141,7 @@ CREATE TABLE Basic.ContractType(
 
 CREATE TABLE Basic.TimeUnit(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	BasedOnMiliscond bigint NOT NULL,
 	Description varchar(4000),
@@ -155,7 +155,7 @@ CREATE TABLE Basic.TimeUnit(
 
 CREATE TABLE UserManagement.Role(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
@@ -168,7 +168,7 @@ CREATE TABLE UserManagement.Role(
 
 CREATE TABLE UserManagement.Groups(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
@@ -181,7 +181,7 @@ CREATE TABLE UserManagement.Groups(
 
 CREATE TABLE UserManagement.Permission(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
@@ -194,7 +194,7 @@ CREATE TABLE UserManagement.Permission(
 
 CREATE TABLE UserManagement.Form(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
@@ -349,7 +349,7 @@ CREATE TABLE DocumentManagement.Document(
 
 CREATE TABLE HumanResource.Company(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Description varchar(4000),
 	ParentId bigint,
@@ -364,7 +364,7 @@ CREATE TABLE HumanResource.Company(
 
 CREATE TABLE HumanResource.Department(
     Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(10) NOT NULL UNIQUE,
+    Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Description varchar(4000),
 	ParentId bigint,
@@ -761,4 +761,103 @@ CREATE TABLE ProjectManagement.ProjectWorkflowStatus(
 	ModifierId bigint,
 	FOREIGN KEY (ProjectWorkflowId) REFERENCES ProjectManagement.ProjectWorkflow(Id),
 	FOREIGN KEY (StatusId) REFERENCES Basic.Status(Id)
+);
+
+CREATE TABLE ProjectManagement.ProjectWorkflowResolvation(
+    Id serial PRIMARY KEY NOT NULL, 
+	ProjectWorkflowId bigint NOT NULL,
+	ResolvationId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProjectWorkflowId) REFERENCES ProjectManagement.ProjectWorkflow(Id),
+	FOREIGN KEY (ResolvationId) REFERENCES Basic.Resolvation(Id)
+);
+
+CREATE TABLE ProjectManagement.ProjectWorkflowProgress(
+    Id serial PRIMARY KEY NOT NULL,
+	Title varchar(255) NOT NULL,
+	StartProjectWorkflowStatusId bigint,
+	IsFromStartPoint boolean NOT NULL
+	CanBeStartedFromAnyStatus boolean NOT NULL,
+	EndProjectWorkflowStatusId bigint,
+	IsWorkflowEndPoint boolean NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (StartProjectWorkflowStatusId) REFERENCES ProjectManagement.ProjectWorkflowStatus(Id),
+	FOREIGN KEY (EndProjectWorkflowStatusId) REFERENCES ProjectManagement.ProjectWorkflowStatus(Id)
+);
+
+CREATE TABLE DocumentManagement.ProjectWorkflowDocumentType(
+    Id serial PRIMARY KEY NOT NULL,
+	DocumentTypeId bigint NOT NULL,
+	ProjectWorkflowId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (DocumentTypeId) REFERENCES DocumentManagement.DocumentType(Id),
+	FOREIGN KEY (ProjectWorkflowId) REFERENCES ProjectManagement.ProjectWorkflow(Id),
+	UNIQUE(DocumentTypeId, ProjectWorkflowId)
+);
+
+CREATE TABLE ProjectManagement.Issue(
+    Id serial PRIMARY KEY NOT NULL,
+	ProjectId bigint NOT NULL,
+	AssigneeStaffId bigint,
+	Code varchar(20) NOT NULL UNIQUE,
+    Title varchar(200) NOT NULL,
+	Description varchar(4000),
+	PriorityId bigint,
+	IssueTypeId bigint NOT NULL,
+	CuurentStatusId bigint NOT NULL,
+	CurrentResolvationId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (AssigneeStaffId) REFERENCES HumanResource.StaffId(Id),
+	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id),
+	FOREIGN KEY (IssueTypeId) REFERENCES Basic.IssueType(Id),
+	FOREIGN KEY (CuurentStatusId) REFERENCES ProjectManagement.ProjectWorkflowStatus(Id),
+	FOREIGN KEY (CurrentResolvationId) REFERENCES ProjectManagement.ProjectWorkflowResolvation(Id)
+);
+
+CREATE TABLE ProjectManagement.IssueComment(
+    Id serial PRIMARY KEY NOT NULL,
+	IssueId bigint NOT NULL,
+	CommentText varchar(4000) NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (IssueId) REFERENCES ProjectManagement.Issue(Id)
+);
+
+CREATE TABLE ProjectManagement.IssueAttachment(
+    Id serial PRIMARY KEY NOT NULL,
+	IssueId bigint NOT NULL,
+	DocumentId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (IssueId) REFERENCES ProjectManagement.Issue(Id),
+	FOREIGN KEY (DocumentId) REFERENCES DocumentManagement.Document(Id),
+	UNIQUE(IssueId, DocumentId)
 );

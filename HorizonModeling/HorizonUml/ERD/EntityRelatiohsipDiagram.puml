@@ -678,8 +678,8 @@ entity "DocumentManagement.Document" as document {
 entity "DocumentManagement.ProjectWorkflowDocumentType" as projectWorkflowDocumentType {
   *Id : bigint(19) <<serial>>
   --
-  *DocumentTypeId : bigint(19) <<FK>>
-  *ProjectWorkflowId : bigint(19) <<FK>>
+  *DocumentTypeId : bigint(19) <<FK>> <<composite unique>>
+  *ProjectWorkflowId : bigint(19) <<FK>> <<composite unique>>
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -763,15 +763,28 @@ entity "ProjectManagement.ProjectWorkflowStatus" as projectWorkflowStatus {
   ModifierId : bigint(19)
 }
 
+entity "ProjectManagement.ProjectWorkflowResolvation" as projectWorkflowResolvation {
+  *Id : bigint(19) <<serial>>
+  --
+  *ProjectWorkflowId : bigint(19) <<FK>>
+  *ResolvationId : bigint(19) <<FK>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
 entity "ProjectManagement.ProjectWorkflowProgress" as projectWorkflowProgress {
   *Id : bigint(19) <<serial>>
   --
-  *Title : varchar(250)
+  *Title : varchar(255)
   StartProjectWorkflowStatusId : bigint(19) <<FK>>
-  IsFromStartPoint : boolean
-  CanBeStartedFromAnyStatus : boolean
+  *IsFromStartPoint : boolean
+  *CanBeStartedFromAnyStatus : boolean
   EndProjectWorkflowStatusId : bigint(19) <<FK>>
-  IsToEndPoint : boolean
+  *IsWorkflowEndPoint : boolean
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -784,15 +797,15 @@ entity "ProjectManagement.Issue" as issue {
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
-  AssineeeId : bigint(19) <<FK>>
+  AssigneeId : bigint(19) <<FK>>
   *Code : varchar(20) <<unique>>
   *Title : varchar(200)
   Description : varchar(4000)
   DueDate : date
   PriorityId : bigint(19) <<FK>>
-  IssueTypeId : bigint(19) <<FK>>
-  CuurentStatusId : bigint(19) <<FK>>
-  CurrentResolvationId : bigint(19) <<FK>>
+  *IssueTypeId : bigint(19) <<FK>>
+  *CuurentStatusId : bigint(19) <<FK>>
+  *CurrentResolvationId : bigint(19) <<FK>>
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -805,7 +818,7 @@ entity "ProjectManagement.IssueComment" as issueComment {
   *Id : bigint(19) <<serial>>
   --
   *IssueId : bigint(19) <<FK>>
-  *Comment : varchar(4000)
+  *CommentText : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -817,8 +830,8 @@ entity "ProjectManagement.IssueComment" as issueComment {
 entity "ProjectManagement.IssueAttachment" as issueAttachment {
   *Id : bigint(19) <<serial>>
   --
-  *IssueId : bigint(19) <<FK>>
-  *DocumentId : bigint(19) <<FK>>
+  *IssueId : bigint(19) <<FK>> <<composite unique>>
+  *DocumentId : bigint(19) <<FK>> <<composite unique>>
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -1136,8 +1149,8 @@ project ||..o{ issue
 issueType ||..o{ issue
 priority ||..o{ issue
 staff ||..o{ issue
-status ||..o{ issue
-resolvation ||..o{ issue
+projectWorkflowStatus ||..o{ issue
+projectWorkflowResolvation ||..o{ issue
 project ||..o{ projectWorkflow
 projectWorkflow ||..o{ projectWorkflowStatus
 projectWorkflowStatus ||..o{ projectWorkflowProgress
@@ -1205,4 +1218,6 @@ projectWorkflow ||..o{ projectWorkflowDocumentType
 documentType ||..o{ projectWorkflowDocumentType
 document ||..o{ profileEducation
 company ||..o{ questionnaire
+projectWorkflow ||..o{ projectWorkflowResolvation
+resolvation ||..o{ projectWorkflowResolvation
 @enduml
