@@ -1,3 +1,12 @@
+/* 
+	Note: This script is created specifically for PostgreSQL datbase.
+	Last Version : 25.4.4
+	Create Databse Guide: 
+	1. Please create a database with "horizondb" name.
+	2. Open connection to created databse.
+	3. Then run the following script. 
+*/
+
 CREATE SCHEMA Basic;
 CREATE SCHEMA UserManagement;
 CREATE SCHEMA HumanResource;
@@ -10,6 +19,7 @@ CREATE TYPE gender AS ENUM ('Male', 'Female');
 CREATE TYPE weekday AS ENUM ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
 CREATE TYPE enterancetype AS ENUM ('Enter', 'Exit');
 CREATE TYPE leavetype AS ENUM ('FullTime', 'PartTime');
+CREATE TYPE calculationtype AS ENUM ('Percentage', 'FixedAmount');
 
 
 CREATE TABLE Basic.EducationLevel(
@@ -891,4 +901,289 @@ CREATE TABLE ProjectManagement.ProjectReleaseIssue(
 	FOREIGN KEY (IssueId) REFERENCES ProjectManagement.Issue(Id),
 	FOREIGN KEY (ProjectReleaseId) REFERENCES ProjectManagement.ProjectRelease(Id),
 	UNIQUE(IssueId, ProjectReleaseId)
+);
+
+
+CREATE TABLE ProjectManagement.WorkLog(
+    Id serial PRIMARY KEY NOT NULL,
+	IssueId bigint NOT NULL,
+	LogDate date NOT NULL,
+	StartWorkTime time NOT NULL,
+	WorkingDuration float NOT NULL, 
+	TimeUnitId bigint NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (IssueId) REFERENCES ProjectManagement.Issue(Id)
+);
+
+CREATE TABLE DocumentManagement.WorkflowEligibleFileExtention(
+    Id serial PRIMARY KEY NOT NULL,
+	FileExtentionId bigint NOT NULL,
+	ProjectWorkflowId bigint NOT NULL,
+	MaxFileSizeForUpload integer NOT NULL DEFAULT 5242880,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (FileExtentionId) REFERENCES DocumentManagement.FileExtention(Id),
+	FOREIGN KEY (ProjectWorkflowId) REFERENCES ProjectManagement.ProjectWorkflow(Id),
+	UNIQUE(FileExtentionId, ProjectWorkflowId)
+);
+
+CREATE TABLE ProjectManagement.IssueWorkflowHistory(
+    Id serial PRIMARY KEY NOT NULL,
+	IssueId bigint NOT NULL,
+	StartStatusId bigint NOT NULL,
+	EndStatusId bigint NOT NULL,
+	ProjectWorkflowProgressId bigint NOT NULL,
+	ProjectWorkflowResolvationId bigint,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (IssueId) REFERENCES ProjectManagement.Issue(Id),
+	FOREIGN KEY (StartStatusId) REFERENCES ProjectManagement.StartStatus(Id),
+	FOREIGN KEY (EndStatusId) REFERENCES ProjectManagement.EndStatus(Id),
+	FOREIGN KEY (ProjectWorkflowProgressId) REFERENCES ProjectManagement.ProjectWorkflowProgress(Id),
+	FOREIGN KEY (ProjectWorkflowResolvationId) REFERENCES ProjectManagement.ProjectWorkflowResolvation(Id)
+);
+
+CREATE TABLE ProjectManagement.ProjectMeeting(
+    Id serial PRIMARY KEY NOT NULL,
+	ProjectId bigint NOT NULL,
+	MeetingTypeId bigint NOT NULL,
+	MeetingDate date NOT NULL,
+	Title varchar(255) NOT NULL,
+	Location varchar(255) NOT NULL,
+	MinutesDocumentId bigint,
+	Description varchar(4000),
+	ScheduleStartTime time,
+	ScheduleEndTime time,
+	ActualStartTime time,
+	ActualEndTime time,
+	IsCanncelled boolean NOT NULL DEFAULT false,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id),
+	FOREIGN KEY (MeetingTypeId) REFERENCES ProjectManagement.MeetingType(Id),
+	FOREIGN KEY (MinutesDocumentId) REFERENCES DocumentManagement.Document(Id)
+);
+
+CREATE TABLE ProjectManagement.MeetingInvitees(
+    Id serial PRIMARY KEY NOT NULL,
+	ProjectMeetingId bigint NOT NULL,
+	StaffId bigint NOT NULL,
+	IsAttanded boolean,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProjectMeetingId) REFERENCES ProjectManagement.ProjectMeeting(Id),
+	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id)
+);
+
+CREATE TABLE ProjectManagement.MeetingMinutes(
+    Id serial PRIMARY KEY NOT NULL,
+	ProjectMeetingId bigint NOT NULL,
+	ResponsibleDepartmentId bigint NOT NULL,
+	Resolutionvarchar(4000) NOT NULL,
+	IssueId bigint,
+	DueDate datetime,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProjectMeetingId) REFERENCES ProjectManagement.ProjectMeeting(Id),
+	FOREIGN KEY (IssueId) REFERENCES ProjectManagement.Issue(Id),
+	FOREIGN KEY (ResponsibleDepartmentId) REFERENCES HumanResource.Department(Id)
+);
+
+CREATE TABLE Finance.StaffContract(
+    Id serial PRIMARY KEY NOT NULL,
+	StaffId bigint NOT NULL,
+	ContractTypeId bigint NOT NULL,
+	StartDate date NOT NULL,
+	EndDate date NOT NULL,
+	Title varchar(255) NOT NULL,
+	Description varchar(4000),
+	AutoRenewal boolean,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id),
+	FOREIGN KEY (ContractTypeId) REFERENCES Basic.ContractType(Id)
+);
+
+CREATE TABLE Finance.ContractSalaryItem(
+    Id serial PRIMARY KEY NOT NULL,
+	StaffContractId bigint NOT NULL,
+	CalculationTimeUnitId bigint NOT NULL,
+	Title varchar(255) NOT NULL,
+	Amount numeric(22, 2) NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ContractId) REFERENCES Finance.StaffContract(Id),
+	FOREIGN KEY (CalculationTimeUnitId) REFERENCES Basic.TimeUnit(Id)
+);
+
+CREATE TABLE Finance.ContractDeductionItem(
+    Id serial PRIMARY KEY NOT NULL,
+	CalculationType calculationtype NOT NULL,
+	StaffContractId bigint NOT NULL,
+	CalculationTimeUnitId bigint NOT NULL,
+	Title varchar(255) NOT NULL,
+	DeductionPercentage numeric(3,2),
+	FixedAmount numeric(22, 2),
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ContractId) REFERENCES Finance.StaffContract(Id),
+	FOREIGN KEY (CalculationTimeUnitId) REFERENCES Basic.TimeUnit(Id)
+);
+
+CREATE TABLE Finance.Supplier(
+    Id serial PRIMARY KEY NOT NULL,
+	Title varchar(255) NOT NULL,
+	Description varchar(4000),
+	Address varchar(4000),
+	PhoneNumber varchar(20),
+	MobileNumber varchar(20),
+	Email varchar(100),
+	PostalCode varchar(20),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint
+);
+
+CREATE TABLE Finance.CostReceipt(
+    Id serial PRIMARY KEY NOT NULL,
+	SupplierId bigint NOT NULL,
+	DocumentId bigint NOT NULL,
+	CompnayId bigint NOT NULL,
+	ReceiptDate date NOT NULL,
+	TotalAmount numeric(22, 2) NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (SupplierId) REFERENCES Finance.Supplier(Id),
+	FOREIGN KEY (DocumentId) REFERENCES DocumentManagement.Document(Id),
+	FOREIGN KEY (CompnayId) REFERENCES HumanResource.Compnay(Id)
+);
+
+CREATE TABLE Finance.CostReceiptItem(
+    Id serial PRIMARY KEY NOT NULL,
+	CostReceiptId bigint NOT NULL,
+	ItemTitle varchar(255) NOT NULL,
+	UnitAmount numeric(22, 2) NOT NULL,
+	Quantity float NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (CostReceiptId) REFERENCES Finance.CostReceipt(Id)
+);
+
+CREATE TABLE Finance.ProjectDirectCostItem(
+    Id serial PRIMARY KEY NOT NULL,
+	ProjectId bigint NOT NULL,
+	CostReceiptItemId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id),
+	FOREIGN KEY (CostReceiptItemId) REFERENCES Finance.CostReceiptItem(Id)
+);
+
+CREATE TABLE Finance.CostReceipt(
+    Id serial PRIMARY KEY NOT NULL,
+	CostReceiptId bigint NOT NULL,
+	DocumentId bigint NOT NULL,
+	PaymentDate date NOT NULL,
+	Amount numeric(22, 2) NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (CostReceiptId) REFERENCES Finance.CostReceipt(Id),
+	FOREIGN KEY (DocumentId) REFERENCES DocumentManagement.Document(Id)
+);
+
+CREATE TABLE Finance.SalaryPaymentReceipt(
+    Id serial PRIMARY KEY NOT NULL,
+	StaffContractId bigint NOT NULL,
+	DocumentId bigint NOT NULL,
+	PaymentDate date NOT NULL,
+	Amount numeric(22, 2) NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (StaffContractId) REFERENCES Finance.StaffContract(Id),
+	FOREIGN KEY (DocumentId) REFERENCES DocumentManagement.Document(Id)
+);
+
+
+CREATE TABLE Finance.StaffAdditionalPaymentReceipt(
+    Id serial PRIMARY KEY NOT NULL,
+	StaffId bigint NOT NULL,
+	DocumentId bigint NOT NULL,
+	PaymentDate date NOT NULL,
+	Amount numeric(22, 2) NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id),
+	FOREIGN KEY (DocumentId) REFERENCES DocumentManagement.Document(Id)
 );

@@ -875,8 +875,8 @@ entity "ProjectManagement.WorkLog" as workLog {
   *IssueId : bigint(19) <<FK>>
   *LogDate : date
   *StartWorkTime : time
-  WorkingDuration : float 
-  TimeUnitId : bigint(19) <<FK>>
+  *WorkingDuration : float 
+  *TimeUnitId : bigint(19) <<FK>>
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -887,12 +887,12 @@ entity "ProjectManagement.WorkLog" as workLog {
 }
 
 
-entity "ProjectManagement.WorkflowEligibleFileExtention" as workflowEligibleFileExtention {
+entity "DocumentManagement.WorkflowEligibleFileExtention" as workflowEligibleFileExtention {
   *Id : bigint(19) <<serial>>
   --
-  *WorkflowId : bigint(19) <<FK>>
-  *FileExtentionId : bigint(19) <<FK>>
-  MaxFileSizeForUpload : integer
+  *WorkflowId : bigint(19) <<FK>> <<composite unique>>
+  *FileExtentionId : bigint(19) <<FK>> <<composite unique>>
+  *MaxFileSizeForUpload : integer <<default: 5242880>>
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -909,7 +909,7 @@ entity "ProjectManagement.IssueWorkflowHistory" as issueWorkflowHistory {
   *StartStatusId : bigint(19) <<FK>>
   *EndStatusId : bigint(19) <<FK>>
   *ProjectWorkflowProgressId : bigint(19) <<FK>>
-  ResolvationId : bigint(19) <<FK>>
+  ProjectWorkflowResolvationId : bigint(19) <<FK>>
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -924,14 +924,15 @@ entity "ProjectManagement.ProjectMeeting" as projectMeeting {
   *ProjectId : bigint(19) <<FK>>
   *MeetingTypeId : bigint(19) <<FK>>
   *MeetingDate : date
-  *Title : varchar(200)
-  *Location : varchar(200)
+  *Title : varchar(255)
+  *Location : varchar(255)
   MinutesDocumentId : bigint(19) <<FK>>
   Description : varchar(4000)
   ScheduleStartTime : time
   ScheduleEndTime : time
   ActualStartTime : time
   ActualEndTime : time
+  *IsCanncelled : boolean <<default: false>>
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -945,7 +946,7 @@ entity "ProjectManagement.MeetingInvitees" as meetingInvitees {
   --
   *ProjectMeetingId : bigint(19) <<FK>>
   *StaffId : bigint(19) <<FK>>
-  *IsAttanded : boolean
+  IsAttanded : boolean
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -989,10 +990,10 @@ entity "Finance.StaffContract" as staffContract {
   ModifierId : bigint(19)
 }
 
-entity "Finance.ContractSallaryItem" as contractSallaryItem {
+entity "Finance.ContractSalaryItem" as contractSalaryItem {
   *Id : bigint(19) <<serial>>
   --
-  *ContractId : bigint(19) <<FK>>
+  *StaffContractId : bigint(19) <<FK>>
   *Title : varchar(200)
   *Amount : numeric(22,2)
   Description : varchar(4000)
@@ -1008,9 +1009,9 @@ entity "Finance.ContractSallaryItem" as contractSallaryItem {
 entity "Finance.ContractDeductionItem" as contractDeductionItem {
   *Id : bigint(19) <<serial>>
   --
-  *ContractId : bigint(19) <<FK>>
+  *StaffContractId : bigint(19) <<FK>>
   *Title : varchar(200)
-  *CalculationType : <<percentage=1, fixedAmount=2>>
+  *CalculationType : enum <<percentage, fixedAmount>>
   DeductionPercentage : numeric(3,2) <<from 0 until 100>>
   FixedAmount : numeric(22,2)
   Description : varchar(4000)
@@ -1026,7 +1027,7 @@ entity "Finance.ContractDeductionItem" as contractDeductionItem {
 entity "Finance.Supplier" as supplier {
   *Id : bigint(19) <<serial>>
   --
-  *Title : bigint(19) <<FK>>
+  *Title : varchar(255)
   Description : varchar(4000)
   Address : varchar(4000)
   PhoneNumber : varchar(20)
@@ -1046,7 +1047,8 @@ entity "Finance.CostReceipt" as costReceipt {
   --
   *SupplierId : bigint(19) <<FK>>
   *DocumentId : bigint(19) <<FK>>
-  *ReceiptDate : bigint(19) <<FK>>
+  *CompanyId : bigint(19) <<FK>>
+  *ReceiptDate : date
   *TotalAmount : numeric(22,2)
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
@@ -1061,7 +1063,7 @@ entity "Finance.CostReceiptItem" as costReceiptItem {
   *Id : bigint(19) <<serial>>
   --
   *CostReceiptId : bigint(19) <<FK>>
-  *ItemTitle : bigint(19) <<FK>>
+  *ItemTitle : varchar(255)
   *UnitAmount : numeric(22,2)
   *Quantity : float
   Description : varchar(4000)
@@ -1103,10 +1105,10 @@ entity "Finance.CostPaymentReceipt" as costPaymentReceipt {
   ModifierId : bigint(19)
 }
 
-entity "Finance.SallaryPaymentReceipt" as sallaryPaymentReceipt {
+entity "Finance.SalaryPaymentReceipt" as salaryPaymentReceipt {
   *Id : bigint(19) <<serial>>
   --
-  *ContractId : bigint(19) <<FK>>
+  *StaffContractId : bigint(19) <<FK>>
   *DocumentId : bigint(19) <<FK>>
   *Amount : numeric(22,2)
   *PaymentDate : date
@@ -1118,6 +1120,23 @@ entity "Finance.SallaryPaymentReceipt" as sallaryPaymentReceipt {
   ModifyDate: timestamp
   ModifierId : bigint(19)
 }
+
+entity "Finance.StaffAditionalPaymentReceipt" as staffAditionalPaymentReceipt {
+  *Id : bigint(19) <<serial>>
+  --
+  *StaffId : bigint(19) <<FK>>
+  *DocumentId : bigint(19) <<FK>>
+  *Amount : numeric(22,2)
+  *PaymentDate : date
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
 
 
 form ||..o{ formPermission
@@ -1175,7 +1194,7 @@ issue ||..o{  issueWorkflowHistory
 status ||..o{ issueWorkflowHistory
 status ||..o{ issueWorkflowHistory
 projectWorkflowProgress ||..o{ issueWorkflowHistory
-resolvation ||..o{ issueWorkflowHistory
+projectWorkflowResolvation ||..o{ issueWorkflowHistory
 questionnaire ||..o{ questionnaireTargetDepartment
 department ||..o{ questionnaireTargetDepartment
 questionnaire ||..o{ question
@@ -1200,10 +1219,11 @@ staff ||..o{ leave
 staff ||..o{ workMission
 contractType ||..o{ staffContract
 staff ||..o{ staffContract
-staffContract ||..o{ contractSallaryItem
-timeUnit ||..o{ contractSallaryItem
+staffContract ||..o{ contractSalaryItem
+timeUnit ||..o{ contractSalaryItem
 supplier ||..o{ costReceipt
 document ||..o{ costReceipt
+compnay ||..o{ costReceipt
 costReceipt ||..o{ costReceiptItem
 costReceiptItem ||..o{ projectDirectCostItem
 project ||..o{ projectDirectCostItem
@@ -1212,12 +1232,14 @@ costReceipt ||..o{ costPaymentReceipt
 document ||..o{ costPaymentReceipt
 staffContract ||..o{ contractDeductionItem
 timeUnit ||..o{ contractDeductionItem
-document ||..o{ sallaryPaymentReceipt
-contract ||..o{ sallaryPaymentReceipt
+document ||..o{ salaryPaymentReceipt
+contract ||..o{ salaryPaymentReceipt
 projectWorkflow ||..o{ projectWorkflowDocumentType
 documentType ||..o{ projectWorkflowDocumentType
 document ||..o{ profileEducation
 company ||..o{ questionnaire
 projectWorkflow ||..o{ projectWorkflowResolvation
 resolvation ||..o{ projectWorkflowResolvation
+staff ||..o{ staffAditionalPaymentReceipt
+document ||..o{ staffAditionalPaymentReceipt
 @enduml
