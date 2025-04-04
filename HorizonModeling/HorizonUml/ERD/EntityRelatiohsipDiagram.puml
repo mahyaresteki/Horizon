@@ -840,7 +840,7 @@ entity "ProjectManagement.IssueAttachment" as issueAttachment {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.Release" as release {
+entity "ProjectManagement.ProjectRelease" as release {
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
@@ -855,11 +855,11 @@ entity "ProjectManagement.Release" as release {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.ReleaseIssue" as releaseIssue {
+entity "ProjectManagement.ProjectReleaseIssue" as releaseIssue {
   *Id : bigint(19) <<serial>>
   --
-  *ReleaseId : bigint(19) <<FK>>
-  *IssueId : bigint(19) <<FK>>
+  *ProjectReleaseId : bigint(19) <<FK>> <<composite unique>>
+  *IssueId : bigint(19) <<FK>> <<composite unique>>
   IsFinalized : boolean
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>

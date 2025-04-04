@@ -861,3 +861,34 @@ CREATE TABLE ProjectManagement.IssueAttachment(
 	FOREIGN KEY (DocumentId) REFERENCES DocumentManagement.Document(Id),
 	UNIQUE(IssueId, DocumentId)
 );
+
+CREATE TABLE ProjectManagement.ProjectRelease(
+    Id serial PRIMARY KEY NOT NULL,
+	ProjectId bigint NOT NULL,
+	VersionNumber varchar(20) NOT NULL UNIQUE,
+    ReleaseDate date,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id)
+);
+
+CREATE TABLE ProjectManagement.ProjectReleaseIssue(
+    Id serial PRIMARY KEY NOT NULL,
+	IssueId bigint NOT NULL,
+	ProjectReleaseId bigint NOT NULL,
+	IsFinalized boolean,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (IssueId) REFERENCES ProjectManagement.Issue(Id),
+	FOREIGN KEY (ProjectReleaseId) REFERENCES ProjectManagement.ProjectRelease(Id),
+	UNIQUE(IssueId, ProjectReleaseId)
+);
