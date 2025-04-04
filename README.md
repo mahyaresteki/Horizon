@@ -61,17 +61,17 @@ At this stage, contributions are welcome in the form of research, documentation,
 ## Documentation
 ### Theories Articles
 The following articles are available to the public as theories of the project.
-1. Worldview Theory: [Social-Oriented Philosophy](https://github.com/mahyaresteki/Horizon/blob/master/Theories/Social_Oriented_Philosophy.pdf)
-2. Theory About The Problem: [Deceptive Virtualization Theory](https://github.com/mahyaresteki/Horizon/blob/master/Theories/Deceptive_Virtualization_Theory.pdf)
-3. Therory About The Soltion: [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/Theories/Theory_of_Endurance_Software_Development_Methodology.pdf)
+1. Worldview Theory: [Social-Oriented Philosophy](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Social_Oriented_Philosophy.pdf)
+2. Theory About The Problem: [Deceptive Virtualization Theory](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Deceptive_Virtualization_Theory.pdf)
+3. Therory About The Soltion: [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Theory_of_Endurance_Software_Development_Methodology.pdf)
 
 ### Modeling Outputs
-1. **Modeling Language:** Horizon system is modeled in [UML 2.0](https://en.wikipedia.org/wiki/Unified_Modeling_Language) format by [PlantUML](https://plantuml.com/). Please [click here](https://github.com/mahyaresteki/Horizon/tree/master/HorizonModeling/HorizonUml/out) to see the modeling diagrams.
-2. **Prototyping:** the project is prototyped by [Pencil](https://pencil.evolus.vn/) application. Please [click here](https://github.com/mahyaresteki/Horizon/tree/master/HorizonModeling/HorizonUiSketch) to see created prototypes.
+1. **Modeling Language:** Horizon system is modeled in [UML 2.0](https://en.wikipedia.org/wiki/Unified_Modeling_Language) format by [PlantUML](https://plantuml.com/). Please [click here](https://github.com/mahyaresteki/Horizon/tree/master/3-HorizonModeling/HorizonUml/out) to see the modeling diagrams.
+2. **Prototyping:** the project is prototyped by [Pencil](https://pencil.evolus.vn/) application. Please [click here](https://github.com/mahyaresteki/Horizon/tree/master/3-HorizonModeling/HorizonUiSketch) to see created prototypes.
 
 ### Technical Documents
 The list of technical documentation for the project is as follows:
-1. **Project Architecture:** This document contains necessary information about the overall structure, architecture, and infrastructure of the project. [Click here](https://github.com/mahyaresteki/Horizon/blob/master/TechnicalDocuments/Project_Achitecture.pdf) to view it.
+1. **Project Architecture:** This document contains necessary information about the overall structure, architecture, and infrastructure of the project. [Click here](https://github.com/mahyaresteki/Horizon/blob/master/2-TechnicalDocuments/Project_Achitecture.pdf) to view it.
 
 ## Use of AI Assistants in the Horizon Project
 As part of the Horizon project development, AI assistants were used to improve the quality and efficiency of both content creation and design tasks. The following tools were utilized:
