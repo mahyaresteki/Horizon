@@ -158,6 +158,22 @@ entity "Basic.TimeUnit" as timeUnit {
   ModifierId : bigint(19)
 }
 
+entity "Basic.Currency" as currency {
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : varchar(200)
+  *Code : varchar(20) <<unique>>
+  *Symbol : varchar(20) <<unique>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+
 
 entity "UserManagement.Role" as role {
   *Id : bigint(19) <<serial>>
@@ -933,6 +949,7 @@ entity "Finance.ContractSalaryItem" as contractSalaryItem {
   *StaffContractId : bigint(19) <<FK>>
   *Title : varchar(200)
   *Amount : numeric(22,2)
+  *CurrencyId : bigint(19) <<FK>>
   Description : varchar(4000)
   *CalculationTimeUnitId : bigint(19) <<FK>>
   *IsActive : boolean <<default: true>>
@@ -951,6 +968,7 @@ entity "Finance.ContractDeductionItem" as contractDeductionItem {
   *CalculationType : enum <<percentage, fixedAmount>>
   DeductionPercentage : numeric(3,2) <<from 0 until 100>>
   FixedAmount : numeric(22,2)
+  *FixedAmountCurrencyId : bigint(19) <<FK>>
   Description : varchar(4000)
   *CalculationTimeUnitId : bigint(19) <<FK>>
   *IsActive : boolean <<default: true>>
@@ -986,6 +1004,7 @@ entity "Finance.CostReceipt" as costReceipt {
   *DocumentId : bigint(19) <<FK>>
   *ReceiptDate : date
   *TotalAmount : numeric(22,2)
+  *CurrencyId : bigint(19) <<FK>>
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -1001,6 +1020,7 @@ entity "Finance.CostReceiptItem" as costReceiptItem {
   *CostReceiptId : bigint(19) <<FK>>
   *ItemTitle : varchar(255)
   *UnitAmount : numeric(22,2)
+  *CurrencyId : bigint(19) <<FK>>
   *Quantity : float
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
@@ -1031,6 +1051,7 @@ entity "Finance.CostPaymentReceipt" as costPaymentReceipt {
   *CostReceiptId : bigint(19) <<FK>>
   *DocumentId : bigint(19) <<FK>>
   *Amount : numeric(22,2)
+  *CurrencyId : bigint(19) <<FK>>
   *PaymentDate : date
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
@@ -1047,6 +1068,7 @@ entity "Finance.SalaryPaymentReceipt" as salaryPaymentReceipt {
   *StaffContractId : bigint(19) <<FK>>
   *DocumentId : bigint(19) <<FK>>
   *Amount : numeric(22,2)
+  *CurrencyId : bigint(19) <<FK>>
   *PaymentDate : date
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
@@ -1063,6 +1085,7 @@ entity "Finance.StaffAditionalPaymentReceipt" as staffAditionalPaymentReceipt {
   *ProfileId : bigint(19) <<FK>>
   *DocumentId : bigint(19) <<FK>>
   *Amount : numeric(22,2)
+  *CurrencyId : bigint(19) <<FK>>
   *PaymentDate : date
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
@@ -1085,6 +1108,7 @@ profile ||..o{ profileRole
 role ||..o{ profileRole
 profile ||..o{ profileGroup
 groups ||..o{ profileGroup
+department |o..o{ department
 position |o..o{ position
 department ||..o{ position
 position ||..o{ profile
@@ -1147,18 +1171,24 @@ contractType ||..o{ staffContract
 profile ||..o{ staffContract
 staffContract ||..o{ contractSalaryItem
 timeUnit ||..o{ contractSalaryItem
+currency ||..o{ contractSalaryItem
 supplier ||..o{ costReceipt
 document ||..o{ costReceipt
+currency ||..o{ costReceipt
 costReceipt ||..o{ costReceiptItem
+currency ||..o{ costReceiptItem
 costReceiptItem ||..o{ projectDirectCostItem
 project ||..o{ projectDirectCostItem
 costReceiptItem ||..o{ projectDirectCostItem
 costReceipt ||..o{ costPaymentReceipt
 document ||..o{ costPaymentReceipt
+currency ||..o{ costPaymentReceipt
 staffContract ||..o{ contractDeductionItem
 timeUnit ||..o{ contractDeductionItem
+currency ||..o{ contractDeductionItem
 document ||..o{ salaryPaymentReceipt
 staffContract ||..o{ salaryPaymentReceipt
+currency ||..o{ salaryPaymentReceipt
 projectWorkflow ||..o{ projectWorkflowDocumentType
 documentType ||..o{ projectWorkflowDocumentType
 document ||..o{ profileEducation
