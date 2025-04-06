@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.4.4
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.4.7
 
 entity "Basic.EducationLevel" as educationLevel {
   *Id : bigint(19) <<serial>>
@@ -256,10 +256,10 @@ entity "UserManagement.GroupPermission" as groupPermission {
   ModifierId : bigint(19)
 }
 
-entity "UserManagement.UserPermission" as userPermission {
+entity "UserManagement.ProfilePermission" as profilePermission {
   *Id : bigint(19) <<serial>>
   --
-  *UserId : bigint(19) <<FK>>
+  *ProfileId : bigint(19) <<FK>>
   *PermissionId : bigint(19) <<FK>>
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -275,6 +275,10 @@ entity "UserManagement.Profile" as profile {
   *FirstName : varchar(200)
   *LastName : varchar(200)
   *Gender : enum <<male, female>>
+  *StaffNumber : varchar(20) <<unique>>
+  *ActiveFrom : timestamp
+  ActiveTo : timestamp
+  PositionId : bigint(19) <<FK>>
   Avatar : text
   Birthday : date
   PhoneNumber : varchar(20)
@@ -282,20 +286,6 @@ entity "UserManagement.Profile" as profile {
   EmailAddress : varchar(200)
   Address : varchar(1000)
   PostalCode : varchar(20)
-  *IsActive : boolean <<default: true>>
-  *IsDeleted : boolean <<default: false>>
-  *CreateDate: timestamp <<default: now()>>
-  *CreatorId : bigint(19)
-  ModifyDate: timestamp
-  ModifierId : bigint(19)
-}
-
-entity "UserManagement.Users" as user {
-  *Id : bigint(19) <<serial>>
-  --
-  *ProfileId : bigint(19) <<FK>>
-  *ActiveFrom : timestamp
-  ActiveTo : timestamp
   LastLogInDate : timestamp
   LogInCount : integer(10) <<default: 0>>
   WrongLogInCount : integer(10) <<default: 0>>
@@ -310,10 +300,10 @@ entity "UserManagement.Users" as user {
   ModifierId : bigint(19)
 }
 
-entity "UserManagement.UserRole" as userRole {
+entity "UserManagement.ProfileRole" as profileRole {
   *Id : bigint(19) <<serial>>
   --
-  *UserId : bigint(19) <<FK>>
+  *ProfileId : bigint(19) <<FK>>
   *RoleId : bigint(19) <<FK>>
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -323,26 +313,11 @@ entity "UserManagement.UserRole" as userRole {
   ModifierId : bigint(19)
 }
 
-entity "UserManagement.UserGroup" as userGroup {
+entity "UserManagement.ProfileGroup" as profileGroup {
   *Id : bigint(19) <<serial>>
   --
-  *UserId : bigint(19) <<FK>>
+  *ProfileId : bigint(19) <<FK>>
   *GroupId : bigint(19) <<FK>>
-  *IsActive : boolean <<default: true>>
-  *IsDeleted : boolean <<default: false>>
-  *CreateDate: timestamp <<default: now()>>
-  *CreatorId : bigint(19)
-  ModifyDate: timestamp
-  ModifierId : bigint(19)
-}
-
-entity "HumanResource.Company" as company {
-  *Id : bigint(19) <<serial>>
-  --
-  *Title : varchar(50)
-  *Code : varchar(20) <<unique>>
-  ParentId : bigint(19) <<FK>>
-  Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -356,7 +331,6 @@ entity "HumanResource.Department" as department {
   --
   *Title : varchar(50)
   *Code : varchar(20) <<unique>>
-  *CompanyId : integer(10)  
   ParentId : integer(20) <<FK>>
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
@@ -374,39 +348,6 @@ entity "HumanResource.Position" as position {
   *Code : varchar(20) <<unique>>
   *DepartmentId : bigint(19) <<FK>>
   ParentId : bigint(19) <<FK>>
-  Description : varchar(4000)
-  *IsActive : boolean <<default: true>>
-  *IsDeleted : boolean <<default: false>>
-  *CreateDate: timestamp <<default: now()>>
-  *CreatorId : bigint(19)
-  ModifyDate: timestamp
-  ModifierId : bigint(19)
-}
-
-entity "HumanResource.Staff" as staff {
-  *Id : integer(10) <<serial>>
-  --
-  *ProfileId : bigint(19) <<FK>>
-  *ComapnyId : bigint(19) <<FK>>
-  *StaffNumber : varchar(20) <<unique>>
-  StartDate : date
-  EndDate : date
-  Description : varchar(4000)
-  *IsActive : boolean <<default: true>>
-  *IsDeleted : boolean <<default: false>>
-  *CreateDate: timestamp <<default: now()>>
-  *CreatorId : bigint(19)
-  ModifyDate: timestamp
-  ModifierId : bigint(19)
-}
-
-entity "HumanResource.StaffPsition" as staffPosition {
-  *Id : integer(10) <<serial>>
-  --
-  *StaffId : bigint(19) <<FK>>
-  *PositionId : bigint(19) <<FK>>
-  StartDate : datetime
-  EndDate : datetime
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -473,7 +414,6 @@ entity "HumanResource.ProfileCertificate" as profileCertificate {
 entity "HumanResource.WorkingTimeTable" as workingTimeTable { 
   *Id : bigint(19) <<serial>>
   --
-  *CompanyId : bigint(19) <<FK>> <<composite unique>>
   *WorkingDay : enum <<Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday>> <<composite unique>>
   *StartTime : time
   *EndTime : time
@@ -490,7 +430,6 @@ entity "HumanResource.WorkingTimeTable" as workingTimeTable {
 entity "HumanResource.Holidaies" as holidaies {
   *Id : bigint(19) <<serial>>
   --
-  *CompanyId : bigint(19) <<FK>> <<composite unique>>
   HolidayDate : date <<composite unique>> 
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
@@ -504,7 +443,7 @@ entity "HumanResource.Holidaies" as holidaies {
 entity "HumanResource.Attendance" as attendance {
   *Id : bigint(19) <<serial>>
   --
-  *StaffId : bigint(19) <<FK>>
+  *ProfileId : bigint(19) <<FK>>
   *WorkingDate : date
   *EnteranceType : enum <<enter, exit>>
   *EnternaceTime : time
@@ -519,7 +458,7 @@ entity "HumanResource.Attendance" as attendance {
 entity "HumanResource.Leave" as leave {
   *Id : bigint(19) <<serial>>
   --
-  *StaffId : bigint(19) <<FK>>
+  *ProfileId : bigint(19) <<FK>>
   LeaveType : enum <<fulltime, parttime>>
   *LeavingStartDate : date
   LeavingEndDate : date
@@ -537,7 +476,7 @@ entity "HumanResource.Leave" as leave {
 entity "HumanResource.WorkMission" as workMission {
   *Id : bigint(19) <<serial>>
   --
-  *StaffId : bigint(19) <<FK>>
+  *ProfileId : bigint(19) <<FK>>
   *MissionStartDate : date
   MissionEndDate : date
   *MissionStartTime : time
@@ -555,7 +494,6 @@ entity "HumanResource.WorkMission" as workMission {
 entity "HumanResource.Questionnaire" as questionnaire {
   *Id : bigint(19) <<serial>>
   --
-  *CompanyId : bigint(19) <<FK>>
   *Title : varchar(200)
   *TotalScore : integer
   *AcceptableScore : integer
@@ -619,7 +557,7 @@ entity "HumanResource.QuestionnaireResult" as questionnaireResult {
   *Id : bigint(19) <<serial>>
   --
   *QuestionnaireId : bigint(19) <<FK>>
-  *StaffId : bigint(19) <<FK>>
+  *ProfileId : bigint(19) <<FK>>
   *TotalScore : integer
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -693,7 +631,6 @@ entity "DocumentManagement.ProjectWorkflowDocumentType" as projectWorkflowDocume
 entity "ProjectManagement.Project" as project {
   *Id : bigint(19) <<serial>>
   --
-  *CompnayId : bigint(19) <<FK>>
   *Code : varchar(20) <<unique>>
   *Title : varchar(200)
   Description : varchar(4000)
@@ -711,7 +648,7 @@ entity "ProjectManagement.ProjectStaffMember" as projectStaffMember {
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>> <<composite unique>>
-  *StaffId : bigint(19) <<FK>> <<composite unique>>
+  *ProfileId : bigint(19) <<FK>> <<composite unique>>
   *IsProjectManager : boolean
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -945,7 +882,7 @@ entity "ProjectManagement.MeetingInvitees" as meetingInvitees {
   *Id : bigint(19) <<serial>>
   --
   *ProjectMeetingId : bigint(19) <<FK>>
-  *StaffId : bigint(19) <<FK>>
+  *ProfileId : bigint(19) <<FK>>
   IsAttanded : boolean
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -975,7 +912,7 @@ entity "ProjectManagement.MeetingMinutes" as meetingMinutes {
 entity "Finance.StaffContract" as staffContract {
   *Id : bigint(19) <<serial>>
   --
-  *StaffId : bigint(19) <<FK>>
+  *ProfileId : bigint(19) <<FK>>
   *ContractTypeId : bigint(19) <<FK>>
   *StartDate : date
   *EndDate : date
@@ -1047,7 +984,6 @@ entity "Finance.CostReceipt" as costReceipt {
   --
   *SupplierId : bigint(19) <<FK>>
   *DocumentId : bigint(19) <<FK>>
-  *CompanyId : bigint(19) <<FK>>
   *ReceiptDate : date
   *TotalAmount : numeric(22,2)
   Description : varchar(4000)
@@ -1124,7 +1060,7 @@ entity "Finance.SalaryPaymentReceipt" as salaryPaymentReceipt {
 entity "Finance.StaffAditionalPaymentReceipt" as staffAditionalPaymentReceipt {
   *Id : bigint(19) <<serial>>
   --
-  *StaffId : bigint(19) <<FK>>
+  *ProfileId : bigint(19) <<FK>>
   *DocumentId : bigint(19) <<FK>>
   *Amount : numeric(22,2)
   *PaymentDate : date
@@ -1137,29 +1073,21 @@ entity "Finance.StaffAditionalPaymentReceipt" as staffAditionalPaymentReceipt {
   ModifierId : bigint(19)
 }
 
-
-
 form ||..o{ formPermission
 permission ||..o{ formPermission
 role ||..o{ rolePermission
 permission ||..o{ rolePermission
 groups ||..o{ groupPermission
 permission ||..o{ groupPermission
-user ||..o{ userPermission
-permission ||..o{ userPermission
-user ||..o{ userRole
-role ||..o{ userRole
-user ||..o{ userGroup
-groups ||..o{ userGroup
-company |o..o{ company
-company ||..o{ department
+profile ||..o{ profilePermission
+permission ||..o{ profilePermission
+profile ||..o{ profileRole
+role ||..o{ profileRole
+profile ||..o{ profileGroup
+groups ||..o{ profileGroup
 position |o..o{ position
 department ||..o{ position
-company ||..o{ staff
-profile ||..o{ staff
-position ||..o{ staffPosition
-staff ||..o{ staffPosition
-profile ||..o{ user
+position ||..o{ profile
 profile ||..o{ profileEducation
 educationLevel ||..o{ profileEducation
 profile ||..o{ profileCertificate
@@ -1167,7 +1095,7 @@ profile ||..o{ profileJobExperience
 project ||..o{ issue
 issueType ||..o{ issue
 priority ||..o{ issue
-staff ||..o{ issue
+profile ||..o{ issue
 projectWorkflowStatus ||..o{ issue
 projectWorkflowResolvation ||..o{ issue
 project ||..o{ projectWorkflow
@@ -1176,7 +1104,7 @@ projectWorkflowStatus ||..o{ projectWorkflowProgress
 projectWorkflowStatus ||..o{ projectWorkflowProgress
 issue ||..o{ issueComment
 project ||..o{ projectMeeting
-staff ||..o{ meetingInvitees
+profile ||..o{ meetingInvitees
 projectMeeting ||..o{ meetingInvitees
 department ||..o{ meetingMinutes
 projectMeeting ||..o{ meetingMinutes
@@ -1200,7 +1128,7 @@ department ||..o{ questionnaireTargetDepartment
 questionnaire ||..o{ question
 question ||..o{ questionOption
 questionnaire ||..o{ questionnaireResult
-staff ||..o{ questionnaireResult
+profile ||..o{ questionnaireResult
 questionnaireResult ||..o{ questionnaireResultDetail
 question ||..o{ questionnaireResultDetail
 questionnaireResultDetail ||..o{ questionnairChoosedOptionResultDetail
@@ -1209,21 +1137,18 @@ project ||..o{ release
 release ||..o{ releaseIssue
 issue ||..o{ releaseIssue
 project ||..o{ projectStaffMember
-staff ||..o{ projectStaffMember
+profile ||..o{ projectStaffMember
 project ||..o{ projectDepartmentMember
 department ||..o{ projectDepartmentMember
-company ||..o{ workingTimeTable
-company ||..o{ holidaies
-staff ||..o{ attendance
-staff ||..o{ leave
-staff ||..o{ workMission
+profile ||..o{ attendance
+profile ||..o{ leave
+profile ||..o{ workMission
 contractType ||..o{ staffContract
-staff ||..o{ staffContract
+profile ||..o{ staffContract
 staffContract ||..o{ contractSalaryItem
 timeUnit ||..o{ contractSalaryItem
 supplier ||..o{ costReceipt
 document ||..o{ costReceipt
-compnay ||..o{ costReceipt
 costReceipt ||..o{ costReceiptItem
 costReceiptItem ||..o{ projectDirectCostItem
 project ||..o{ projectDirectCostItem
@@ -1233,13 +1158,12 @@ document ||..o{ costPaymentReceipt
 staffContract ||..o{ contractDeductionItem
 timeUnit ||..o{ contractDeductionItem
 document ||..o{ salaryPaymentReceipt
-contract ||..o{ salaryPaymentReceipt
+staffContract ||..o{ salaryPaymentReceipt
 projectWorkflow ||..o{ projectWorkflowDocumentType
 documentType ||..o{ projectWorkflowDocumentType
 document ||..o{ profileEducation
-company ||..o{ questionnaire
 projectWorkflow ||..o{ projectWorkflowResolvation
 resolvation ||..o{ projectWorkflowResolvation
-staff ||..o{ staffAditionalPaymentReceipt
+profile ||..o{ staffAditionalPaymentReceipt
 document ||..o{ staffAditionalPaymentReceipt
 @enduml
