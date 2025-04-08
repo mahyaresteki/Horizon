@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.4.7
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.4.9
 
 entity "Basic.EducationLevel" as educationLevel {
   *Id : bigint(19) <<serial>>
@@ -430,7 +430,7 @@ entity "HumanResource.ProfileCertificate" as profileCertificate {
 entity "HumanResource.WorkingTimeTable" as workingTimeTable { 
   *Id : bigint(19) <<serial>>
   --
-  *WorkingDay : enum <<Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday>> <<composite unique>>
+  *WorkingDay : enum <<Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday>>
   *StartTime : time
   *EndTime : time
   FloatingStartTime : time
@@ -446,7 +446,7 @@ entity "HumanResource.WorkingTimeTable" as workingTimeTable {
 entity "HumanResource.Holidaies" as holidaies {
   *Id : bigint(19) <<serial>>
   --
-  HolidayDate : date <<composite unique>> 
+  HolidayDate : date <<unique>> 
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -642,8 +642,6 @@ entity "DocumentManagement.ProjectWorkflowDocumentType" as projectWorkflowDocume
   ModifierId : bigint(19)
 }
 
-
-
 entity "ProjectManagement.Project" as project {
   *Id : bigint(19) <<serial>>
   --
@@ -660,12 +658,38 @@ entity "ProjectManagement.Project" as project {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.ProjectStaffMember" as projectStaffMember {
+entity "ProjectManagement.ProjectProfileMember" as projectProfileMember {
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>> <<composite unique>>
   *ProfileId : bigint(19) <<FK>> <<composite unique>>
   *IsProjectManager : boolean
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "ProjectManagement.ProjectGroupMember" as projectGroupMember {
+  *Id : bigint(19) <<serial>>
+  --
+  *ProjectId : bigint(19) <<FK>> <<composite unique>>
+  *GroupId : bigint(19) <<FK>> <<composite unique>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "ProjectManagement.ProjectRoleMember" as projectRoleMember {
+  *Id : bigint(19) <<serial>>
+  --
+  *ProjectId : bigint(19) <<FK>> <<composite unique>>
+  *RoleId : bigint(19) <<FK>> <<composite unique>>
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
@@ -701,7 +725,6 @@ entity "ProjectManagement.ProjectWorkflow" as projectWorkflow {
   ModifyDate: timestamp
   ModifierId : bigint(19)
 }
-
 
 entity "ProjectManagement.ProjectWorkflowStatus" as projectWorkflowStatus {
   *Id : bigint(19) <<serial>>
@@ -839,7 +862,6 @@ entity "ProjectManagement.WorkLog" as workLog {
   ModifierId : bigint(19)
 }
 
-
 entity "DocumentManagement.WorkflowEligibleFileExtention" as workflowEligibleFileExtention {
   *Id : bigint(19) <<serial>>
   --
@@ -853,7 +875,6 @@ entity "DocumentManagement.WorkflowEligibleFileExtention" as workflowEligibleFil
   ModifyDate: timestamp
   ModifierId : bigint(19)
 }
-
 
 entity "ProjectManagement.IssueWorkflowHistory" as issueWorkflowHistory {
   *Id : bigint(19) <<serial>>
@@ -898,7 +919,10 @@ entity "ProjectManagement.MeetingInvitees" as meetingInvitees {
   *Id : bigint(19) <<serial>>
   --
   *ProjectMeetingId : bigint(19) <<FK>>
-  *ProfileId : bigint(19) <<FK>>
+  *IsFromInsideCompnay : boolean
+  ProfileId : bigint(19) <<FK>>
+  InviteeFullName : varchar(255)
+	InviteeCompanyName : varchar(255)
   IsAttanded : boolean
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -907,7 +931,6 @@ entity "ProjectManagement.MeetingInvitees" as meetingInvitees {
   ModifyDate: timestamp
   ModifierId : bigint(19)
 }
-
 
 entity "ProjectManagement.MeetingMinutes" as meetingMinutes {
   *Id : bigint(19) <<serial>>
@@ -968,7 +991,7 @@ entity "Finance.ContractDeductionItem" as contractDeductionItem {
   *CalculationType : enum <<percentage, fixedAmount>>
   DeductionPercentage : numeric(3,2) <<from 0 until 100>>
   FixedAmount : numeric(22,2)
-  *FixedAmountCurrencyId : bigint(19) <<FK>>
+  FixedAmountCurrencyId : bigint(19) <<FK>>
   Description : varchar(4000)
   *CalculationTimeUnitId : bigint(19) <<FK>>
   *IsActive : boolean <<default: true>>
@@ -1160,8 +1183,12 @@ questionOption ||..o{ questionnairChoosedOptionResultDetail
 project ||..o{ release
 release ||..o{ releaseIssue
 issue ||..o{ releaseIssue
-project ||..o{ projectStaffMember
-profile ||..o{ projectStaffMember
+project ||..o{ projectProfileMember
+profile ||..o{ projectProfileMember
+project ||..o{ projectGroupMember
+groups ||..o{ projectGroupMember
+project ||..o{ projectRoleMember
+role ||..o{ projectRoleMember
 project ||..o{ projectDepartmentMember
 department ||..o{ projectDepartmentMember
 profile ||..o{ attendance

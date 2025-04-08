@@ -1,6 +1,6 @@
 /* 
 	Note: This script is created specifically for PostgreSQL datbase.
-	Last Version : 25.4.4
+	Last Version : 25.4.9
 	Create Databse Guide: 
 	1. Please create a database with "horizondb" name.
 	2. Open connection to created databse.
@@ -163,6 +163,20 @@ CREATE TABLE Basic.TimeUnit(
 	ModifierId bigint
 );
 
+CREATE TABLE Basic.Currency(
+    Id serial PRIMARY KEY NOT NULL, 
+    Code varchar(20) NOT NULL UNIQUE,
+	Symbol varchar(20) NOT NULL UNIQUE,
+    Title varchar(200) NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint
+);
+
 CREATE TABLE UserManagement.Role(
     Id serial PRIMARY KEY NOT NULL, 
     Code varchar(20) NOT NULL UNIQUE,
@@ -257,136 +271,19 @@ CREATE TABLE UserManagement.GroupPermission(
     FOREIGN KEY (FormPermissionId) REFERENCES UserManagement.FormPermission(Id)
 );
 
-CREATE TABLE UserManagement.Profile(
-    Id serial PRIMARY KEY NOT NULL,
-	FirstName varchar(200) NOT NULL,
-	LastName varchar(200) NOT NULL,
-	Gender gender NOT NULL,
-	Avatar varchar(1000),
-	Birthday date,
-	PhoneNumber varchar(20),
-	MobileNumber varchar(20),
-	EmailAddress varchar(200),
-	Address varchar(1000),
-	PostalCode varchar(20),
-    IsActive boolean NOT NULL DEFAULT true,
-    IsDeleted boolean NOT NULL DEFAULT false,
-    CreateDate timestamp NOT NULL DEFAULT NOW(),
-	CreatorId bigint NOT NULL,
-    ModifyDate timestamp,
-	ModifierId bigint
-);
-
-CREATE TABLE UserManagement.Users(
-    Id serial PRIMARY KEY NOT NULL,
-	ProfileId bigint NOT NULL,
-	Username varchar(200) NOT NULL,
-	Pass varchar(255) NOT NULL,
-	PassSalt varchar(5),
-	ActiveFrom timestamp NOT NULL,
-	ActiveTo timestamp,
-	LastLogInDate timestamp,
-	LogInCount int NOT NULL DEFAULT 0,
-	WrongLogInCount int NOT NULL DEFAULT 0,
-    IsActive boolean NOT NULL DEFAULT true,
-    IsDeleted boolean NOT NULL DEFAULT false,
-    CreateDate timestamp NOT NULL DEFAULT NOW(),
-	CreatorId bigint NOT NULL,
-    ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
-);
-
-CREATE TABLE UserManagement.UserPermission(
-    Id serial PRIMARY KEY NOT NULL, 
-    FormPermissionId bigint NOT NULL,
-	UserId bigint NOT NULL,
-    IsActive boolean NOT NULL DEFAULT true,
-    IsDeleted boolean NOT NULL DEFAULT false,
-    CreateDate timestamp NOT NULL DEFAULT NOW(),
-	CreatorId bigint NOT NULL,
-    ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (UserId) REFERENCES UserManagement.Users(Id),
-    FOREIGN KEY (FormPermissionId) REFERENCES UserManagement.FormPermission(Id)
-);
-
-CREATE TABLE UserManagement.UserRole(
-    Id serial PRIMARY KEY NOT NULL, 
-    UserId bigint NOT NULL,
-	RoleId bigint NOT NULL,
-    IsActive boolean NOT NULL DEFAULT true,
-    IsDeleted boolean NOT NULL DEFAULT false,
-    CreateDate timestamp NOT NULL DEFAULT NOW(),
-	CreatorId bigint NOT NULL,
-    ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (RoleId) REFERENCES UserManagement.Role(Id),
-    FOREIGN KEY (UserId) REFERENCES UserManagement.Users(Id)
-);
-
-CREATE TABLE UserManagement.UserGroup(
-    Id serial PRIMARY KEY NOT NULL, 
-    UserId bigint NOT NULL,
-	GroupId bigint NOT NULL,
-    IsActive boolean NOT NULL DEFAULT true,
-    IsDeleted boolean NOT NULL DEFAULT false,
-    CreateDate timestamp NOT NULL DEFAULT NOW(),
-	CreatorId bigint NOT NULL,
-    ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (GroupId) REFERENCES UserManagement.Groups(Id),
-    FOREIGN KEY (UserId) REFERENCES UserManagement.Users(Id)
-);
-
-CREATE TABLE DocumentManagement.Document(
-    Id serial PRIMARY KEY NOT NULL, 
-    TableId bigint NOT NULL,
-    TableName varchar(255) NOT NULL,
-	FileAddress varchar(4000) NOT NULL,
-	DocumentTypeId bigint NOT NULL,
-	FileExtentionId bigint NOT NULL,
-    IsActive boolean NOT NULL DEFAULT true,
-    IsDeleted boolean NOT NULL DEFAULT false,
-    CreateDate timestamp NOT NULL DEFAULT NOW(),
-	CreatorId bigint NOT NULL,
-    ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (DocumentTypeId) REFERENCES Basic.DocumentType(Id),
-	FOREIGN KEY (FileExtention) REFERENCES Basic.FileExtention(Id)
-);
-
-
-CREATE TABLE HumanResource.Company(
-    Id serial PRIMARY KEY NOT NULL, 
-    Code varchar(20) NOT NULL UNIQUE,
-    Title varchar(200) NOT NULL,
-	Description varchar(4000),
-	ParentId bigint,
-    IsActive boolean NOT NULL DEFAULT true,
-    IsDeleted boolean NOT NULL DEFAULT false,
-    CreateDate timestamp NOT NULL DEFAULT NOW(),
-	CreatorId bigint NOT NULL,
-    ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (ParentId) REFERENCES HumanResource.Company(Id)
-);
-
 CREATE TABLE HumanResource.Department(
     Id serial PRIMARY KEY NOT NULL, 
     Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Description varchar(4000),
 	ParentId bigint,
-	CompanyId bigint NOT NULL,
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
     CreateDate timestamp NOT NULL DEFAULT NOW(),
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (ParentId) REFERENCES HumanResource.Department(Id),
-	FOREIGN KEY (CompanyId) REFERENCES HumanResource.Company(Id)
+	FOREIGN KEY (ParentId) REFERENCES HumanResource.Department(Id)
 );
 
 CREATE TABLE HumanResource.Position(
@@ -406,14 +303,41 @@ CREATE TABLE HumanResource.Position(
 	FOREIGN KEY (DepartmentId) REFERENCES HumanResource.Department(Id)
 );
 
-CREATE TABLE HumanResource.Staff(
+CREATE TABLE UserManagement.Profile(
+    Id serial PRIMARY KEY NOT NULL,
+	FirstName varchar(200) NOT NULL,
+	LastName varchar(200) NOT NULL,
+	Gender gender NOT NULL,
+	StaffNumber varchar(20) NOT NULL UNIQUE,
+	ActiveFrom timestamp NOT NULL,
+	ActiveTo timestamp,
+	PositionId bigint,
+	Avatar varchar(1000),
+	Birthday date,
+	PhoneNumber varchar(20),
+	MobileNumber varchar(20),
+	EmailAddress varchar(200),
+	Address varchar(1000),
+	PostalCode varchar(20),
+	Username varchar(200) NOT NULL UNIQUE,
+	Pass varchar(255) NOT NULL,
+	PassSalt varchar(5),
+	LastLogInDate timestamp,
+	LogInCount int NOT NULL DEFAULT 0,
+	WrongLogInCount int NOT NULL DEFAULT 0,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (PositionId) REFERENCES HumanResource.Position(Id)
+);
+
+CREATE TABLE UserManagement.ProfilePermission(
     Id serial PRIMARY KEY NOT NULL, 
-    StaffNumber varchar(20) NOT NULL UNIQUE,
-	ProfileId bigint Not Null,
-	CompanyId bigint NOT NULL,
-	StartDate date,
-	EndDate date,
-	Description varchar(4000),
+    FormPermissionId bigint NOT NULL,
+	ProfileId bigint NOT NULL,
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
     CreateDate timestamp NOT NULL DEFAULT NOW(),
@@ -421,24 +345,52 @@ CREATE TABLE HumanResource.Staff(
     ModifyDate timestamp,
 	ModifierId bigint,
 	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id),
-	FOREIGN KEY (CompanyId) REFERENCES HumanResource.Company(Id)
+    FOREIGN KEY (FormPermissionId) REFERENCES UserManagement.FormPermission(Id)
 );
 
-CREATE TABLE HumanResource.StaffPosition(
+CREATE TABLE UserManagement.ProfileRole(
     Id serial PRIMARY KEY NOT NULL, 
-	StaffId bigint Not Null,
-	PositionId bigint NOT NULL,
-	StartDate date,
-	EndDate date,
-	Description varchar(4000),
+    ProfileId bigint NOT NULL,
+	RoleId bigint NOT NULL,
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
     CreateDate timestamp NOT NULL DEFAULT NOW(),
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id),
-	FOREIGN KEY (PositionId) REFERENCES HumanResource.Position(Id)
+	FOREIGN KEY (RoleId) REFERENCES UserManagement.Role(Id),
+    FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
+);
+
+CREATE TABLE UserManagement.ProfileGroup(
+    Id serial PRIMARY KEY NOT NULL, 
+    ProfileId bigint NOT NULL,
+	GroupId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (GroupId) REFERENCES UserManagement.Groups(Id),
+    FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
+);
+
+CREATE TABLE DocumentManagement.Document(
+    Id serial PRIMARY KEY NOT NULL, 
+    TableId bigint NOT NULL,
+    TableName varchar(255) NOT NULL,
+	FileAddress varchar(4000) NOT NULL,
+	DocumentTypeId bigint NOT NULL,
+	FileExtentionId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (DocumentTypeId) REFERENCES Basic.DocumentType(Id),
+	FOREIGN KEY (FileExtention) REFERENCES Basic.FileExtention(Id)
 );
 
 CREATE TABLE HumanResource.ProfileEducation(
@@ -500,7 +452,6 @@ CREATE TABLE HumanResource.ProfileCertificate(
 
 CREATE TABLE HumanResource.WorkingTimeTable(
     Id serial PRIMARY KEY NOT NULL, 
-	CompnayId bigint Not Null,
 	WorkingDay weekday NOT NULL,
 	StartTime time NOT NULL,
 	EndTime time NOT NULL,
@@ -511,29 +462,24 @@ CREATE TABLE HumanResource.WorkingTimeTable(
     CreateDate timestamp NOT NULL DEFAULT NOW(),
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (CompanyId) REFERENCES HumanResource.Company(Id),
-	UNIQUE (CompnayId, WorkingDay)
+	ModifierId bigint
 );
 
 CREATE TABLE HumanResource.Holidaies(
     Id serial PRIMARY KEY NOT NULL, 
-	CompnayId bigint Not Null,
-	HolidayDate date NOT NULL,
+	HolidayDate date NOT NULL UNIQUE,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
     CreateDate timestamp NOT NULL DEFAULT NOW(),
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (CompanyId) REFERENCES HumanResource.Company(Id),
-	UNIQUE (CompnayId, HolidayDate)
+	ModifierId bigint
 );
 
 CREATE TABLE HumanResource.Attendance(
     Id serial PRIMARY KEY NOT NULL, 
-	StaffId bigint Not Null,
+	ProfileId bigint Not Null,
 	WorkingDate date NOT NULL,
 	EnteranceType enterancetype NOT NULL,
 	EnternaceTime time NOT NULL,
@@ -543,12 +489,12 @@ CREATE TABLE HumanResource.Attendance(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id)
+	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
 );
 
 CREATE TABLE HumanResource.Leave(
     Id serial PRIMARY KEY NOT NULL, 
-	StaffId bigint Not Null,
+	ProfileId bigint Not Null,
 	LeaveType leavetype NOT NULL,
 	LeavingStartDate date NOT NULL,
 	LeavingEndDate date,
@@ -561,13 +507,13 @@ CREATE TABLE HumanResource.Leave(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id)
+	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
 );
 
 
 CREATE TABLE HumanResource.WorkMission(
     Id serial PRIMARY KEY NOT NULL, 
-	StaffId bigint Not Null,
+	ProfileId bigint Not Null,
 	MissionStartDate date NOT NULL,
 	MissionEndDate date,
 	MissionStartTime time NOT NULL,
@@ -580,12 +526,11 @@ CREATE TABLE HumanResource.WorkMission(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id)
+	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
 );
 
 CREATE TABLE HumanResource.Questionnaire(
-    Id serial PRIMARY KEY NOT NULL, 
-	CompanyId bigint NOT Null,
+    Id serial PRIMARY KEY NOT NULL,
 	Title varchar(255) NOT NULL
 	TotalScore int NOT NULL,
 	AcceptableScore int NOT NULL,
@@ -597,8 +542,7 @@ CREATE TABLE HumanResource.Questionnaire(
     CreateDate timestamp NOT NULL DEFAULT NOW(),
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (CompanyId) REFERENCES HumanResource.Company(Id)
+	ModifierId bigint
 );
 
 CREATE TABLE HumanResource.QuestionnaireTargetDepartment(
@@ -652,7 +596,7 @@ CREATE TABLE HumanResource.QuestionOption(
 CREATE TABLE HumanResource.QuestionnaireResult(
     Id serial PRIMARY KEY NOT NULL, 
 	QuestionnaireId bigint NOT Null,
-	StaffId bigint NOT Null,
+	ProfileId bigint NOT Null,
 	TotalScore int NOT NULL,
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
@@ -661,7 +605,7 @@ CREATE TABLE HumanResource.QuestionnaireResult(
     ModifyDate timestamp,
 	ModifierId bigint,
 	FOREIGN KEY (QuestionnaireId) REFERENCES HumanResource.Questionnaire(Id),
-	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id)
+	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
 );
 
 CREATE TABLE HumanResource.QuestionnaireResultDetail(
@@ -697,8 +641,7 @@ CREATE TABLE HumanResource.QuestionnaireChoosedOptionResultDetail(
 );
 
 CREATE TABLE ProjectManagement.Project(
-    Id serial PRIMARY KEY NOT NULL, 
-	CompanyId bigint NOT NULL,
+    Id serial PRIMARY KEY NOT NULL,
 	Title varchar(255) NOT NULL,
 	Code varchar(20) NOT NULL UNIQUE,
 	StartDate date,
@@ -709,14 +652,13 @@ CREATE TABLE ProjectManagement.Project(
     CreateDate timestamp NOT NULL DEFAULT NOW(),
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (CompanyId) REFERENCES HumanResource.Company(Id)
+	ModifierId bigint
 );
 
-CREATE TABLE ProjectManagement.ProjectStaffMember(
+CREATE TABLE ProjectManagement.ProjectProfileMember(
     Id serial PRIMARY KEY NOT NULL, 
 	ProjectId bigint NOT NULL,
-	StaffId bigint NOT NULL,
+	ProfileId bigint NOT NULL,
 	IsProjectManager boolean NOT NULL,
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
@@ -725,8 +667,38 @@ CREATE TABLE ProjectManagement.ProjectStaffMember(
     ModifyDate timestamp,
 	ModifierId bigint,
 	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id),
-	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id),
-	UNIQUE (ProjectId, StaffId)
+	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id),
+	UNIQUE (ProjectId, ProfileId)
+);
+
+CREATE TABLE ProjectManagement.ProjectGroupMember(
+    Id serial PRIMARY KEY NOT NULL, 
+	ProjectId bigint NOT NULL,
+	GroupId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id),
+	FOREIGN KEY (GroupId) REFERENCES UserManagement.Groups(Id),
+	UNIQUE (ProjectId, GroupId)
+);
+
+CREATE TABLE ProjectManagement.ProjectRoleMember(
+    Id serial PRIMARY KEY NOT NULL, 
+	ProjectId bigint NOT NULL,
+	RoleId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id),
+	FOREIGN KEY (RoleId) REFERENCES UserManagement.Role(Id),
+	UNIQUE (ProjectId, RoleId)
 );
 
 CREATE TABLE ProjectManagement.ProjectDepartmentMember(
@@ -823,7 +795,7 @@ CREATE TABLE DocumentManagement.ProjectWorkflowDocumentType(
 CREATE TABLE ProjectManagement.Issue(
     Id serial PRIMARY KEY NOT NULL,
 	ProjectId bigint NOT NULL,
-	AssigneeStaffId bigint,
+	AssigneeId bigint,
 	Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Description varchar(4000),
@@ -837,7 +809,7 @@ CREATE TABLE ProjectManagement.Issue(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (AssigneeStaffId) REFERENCES HumanResource.StaffId(Id),
+	FOREIGN KEY (AssigneeId) REFERENCES UserManagement.Profile(Id),
 	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id),
 	FOREIGN KEY (IssueTypeId) REFERENCES Basic.IssueType(Id),
 	FOREIGN KEY (CuurentStatusId) REFERENCES ProjectManagement.ProjectWorkflowStatus(Id),
@@ -985,7 +957,10 @@ CREATE TABLE ProjectManagement.ProjectMeeting(
 CREATE TABLE ProjectManagement.MeetingInvitees(
     Id serial PRIMARY KEY NOT NULL,
 	ProjectMeetingId bigint NOT NULL,
-	StaffId bigint NOT NULL,
+	IsFromInsideCompnay boolean NOT NULL,
+	ProfileId bigint,
+	InviteeFullName varchar(255),
+	InviteeCompanyName varchar(255),
 	IsAttanded boolean,
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
@@ -994,14 +969,14 @@ CREATE TABLE ProjectManagement.MeetingInvitees(
     ModifyDate timestamp,
 	ModifierId bigint,
 	FOREIGN KEY (ProjectMeetingId) REFERENCES ProjectManagement.ProjectMeeting(Id),
-	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id)
+	FOREIGN KEY (ProfileId) REFERENCES HumanResource.Profile(Id)
 );
 
 CREATE TABLE ProjectManagement.MeetingMinutes(
     Id serial PRIMARY KEY NOT NULL,
 	ProjectMeetingId bigint NOT NULL,
 	ResponsibleDepartmentId bigint NOT NULL,
-	Resolutionvarchar(4000) NOT NULL,
+	Resolution varchar(4000) NOT NULL,
 	IssueId bigint,
 	DueDate datetime,
     IsActive boolean NOT NULL DEFAULT true,
@@ -1017,7 +992,7 @@ CREATE TABLE ProjectManagement.MeetingMinutes(
 
 CREATE TABLE Finance.StaffContract(
     Id serial PRIMARY KEY NOT NULL,
-	StaffId bigint NOT NULL,
+	ProfileId bigint NOT NULL,
 	ContractTypeId bigint NOT NULL,
 	StartDate date NOT NULL,
 	EndDate date NOT NULL,
@@ -1030,7 +1005,7 @@ CREATE TABLE Finance.StaffContract(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id),
+	FOREIGN KEY (PofileId) REFERENCES UserManagement.Profile(Id),
 	FOREIGN KEY (ContractTypeId) REFERENCES Basic.ContractType(Id)
 );
 
@@ -1040,6 +1015,7 @@ CREATE TABLE Finance.ContractSalaryItem(
 	CalculationTimeUnitId bigint NOT NULL,
 	Title varchar(255) NOT NULL,
 	Amount numeric(22, 2) NOT NULL,
+	CurrencyId bigint NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
@@ -1048,6 +1024,7 @@ CREATE TABLE Finance.ContractSalaryItem(
     ModifyDate timestamp,
 	ModifierId bigint,
 	FOREIGN KEY (ContractId) REFERENCES Finance.StaffContract(Id),
+	FOREIGN KEY (CurrencyId) REFERENCES Basic.Currency(Id),
 	FOREIGN KEY (CalculationTimeUnitId) REFERENCES Basic.TimeUnit(Id)
 );
 
@@ -1059,6 +1036,7 @@ CREATE TABLE Finance.ContractDeductionItem(
 	Title varchar(255) NOT NULL,
 	DeductionPercentage numeric(3,2),
 	FixedAmount numeric(22, 2),
+	FixedAmountCurrencyId bigint,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
@@ -1067,6 +1045,7 @@ CREATE TABLE Finance.ContractDeductionItem(
     ModifyDate timestamp,
 	ModifierId bigint,
 	FOREIGN KEY (ContractId) REFERENCES Finance.StaffContract(Id),
+	FOREIGN KEY (FixedAmountCurrencyId) REFERENCES Basic.Currency(Id),
 	FOREIGN KEY (CalculationTimeUnitId) REFERENCES Basic.TimeUnit(Id)
 );
 
@@ -1094,6 +1073,7 @@ CREATE TABLE Finance.CostReceipt(
 	CompnayId bigint NOT NULL,
 	ReceiptDate date NOT NULL,
 	TotalAmount numeric(22, 2) NOT NULL,
+	CurrencyId bigint NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
@@ -1103,6 +1083,7 @@ CREATE TABLE Finance.CostReceipt(
 	ModifierId bigint,
 	FOREIGN KEY (SupplierId) REFERENCES Finance.Supplier(Id),
 	FOREIGN KEY (DocumentId) REFERENCES DocumentManagement.Document(Id),
+	FOREIGN KEY (CurrencyId) REFERENCES Basic.Currency(Id),
 	FOREIGN KEY (CompnayId) REFERENCES HumanResource.Compnay(Id)
 );
 
@@ -1111,6 +1092,7 @@ CREATE TABLE Finance.CostReceiptItem(
 	CostReceiptId bigint NOT NULL,
 	ItemTitle varchar(255) NOT NULL,
 	UnitAmount numeric(22, 2) NOT NULL,
+	CurrencyId bigint NOT NULL,
 	Quantity float NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
@@ -1119,13 +1101,15 @@ CREATE TABLE Finance.CostReceiptItem(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (CostReceiptId) REFERENCES Finance.CostReceipt(Id)
+	FOREIGN KEY (CostReceiptId) REFERENCES Finance.CostReceipt(Id),
+	FOREIGN KEY (CurrencyId) REFERENCES Basic.Currency(Id)
 );
 
 CREATE TABLE Finance.ProjectDirectCostItem(
     Id serial PRIMARY KEY NOT NULL,
 	ProjectId bigint NOT NULL,
 	CostReceiptItemId bigint NOT NULL,
+	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
     CreateDate timestamp NOT NULL DEFAULT NOW(),
@@ -1142,6 +1126,8 @@ CREATE TABLE Finance.CostReceipt(
 	DocumentId bigint NOT NULL,
 	PaymentDate date NOT NULL,
 	Amount numeric(22, 2) NOT NULL,
+	CurrencyId bigint NOT NULL,
+	CurrencyId bigint NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
@@ -1150,6 +1136,7 @@ CREATE TABLE Finance.CostReceipt(
     ModifyDate timestamp,
 	ModifierId bigint,
 	FOREIGN KEY (CostReceiptId) REFERENCES Finance.CostReceipt(Id),
+	FOREIGN KEY (CurrencyId) REFERENCES Basic.Currency(Id),
 	FOREIGN KEY (DocumentId) REFERENCES DocumentManagement.Document(Id)
 );
 
@@ -1159,6 +1146,7 @@ CREATE TABLE Finance.SalaryPaymentReceipt(
 	DocumentId bigint NOT NULL,
 	PaymentDate date NOT NULL,
 	Amount numeric(22, 2) NOT NULL,
+	CurrencyId bigint NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
@@ -1167,16 +1155,18 @@ CREATE TABLE Finance.SalaryPaymentReceipt(
     ModifyDate timestamp,
 	ModifierId bigint,
 	FOREIGN KEY (StaffContractId) REFERENCES Finance.StaffContract(Id),
+	FOREIGN KEY (CurrencyId) REFERENCES Basic.Currency(Id),
 	FOREIGN KEY (DocumentId) REFERENCES DocumentManagement.Document(Id)
 );
 
 
 CREATE TABLE Finance.StaffAdditionalPaymentReceipt(
     Id serial PRIMARY KEY NOT NULL,
-	StaffId bigint NOT NULL,
+	ProfileId bigint NOT NULL,
 	DocumentId bigint NOT NULL,
 	PaymentDate date NOT NULL,
 	Amount numeric(22, 2) NOT NULL,
+	CurrencyId bigint NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
@@ -1184,6 +1174,7 @@ CREATE TABLE Finance.StaffAdditionalPaymentReceipt(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (StaffId) REFERENCES HumanResource.Staff(Id),
+	FOREIGN KEY (ProfileId) REFERENCES HumanResource.Profile(Id),
+	FOREIGN KEY (CurrencyId) REFERENCES Basic.Currency(Id),
 	FOREIGN KEY (DocumentId) REFERENCES DocumentManagement.Document(Id)
 );
