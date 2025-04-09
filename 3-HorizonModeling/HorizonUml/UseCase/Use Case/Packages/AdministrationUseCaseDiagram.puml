@@ -5,65 +5,198 @@ skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 
-title Horizon Research Project (HRP) \n Administration Use Cases \n Version 25.1.10
+title Horizon Research Project (HRP) \n Administration Use Cases \n Version 25.4.10
 
 :User: as User
 :Administrator: as Admin
 
-package "Auth"{
-    usecase "Profile Management" as profileManagement
+package "User Management"{
+    
     usecase "Role Management" as roleManagement
     usecase "Role Registration" as roleRegistration
     usecase "Role Update" as roleUpdate
     usecase "Role Activation" as roleActivation
     usecase "Role Search" as roleSearch
     usecase "Role List" as roleList
+
     usecase "Group Management" as groupManagement
     usecase "Group Registration" as groupRegistration
     usecase "Group Update" as groupUpdate
     usecase "Group Activation" as groupActivation
     usecase "Group Search" as groupSearch
     usecase "Group List" as groupList
-    usecase "User Management" as userManagement
-    usecase "User Registration" as userRegistration
-    usecase "User Activation" as userActivation
-    usecase "User Update" as userUpdate
-    usecase "User Search" as userSearch
-    usecase "User List" as userList
-    usecase "Update Profile" as updateProfile
-    usecase "View Profile" as viewProfile
+
+    usecase "Profile Management" as profileManagement
+    usecase "Profile Registration" as profileRegistration
+    usecase "Profile Activation" as profileActivation
+    usecase "Profile Update" as profileUpdate
+    usecase "Profile Search" as profileSearch
+    usecase "Profile List" as profileList
+    usecase "Profile View" as profileView
+
+    usecase "Profile Permission" as profilePermission
+    usecase "Add Profile Permission" as addProfilePermission
+    usecase "Remove Profile Permission" as removeProfilePermission
+    usecase "Profile Permission List" as profilePermissionList
+
+    usecase "Profile Role Management" as profileRoleManagement
+    usecase "Add Profile Role" as addProfileRole
+    usecase "Remove Profile Role" as removeProfileRole
+    usecase "Profile Role List" as profileRoleList
+
+    usecase "Profile Group Management" as profileGroupManagement
+    usecase "Add Profile Group" as addProfileGroup
+    usecase "Remove Profile Group" as removeProfileGroup
+    usecase "Profile Group List" as profileGroupList
+
+    usecase "Token Management" as tokenMangement
+    usecase "Create Token" as createToken
+    usecase "Get Token" as getToken
+    usecase "Refresh Token" as refreshToken
+
     usecase "Change Password" as changePassword
     usecase "Authenitication" as authentication
-    usecase "Login" as login
-    usecase "Create Token" as createToken
+
     usecase "Authorization" as authorization
-    usecase "Grant Role" as grantRole
-    usecase "User Restriction" as userRestriction
-    usecase "Check User Role Grant" as checkGrant
+    usecase "Check Profile Grant" as checkGrant
 
 }
+
+package "Basic Data Management"{
+    usecase "Currency" as currency
+    usecase "Add Currency" as addCurrency
+    usecase "Update Currency" as updateCurrency
+    usecase "Remove Currency" as removeCurrency
+    usecase "Currency Activation" as currencyActivation
+    usecase "Currency View" as currencyView
+    usecase "Currency List" as currencyList
+
+    usecase "Education Level" as educationLevel
+    usecase "Add Education Level" as addEducationLevel
+    usecase "Update Education Level" as updateEducationLevel
+    usecase "Remove Education Level" as removeEducationLevel
+    usecase "Education Level Activation" as educationLevelActivation
+    usecase "Education Level View" as educationLevelView
+    usecase "Education Level List" as educationLevelList
+
+    usecase "Priority" as priority
+    usecase "Add Priority" as addPriority
+    usecase "Update Priority" as updatePriority
+    usecase "Remove Priority" as removePriority
+    usecase "Priority Activation" as priorityActivation
+    usecase "Priority View" as priorityView
+    usecase "Priority List" as priorityList
+
+    usecase "Issue Type" as issueType
+    usecase "Add Issue Type" as addIssueType
+    usecase "Update Issue Type" as updateIssueType
+    usecase "Remove Issue Type" as removeIssueType
+    usecase "Issue Type Activation" as issueTypeActivation
+    usecase "Issue Type View" as issueTypeView
+    usecase "Issue Type List" as issueTypeList
+
+    usecase "Status" as status
+    usecase "Add Status" as addStatus
+    usecase "Update Status" as updateStatus
+    usecase "Remove Status" as removeStatus
+    usecase "Status Activation" as statusActivation
+    usecase "Status View" as statusView
+    usecase "Status List" as statusList
+
+    usecase "Resolvation" as resolvation
+    usecase "Add Resolvation" as addResolvation
+    usecase "Update Resolvation" as updateResolvation
+    usecase "Remove Resolvation" as removeResolvation
+    usecase "Resolvation Activation" as resolvationActivation
+    usecase "Resolvation View" as resolvationView
+    usecase "Resolvation List" as resolvationList
+
+
+    usecase "Meeting Type" as meetingType
+    usecase "Add Meeting Type" as addMeetingType
+    usecase "Update Meeting Type" as updateMeetingType
+    usecase "Remove Meeting Type" as removeMeetingType
+    usecase "Meeting Type Activation" as meetingTypeActivation
+    usecase "Meeting Type View" as meetingTypeView
+    usecase "Meeting Type List" as meetingTypeList
+
+    usecase "Document Type" as documentType
+    usecase "Add Document Type" as addDocumentType
+    usecase "Update Document Type" as updateDocumentType
+    usecase "Remove Document Type" as removeDocumentType
+    usecase "Document Type Activation" as documentTypeActivation
+    usecase "Document Type View" as documentTypeView
+    usecase "Document Type List" as documentTypeList
+
+    usecase "File Extention" as fileExtention
+    usecase "Add File Extention" as addFileExtention
+    usecase "Update File Extention" as updateFileExtention
+    usecase "Remove File Extention" as removeFileExtention
+    usecase "File Extention Activation" as fileExtentionActivation
+    usecase "File Extention View" as fileExtentionView
+    usecase "File Extention List" as fileExtentionList
+
+    usecase "Contract Type" as contractType
+    usecase "Add Contract Type" as addContractType
+    usecase "Update Contract Type" as updateContractType
+    usecase "Remove Contract Type" as removeContractType
+    usecase "Contract Type Activation" as contractTypeActivation
+    usecase "Contract Type View" as contractTypeView
+    usecase "Contract Type List" as contractTypeList
+
+    usecase "Time Unit" as timeUnit
+    usecase "Add Time Unit" as addTimeUnit
+    usecase "Update Time Unit" as updateTimeUnit
+    usecase "Remove Time Unit" as removeTimeUnit
+    usecase "Time Unit Activation" as timeUnitActivation
+    usecase "Time Unit View" as timeUnitView
+    usecase "Time Unit List" as timeUnitList
+}
 User <|--Admin
-Admin -- userManagement
+Admin -- profileManagement
 Admin -- roleManagement
-Admin -- groupActivationManagement
+Admin -- groupManagement
 User -- authentication
 User -- authorization
-User -- profileManagement
+User -- profileView
+User -- changePassword
+Admin -- currency
+Admin -- educationLevel
+Admin -- priority
+Admin -- issueType
+Admin -- status
+Admin -- resolvation
+Admin -- meetingType
+Admin -- documentType
+Admin -- fileExtention
+Admin -- contractType
+Admin -- timeUnit
 
-userManagement <. profileManagement 
-roleManagement <. userManagement 
-groupManagement <. userManagement 
 
+profileManagement ..> profileRegistration : <<include>>
+profileManagement ..> profileActivation : <<include>>
+profileManagement ..> changePassword : <<include>>
+profileManagement ..> profileSearch : <<include>>
+profileManagement ..> profileUpdate : <<include>>
+profileManagement ..> profileList : <<include>>
+profileManagement ..> profileView : <<include>>
+profileManagement ..> profilePermission : <<include>>
+profileManagement ..> profileGroupManagement : <<include>>
+profileManagement ..> profileRoleManagement : <<include>>
+profileManagement ..> roleManagement : <<use>>
+profileManagement ..> groupManagement : <<use>>
 
-userManagement ..> userRegistration : <<include>>
-userManagement ..> userActivation : <<include>>
-userManagement ..> changePassword : <<include>>
-userManagement ..> userSearch : <<include>>
-userManagement ..> userUpdate : <<include>>
-userManagement ..> userList : <<include>>
+profilePermission ..> addProfilePermission : <<include>>
+profilePermission ..> removeProfilePermission : <<include>>
+profilePermission ..> profilePermissionList : <<include>>
 
-profileManagement ..> updateProfile :<<include>>
-profileManagement ..> viewProfile :<<include>>
+profileGroupManagement ..> addProfileGroup : <<include>>
+profileGroupManagement ..> removeProfileGroup : <<include>>
+profileGroupManagement ..> profileGroupList : <<include>>
+
+profileRoleManagement ..> addProfileRole : <<include>>
+profileRoleManagement ..> removeProfileRole : <<include>>
+profileRoleManagement ..> profileRoleList : <<include>>
 
 roleManagement ..> roleRegistration : <<include>>
 roleManagement ..> roleUpdate : <<include>>
@@ -77,15 +210,90 @@ groupManagement ..> groupActivation : <<include>>
 groupManagement ..> groupList : <<include>>
 groupManagement ..> groupSearch : <<include>>
 
+tokenMangement ..> createToken : <<include>>
+tokenMangement ..> getToken : <<include>>
+tokenMangement ..> refreshToken : <<include>>
 
-authentication ..> userRegistration
-authentication ..> login : <<include>>
-authentication ..> createToken : <<include>>
-authorization ..>  roleManagement
-authorization ..> authentication 
-authorization ..> userManagement
-grantRole <.. authorization : <<include>>
-userRestriction <.. authorization : <<include>>
+authentication ..> tokenMangement : <<include>>
+tokenMangement ..> profileManagement : <<use>>
+authorization ..> authentication : <<use>>
 checkGrant <.. authorization : <<include>>
+
+currency ..> addCurrency : <<include>>
+currency ..> updateCurrency : <<include>>
+currency ..> removeCurrency : <<include>>
+currency ..> currencyActivation : <<include>>
+currency ..> currencyList : <<include>>
+currency ..> currencyView : <<include>>
+
+priority ..> addPriority : <<include>>
+priority ..> updatePriority : <<include>>
+priority ..> removePriority : <<include>>
+priority ..> priorityActivation : <<include>>
+priority ..> priorityList : <<include>>
+priority ..> priorityView : <<include>>
+
+status ..> addStatus: <<include>>
+status ..> updateStatus : <<include>>
+status ..> removeStatus : <<include>>
+status ..> statusActivation : <<include>>
+status ..> statusList : <<include>>
+status ..> statusView : <<include>>
+
+resolvation ..> addResolvation : <<include>>
+resolvation ..> updateResolvation : <<include>>
+resolvation ..> removeResolvation : <<include>>
+resolvation ..> resolvationActivation : <<include>>
+resolvation ..> resolvationList : <<include>>
+resolvation ..> resolvationView : <<include>>
+
+educationLevel ..> addEducationLevel: <<include>>
+educationLevel ..> updateEducationLevel : <<include>>
+educationLevel ..> removeEducationLevel : <<include>>
+educationLevel ..> educationLevelActivation : <<include>>
+educationLevel ..> educationLevelList : <<include>>
+educationLevel ..> educationLevelView : <<include>>
+
+issueType ..> addIssueType: <<include>>
+issueType ..> updateIssueType : <<include>>
+issueType ..> removeIssueType : <<include>>
+issueType ..> issueTypeActivation : <<include>>
+issueType ..> issueTypeList : <<include>>
+issueType ..> issueTypeView : <<include>>
+
+meetingType ..> addMeetingType: <<include>>
+meetingType ..> updateMeetingType : <<include>>
+meetingType ..> removeMeetingType : <<include>>
+meetingType ..> meetingTypeActivation : <<include>>
+meetingType ..> meetingTypeList : <<include>>
+meetingType ..> meetingTypeView : <<include>>
+
+documentType ..> addDocumentType: <<include>>
+documentType ..> updateDocumentType : <<include>>
+documentType ..> removeDocumentType : <<include>>
+documentType ..> documentTypeActivation : <<include>>
+documentType ..> documentTypeList : <<include>>
+documentType ..> documentTypeView : <<include>>
+
+fileExtention ..> addFileExtention: <<include>>
+fileExtention ..> updateFileExtention : <<include>>
+fileExtention ..> removeFileExtention : <<include>>
+fileExtention ..> fileExtentionActivation : <<include>>
+fileExtention ..> fileExtentionList : <<include>>
+fileExtention ..> fileExtentionView : <<include>>
+
+contractType ..> addContractType: <<include>>
+contractType ..> updateContractType : <<include>>
+contractType ..> removeContractType : <<include>>
+contractType ..> contractTypeActivation : <<include>>
+contractType ..> contractTypeList : <<include>>
+contractType ..> contractTypeView : <<include>>
+
+timeUnit ..> addTimeUnit: <<include>>
+timeUnit ..> updateTimeUnit : <<include>>
+timeUnit ..> removeTimeUnit : <<include>>
+timeUnit ..> timeUnitActivation : <<include>>
+timeUnit ..> timeUnitList : <<include>>
+timeUnit ..> timeUnitView : <<include>>
 
 @enduml
