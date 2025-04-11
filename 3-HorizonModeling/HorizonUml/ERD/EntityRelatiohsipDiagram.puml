@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.4.9
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.4.11
 
 entity "Basic.EducationLevel" as educationLevel {
   *Id : bigint(19) <<serial>>
@@ -172,8 +172,6 @@ entity "Basic.Currency" as currency {
   ModifyDate: timestamp
   ModifierId : bigint(19)
 }
-
-
 
 entity "UserManagement.Role" as role {
   *Id : bigint(19) <<serial>>
@@ -1102,7 +1100,7 @@ entity "Finance.SalaryPaymentReceipt" as salaryPaymentReceipt {
   ModifierId : bigint(19)
 }
 
-entity "Finance.StaffAditionalPaymentReceipt" as staffAditionalPaymentReceipt {
+entity "Finance.StaffAdditionalPaymentReceipt" as staffAdditionalPaymentReceipt {
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -1221,6 +1219,6 @@ documentType ||..o{ projectWorkflowDocumentType
 document ||..o{ profileEducation
 projectWorkflow ||..o{ projectWorkflowResolvation
 resolvation ||..o{ projectWorkflowResolvation
-profile ||..o{ staffAditionalPaymentReceipt
-document ||..o{ staffAditionalPaymentReceipt
+profile ||..o{ staffAdditionalPaymentReceipt
+document ||..o{ staffAdditionalPaymentReceipt
 @enduml

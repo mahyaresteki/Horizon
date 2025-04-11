@@ -5,7 +5,7 @@ skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 
-title Horizon Research Project (HRP) \n Financial Package \n Version 25.1.10
+title Horizon Research Project (HRP) \n Financial Package \n Version 25.4.11
 
 :Financial Manager: as Fmanager
 :Human Resource: as HR
@@ -14,13 +14,76 @@ title Horizon Research Project (HRP) \n Financial Package \n Version 25.1.10
 
 
 package "Financial"{
-    usecase "Project Costing" as costing
+    
     usecase "Activity Based Costing" as abc
     usecase "Direct Costing" as directCosting
     usecase "Bugget Management" as bugget
     usecase "Operational Budgeting" as buggeting
     usecase "Product Pricing" as pricing
+
+    usecase "Cost Management" as costing
+    usecase "Cost Receipt" as costReceipt
+    usecase "Add Cost Receipt" as addCostReceipt
+    usecase "Update Cost Receipt" as updateCostReceipt
+    usecase "Remove Cost Receipt" as removeCostReceipt
+    usecase "Get Cost Receipt" as getCostReceipt
+    usecase "Cost Receipt List" as costReceiptList
+    usecase "Cost Receipt Item" as costReceiptItem
+    usecase "Add Cost Receipt Item" as addCostReceiptItem
+    usecase "Update Cost Receipt Item" as updateCostReceiptItem
+    usecase "Remove Cost Receipt Item" as removeCostReceiptItem
+    usecase "Get Cost Receipt Item" as getCostReceiptItem
+    usecase "Cost Receipt Item List" as costReceiptItemList
+    usecase "Project Direct Cost Item" as projectDirectCostItem
+    usecase "Add Project Direct Cost Item" as addProjectDirectCostItem
+    usecase "Update Project Direct Cost Item" as updateProjectDirectCostItem
+    usecase "Remove Project Direct Cost  Item" as removeProjectDirectCostItem
+    usecase "Get Project Direct Cost Item" as getProjectDirectCostItem
+    usecase "Cost Project Direct Item List" as projectDirectCostItemList
+
+    usecase "Payment Management" as paymentManagement
+    usecase "Supplier Management" as supplierManagement
+    usecase "Add Supplier" as addSupplier
+    usecase "Update Supplier" as updateSupplier
+    usecase "Remove Supplier" as removeSupplier
+    usecase "Get Supplier" as getSupplier
+    usecase "Supplier List" as supplierList
+    usecase "Salary Payment" as salaryPayment
+    usecase "Add Salary Payment Receipt" as addSalaryPaymentReceipt
+    usecase "Update Salary Payment Receipt" as updateSalaryPaymentReceipt
+    usecase "Remove Salary Payment Receipt" as removeSalaryPaymentReceipt
+    usecase "Get Salary Payment Receipt" as getSalaryPaymentReceipt
+    usecase "Salary Payment Receipt List" as salaryPaymentReceiptList
+    usecase "Cost Payment" as costPayment
+    usecase "Add Cost Payment Receipt" as addCostPaymentReceipt
+    usecase "Update Cost Payment Receipt" as updateCostPaymentReceipt
+    usecase "Remove Cost Payment Receipt" as removeCostPaymentReceipt
+    usecase "Get Cost Payment Receipt" as getCostPaymentReceipt
+    usecase "Cost Payment Receipt List" as costPaymentReceiptList
+    usecase "Staff Additional Payment" as staffAdditionalPayment
+    usecase "Add Staff Additional Payment Receipt" as addStaffAdditionalPaymentReceipt
+    usecase "Update Staff Additional Payment Receipt" as updateStaffAdditionalPaymentReceipt
+    usecase "Remove Staff Additional Payment Receipt" as removeStaffAdditionalPaymentReceipt
+    usecase "Get Staff Additional Payment Receipt" as getStaffAdditionalPaymentReceipt
+    usecase "Staff Additional Payment Receipt List" as staffAdditionalPaymentReceiptList
+
     usecase "Salary Management" as salaryManagement
+    usecase "Staff Contract Management" as staffContractManagement
+    usecase "Add Staff Contract" as addStaffContract
+    usecase "Update Staff Contract" as updateStaffContract
+    usecase "Remove Staff Contract" as removeStaffContract
+    usecase "Get Staff Contract" as getStaffContract
+    usecase "Staff Contract List" as staffContractList
+    usecase "Contract Item" as contractItem
+    usecase "Add Contract Item" as addContractItem
+    usecase "Update Contract Item" as updateContractItem
+    usecase "Remove Contract Item" as removeContractItem
+    usecase "Contract Item List" as contractItemList
+    usecase "Contract Deduction Item" as contractDeductionItem
+    usecase "Add Contract Deduction Item" as addContractDeductionItem
+    usecase "Update Contract Deduction Item" as updateContractDeductionItem
+    usecase "Remove Contract Deduction Item" as removeContractDeductionItem
+    usecase "Contract Deduction Item List" as contractDeductionItemList
     usecase "Monthly Salary Calulation" as monthlySalaryCalculation
     usecase "Annually Salary Calulation" as annuallySalaryCalculation
     usecase "Print Bill Salary" as printBillSalary
@@ -30,15 +93,78 @@ salaryManagement -- Accountant
 salaryManagement -- Fmanager
 salaryManagement -- HR
 costing -- Accountant
+paymentManagement -- Accountant
 pricing -- Accountant
 bugget -- Fmanager
 bugget -- SeniorManager
 
+
+staffContractManagement <.. salaryManagement : <<include>>
+addStaffContract <.. staffContractManagement : <<include>>
+updateStaffContract <.. staffContractManagement : <<include>>
+removeStaffContract <.. staffContractManagement : <<include>>
+getStaffContract <.. staffContractManagement : <<include>>
+staffContractList <.. staffContractManagement : <<include>>
+contractItem <.. staffContractManagement : <<include>>
+addContractItem <.. contractItem : <<include>>
+updateContractItem <.. contractItem : <<include>>
+removeContractItem <.. contractItem : <<include>>
+contractItemList <.. contractItem : <<include>>
+contractDeductionItem <.. staffContractManagement : <<include>>
+addContractDeductionItem <.. contractDeductionItem : <<include>>
+updateContractDeductionItem <.. contractDeductionItem : <<include>>
+removeContractDeductionItem <.. contractDeductionItem : <<include>>
+contractDeductionItemList <.. contractDeductionItem : <<include>>
 monthlySalaryCalculation <.. salaryManagement : <<include>>
 annuallySalaryCalculation <.. salaryManagement : <<include>>
 printBillSalary <.. salaryManagement : <<include>>
+
+supplierManagement <.. paymentManagement : <<include>>
+addSupplier <.. supplierManagement : <<include>>
+updateSupplier <.. supplierManagement : <<include>>
+removeSupplier <.. supplierManagement : <<include>>
+getSupplier <.. supplierManagement : <<include>>
+supplierList <.. supplierManagement : <<include>>
+salaryPayment <.. paymentManagement : <<include>>
+addSalaryPaymentReceipt <.. salaryPayment : <<include>>
+updateSalaryPaymentReceipt <.. salaryPayment : <<include>>
+removeSalaryPaymentReceipt <.. salaryPayment : <<include>>
+getSalaryPaymentReceipt <.. salaryPayment : <<include>>
+salaryPaymentReceiptList <.. salaryPayment : <<include>>
+costPayment <.. paymentManagement : <<include>>
+addCostPaymentReceipt <.. costPayment : <<include>>
+updateCostPaymentReceipt <.. costPayment : <<include>>
+removeCostPaymentReceipt <.. costPayment : <<include>>
+getCostPaymentReceipt <.. costPayment : <<include>>
+costPaymentReceiptList <.. costPayment : <<include>>
+staffAdditionalPayment <.. paymentManagement : <<include>>
+addStaffAdditionalPaymentReceipt <.. staffAdditionalPayment : <<include>>
+updateStaffAdditionalPaymentReceipt <.. staffAdditionalPayment : <<include>>
+removeStaffAdditionalPaymentReceipt <.. staffAdditionalPayment : <<include>>
+getStaffAdditionalPaymentReceipt <.. staffAdditionalPayment : <<include>>
+staffAdditionalPaymentReceiptList <.. staffAdditionalPayment : <<include>>
+
+costReceipt <.. costing : <<include>>
+addCostReceipt <.. costReceipt : <<include>>
+updateCostReceipt <.. costReceipt : <<include>>
+removeCostReceipt <.. costReceipt : <<include>>
+getCostReceipt <.. costReceipt : <<include>>
+costReceiptList <.. costReceipt : <<include>>
+costReceiptItem <.. costReceipt : <<include>>
+addCostReceiptItem <.. costReceiptItem : <<include>>
+updateCostReceiptItem <.. costReceiptItem : <<include>>
+removeCostReceiptItem <.. costReceiptItem : <<include>>
+getCostReceiptItem <.. costReceiptItem : <<include>>
+costReceiptItemList <.. costReceiptItem : <<include>>
+projectDirectCostItem <.. costReceiptItem : <<include>>
+addProjectDirectCostItem <.. projectDirectCostItem : <<include>>
+updateProjectDirectCostItem <.. projectDirectCostItem : <<include>>
+removeProjectDirectCostItem <.. projectDirectCostItem : <<include>>
+getProjectDirectCostItem <.. projectDirectCostItem : <<include>>
+projectDirectCostItemList <.. projectDirectCostItem : <<include>>
+
 buggeting <.. bugget : <<include>>
-directCosting <.. costing : <<include>>
-abc <.. costing : <<include>>
+directCosting <.. pricing : <<include>>
+abc <.. pricing : <<include>>
 
 @enduml
