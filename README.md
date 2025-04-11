@@ -29,6 +29,12 @@ Therefore, the Horizon project is a humanitarian research activity aimed at crea
 
 **_"It is always possible to produce a good application software. But time is running out to improve people's living conditions."_**
 
+## Mindsets
+The following articles are available to the public as mindsets of the project.
+1. **Worldview Mindset:** [Social-Oriented Philosophy](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Social_Oriented_Philosophy.pdf)
+2. **Mindset for the Problem:** [Deceptive Virtualization Theory](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Deceptive_Virtualization_Theory.pdf)
+3. **Mindset for the Soltion:** [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Theory_of_Endurance_Software_Development_Methodology.pdf)
+
 ## Research Type
 Based on definitions of [Lawrence Berkeley	National	Laboratory](https://www.sjsu.edu/people/fred.prochaska/courses/ScWk170/s0/Basic-vs.-Applied-Research.pdf), this project is an **"applied research"**.
 
@@ -59,11 +65,6 @@ This project is currently in the research and documentation phase. No coding tas
 At this stage, contributions are welcome in the form of research, documentation, and theoretical discussion.
 
 ## Documentation
-### Mindsets
-The following articles are available to the public as mindsets of the project.
-1. **Worldview Mindset:** [Social-Oriented Philosophy](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Social_Oriented_Philosophy.pdf)
-2. **Mindset for the Problem:** [Deceptive Virtualization Theory](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Deceptive_Virtualization_Theory.pdf)
-3. **Mindset for the Soltion:** [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Theory_of_Endurance_Software_Development_Methodology.pdf)
 
 ### Modeling Outputs
 1. **Modeling Language:** Horizon system is modeled in [UML 2.0](https://en.wikipedia.org/wiki/Unified_Modeling_Language) format by [PlantUML](https://plantuml.com/). Please [click here](https://github.com/mahyaresteki/Horizon/tree/master/3-HorizonModeling/HorizonUml/out) to see the modeling diagrams.
