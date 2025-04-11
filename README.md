@@ -13,9 +13,9 @@ Insights from this research project will support senior managers in optimizing b
 ## How Does Horizon System Work?
 Horizon System assesses job satisfaction and performance using a combination of qualitative and quantitative methods. Key approaches include:
 
-1. Employee Surveys & Feedback: Regular surveys help gather insights on job satisfaction, workplace culture, and team dynamics.
-2. Project Workflow Analysis: By tracking task completion times, collaboration patterns, and workload distribution, the system identifies areas for improvement.
-3. Performance Metrics: The system evaluates productivity trends and employee engagement based on real work data.
+1. **Employee Surveys & Feedback:** Regular surveys help gather insights on job satisfaction, workplace culture, and team dynamics.
+2. **Project Workflow Analysis:** By tracking task completion times, collaboration patterns, and workload distribution, the system identifies areas for improvement.
+3. **Performance Metrics:** The system evaluates productivity trends and employee engagement based on real work data.
 Ethical & Social Impact Indicators – Workplace inclusivity, work-life balance, and adherence to labor rights standards are measured to ensure a fair work environment.
 
 By integrating these methods, Horizon System provides actionable insights for both employees and managers, fostering a healthier and more efficient work environment.
