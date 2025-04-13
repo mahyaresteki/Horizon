@@ -5,170 +5,122 @@ skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 
-title Horizon Research Project (HRP) \n HR Management Package \n Version 25.1.11
+title Horizon Research Project (HRP) \n HR Management Package \n Version 25.4.14
 
 :Human Resource: as HR
-:Network Manager: as NetworkManager
 :Staff: as Staff
 
 package "HR Management"{
+    usecase "Department Management" as departmentManagement
+    usecase "Department Registration" as departmentRegistration
+    usecase "Department Update" as departmentUpdate
+    usecase "Department Activation" as departmentActivation
+    usecase "Department Remove" as departmentRemove
+    usecase "Department List" as departmentList
+    usecase "Department View" as departmentView
+
     usecase "Position Management" as positionManagement
     usecase "Position Registration" as positionRegistration
     usecase "Position Update" as positionUpdate
     usecase "Position Activation" as positionActivation
-    usecase "Set Salary Range of The Position" as setPositionSalaryrange
+    usecase "Position Remove" as positionRemove
     usecase "Position List" as positionList
     usecase "Position View" as positionView
-    usecase "Position Search" as positionSearch
-    usecase "Staff Management" as staffManagement
-    usecase "Staff Registration" as staffRegistration
-    usecase "Staff Update" as staffUpdate
-    usecase "Staff Activation" as staffActivation
-    usecase "Staff List" as staffList
-    usecase "Staff View" as staffView
-    usecase "Staff Search" as staffSearch
-    usecase "Staff Resume" as staffResume
+    usecase "Set Salary Range of The Position" as setPositionSalaryrange
+
     usecase "Attendance Management" as attendanceManagement
     usecase "Attendance Add" as attendanceAdd
     usecase "Attendance Update" as AttendanceUpdate
     usecase "Attendance Remove" as AttendanceRemove
     usecase "Attendance List" as attendanceList
     usecase "Attendance View" as attendanceView
-    usecase "Attendance Search" as attendanceSearch
+
     usecase "Leave Management" as leaveManagement
     usecase "Leave Add" as leaveAdd
     usecase "Leave Update" as leaveUpdate
     usecase "Leave Remove" as leaveRemove
     usecase "Leave List" as leaveList
     usecase "Leave View" as leaveView
-    usecase "Leave Search" as leaveSearch
+
     usecase "Mission Management" as missionManagement
     usecase "Mission Add" as missionAdd
     usecase "Mission Update" as missionUpdate
     usecase "Mission Remove" as missionRemove
     usecase "Mission List" as missionList
     usecase "Mission View" as missionView
-    usecase "Mission Search" as missionSearch
+
     usecase "Attendance Report" as attendanceReport
     usecase "Calulate Total Mission Time" as totalMissionTime
     usecase "Calulate Total Leave Time" as totalLeaveTime
     usecase "Calulate Total Overtime" as totalOvertime
     usecase "Calulate Total Work Dificit Time" as totalWorkDificitTime
-    
+
+    usecase "Resume Management" as resumeManagement
+    usecase "Profile Education" as profileEducation
+    usecase "Profile Job Experience" as profileJobExperience
+    usecase "Profile Certificate" as profileCertificate
+
+    usecase "Company Calendar Management" as compnayCalendarManagement
+    usecase "Working Timetable" as workingTimeTable
+    usecase "Holidaies" as holidaies
+    usecase "Questionnaire" as questionnaire
 }
 
-package "Organization"{
-    usecase "Organization Management" as organizationManagement
-    usecase "Organization Registration" as organizationRegistration
-    usecase "Organization Update" as organizationUpdate
-    usecase "Organization Activation" as organizationActivation
-    usecase "Organization List" as organizationList
-    usecase "Organization View" as organizationView
-    usecase "Organization Search" as organizationSearch
-    usecase "Department Management" as departmentManagement
-    usecase "Department Registration" as departmentRegistration
-    usecase "Department Update" as departmentUpdate
-    usecase "Department Activation" as departmentActivation
-    usecase "Department List" as departmentList
-    usecase "Department View" as departmentView
-    usecase "Department Search" as departmentSearch
-    usecase "Building Management" as buildingManagement
-    usecase "Building Add" as buildingAdd
-    usecase "Building Update" as buildingUpdate
-    usecase "Building Activation" as buildingActivation
-    usecase "Building List" as buildingList
-    usecase "Building View" as buildingView
-    usecase "Building Search" as buildingSearch
-    usecase "Work Stattion Management" as workStationManagement
-    usecase "Work Stattion Add" as workStationAdd
-    usecase "Work Stattion Update" as workStationUpdate
-    usecase "Work Stattion Activation" as workStationActivation
-    usecase "Work Stattion List" as workStationList
-    usecase "Work Stattion View" as workStationView
-    usecase "Work Stattion Search" as workStationSearch
-}
 
-HR -- departmentManagement
-HR -- organizationManagement
-HR -- buildingManagement
-NetworkManager -- workStationManagement
 
-departmentManagement .> organizationManagement
-buildingManagement <. workStationManagement
-buildingManagement .> organizationManagement
 
-organizationManagement ..> organizationRegistration : <<include>>
-organizationManagement ..> organizationUpdate : <<include>>
-organizationManagement ..> organizationActivation : <<include>>
-organizationManagement ..> organizationList : <<include>>
-organizationManagement ..> organizationView : <<include>>
-organizationManagement ..> organizationSearch : <<include>>
-departmentManagement ..> departmentRegistration : <<include>>
-departmentManagement ..> departmentUpdate : <<include>>
-departmentManagement ..> departmentActivation : <<include>>
-departmentManagement ..> departmentList : <<include>>
-departmentManagement ..> departmentView : <<include>>
-departmentManagement ..> departmentSearch : <<include>>
-buildingManagement ..> buildingAdd : <<include>>
-buildingManagement ..> buildingUpdate : <<include>>
-buildingManagement ..> buildingActivation : <<include>>
-buildingManagement ..> buildingList : <<include>>
-buildingManagement ..> buildingView : <<include>>
-buildingManagement ..> buildingSearch : <<include>>
-workStationManagement ..> workStationAdd : <<include>>
-workStationManagement ..> workStationUpdate : <<include>>
-workStationManagement ..> workStationActivation : <<include>>
-workStationManagement ..> workStationList : <<include>>
-workStationManagement ..> workStationView : <<include>>
-workStationManagement ..> workStationSearch : <<include>>
+departmentRegistration <.. departmentManagement : <<include>>
+departmentUpdate <.. departmentManagement : <<include>>
+departmentActivation <.. departmentManagement : <<include>>
+departmentRemove <.. departmentManagement : <<include>>
+departmentList <.. departmentManagement : <<include>>
+departmentView <.. departmentManagement : <<include>>
 
-staffManagement -- HR
+departmentManagement -- HR
 positionManagement -- HR
-staffManagement -- Staff
+resumeManagement -- HR
+compnayCalendarManagement -- HR
+questionnaire -- HR
 attendanceManagement -- Staff
-
-staffManagement ..> positionManagement
-attendanceManagement ..> staffManagement
-
-staffRegistration <.. staffManagement : <<include>>
-staffUpdate <.. staffManagement : <<include>>
-staffActivation <.. staffManagement : <<include>>
-staffList <.. staffManagement : <<include>>
-staffView <.. staffManagement : <<include>>
-staffSearch <.. staffManagement : <<include>>
-staffResume <.. staffManagement : <<include>>
+departmentManagement <. positionManagement
 positionRegistration <.. positionManagement : <<include>>
 positionUpdate <.. positionManagement : <<include>>
+positionRemove <.. positionManagement : <<include>>
 positionActivation <.. positionManagement : <<include>>
 positionList <.. positionManagement : <<include>>
 positionView <.. positionManagement : <<include>>
-positionSearch <.. positionManagement : <<include>>
 setPositionSalaryrange <.. positionManagement : <<include>>
-staffManagement <.. positionManagement : <<include>>
 
 attendanceAdd <.. attendanceManagement : <<include>>
 AttendanceUpdate <.. attendanceManagement : <<include>>
 AttendanceRemove <.. attendanceManagement : <<include>>
 attendanceList <.. attendanceManagement : <<include>>
 attendanceView <.. attendanceManagement : <<include>>
-attendanceSearch <.. attendanceManagement : <<include>>
+
 leaveManagement <.. attendanceManagement : <<include>>
 leaveAdd <.. leaveManagement : <<include>>
 leaveUpdate <.. leaveManagement : <<include>>
 leaveRemove <.. leaveManagement : <<include>>
 leaveList <.. leaveManagement : <<include>>
 leaveView <.. leaveManagement : <<include>>
-leaveSearch <.. leaveManagement : <<include>>
+
 missionManagement <.. attendanceManagement : <<include>>
 missionAdd <.. missionManagement : <<include>>
 missionUpdate <.. missionManagement : <<include>>
 missionRemove <.. missionManagement : <<include>>
 missionList <.. missionManagement : <<include>>
 missionView <.. missionManagement : <<include>>
-missionSearch <.. missionManagement : <<include>>
+
 attendanceReport <.. attendanceManagement : <<include>>
 totalMissionTime <.. attendanceReport : <<include>>
 totalLeaveTime <.. attendanceReport : <<include>>
 totalOvertime <.. attendanceReport : <<include>>
 totalWorkDificitTime <.. attendanceReport : <<include>>
+
+profileEducation <.. resumeManagement : <<include>>
+profileJobExperience <.. resumeManagement : <<include>>
+profileCertificate <.. resumeManagement : <<include>>
+
+workingTimeTable <.. compnayCalendarManagement : <<include>>
+holidaies <.. compnayCalendarManagement : <<include>>
 @enduml
