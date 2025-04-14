@@ -4,13 +4,14 @@ left to right direction
 skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
+skinparam TitleFontSize 48px
 
-title Horizon Research Project (HRP) \n HR Management Package \n Version 25.4.15
+title Horizon Research Project (HRP) \n Human Resource Management Package \n Version 25.4.15
 
 :Human Resource: as HR
 :Staff: as Staff
 
-package "HR Management"{
+package "Human Resource Management"{
     usecase "Department Management" as departmentManagement
     usecase "Department Registration" as departmentRegistration
     usecase "Department Update" as departmentUpdate
