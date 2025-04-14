@@ -5,7 +5,7 @@ skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 
-title Horizon Research Project (HRP) \n HR Management Package \n Version 25.4.14
+title Horizon Research Project (HRP) \n HR Management Package \n Version 25.4.15
 
 :Human Resource: as HR
 :Staff: as Staff
@@ -57,17 +57,86 @@ package "HR Management"{
 
     usecase "Resume Management" as resumeManagement
     usecase "Profile Education" as profileEducation
+    usecase "Profile Education Add" as profileEducationAdd
+    usecase "Profile Education Update" as profileEducationUpdate
+    usecase "Profile Education Remove" as profileEducationRemove
+    usecase "Profile Education List" as profileEducationList
+    usecase "Profile Education View" as profileEducationView
     usecase "Profile Job Experience" as profileJobExperience
+    usecase "Profile Job Experience Add" as profileJobExperienceAdd
+    usecase "Profile Job Experience Update" as profileJobExperienceUpdate
+    usecase "Profile Job Experience Remove" as profileJobExperienceRemove
+    usecase "Profile Job Experience List" as profileJobExperienceList
+    usecase "Profile Job Experience View" as profileJobExperienceView
     usecase "Profile Certificate" as profileCertificate
+    usecase "Profile Certificate Add" as profileCertificateAdd
+    usecase "Profile Certificate Update" as profileCertificateUpdate
+    usecase "Profile Certificate Remove" as profileCertificateRemove
+    usecase "Profile Certificate List" as profileCertificateList
+    usecase "Profile Certificate View" as profileCertificateView
 
     usecase "Company Calendar Management" as compnayCalendarManagement
     usecase "Working Timetable" as workingTimeTable
+    usecase "Working Timetable Add" as workingTimeTableAdd
+    usecase "Working Timetable Update" as workingTimeTableUpdate
+    usecase "Working Timetable Remove" as workingTimeTableRemove
+    usecase "Working Timetable List" as workingTimeTableList
+    usecase "Working Timetable View" as workingTimeTableView
     usecase "Holidaies" as holidaies
+    usecase "Holidaies Add" as holidaiesAdd
+    usecase "Holidaies Update" as holidaiesUpdate
+    usecase "Holidaies Remove" as holidaiesRemove
+    usecase "Holidaies List" as holidaiesList
+    usecase "Holidaies View" as holidaiesView
+
     usecase "Questionnaire" as questionnaire
+    usecase "Questionnaire Add" as questionnaireAdd
+    usecase "Questionnaire Update" as questionnaireUpdate
+    usecase "Questionnaire Remove" as questionnaireRemove
+    usecase "Questionnaire List" as questionnaireList
+    usecase "Questionnaire View" as questionnaireView
+    usecase "Questionnaire Target Department" as questionnaireTargetDepartment
+    usecase "Questionnaire Target Department Add" as questionnaireTargetDepartmentAdd
+    usecase "Questionnaire Target Department Update" as questionnaireTargetDepartmentUpdate
+    usecase "Questionnaire Target Department Remove" as questionnaireTargetDepartmentRemove
+    usecase "Questionnaire Target Department List" as questionnaireTargetDepartmentList
+    usecase "Questionnaire Target Department View" as questionnaireTargetDepartmentView
+    usecase "Question" as question
+    usecase "Question Add" as questionAdd
+    usecase "Question Update" as questionUpdate
+    usecase "Question Remove" as questionRemove
+    usecase "Question List" as questionList
+    usecase "Question View" as questionView
+    usecase "Question Option" as questionOption
+    usecase "Question Option Add" as questionOptionAdd
+    usecase "Question Option Update" as questionOptionUpdate
+    usecase "Question Option Remove" as questionOptionRemove
+    usecase "Question Option List" as questionOptionList
+    usecase "Question Option View" as questionOptionView
+
+    usecase "Questionnaire Result" as questionnaireResult
+    usecase "Questionnaire Result Add" as questionnaireResultAdd
+    usecase "Questionnaire Result List" as questionnaireResultList
+    usecase "Questionnaire Result View" as questionnaireResultView
+    usecase "Questionnaire Result Detail" as questionnaireResultDetail
+    usecase "Questionnaire Result Detail Add" as questionnaireResultDetailAdd
+    usecase "Questionnaire Result Detail List" as questionnaireResultDetailList
+    usecase "Questionnaire Result Detail View" as questionnaireResultDetailView
+    usecase "Questionnaire Choosed Option Result Detail" as questionnaireChoosedOptionResultDetail
+    usecase "Questionnaire Choosed Option Result Detail Add" as questionnaireChoosedOptionResultDetailAdd
+    usecase "Questionnaire Choosed Option Result Detail List" as questionnaireChoosedOptionResultDetailList
+    usecase "Questionnaire Choosed Option Result Detail View" as questionnaireChoosedOptionResultDetailView
 }
 
-
-
+departmentManagement -- HR
+positionManagement -- HR
+resumeManagement -- HR
+compnayCalendarManagement -- HR
+questionnaire -- HR
+attendanceManagement -- HR
+questionnaireResult -- HR
+attendanceManagement -- Staff
+questionnaireResult -- Staff
 
 departmentRegistration <.. departmentManagement : <<include>>
 departmentUpdate <.. departmentManagement : <<include>>
@@ -76,12 +145,6 @@ departmentRemove <.. departmentManagement : <<include>>
 departmentList <.. departmentManagement : <<include>>
 departmentView <.. departmentManagement : <<include>>
 
-departmentManagement -- HR
-positionManagement -- HR
-resumeManagement -- HR
-compnayCalendarManagement -- HR
-questionnaire -- HR
-attendanceManagement -- Staff
 departmentManagement <. positionManagement
 positionRegistration <.. positionManagement : <<include>>
 positionUpdate <.. positionManagement : <<include>>
@@ -118,9 +181,71 @@ totalOvertime <.. attendanceReport : <<include>>
 totalWorkDificitTime <.. attendanceReport : <<include>>
 
 profileEducation <.. resumeManagement : <<include>>
+profileEducationAdd <.. profileEducation : <<include>>
+profileEducationUpdate <.. profileEducation : <<include>>
+profileEducationRemove <.. profileEducation : <<include>>
+profileEducationList <.. profileEducation : <<include>>
+profileEducationView <.. profileEducation : <<include>>
 profileJobExperience <.. resumeManagement : <<include>>
+profileJobExperienceAdd <.. profileJobExperience : <<include>>
+profileJobExperienceRemove <.. profileJobExperience : <<include>>
+profileJobExperienceUpdate <.. profileJobExperience : <<include>>
+profileJobExperienceList <.. profileJobExperience : <<include>>
+profileJobExperienceView <.. profileJobExperience : <<include>>
 profileCertificate <.. resumeManagement : <<include>>
+profileCertificateAdd <.. profileCertificate : <<include>>
+profileCertificateUpdate <.. profileCertificate : <<include>>
+profileCertificateRemove <.. profileCertificate : <<include>>
+profileCertificateList <.. profileCertificate : <<include>>
+profileCertificateView <.. profileCertificate : <<include>>
 
 workingTimeTable <.. compnayCalendarManagement : <<include>>
+workingTimeTableAdd <.. workingTimeTable : <<include>>
+workingTimeTableUpdate <.. workingTimeTable : <<include>>
+workingTimeTableRemove <.. workingTimeTable : <<include>>
+workingTimeTableList <.. workingTimeTable : <<include>>
+workingTimeTableView <.. workingTimeTable : <<include>>
 holidaies <.. compnayCalendarManagement : <<include>>
+holidaiesAdd <.. holidaies : <<include>>
+holidaiesUpdate <.. holidaies : <<include>>
+holidaiesRemove <.. holidaies : <<include>>
+holidaiesList <.. holidaies : <<include>>
+holidaiesView <.. holidaies : <<include>>
+
+questionnaireAdd <.. questionnaire : <<include>>
+questionnaireUpdate <.. questionnaire : <<include>>
+questionnaireRemove <.. questionnaire : <<include>>
+questionnaireList <.. questionnaire : <<include>>
+questionnaireView <.. questionnaire : <<include>>
+questionnaireTargetDepartment <.. questionnaire : <<include>>
+questionnaireTargetDepartmentAdd <.. questionnaireTargetDepartment : <<include>>
+questionnaireTargetDepartmentUpdate <.. questionnaireTargetDepartment : <<include>>
+questionnaireTargetDepartmentRemove <.. questionnaireTargetDepartment : <<include>>
+questionnaireTargetDepartmentList <.. questionnaireTargetDepartment : <<include>>
+questionnaireTargetDepartmentView <.. questionnaireTargetDepartment : <<include>>
+question <.. questionnaire : <<include>>
+questionAdd <.. question : <<include>>
+questionUpdate <.. question : <<include>>
+questionRemove <.. question : <<include>>
+questionList <.. question : <<include>>
+questionView <.. question : <<include>>
+questionOption <.. question : <<include>>
+questionOptionAdd <.. questionOption : <<include>>
+questionOptionUpdate <.. questionOption : <<include>>
+questionOptionRemove <.. questionOption : <<include>>
+questionOptionList <.. questionOption : <<include>>
+questionOptionView <.. questionOption : <<include>>
+
+questionnaire <. questionnaireResult : <<inculde>>
+questionnaireResultAdd <.. questionnaireResult : <<inculde>>
+questionnaireResultList <.. questionnaireResult : <<inculde>>
+questionnaireResultView <.. questionnaireResult : <<inculde>>
+questionnaireResultDetail <.. questionnaireResult : <<inculde>>
+questionnaireResultDetailAdd <.. questionnaireResultDetail : <<inculde>>
+questionnaireResultDetailList <.. questionnaireResultDetail : <<inculde>>
+questionnaireResultDetailView <.. questionnaireResultDetail : <<inculde>>
+questionnaireChoosedOptionResultDetail <.. questionnaireResultDetail : <<inculde>>
+questionnaireChoosedOptionResultDetailAdd <.. questionnaireChoosedOptionResultDetail : <<inculde>>
+questionnaireChoosedOptionResultDetailList <.. questionnaireChoosedOptionResultDetail : <<inculde>>
+questionnaireChoosedOptionResultDetailView <.. questionnaireChoosedOptionResultDetail : <<inculde>>
 @enduml
