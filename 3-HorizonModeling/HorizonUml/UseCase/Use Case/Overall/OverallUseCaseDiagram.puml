@@ -4,8 +4,9 @@ left to right direction
 skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
+skinparam TitleFontSize 72px
 
-title Horizon Research Project (HRP) \n Overall Use Case Diagram \n Version 25.1.10
+title Horizon Research Project (HRP) \n Overall Use Case Diagram \n Version 25.4.17
 
 :User: as User
 :Senior Manager: as SeniorManager
@@ -21,101 +22,917 @@ title Horizon Research Project (HRP) \n Overall Use Case Diagram \n Version 25.1
 :Product Manager: as ProductManager
 
 
-package "Administration"{
+package "User Management"{
+    
     usecase "Role Management" as roleManagement
+    usecase "Role Registration" as roleRegistration
+    usecase "Role Update" as roleUpdate
+    usecase "Role Activation" as roleActivation
+    usecase "Role Search" as roleSearch
+    usecase "Role List" as roleList
+
     usecase "Group Management" as groupManagement
-    usecase "User Management" as userManagement
+    usecase "Group Registration" as groupRegistration
+    usecase "Group Update" as groupUpdate
+    usecase "Group Activation" as groupActivation
+    usecase "Group Search" as groupSearch
+    usecase "Group List" as groupList
+
     usecase "Profile Management" as profileManagement
+    usecase "Profile Registration" as profileRegistration
+    usecase "Profile Activation" as profileActivation
+    usecase "Profile Update" as profileUpdate
+    usecase "Profile Search" as profileSearch
+    usecase "Profile List" as profileList
+    usecase "Profile View" as profileView
+
+    usecase "Profile Permission" as profilePermission
+    usecase "Add Profile Permission" as addProfilePermission
+    usecase "Remove Profile Permission" as removeProfilePermission
+    usecase "Profile Permission List" as profilePermissionList
+
+    usecase "Profile Role Management" as profileRoleManagement
+    usecase "Add Profile Role" as addProfileRole
+    usecase "Remove Profile Role" as removeProfileRole
+    usecase "Profile Role List" as profileRoleList
+
+    usecase "Profile Group Management" as profileGroupManagement
+    usecase "Add Profile Group" as addProfileGroup
+    usecase "Remove Profile Group" as removeProfileGroup
+    usecase "Profile Group List" as profileGroupList
+
+    usecase "Token Management" as tokenMangement
+    usecase "Create Token" as createToken
+    usecase "Get Token" as getToken
+    usecase "Refresh Token" as refreshToken
+
+    usecase "Change Password" as changePassword
     usecase "Authenitication" as authentication
+
     usecase "Authorization" as authorization
+    usecase "Check Profile Grant" as checkGrant
+
 }
 
-package "Organization"{
-    usecase "Organization Management" as organizationManagement
-    usecase "Building Management" as buildingManagement
-    usecase "Work Stattion Management" as workStationManagement
-    usecase "Department Management" as departmentManagement
-}
+package "Basic Data Management"{
+    usecase "Currency" as currency
+    usecase "Add Currency" as addCurrency
+    usecase "Update Currency" as updateCurrency
+    usecase "Remove Currency" as removeCurrency
+    usecase "Currency Activation" as currencyActivation
+    usecase "Currency View" as currencyView
+    usecase "Currency List" as currencyList
 
-package "HR Management"{
-    usecase "Position Management" as positionManagement
-    usecase "Staff Management" as staffManagement
-    usecase "Attendance Management" as attendanceManagement
-}
+    usecase "Education Level" as educationLevel
+    usecase "Add Education Level" as addEducationLevel
+    usecase "Update Education Level" as updateEducationLevel
+    usecase "Remove Education Level" as removeEducationLevel
+    usecase "Education Level Activation" as educationLevelActivation
+    usecase "Education Level View" as educationLevelView
+    usecase "Education Level List" as educationLevelList
 
-package "Asset"{
-    usecase "Asset Management" as assetManagement
-}
+    usecase "Priority" as priority
+    usecase "Add Priority" as addPriority
+    usecase "Update Priority" as updatePriority
+    usecase "Remove Priority" as removePriority
+    usecase "Priority Activation" as priorityActivation
+    usecase "Priority View" as priorityView
+    usecase "Priority List" as priorityList
 
-package "Project"{
-    usecase "Project Management" as projectManagement
-    usecase "Project Team Management" as projectTeamManagement
-    usecase "Release Management" as releaseManagement
-    usecase "Issue Management" as issueManagement
-    usecase "Meeting Management" as meetingManagement
-    usecase "Timesheet Management" as timesheetManagement
-}
+    usecase "Issue Type" as issueType
+    usecase "Add Issue Type" as addIssueType
+    usecase "Update Issue Type" as updateIssueType
+    usecase "Remove Issue Type" as removeIssueType
+    usecase "Issue Type Activation" as issueTypeActivation
+    usecase "Issue Type View" as issueTypeView
+    usecase "Issue Type List" as issueTypeList
 
-package "Reporting"{
-    usecase "Business Intelligence (BI) Reports" as biReport
-    usecase "Projects Reports" as projectReport
-    usecase "Financial Reports" as financialReport
-    usecase "Log Reports" as logReport
-}
+    usecase "Status" as status
+    usecase "Add Status" as addStatus
+    usecase "Update Status" as updateStatus
+    usecase "Remove Status" as removeStatus
+    usecase "Status Activation" as statusActivation
+    usecase "Status View" as statusView
+    usecase "Status List" as statusList
 
+    usecase "Resolvation" as resolvation
+    usecase "Add Resolvation" as addResolvation
+    usecase "Update Resolvation" as updateResolvation
+    usecase "Remove Resolvation" as removeResolvation
+    usecase "Resolvation Activation" as resolvationActivation
+    usecase "Resolvation View" as resolvationView
+    usecase "Resolvation List" as resolvationList
+
+
+    usecase "Meeting Type" as meetingType
+    usecase "Add Meeting Type" as addMeetingType
+    usecase "Update Meeting Type" as updateMeetingType
+    usecase "Remove Meeting Type" as removeMeetingType
+    usecase "Meeting Type Activation" as meetingTypeActivation
+    usecase "Meeting Type View" as meetingTypeView
+    usecase "Meeting Type List" as meetingTypeList
+
+    usecase "Document Type" as documentType
+    usecase "Add Document Type" as addDocumentType
+    usecase "Update Document Type" as updateDocumentType
+    usecase "Remove Document Type" as removeDocumentType
+    usecase "Document Type Activation" as documentTypeActivation
+    usecase "Document Type View" as documentTypeView
+    usecase "Document Type List" as documentTypeList
+
+    usecase "File Extention" as fileExtention
+    usecase "Add File Extention" as addFileExtention
+    usecase "Update File Extention" as updateFileExtention
+    usecase "Remove File Extention" as removeFileExtention
+    usecase "File Extention Activation" as fileExtentionActivation
+    usecase "File Extention View" as fileExtentionView
+    usecase "File Extention List" as fileExtentionList
+
+    usecase "Contract Type" as contractType
+    usecase "Add Contract Type" as addContractType
+    usecase "Update Contract Type" as updateContractType
+    usecase "Remove Contract Type" as removeContractType
+    usecase "Contract Type Activation" as contractTypeActivation
+    usecase "Contract Type View" as contractTypeView
+    usecase "Contract Type List" as contractTypeList
+
+    usecase "Time Unit" as timeUnit
+    usecase "Add Time Unit" as addTimeUnit
+    usecase "Update Time Unit" as updateTimeUnit
+    usecase "Remove Time Unit" as removeTimeUnit
+    usecase "Time Unit Activation" as timeUnitActivation
+    usecase "Time Unit View" as timeUnitView
+    usecase "Time Unit List" as timeUnitList
+}
+User <|--Admin
+Admin -- profileManagement
+Admin -- roleManagement
+Admin -- groupManagement
+User -- authentication
+User -- authorization
+User -- profileView
+User -- changePassword
+Admin -- currency
+Admin -- educationLevel
+Admin -- priority
+Admin -- issueType
+Admin -- status
+Admin -- resolvation
+Admin -- meetingType
+Admin -- documentType
+Admin -- fileExtention
+Admin -- contractType
+Admin -- timeUnit
+
+
+profileManagement ..> profileRegistration : <<include>>
+profileManagement ..> profileActivation : <<include>>
+profileManagement ..> changePassword : <<include>>
+profileManagement ..> profileSearch : <<include>>
+profileManagement ..> profileUpdate : <<include>>
+profileManagement ..> profileList : <<include>>
+profileManagement ..> profileView : <<include>>
+profileManagement ..> profilePermission : <<include>>
+profileManagement ..> profileGroupManagement : <<include>>
+profileManagement ..> profileRoleManagement : <<include>>
+profileManagement ..> roleManagement : <<use>>
+profileManagement ..> groupManagement : <<use>>
+
+profilePermission ..> addProfilePermission : <<include>>
+profilePermission ..> removeProfilePermission : <<include>>
+profilePermission ..> profilePermissionList : <<include>>
+
+profileGroupManagement ..> addProfileGroup : <<include>>
+profileGroupManagement ..> removeProfileGroup : <<include>>
+profileGroupManagement ..> profileGroupList : <<include>>
+
+profileRoleManagement ..> addProfileRole : <<include>>
+profileRoleManagement ..> removeProfileRole : <<include>>
+profileRoleManagement ..> profileRoleList : <<include>>
+
+roleManagement ..> roleRegistration : <<include>>
+roleManagement ..> roleUpdate : <<include>>
+roleManagement ..> roleActivation : <<include>>
+roleManagement ..> roleList : <<include>>
+roleManagement ..> roleSearch : <<include>>
+
+groupManagement ..> groupRegistration : <<include>>
+groupManagement ..> groupUpdate : <<include>>
+groupManagement ..> groupActivation : <<include>>
+groupManagement ..> groupList : <<include>>
+groupManagement ..> groupSearch : <<include>>
+
+tokenMangement ..> createToken : <<include>>
+tokenMangement ..> getToken : <<include>>
+tokenMangement ..> refreshToken : <<include>>
+
+authentication ..> tokenMangement : <<include>>
+tokenMangement ..> profileManagement : <<use>>
+authorization ..> authentication : <<use>>
+checkGrant <.. authorization : <<include>>
+
+currency ..> addCurrency : <<include>>
+currency ..> updateCurrency : <<include>>
+currency ..> removeCurrency : <<include>>
+currency ..> currencyActivation : <<include>>
+currency ..> currencyList : <<include>>
+currency ..> currencyView : <<include>>
+
+priority ..> addPriority : <<include>>
+priority ..> updatePriority : <<include>>
+priority ..> removePriority : <<include>>
+priority ..> priorityActivation : <<include>>
+priority ..> priorityList : <<include>>
+priority ..> priorityView : <<include>>
+
+status ..> addStatus: <<include>>
+status ..> updateStatus : <<include>>
+status ..> removeStatus : <<include>>
+status ..> statusActivation : <<include>>
+status ..> statusList : <<include>>
+status ..> statusView : <<include>>
+
+resolvation ..> addResolvation : <<include>>
+resolvation ..> updateResolvation : <<include>>
+resolvation ..> removeResolvation : <<include>>
+resolvation ..> resolvationActivation : <<include>>
+resolvation ..> resolvationList : <<include>>
+resolvation ..> resolvationView : <<include>>
+
+educationLevel ..> addEducationLevel: <<include>>
+educationLevel ..> updateEducationLevel : <<include>>
+educationLevel ..> removeEducationLevel : <<include>>
+educationLevel ..> educationLevelActivation : <<include>>
+educationLevel ..> educationLevelList : <<include>>
+educationLevel ..> educationLevelView : <<include>>
+
+issueType ..> addIssueType: <<include>>
+issueType ..> updateIssueType : <<include>>
+issueType ..> removeIssueType : <<include>>
+issueType ..> issueTypeActivation : <<include>>
+issueType ..> issueTypeList : <<include>>
+issueType ..> issueTypeView : <<include>>
+
+meetingType ..> addMeetingType: <<include>>
+meetingType ..> updateMeetingType : <<include>>
+meetingType ..> removeMeetingType : <<include>>
+meetingType ..> meetingTypeActivation : <<include>>
+meetingType ..> meetingTypeList : <<include>>
+meetingType ..> meetingTypeView : <<include>>
+
+documentType ..> addDocumentType: <<include>>
+documentType ..> updateDocumentType : <<include>>
+documentType ..> removeDocumentType : <<include>>
+documentType ..> documentTypeActivation : <<include>>
+documentType ..> documentTypeList : <<include>>
+documentType ..> documentTypeView : <<include>>
+
+fileExtention ..> addFileExtention: <<include>>
+fileExtention ..> updateFileExtention : <<include>>
+fileExtention ..> removeFileExtention : <<include>>
+fileExtention ..> fileExtentionActivation : <<include>>
+fileExtention ..> fileExtentionList : <<include>>
+fileExtention ..> fileExtentionView : <<include>>
+
+contractType ..> addContractType: <<include>>
+contractType ..> updateContractType : <<include>>
+contractType ..> removeContractType : <<include>>
+contractType ..> contractTypeActivation : <<include>>
+contractType ..> contractTypeList : <<include>>
+contractType ..> contractTypeView : <<include>>
+
+timeUnit ..> addTimeUnit: <<include>>
+timeUnit ..> updateTimeUnit : <<include>>
+timeUnit ..> removeTimeUnit : <<include>>
+timeUnit ..> timeUnitActivation : <<include>>
+timeUnit ..> timeUnitList : <<include>>
+timeUnit ..> timeUnitView : <<include>>
 
 package "Financial"{
-    usecase "Project Costing" as costing
+    
+    usecase "Activity Based Costing" as abc
+    usecase "Direct Costing" as directCosting
     usecase "Bugget Management" as bugget
+    usecase "Operational Budgeting" as buggeting
     usecase "Product Pricing" as pricing
+
+    usecase "Cost Management" as costing
+    usecase "Cost Receipt" as costReceipt
+    usecase "Add Cost Receipt" as addCostReceipt
+    usecase "Update Cost Receipt" as updateCostReceipt
+    usecase "Remove Cost Receipt" as removeCostReceipt
+    usecase "Get Cost Receipt" as getCostReceipt
+    usecase "Cost Receipt List" as costReceiptList
+    usecase "Cost Receipt Item" as costReceiptItem
+    usecase "Add Cost Receipt Item" as addCostReceiptItem
+    usecase "Update Cost Receipt Item" as updateCostReceiptItem
+    usecase "Remove Cost Receipt Item" as removeCostReceiptItem
+    usecase "Get Cost Receipt Item" as getCostReceiptItem
+    usecase "Cost Receipt Item List" as costReceiptItemList
+    usecase "Project Direct Cost Item" as projectDirectCostItem
+    usecase "Add Project Direct Cost Item" as addProjectDirectCostItem
+    usecase "Update Project Direct Cost Item" as updateProjectDirectCostItem
+    usecase "Remove Project Direct Cost  Item" as removeProjectDirectCostItem
+    usecase "Get Project Direct Cost Item" as getProjectDirectCostItem
+    usecase "Cost Project Direct Item List" as projectDirectCostItemList
+
+    usecase "Payment Management" as paymentManagement
+    usecase "Supplier Management" as supplierManagement
+    usecase "Add Supplier" as addSupplier
+    usecase "Update Supplier" as updateSupplier
+    usecase "Remove Supplier" as removeSupplier
+    usecase "Get Supplier" as getSupplier
+    usecase "Supplier List" as supplierList
+    usecase "Salary Payment" as salaryPayment
+    usecase "Add Salary Payment Receipt" as addSalaryPaymentReceipt
+    usecase "Update Salary Payment Receipt" as updateSalaryPaymentReceipt
+    usecase "Remove Salary Payment Receipt" as removeSalaryPaymentReceipt
+    usecase "Get Salary Payment Receipt" as getSalaryPaymentReceipt
+    usecase "Salary Payment Receipt List" as salaryPaymentReceiptList
+    usecase "Cost Payment" as costPayment
+    usecase "Add Cost Payment Receipt" as addCostPaymentReceipt
+    usecase "Update Cost Payment Receipt" as updateCostPaymentReceipt
+    usecase "Remove Cost Payment Receipt" as removeCostPaymentReceipt
+    usecase "Get Cost Payment Receipt" as getCostPaymentReceipt
+    usecase "Cost Payment Receipt List" as costPaymentReceiptList
+    usecase "Staff Additional Payment" as staffAdditionalPayment
+    usecase "Add Staff Additional Payment Receipt" as addStaffAdditionalPaymentReceipt
+    usecase "Update Staff Additional Payment Receipt" as updateStaffAdditionalPaymentReceipt
+    usecase "Remove Staff Additional Payment Receipt" as removeStaffAdditionalPaymentReceipt
+    usecase "Get Staff Additional Payment Receipt" as getStaffAdditionalPaymentReceipt
+    usecase "Staff Additional Payment Receipt List" as staffAdditionalPaymentReceiptList
+
     usecase "Salary Management" as salaryManagement
+    usecase "Staff Contract Management" as staffContractManagement
+    usecase "Add Staff Contract" as addStaffContract
+    usecase "Update Staff Contract" as updateStaffContract
+    usecase "Remove Staff Contract" as removeStaffContract
+    usecase "Get Staff Contract" as getStaffContract
+    usecase "Staff Contract List" as staffContractList
+    usecase "Contract Item" as contractItem
+    usecase "Add Contract Item" as addContractItem
+    usecase "Update Contract Item" as updateContractItem
+    usecase "Remove Contract Item" as removeContractItem
+    usecase "Contract Item List" as contractItemList
+    usecase "Contract Deduction Item" as contractDeductionItem
+    usecase "Add Contract Deduction Item" as addContractDeductionItem
+    usecase "Update Contract Deduction Item" as updateContractDeductionItem
+    usecase "Remove Contract Deduction Item" as removeContractDeductionItem
+    usecase "Contract Deduction Item List" as contractDeductionItemList
+    usecase "Monthly Salary Calulation" as monthlySalaryCalculation
+    usecase "Annually Salary Calulation" as annuallySalaryCalculation
+    usecase "Print Bill Salary" as printBillSalary
 }
 
+Accountant --|> User
+Fmanager --|> User
+SeniorManager --|> User
+salaryManagement -- Accountant
+salaryManagement -- Fmanager
+salaryManagement -- HR
+costing -- Accountant
+paymentManagement -- Accountant
+pricing -- Accountant
+bugget -- Fmanager
+bugget -- SeniorManager
 
 
-User --> authentication
-User --> authorization
-User --> profileManagement
-Staff --> attendanceManagement
-roleManagement <-- Admin
-groupManagement <-- Admin
-userManagement <-- Admin
-staffManagement <-- HR
-staffManagement <-- Staff
-Accountant --> salaryManagement
-Accountant --> costing
-Accountant --> pricing
-Accountant --> bugget
-pricing <-- ProductManager
-costing <-- PMO
-SeniorManager --> bugget
-positionManagement <-- HR
-departmentManagement <-- HR
-organizationManagement <-- HR
-buildingManagement <-- HR
-PMO --> projectManagement
-PMO --> projectTeamManagement
-PMO --> releaseManagement
-PMO --> meetingManagement
-ProductManager --> releaseManagement
-ProductManager --> projectManagement
-HR --> calendarManagement
-assetManagement <-- PMO
-calendarManagement <-- PMO
-LogesticsManager --> assetManagement
-Fmanager --> assetManagement
+staffContractManagement <.. salaryManagement : <<include>>
+addStaffContract <.. staffContractManagement : <<include>>
+updateStaffContract <.. staffContractManagement : <<include>>
+removeStaffContract <.. staffContractManagement : <<include>>
+getStaffContract <.. staffContractManagement : <<include>>
+staffContractList <.. staffContractManagement : <<include>>
+contractItem <.. staffContractManagement : <<include>>
+addContractItem <.. contractItem : <<include>>
+updateContractItem <.. contractItem : <<include>>
+removeContractItem <.. contractItem : <<include>>
+contractItemList <.. contractItem : <<include>>
+contractDeductionItem <.. staffContractManagement : <<include>>
+addContractDeductionItem <.. contractDeductionItem : <<include>>
+updateContractDeductionItem <.. contractDeductionItem : <<include>>
+removeContractDeductionItem <.. contractDeductionItem : <<include>>
+contractDeductionItemList <.. contractDeductionItem : <<include>>
+monthlySalaryCalculation <.. salaryManagement : <<include>>
+annuallySalaryCalculation <.. salaryManagement : <<include>>
+printBillSalary <.. salaryManagement : <<include>>
 
-releaseManagement <-- DevOpsManager
-issueManagement <-- Staff
-meetingManagement <-- Staff
-timesheetManagement <-- Staff
+supplierManagement <.. paymentManagement : <<include>>
+addSupplier <.. supplierManagement : <<include>>
+updateSupplier <.. supplierManagement : <<include>>
+removeSupplier <.. supplierManagement : <<include>>
+getSupplier <.. supplierManagement : <<include>>
+supplierList <.. supplierManagement : <<include>>
+salaryPayment <.. paymentManagement : <<include>>
+addSalaryPaymentReceipt <.. salaryPayment : <<include>>
+updateSalaryPaymentReceipt <.. salaryPayment : <<include>>
+removeSalaryPaymentReceipt <.. salaryPayment : <<include>>
+getSalaryPaymentReceipt <.. salaryPayment : <<include>>
+salaryPaymentReceiptList <.. salaryPayment : <<include>>
+costPayment <.. paymentManagement : <<include>>
+addCostPaymentReceipt <.. costPayment : <<include>>
+updateCostPaymentReceipt <.. costPayment : <<include>>
+removeCostPaymentReceipt <.. costPayment : <<include>>
+getCostPaymentReceipt <.. costPayment : <<include>>
+costPaymentReceiptList <.. costPayment : <<include>>
+staffAdditionalPayment <.. paymentManagement : <<include>>
+addStaffAdditionalPaymentReceipt <.. staffAdditionalPayment : <<include>>
+updateStaffAdditionalPaymentReceipt <.. staffAdditionalPayment : <<include>>
+removeStaffAdditionalPaymentReceipt <.. staffAdditionalPayment : <<include>>
+getStaffAdditionalPaymentReceipt <.. staffAdditionalPayment : <<include>>
+staffAdditionalPaymentReceiptList <.. staffAdditionalPayment : <<include>>
 
-Admin --> logReport
-Fmanager --> financialReport
-SeniorManager --> financialReport
-SeniorManager --> biReport
-projectReport <-- PMO
-salaryManagement <-- Fmanager
-NetworkManager --> workStationManagement
+costReceipt <.. costing : <<include>>
+addCostReceipt <.. costReceipt : <<include>>
+updateCostReceipt <.. costReceipt : <<include>>
+removeCostReceipt <.. costReceipt : <<include>>
+getCostReceipt <.. costReceipt : <<include>>
+costReceiptList <.. costReceipt : <<include>>
+costReceiptItem <.. costReceipt : <<include>>
+addCostReceiptItem <.. costReceiptItem : <<include>>
+updateCostReceiptItem <.. costReceiptItem : <<include>>
+removeCostReceiptItem <.. costReceiptItem : <<include>>
+getCostReceiptItem <.. costReceiptItem : <<include>>
+costReceiptItemList <.. costReceiptItem : <<include>>
+projectDirectCostItem <.. costReceiptItem : <<include>>
+addProjectDirectCostItem <.. projectDirectCostItem : <<include>>
+updateProjectDirectCostItem <.. projectDirectCostItem : <<include>>
+removeProjectDirectCostItem <.. projectDirectCostItem : <<include>>
+getProjectDirectCostItem <.. projectDirectCostItem : <<include>>
+projectDirectCostItemList <.. projectDirectCostItem : <<include>>
+
+buggeting <.. bugget : <<include>>
+directCosting <.. pricing : <<include>>
+abc <.. pricing : <<include>>
+
+:Human Resource: as HR
+:Staff: as Staff
+
+package "Human Resource Management"{
+    usecase "Department Management" as departmentManagement
+    usecase "Department Registration" as departmentRegistration
+    usecase "Department Update" as departmentUpdate
+    usecase "Department Activation" as departmentActivation
+    usecase "Department Remove" as departmentRemove
+    usecase "Department List" as departmentList
+    usecase "Department View" as departmentView
+
+    usecase "Position Management" as positionManagement
+    usecase "Position Registration" as positionRegistration
+    usecase "Position Update" as positionUpdate
+    usecase "Position Activation" as positionActivation
+    usecase "Position Remove" as positionRemove
+    usecase "Position List" as positionList
+    usecase "Position View" as positionView
+    usecase "Set Salary Range of The Position" as setPositionSalaryrange
+
+    usecase "Attendance Management" as attendanceManagement
+    usecase "Attendance Add" as attendanceAdd
+    usecase "Attendance Update" as AttendanceUpdate
+    usecase "Attendance Remove" as AttendanceRemove
+    usecase "Attendance List" as attendanceList
+    usecase "Attendance View" as attendanceView
+
+    usecase "Leave Management" as leaveManagement
+    usecase "Leave Add" as leaveAdd
+    usecase "Leave Update" as leaveUpdate
+    usecase "Leave Remove" as leaveRemove
+    usecase "Leave List" as leaveList
+    usecase "Leave View" as leaveView
+
+    usecase "Mission Management" as missionManagement
+    usecase "Mission Add" as missionAdd
+    usecase "Mission Update" as missionUpdate
+    usecase "Mission Remove" as missionRemove
+    usecase "Mission List" as missionList
+    usecase "Mission View" as missionView
+
+    usecase "Attendance Report" as attendanceReport
+    usecase "Calulate Total Mission Time" as totalMissionTime
+    usecase "Calulate Total Leave Time" as totalLeaveTime
+    usecase "Calulate Total Overtime" as totalOvertime
+    usecase "Calulate Total Work Dificit Time" as totalWorkDificitTime
+
+    usecase "Resume Management" as resumeManagement
+    usecase "Profile Education" as profileEducation
+    usecase "Profile Education Add" as profileEducationAdd
+    usecase "Profile Education Update" as profileEducationUpdate
+    usecase "Profile Education Remove" as profileEducationRemove
+    usecase "Profile Education List" as profileEducationList
+    usecase "Profile Education View" as profileEducationView
+    usecase "Profile Job Experience" as profileJobExperience
+    usecase "Profile Job Experience Add" as profileJobExperienceAdd
+    usecase "Profile Job Experience Update" as profileJobExperienceUpdate
+    usecase "Profile Job Experience Remove" as profileJobExperienceRemove
+    usecase "Profile Job Experience List" as profileJobExperienceList
+    usecase "Profile Job Experience View" as profileJobExperienceView
+    usecase "Profile Certificate" as profileCertificate
+    usecase "Profile Certificate Add" as profileCertificateAdd
+    usecase "Profile Certificate Update" as profileCertificateUpdate
+    usecase "Profile Certificate Remove" as profileCertificateRemove
+    usecase "Profile Certificate List" as profileCertificateList
+    usecase "Profile Certificate View" as profileCertificateView
+
+    usecase "Company Calendar Management" as compnayCalendarManagement
+    usecase "Working Timetable" as workingTimeTable
+    usecase "Working Timetable Add" as workingTimeTableAdd
+    usecase "Working Timetable Update" as workingTimeTableUpdate
+    usecase "Working Timetable Remove" as workingTimeTableRemove
+    usecase "Working Timetable List" as workingTimeTableList
+    usecase "Working Timetable View" as workingTimeTableView
+    usecase "Holidaies" as holidaies
+    usecase "Holidaies Add" as holidaiesAdd
+    usecase "Holidaies Update" as holidaiesUpdate
+    usecase "Holidaies Remove" as holidaiesRemove
+    usecase "Holidaies List" as holidaiesList
+    usecase "Holidaies View" as holidaiesView
+
+    usecase "Questionnaire" as questionnaire
+    usecase "Questionnaire Add" as questionnaireAdd
+    usecase "Questionnaire Update" as questionnaireUpdate
+    usecase "Questionnaire Remove" as questionnaireRemove
+    usecase "Questionnaire List" as questionnaireList
+    usecase "Questionnaire View" as questionnaireView
+    usecase "Questionnaire Target Department" as questionnaireTargetDepartment
+    usecase "Questionnaire Target Department Add" as questionnaireTargetDepartmentAdd
+    usecase "Questionnaire Target Department Update" as questionnaireTargetDepartmentUpdate
+    usecase "Questionnaire Target Department Remove" as questionnaireTargetDepartmentRemove
+    usecase "Questionnaire Target Department List" as questionnaireTargetDepartmentList
+    usecase "Questionnaire Target Department View" as questionnaireTargetDepartmentView
+    usecase "Question" as question
+    usecase "Question Add" as questionAdd
+    usecase "Question Update" as questionUpdate
+    usecase "Question Remove" as questionRemove
+    usecase "Question List" as questionList
+    usecase "Question View" as questionView
+    usecase "Question Option" as questionOption
+    usecase "Question Option Add" as questionOptionAdd
+    usecase "Question Option Update" as questionOptionUpdate
+    usecase "Question Option Remove" as questionOptionRemove
+    usecase "Question Option List" as questionOptionList
+    usecase "Question Option View" as questionOptionView
+
+    usecase "Questionnaire Result" as questionnaireResult
+    usecase "Questionnaire Result Add" as questionnaireResultAdd
+    usecase "Questionnaire Result List" as questionnaireResultList
+    usecase "Questionnaire Result View" as questionnaireResultView
+    usecase "Questionnaire Result Detail" as questionnaireResultDetail
+    usecase "Questionnaire Result Detail Add" as questionnaireResultDetailAdd
+    usecase "Questionnaire Result Detail List" as questionnaireResultDetailList
+    usecase "Questionnaire Result Detail View" as questionnaireResultDetailView
+    usecase "Questionnaire Choosed Option Result Detail" as questionnaireChoosedOptionResultDetail
+    usecase "Questionnaire Choosed Option Result Detail Add" as questionnaireChoosedOptionResultDetailAdd
+    usecase "Questionnaire Choosed Option Result Detail List" as questionnaireChoosedOptionResultDetailList
+    usecase "Questionnaire Choosed Option Result Detail View" as questionnaireChoosedOptionResultDetailView
+}
+
+HR --|> User
+departmentManagement -- HR
+positionManagement -- HR
+resumeManagement -- HR
+compnayCalendarManagement -- HR
+questionnaire -- HR
+attendanceManagement -- HR
+questionnaireResult -- HR
+attendanceManagement -- Staff
+questionnaireResult -- Staff
+
+departmentRegistration <.. departmentManagement : <<include>>
+departmentUpdate <.. departmentManagement : <<include>>
+departmentActivation <.. departmentManagement : <<include>>
+departmentRemove <.. departmentManagement : <<include>>
+departmentList <.. departmentManagement : <<include>>
+departmentView <.. departmentManagement : <<include>>
+
+departmentManagement <. positionManagement
+positionRegistration <.. positionManagement : <<include>>
+positionUpdate <.. positionManagement : <<include>>
+positionRemove <.. positionManagement : <<include>>
+positionActivation <.. positionManagement : <<include>>
+positionList <.. positionManagement : <<include>>
+positionView <.. positionManagement : <<include>>
+setPositionSalaryrange <.. positionManagement : <<include>>
+
+attendanceAdd <.. attendanceManagement : <<include>>
+AttendanceUpdate <.. attendanceManagement : <<include>>
+AttendanceRemove <.. attendanceManagement : <<include>>
+attendanceList <.. attendanceManagement : <<include>>
+attendanceView <.. attendanceManagement : <<include>>
+
+leaveManagement <.. attendanceManagement : <<include>>
+leaveAdd <.. leaveManagement : <<include>>
+leaveUpdate <.. leaveManagement : <<include>>
+leaveRemove <.. leaveManagement : <<include>>
+leaveList <.. leaveManagement : <<include>>
+leaveView <.. leaveManagement : <<include>>
+
+missionManagement <.. attendanceManagement : <<include>>
+missionAdd <.. missionManagement : <<include>>
+missionUpdate <.. missionManagement : <<include>>
+missionRemove <.. missionManagement : <<include>>
+missionList <.. missionManagement : <<include>>
+missionView <.. missionManagement : <<include>>
+
+attendanceReport <.. attendanceManagement : <<include>>
+totalMissionTime <.. attendanceReport : <<include>>
+totalLeaveTime <.. attendanceReport : <<include>>
+totalOvertime <.. attendanceReport : <<include>>
+totalWorkDificitTime <.. attendanceReport : <<include>>
+
+profileEducation <.. resumeManagement : <<include>>
+profileEducationAdd <.. profileEducation : <<include>>
+profileEducationUpdate <.. profileEducation : <<include>>
+profileEducationRemove <.. profileEducation : <<include>>
+profileEducationList <.. profileEducation : <<include>>
+profileEducationView <.. profileEducation : <<include>>
+profileJobExperience <.. resumeManagement : <<include>>
+profileJobExperienceAdd <.. profileJobExperience : <<include>>
+profileJobExperienceRemove <.. profileJobExperience : <<include>>
+profileJobExperienceUpdate <.. profileJobExperience : <<include>>
+profileJobExperienceList <.. profileJobExperience : <<include>>
+profileJobExperienceView <.. profileJobExperience : <<include>>
+profileCertificate <.. resumeManagement : <<include>>
+profileCertificateAdd <.. profileCertificate : <<include>>
+profileCertificateUpdate <.. profileCertificate : <<include>>
+profileCertificateRemove <.. profileCertificate : <<include>>
+profileCertificateList <.. profileCertificate : <<include>>
+profileCertificateView <.. profileCertificate : <<include>>
+
+workingTimeTable <.. compnayCalendarManagement : <<include>>
+workingTimeTableAdd <.. workingTimeTable : <<include>>
+workingTimeTableUpdate <.. workingTimeTable : <<include>>
+workingTimeTableRemove <.. workingTimeTable : <<include>>
+workingTimeTableList <.. workingTimeTable : <<include>>
+workingTimeTableView <.. workingTimeTable : <<include>>
+holidaies <.. compnayCalendarManagement : <<include>>
+holidaiesAdd <.. holidaies : <<include>>
+holidaiesUpdate <.. holidaies : <<include>>
+holidaiesRemove <.. holidaies : <<include>>
+holidaiesList <.. holidaies : <<include>>
+holidaiesView <.. holidaies : <<include>>
+
+questionnaireAdd <.. questionnaire : <<include>>
+questionnaireUpdate <.. questionnaire : <<include>>
+questionnaireRemove <.. questionnaire : <<include>>
+questionnaireList <.. questionnaire : <<include>>
+questionnaireView <.. questionnaire : <<include>>
+questionnaireTargetDepartment <.. questionnaire : <<include>>
+questionnaireTargetDepartmentAdd <.. questionnaireTargetDepartment : <<include>>
+questionnaireTargetDepartmentUpdate <.. questionnaireTargetDepartment : <<include>>
+questionnaireTargetDepartmentRemove <.. questionnaireTargetDepartment : <<include>>
+questionnaireTargetDepartmentList <.. questionnaireTargetDepartment : <<include>>
+questionnaireTargetDepartmentView <.. questionnaireTargetDepartment : <<include>>
+question <.. questionnaire : <<include>>
+questionAdd <.. question : <<include>>
+questionUpdate <.. question : <<include>>
+questionRemove <.. question : <<include>>
+questionList <.. question : <<include>>
+questionView <.. question : <<include>>
+questionOption <.. question : <<include>>
+questionOptionAdd <.. questionOption : <<include>>
+questionOptionUpdate <.. questionOption : <<include>>
+questionOptionRemove <.. questionOption : <<include>>
+questionOptionList <.. questionOption : <<include>>
+questionOptionView <.. questionOption : <<include>>
+
+questionnaire <. questionnaireResult : <<inculde>>
+questionnaireResultAdd <.. questionnaireResult : <<inculde>>
+questionnaireResultList <.. questionnaireResult : <<inculde>>
+questionnaireResultView <.. questionnaireResult : <<inculde>>
+questionnaireResultDetail <.. questionnaireResult : <<inculde>>
+questionnaireResultDetailAdd <.. questionnaireResultDetail : <<inculde>>
+questionnaireResultDetailList <.. questionnaireResultDetail : <<inculde>>
+questionnaireResultDetailView <.. questionnaireResultDetail : <<inculde>>
+questionnaireChoosedOptionResultDetail <.. questionnaireResultDetail : <<inculde>>
+questionnaireChoosedOptionResultDetailAdd <.. questionnaireChoosedOptionResultDetail : <<inculde>>
+questionnaireChoosedOptionResultDetailList <.. questionnaireChoosedOptionResultDetail : <<inculde>>
+questionnaireChoosedOptionResultDetailView <.. questionnaireChoosedOptionResultDetail : <<inculde>>
+
+package "Project Management"{
+    usecase "Project Management" as projectManagement
+    usecase "Project Registration" as projectRegistration
+    usecase "Project Update" as projectUpdate
+    usecase "Project Activation" as projectActivation
+    usecase "Project List" as projectList
+    usecase "Project View" as projectView
+    usecase "Project Workflow" as projectWorkflow
+    usecase "Project Workflow Add" as projectWorkflowAdd
+    usecase "Project Workflow Update" as projectWorkflowUpdate
+    usecase "Project Workflow Remove" as projectWorkflowRemove
+    usecase "Project Workflow List" as projectWorkflowList
+    usecase "Project Workflow View" as projectWorkflowView
+    usecase "Workflow Status" as workflowStatus
+    usecase "Workflow Status Add" as workflowStatusAdd
+    usecase "Workflow Status Update" as workflowStatusUpdate
+    usecase "Workflow Status Remove" as workflowStatusRemove
+    usecase "Workflow Status List" as workflowStatusList
+    usecase "Workflow Status View" as workflowStatusView
+    usecase "Workflow Resolvation" as workflowResolvation
+    usecase "Workflow Resolvation Add" as workflowResolvationAdd
+    usecase "Workflow Resolvation Update" as workflowResolvationUpdate
+    usecase "Workflow Resolvation Remove" as workflowResolvationRemove
+    usecase "Workflow Resolvation List" as workflowResolvationList
+    usecase "Workflow Resolvation View" as workflowResolvationView
+    usecase "Workflow Progress" as workflowProgress
+    usecase "Workflow Progress Add" as workflowProgressAdd
+    usecase "Workflow Progress Update" as workflowProgressUpdate
+    usecase "Workflow Progress Remove" as workflowProgressRemove
+    usecase "Workflow Progress List" as workflowProgressList
+    usecase "Workflow Progress View" as workflowProgressView
+    usecase "Project Team Management" as projectTeamManagement
+    usecase "Team Member Add" as teamMemberAdd
+    usecase "Team Member Update" as teamMemberUpdate
+    usecase "Team Member Remove" as teamMemberRemove
+    usecase "Team Member Team List" as teamMemberList
+    usecase "Team Member View" as teamMemberView
+    usecase "Release Management" as releaseManagement
+    usecase "Release Add" as releaseAdd
+    usecase "Release Update" as releaseUpdate
+    usecase "Release Remove" as releaseRemove
+    usecase "Release List" as releaseList
+    usecase "Release View" as releaseView
+    usecase "Release Issue" as releaseIssue
+    usecase "Release Publish" as releasePublish
+    usecase "Release Issue Add" as releaseIssueAdd
+    usecase "Release Issue Update" as releaseIssueUpdate
+    usecase "Release Issue Remove" as releaseIssueRemove
+    usecase "Release Issue List" as releaseIssueList
+    usecase "Release Issue View" as releaseIssueView
+    usecase "Issue Management" as issueManagement
+    usecase "Meeting Management" as meetingManagement
+    usecase "Worklog Management" as worklogManagement
+    usecase "Meeting Add" as meetingAdd
+    usecase "Meeting Update" as meetingUpdate
+    usecase "Meeting Cancel" as meetingCancel
+    usecase "Meeting List" as meetingList
+    usecase "Meeting View" as meetingView
+    usecase "Meeting Add Comment" as meetingAddComment
+    usecase "Meeting Update Comment" as meetingUpdateComment
+    usecase "Meeting Remove Comment" as meetingRemoveComment
+    usecase "Meeting Invitees" as meetingInvitees
+    usecase "Meeting Invitees Add" as meetingInviteesAdd
+    usecase "Meeting Invitees Update" as meetingInviteesUpdate
+    usecase "Meeting Invitees Remove" as meetingInviteesRemove
+    usecase "Meeting Invitees List" as meetingInviteesList
+    usecase "Meeting Invitees View" as meetingInviteesView
+    usecase "Meeting Attendance" as meetingAttendace
+    usecase "Meeting Minutes" as meetingMinutes
+    usecase "Meeting Minutes Add" as meetingMinutesAdd
+    usecase "Meeting Minutes Update" as meetingMinutesUpdate
+    usecase "Meeting Minutes Remove" as meetingMinutesRemove
+    usecase "Meeting Minutes List" as meetingMinutesList
+    usecase "Meeting Minutes View" as meetingMinutesView
+    usecase "Issue Add" as issueAdd
+    usecase "Issue Update" as issueUpdate
+    usecase "Issue Remove" as issueCancel
+    usecase "Issue List" as issueList
+    usecase "Issue View" as issueView
+    usecase "Issue Change Status" as issueChangeStatus
+    usecase "Issue Change Resolvation" as issueChangeResolvation
+    usecase "Assign Issue to Profile" as assignIssueToProfile
+    usecase "Issue Comment" as issueComment
+    usecase "Issue Comment Add" as issueCommentAdd
+    usecase "Issue Comment Update" as issueCommentUpdate
+    usecase "Issue Comment Remove" as issueCommentRemove
+    usecase "Issue Comment List" as issueCommentList
+    usecase "Issue Comment View" as issueCommentView
+    usecase "Issue Attachment" as issueAttachment
+    usecase "Issue Attachment Add" as issueAttachmentAdd
+    usecase "Issue Attachment Update" as issueAttachmentUpdate
+    usecase "Issue Attachment Remove" as issueAttachmentRemove
+    usecase "Issue Attachment List" as issueAttachmentList
+    usecase "Issue Attachment View" as issueAttachmentView
+    usecase "Issue Workflow History" as issueWorkflowHistory
+    usecase "Issue Workflow History Add" as issueWorkflowHistoryAdd
+    usecase "Issue Workflow History List" as issueWorkflowHistoryList
+    usecase "Issue Workflow History View" as issueWorkflowHistoryView
+    usecase "Worklog Add" as worklogAdd
+    usecase "Worklog Update" as worklogUpdate
+    usecase "Worklog Remove" as worklogRemove
+    usecase "Worklog List" as worklogList
+    usecase "Worklog View" as worklogView
+}
+
+ProductManager --|> User
+PMO --|> User
+Staff --|> User
+DevOps --|> User
+projectManagement -- ProductManager
+projectManagement -- PMO
+projectTeamManagement -- PMO
+releaseManagement -- PMO
+releaseManagement -- ProductManager
+releaseManagement -- DevOpsManager
+issueManagement -- Staff
+worklogManagement -- Staff
+meetingManagement -- Staff
+
+projectTeamManagement ..> projectManagement
+projectWorkflow ..> projectManagement
+issueManagement ..> projectWorkflow
+releaseManagement ..> projectManagement
+releaseIssue ..> issueManagement 
+issueManagement ..> projectManagement
+worklogManagement ..> issueManagement
+meetingManagement ..> projectManagement
+
+
+
+projectRegistration <.. projectManagement : <<include>>
+projectUpdate <.. projectManagement : <<include>>
+projectActivation <.. projectManagement : <<include>>
+projectList <.. projectManagement : <<include>>
+projectView <.. projectManagement : <<include>>
+projectWorkflowAdd <.. projectWorkflow : <<include>>
+projectWorkflowUpdate <.. projectWorkflow : <<include>>
+projectWorkflowRemove <.. projectWorkflow : <<include>>
+projectWorkflowList <.. projectWorkflow : <<include>>
+projectWorkflowView <.. projectWorkflow : <<include>>
+workflowStatus <.. projectWorkflow : <<include>>
+workflowStatusAdd <.. workflowStatus : <<include>>
+workflowStatusUpdate <.. workflowStatus : <<include>>
+workflowStatusRemove <.. workflowStatus : <<include>>
+workflowStatusList <.. workflowStatus : <<include>>
+workflowStatusView <.. workflowStatus : <<include>>
+workflowResolvation <.. projectWorkflow : <<include>>
+workflowResolvationAdd <.. workflowResolvation : <<include>>
+workflowResolvationUpdate <.. workflowResolvation : <<include>>
+workflowResolvationRemove <.. workflowResolvation : <<include>>
+workflowResolvationList <.. workflowResolvation : <<include>>
+workflowResolvationView <.. workflowResolvation : <<include>>
+workflowProgress <.. projectWorkflow : <<include>>
+workflowProgressAdd <.. workflowProgress : <<include>>
+workflowProgressUpdate <.. workflowProgress : <<include>>
+workflowProgressRemove <.. workflowProgress : <<include>>
+workflowProgressList <.. workflowProgress : <<include>>
+workflowProgressView <.. workflowProgress : <<include>>
+teamMemberAdd <.. projectTeamManagement : <<include>>
+teamMemberUpdate <.. projectTeamManagement : <<include>>
+teamMemberRemove <.. projectTeamManagement : <<include>>
+teamMemberList <.. projectTeamManagement : <<include>>
+teamMemberView <.. projectTeamManagement : <<include>>
+releaseAdd <.. releaseManagement : <<include>>
+releaseUpdate <.. releaseManagement : <<include>>
+releaseRemove <.. releaseManagement : <<include>>
+releaseList <.. releaseManagement : <<include>>
+releasePublish <.. releaseManagement : <<include>>
+releaseView <.. releaseManagement : <<include>>
+releaseIssue <.. releaseManagement : <<include>>
+releaseIssueAdd <.. releaseIssue : <<include>>
+releaseIssueUpdate <.. releaseIssue : <<include>>
+releaseIssueRemove <.. releaseIssue : <<include>>
+releaseIssueList <.. releaseIssue : <<include>>
+releaseIssueView <.. releaseIssue : <<include>>
+meetingAdd <.. meetingManagement : <<include>>
+meetingUpdate <.. meetingManagement : <<include>>
+meetingCancel <.. meetingManagement : <<include>>
+meetingList <.. meetingManagement : <<include>>
+meetingInvitees <.. meetingManagement : <<include>>
+meetingInviteesAdd <.. meetingInvitees : <<include>>
+meetingInviteesUpdate <.. meetingInvitees : <<include>>
+meetingInviteesRemove <.. meetingInvitees : <<include>>
+meetingInviteesList <.. meetingInvitees : <<include>>
+meetingInviteesView <.. meetingInvitees : <<include>>
+meetingAttendace <.. meetingInvitees : <<include>>
+meetingMinutes <.. meetingManagement : <<include>>
+meetingMinutesAdd <.. meetingMinutes : <<include>>
+meetingMinutesUpdate <.. meetingMinutes : <<include>>
+meetingMinutesRemove <.. meetingMinutes : <<include>>
+meetingMinutesList <.. meetingMinutes : <<include>>
+meetingMinutesView <.. meetingMinutes : <<include>>
+meetingView <.. meetingManagement : <<include>>
+meetingAddComment <.. meetingManagement : <<include>>
+meetingUpdateComment <.. meetingManagement : <<include>>
+meetingRemoveComment <.. meetingManagement : <<include>>
+issueAdd <.. issueManagement : <<include>>
+issueUpdate <.. issueManagement : <<include>>
+issueCancel <.. issueManagement : <<include>>
+issueList <.. issueManagement : <<include>>
+issueView <.. issueManagement : <<include>>
+issueChangeStatus <.. issueManagement : <<include>>
+issueChangeResolvation <.. issueManagement : <<include>>
+assignIssueToProfile <.. issueManagement : <<include>>
+issueComment <.. issueManagement : <<include>>
+issueCommentAdd <.. issueComment : <<include>>
+issueCommentUpdate <.. issueComment : <<include>>
+issueCommentRemove <.. issueComment : <<include>>
+issueCommentList <.. issueComment : <<include>>
+issueCommentView <.. issueComment : <<include>>
+issueAttachment <.. issueManagement : <<include>>
+issueAttachmentAdd <.. issueAttachment : <<include>>
+issueAttachmentUpdate <.. issueAttachment : <<include>>
+issueAttachmentRemove <.. issueAttachment : <<include>>
+issueAttachmentList <.. issueAttachment : <<include>>
+issueAttachmentView <.. issueAttachment : <<include>>
+issueWorkflowHistory <.. issueChangeStatus : <<include>>
+issueWorkflowHistory <.. issueChangeResolvation : <<include>>
+issueWorkflowHistoryAdd <.. issueWorkflowHistory : <<include>>
+issueWorkflowHistoryList <.. issueWorkflowHistory : <<include>>
+issueWorkflowHistoryView <.. issueWorkflowHistory : <<include>>
+worklogAdd <.. worklogManagement : <<include>>
+worklogUpdate  <.. worklogManagement : <<include>>
+worklogRemove  <.. worklogManagement : <<include>>
+worklogList  <.. worklogManagement : <<include>>
+worklogView  <.. worklogManagement : <<include>>
 
 @enduml
