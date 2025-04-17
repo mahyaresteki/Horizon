@@ -4,95 +4,119 @@ left to right direction
 skinparam useCaseBackgroundColor #Business
 skinparam actorBackgroundColor #Business
 skinparam Shadowing True
+skinparam TitleFontSize 48px
 
-title Horizon Research Project (HRP) \n Project Management Usecases \n Version 25.1.10
+title Horizon Research Project (HRP) \n Project Management Usecases \n Version 25.4.17
 
 :Project Manager: as PMO
 :DevOps Manager: as DevOpsManager
 :Product Manager: as ProductManager
 :Staff: as Staff
-:Logistics Manager: as LogesticsManager
 :Project Manager: as PMO
 
-package "Asset"{
-    usecase "Asset Management" as assetManagement
-    usecase "Asset Add" as assetRegistration
-    usecase "Asset Update" as assetUpdate
-    usecase "Asset Activation" as assetActivation
-    usecase "Asset Assign to the Project" as assetAssignToProject
-    usecase "Asset List" as assetList
-    usecase "Asset View" as assetView
-    usecase "Asset Search" as assetSearch
-}
-
-assetManagement <-- LogesticsManager
-assetManagement <-- Fmanager
-assetManagement <-- PMO
-
-assetRegistration <.. assetManagement : <<include>>
-assetUpdate  <.. assetManagement : <<include>>
-assetActivation  <.. assetManagement : <<include>>
-assetAssignToProject  <.. assetManagement : <<include>>
-assetList  <.. assetManagement : <<include>>
-assetView  <.. assetManagement : <<include>>
-assetSearch  <.. assetManagement : <<include>>
-
-package "Project"{
+package "Project Management"{
     usecase "Project Management" as projectManagement
     usecase "Project Registration" as projectRegistration
     usecase "Project Update" as projectUpdate
     usecase "Project Activation" as projectActivation
     usecase "Project List" as projectList
     usecase "Project View" as projectView
-    usecase "Project Search" as projectSearch
+    usecase "Project Workflow" as projectWorkflow
+    usecase "Project Workflow Add" as projectWorkflowAdd
+    usecase "Project Workflow Update" as projectWorkflowUpdate
+    usecase "Project Workflow Remove" as projectWorkflowRemove
+    usecase "Project Workflow List" as projectWorkflowList
+    usecase "Project Workflow View" as projectWorkflowView
+    usecase "Workflow Status" as workflowStatus
+    usecase "Workflow Status Add" as workflowStatusAdd
+    usecase "Workflow Status Update" as workflowStatusUpdate
+    usecase "Workflow Status Remove" as workflowStatusRemove
+    usecase "Workflow Status List" as workflowStatusList
+    usecase "Workflow Status View" as workflowStatusView
+    usecase "Workflow Resolvation" as workflowResolvation
+    usecase "Workflow Resolvation Add" as workflowResolvationAdd
+    usecase "Workflow Resolvation Update" as workflowResolvationUpdate
+    usecase "Workflow Resolvation Remove" as workflowResolvationRemove
+    usecase "Workflow Resolvation List" as workflowResolvationList
+    usecase "Workflow Resolvation View" as workflowResolvationView
+    usecase "Workflow Progress" as workflowProgress
+    usecase "Workflow Progress Add" as workflowProgressAdd
+    usecase "Workflow Progress Update" as workflowProgressUpdate
+    usecase "Workflow Progress Remove" as workflowProgressRemove
+    usecase "Workflow Progress List" as workflowProgressList
+    usecase "Workflow Progress View" as workflowProgressView
     usecase "Project Team Management" as projectTeamManagement
     usecase "Team Member Add" as teamMemberAdd
     usecase "Team Member Update" as teamMemberUpdate
     usecase "Team Member Remove" as teamMemberRemove
     usecase "Team Member Team List" as teamMemberList
     usecase "Team Member View" as teamMemberView
-    usecase "Team Member Search" as teamMemberSearch
     usecase "Release Management" as releaseManagement
     usecase "Release Add" as releaseAdd
     usecase "Release Update" as releaseUpdate
     usecase "Release Remove" as releaseRemove
     usecase "Release List" as releaseList
-    usecase "Release Issue List" as releaseIssueList
-    usecase "Release Publish" as releasePublish
     usecase "Release View" as releaseView
-    usecase "Release Search" as projectSearch
+    usecase "Release Issue" as releaseIssue
+    usecase "Release Publish" as releasePublish
+    usecase "Release Issue Add" as releaseIssueAdd
+    usecase "Release Issue Update" as releaseIssueUpdate
+    usecase "Release Issue Remove" as releaseIssueRemove
+    usecase "Release Issue List" as releaseIssueList
+    usecase "Release Issue View" as releaseIssueView
     usecase "Issue Management" as issueManagement
     usecase "Meeting Management" as meetingManagement
-    usecase "Timesheet Management" as timesheetManagement
+    usecase "Worklog Management" as worklogManagement
     usecase "Meeting Add" as meetingAdd
     usecase "Meeting Update" as meetingUpdate
     usecase "Meeting Cancel" as meetingCancel
     usecase "Meeting List" as meetingList
     usecase "Meeting View" as meetingView
-    usecase "Meeting Search" as meetingSearch
     usecase "Meeting Add Comment" as meetingAddComment
-    usecase "Meeting Edit Comment" as meetingEditComment
-    usecase "Meeting Delete Comment" as meetingDeleteComment
-    usecase "Assign People to Meeting" as assignPeopleToMeeting
+    usecase "Meeting Update Comment" as meetingUpdateComment
+    usecase "Meeting Remove Comment" as meetingRemoveComment
+    usecase "Meeting Invitees" as meetingInvitees
+    usecase "Meeting Invitees Add" as meetingInviteesAdd
+    usecase "Meeting Invitees Update" as meetingInviteesUpdate
+    usecase "Meeting Invitees Remove" as meetingInviteesRemove
+    usecase "Meeting Invitees List" as meetingInviteesList
+    usecase "Meeting Invitees View" as meetingInviteesView
     usecase "Meeting Attendance" as meetingAttendace
-    usecase "Attach Minutes Content" as attachMinutesContent
+    usecase "Meeting Minutes" as meetingMinutes
+    usecase "Meeting Minutes Add" as meetingMinutesAdd
+    usecase "Meeting Minutes Update" as meetingMinutesUpdate
+    usecase "Meeting Minutes Remove" as meetingMinutesRemove
+    usecase "Meeting Minutes List" as meetingMinutesList
+    usecase "Meeting Minutes View" as meetingMinutesView
     usecase "Issue Add" as issueAdd
     usecase "Issue Update" as issueUpdate
-    usecase "Issue Remve" as issueCancel
+    usecase "Issue Remove" as issueCancel
     usecase "Issue List" as issueList
     usecase "Issue View" as issueView
-    usecase "Issue Search" as issueSearch
-    usecase "Issue Change State" as issueChangeState
-    usecase "Assign Issue to Staff" as assignIssueToStaff
-    usecase "Assign Issue to Release" as assignIssueToRelease
-    usecase "Issue Add Comment" as issueAddComment
-    usecase "Issue Edit Comment" as issueEditComment
-    usecase "Issue Delete Comment" as issueDeleteComment
-    usecase "Timesheet Add" as timesheetAdd
-    usecase "Timesheet Edit" as timesheetEdit
-    usecase "Timesheet Delete" as timesheetDelete
-    usecase "Timesheet List" as timesheetList
-    usecase "Timesheet View" as timesheetView
+    usecase "Issue Change Status" as issueChangeStatus
+    usecase "Issue Change Resolvation" as issueChangeResolvation
+    usecase "Assign Issue to Profile" as assignIssueToProfile
+    usecase "Issue Comment" as issueComment
+    usecase "Issue Comment Add" as issueCommentAdd
+    usecase "Issue Comment Update" as issueCommentUpdate
+    usecase "Issue Comment Remove" as issueCommentRemove
+    usecase "Issue Comment List" as issueCommentList
+    usecase "Issue Comment View" as issueCommentView
+    usecase "Issue Attachment" as issueAttachment
+    usecase "Issue Attachment Add" as issueAttachmentAdd
+    usecase "Issue Attachment Update" as issueAttachmentUpdate
+    usecase "Issue Attachment Remove" as issueAttachmentRemove
+    usecase "Issue Attachment List" as issueAttachmentList
+    usecase "Issue Attachment View" as issueAttachmentView
+    usecase "Issue Workflow History" as issueWorkflowHistory
+    usecase "Issue Workflow History Add" as issueWorkflowHistoryAdd
+    usecase "Issue Workflow History List" as issueWorkflowHistoryList
+    usecase "Issue Workflow History View" as issueWorkflowHistoryView
+    usecase "Worklog Add" as worklogAdd
+    usecase "Worklog Update" as worklogUpdate
+    usecase "Worklog Remove" as worklogRemove
+    usecase "Worklog List" as worklogList
+    usecase "Worklog View" as worklogView
 }
 
 projectManagement -- ProductManager
@@ -102,15 +126,18 @@ releaseManagement -- PMO
 releaseManagement -- ProductManager
 releaseManagement -- DevOpsManager
 issueManagement -- Staff
-timesheetManagement -- Staff
+worklogManagement -- Staff
 meetingManagement -- Staff
 
 projectTeamManagement ..> projectManagement
+projectWorkflow ..> projectManagement
+issueManagement ..> projectWorkflow
 releaseManagement ..> projectManagement
+releaseIssue ..> issueManagement 
 issueManagement ..> projectManagement
-issueManagement ..> projectTeamManagement
-timesheetManagement ..> issueManagement
+worklogManagement ..> issueManagement
 meetingManagement ..> projectManagement
+
 
 
 projectRegistration <.. projectManagement : <<include>>
@@ -118,48 +145,96 @@ projectUpdate <.. projectManagement : <<include>>
 projectActivation <.. projectManagement : <<include>>
 projectList <.. projectManagement : <<include>>
 projectView <.. projectManagement : <<include>>
-projectSearch <.. projectManagement : <<include>>
+projectWorkflowAdd <.. projectWorkflow : <<include>>
+projectWorkflowUpdate <.. projectWorkflow : <<include>>
+projectWorkflowRemove <.. projectWorkflow : <<include>>
+projectWorkflowList <.. projectWorkflow : <<include>>
+projectWorkflowView <.. projectWorkflow : <<include>>
+workflowStatus <.. projectWorkflow : <<include>>
+workflowStatusAdd <.. workflowStatus : <<include>>
+workflowStatusUpdate <.. workflowStatus : <<include>>
+workflowStatusRemove <.. workflowStatus : <<include>>
+workflowStatusList <.. workflowStatus : <<include>>
+workflowStatusView <.. workflowStatus : <<include>>
+workflowResolvation <.. projectWorkflow : <<include>>
+workflowResolvationAdd <.. workflowResolvation : <<include>>
+workflowResolvationUpdate <.. workflowResolvation : <<include>>
+workflowResolvationRemove <.. workflowResolvation : <<include>>
+workflowResolvationList <.. workflowResolvation : <<include>>
+workflowResolvationView <.. workflowResolvation : <<include>>
+workflowProgress <.. projectWorkflow : <<include>>
+workflowProgressAdd <.. workflowProgress : <<include>>
+workflowProgressUpdate <.. workflowProgress : <<include>>
+workflowProgressRemove <.. workflowProgress : <<include>>
+workflowProgressList <.. workflowProgress : <<include>>
+workflowProgressView <.. workflowProgress : <<include>>
 teamMemberAdd <.. projectTeamManagement : <<include>>
 teamMemberUpdate <.. projectTeamManagement : <<include>>
 teamMemberRemove <.. projectTeamManagement : <<include>>
 teamMemberList <.. projectTeamManagement : <<include>>
 teamMemberView <.. projectTeamManagement : <<include>>
-teamMemberSearch <.. projectTeamManagement : <<include>>
 releaseAdd <.. releaseManagement : <<include>>
 releaseUpdate <.. releaseManagement : <<include>>
 releaseRemove <.. releaseManagement : <<include>>
 releaseList <.. releaseManagement : <<include>>
-releaseIssueList <.. releaseManagement : <<include>>
 releasePublish <.. releaseManagement : <<include>>
 releaseView <.. releaseManagement : <<include>>
+releaseIssue <.. releaseManagement : <<include>>
+releaseIssueAdd <.. releaseIssue : <<include>>
+releaseIssueUpdate <.. releaseIssue : <<include>>
+releaseIssueRemove <.. releaseIssue : <<include>>
+releaseIssueList <.. releaseIssue : <<include>>
+releaseIssueView <.. releaseIssue : <<include>>
 meetingAdd <.. meetingManagement : <<include>>
 meetingUpdate <.. meetingManagement : <<include>>
 meetingCancel <.. meetingManagement : <<include>>
 meetingList <.. meetingManagement : <<include>>
-meetingSearch <.. meetingManagement : <<include>>
-assignPeopleToMeeting <.. meetingManagement : <<include>>
-meetingAttendace <.. meetingManagement : <<include>>
-attachMinutesContent <.. meetingManagement : <<include>>
+meetingInvitees <.. meetingManagement : <<include>>
+meetingInviteesAdd <.. meetingInvitees : <<include>>
+meetingInviteesUpdate <.. meetingInvitees : <<include>>
+meetingInviteesRemove <.. meetingInvitees : <<include>>
+meetingInviteesList <.. meetingInvitees : <<include>>
+meetingInviteesView <.. meetingInvitees : <<include>>
+meetingAttendace <.. meetingInvitees : <<include>>
+meetingMinutes <.. meetingManagement : <<include>>
+meetingMinutesAdd <.. meetingMinutes : <<include>>
+meetingMinutesUpdate <.. meetingMinutes : <<include>>
+meetingMinutesRemove <.. meetingMinutes : <<include>>
+meetingMinutesList <.. meetingMinutes : <<include>>
+meetingMinutesView <.. meetingMinutes : <<include>>
 meetingView <.. meetingManagement : <<include>>
 meetingAddComment <.. meetingManagement : <<include>>
-meetingEditComment <.. meetingManagement : <<include>>
-meetingDeleteComment <.. meetingManagement : <<include>>
+meetingUpdateComment <.. meetingManagement : <<include>>
+meetingRemoveComment <.. meetingManagement : <<include>>
 issueAdd <.. issueManagement : <<include>>
 issueUpdate <.. issueManagement : <<include>>
 issueCancel <.. issueManagement : <<include>>
 issueList <.. issueManagement : <<include>>
 issueView <.. issueManagement : <<include>>
-issueSearch <.. issueManagement : <<include>>
-issueChangeState <.. issueManagement : <<include>>
-assignIssueToStaff <.. issueManagement : <<include>>
-assignIssueToRelease <.. issueManagement : <<include>>
-issueAddComment <.. issueManagement : <<include>>
-issueEditComment <.. issueManagement : <<include>>
-issueDeleteComment <.. issueManagement : <<include>>
-timesheetAdd <.. timesheetManagement : <<include>>
-timesheetEdit  <.. timesheetManagement : <<include>>
-timesheetDelete  <.. timesheetManagement : <<include>>
-timesheetList  <.. timesheetManagement : <<include>>
-timesheetView  <.. timesheetManagement : <<include>>
+issueChangeStatus <.. issueManagement : <<include>>
+issueChangeResolvation <.. issueManagement : <<include>>
+assignIssueToProfile <.. issueManagement : <<include>>
+issueComment <.. issueManagement : <<include>>
+issueCommentAdd <.. issueComment : <<include>>
+issueCommentUpdate <.. issueComment : <<include>>
+issueCommentRemove <.. issueComment : <<include>>
+issueCommentList <.. issueComment : <<include>>
+issueCommentView <.. issueComment : <<include>>
+issueAttachment <.. issueManagement : <<include>>
+issueAttachmentAdd <.. issueAttachment : <<include>>
+issueAttachmentUpdate <.. issueAttachment : <<include>>
+issueAttachmentRemove <.. issueAttachment : <<include>>
+issueAttachmentList <.. issueAttachment : <<include>>
+issueAttachmentView <.. issueAttachment : <<include>>
+issueWorkflowHistory <.. issueChangeStatus : <<include>>
+issueWorkflowHistory <.. issueChangeResolvation : <<include>>
+issueWorkflowHistoryAdd <.. issueWorkflowHistory : <<include>>
+issueWorkflowHistoryList <.. issueWorkflowHistory : <<include>>
+issueWorkflowHistoryView <.. issueWorkflowHistory : <<include>>
+worklogAdd <.. worklogManagement : <<include>>
+worklogUpdate  <.. worklogManagement : <<include>>
+worklogRemove  <.. worklogManagement : <<include>>
+worklogList  <.. worklogManagement : <<include>>
+worklogView  <.. worklogManagement : <<include>>
 
 @enduml
