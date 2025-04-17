@@ -164,6 +164,30 @@ package "Basic Data Management"{
     usecase "Time Unit View" as timeUnitView
     usecase "Time Unit List" as timeUnitList
 }
+
+package "Document Management"{
+    usecase "Document" as document
+    usecase "Document Upload" as documentUpload
+    usecase "Document Info Update" as documentInfoUpdate
+    usecase "Document Remove" as documentRemove
+    usecase "Document List" as documentList
+    usecase "Document View" as documentView
+    usecase "Project Workflow Document Type" as projectWorkflowDocumentType
+    usecase "Project Workflow Document Type Add" as projectWorkflowDocumentTypeAdd
+    usecase "Project Workflow Document Type Update" as projectWorkflowDocumentTypeUpdate
+    usecase "Project Workflow Document Type Remove" as projectWorkflowDocumentTypeRemove
+    usecase "Project Workflow Document Type List" as projectWorkflowDocumentTypeList
+    usecase "Project Workflow Document Type View" as projectWorkflowDocumentTypeView
+    usecase "Project Workflow Document Type Activation" as projectWorkflowDocumentTypeActivation
+    usecase "Workflow Eligible File Extention" as workflowEligibleFileExtention
+    usecase "Workflow Eligible File Extention Add" as workflowEligibleFileExtentionAdd
+    usecase "Workflow Eligible File Extention Update" as workflowEligibleFileExtentionUpdate
+    usecase "Workflow Eligible File Extention Remove" as workflowEligibleFileExtentionRemove
+    usecase "Workflow Eligible File Extention List" as workflowEligibleFileExtentionList
+    usecase "Workflow Eligible File Extention View" as workflowEligibleFileExtentionView
+    usecase "Workflow Eligible File Extention Activation" as workflowEligibleFileExtentionActivation
+}
+
 User <|--Admin
 Admin -- profileManagement
 Admin -- roleManagement
@@ -183,6 +207,9 @@ Admin -- documentType
 Admin -- fileExtention
 Admin -- contractType
 Admin -- timeUnit
+User -- document
+Admin -- projectWorkflowDocumentType
+Admin -- workflowEligibleFileExtention
 
 
 profileManagement ..> profileRegistration : <<include>>
@@ -307,6 +334,24 @@ timeUnit ..> removeTimeUnit : <<include>>
 timeUnit ..> timeUnitActivation : <<include>>
 timeUnit ..> timeUnitList : <<include>>
 timeUnit ..> timeUnitView : <<include>>
+
+document ..> documentUpload : <<include>>
+document ..> documentInfoUpdate : <<include>>
+document ..> documentRemove : <<include>>
+document ..> documentList : <<include>>
+document ..> documentView : <<include>>
+projectWorkflowDocumentType ..> projectWorkflowDocumentTypeAdd : <<include>>
+projectWorkflowDocumentType ..> projectWorkflowDocumentTypeUpdate : <<include>>
+projectWorkflowDocumentType ..> projectWorkflowDocumentTypeRemove : <<include>>
+projectWorkflowDocumentType ..> projectWorkflowDocumentTypeList : <<include>>
+projectWorkflowDocumentType ..> projectWorkflowDocumentTypeView : <<include>>
+projectWorkflowDocumentType ..> projectWorkflowDocumentTypeActivation : <<include>>
+workflowEligibleFileExtention ..> workflowEligibleFileExtentionAdd : <<include>>
+workflowEligibleFileExtention ..> workflowEligibleFileExtentionUpdate : <<include>>
+workflowEligibleFileExtention ..> workflowEligibleFileExtentionRemove : <<include>>
+workflowEligibleFileExtention ..> workflowEligibleFileExtentionList : <<include>>
+workflowEligibleFileExtention ..> workflowEligibleFileExtentionView : <<include>>
+workflowEligibleFileExtention ..> workflowEligibleFileExtentionActivation : <<include>>
 
 package "Financial"{
     
