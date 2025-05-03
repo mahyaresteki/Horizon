@@ -1,7 +1,7 @@
 /* 
-	Note: This script is created specifically for PostgreSQL datbase.
-	Last Version : 25.4.9
-	Create Databse Guide: 
+	Note: This script is created specifically for PostgreSQL database.
+	Last Version : 25.5.3
+	User Guide for Creating Database : 
 	1. Please create a database with "horizondb" name.
 	2. Open connection to created databse.
 	3. Then run the following script. 
@@ -123,7 +123,7 @@ CREATE TABLE Basic.DocumentType(
 	ModifierId bigint
 );
 
-CREATE TABLE Basic.FileExtention(
+CREATE TABLE Basic.FileExtension(
     Id serial PRIMARY KEY NOT NULL, 
     Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
@@ -153,7 +153,7 @@ CREATE TABLE Basic.TimeUnit(
     Id serial PRIMARY KEY NOT NULL, 
     Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
-	BasedOnMiliscond bigint NOT NULL,
+	ValueBasedOnMillisecond bigint NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
@@ -382,7 +382,7 @@ CREATE TABLE DocumentManagement.Document(
     TableName varchar(255) NOT NULL,
 	FileAddress varchar(4000) NOT NULL,
 	DocumentTypeId bigint NOT NULL,
-	FileExtentionId bigint NOT NULL,
+	FileExtensionId bigint NOT NULL,
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
     CreateDate timestamp NOT NULL DEFAULT NOW(),
@@ -390,7 +390,7 @@ CREATE TABLE DocumentManagement.Document(
     ModifyDate timestamp,
 	ModifierId bigint,
 	FOREIGN KEY (DocumentTypeId) REFERENCES Basic.DocumentType(Id),
-	FOREIGN KEY (FileExtention) REFERENCES Basic.FileExtention(Id)
+	FOREIGN KEY (FileExtension) REFERENCES Basic.FileExtension(Id)
 );
 
 CREATE TABLE HumanResource.ProfileEducation(
@@ -893,9 +893,9 @@ CREATE TABLE ProjectManagement.WorkLog(
 	FOREIGN KEY (IssueId) REFERENCES ProjectManagement.Issue(Id)
 );
 
-CREATE TABLE DocumentManagement.WorkflowEligibleFileExtention(
+CREATE TABLE DocumentManagement.WorkflowEligibleFileExtension(
     Id serial PRIMARY KEY NOT NULL,
-	FileExtentionId bigint NOT NULL,
+	FileExtensionId bigint NOT NULL,
 	ProjectWorkflowId bigint NOT NULL,
 	MaxFileSizeForUpload integer NOT NULL DEFAULT 5242880,
     IsActive boolean NOT NULL DEFAULT true,
@@ -904,9 +904,9 @@ CREATE TABLE DocumentManagement.WorkflowEligibleFileExtention(
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
 	ModifierId bigint,
-	FOREIGN KEY (FileExtentionId) REFERENCES DocumentManagement.FileExtention(Id),
+	FOREIGN KEY (FileExtensionId) REFERENCES DocumentManagement.FileExtension(Id),
 	FOREIGN KEY (ProjectWorkflowId) REFERENCES ProjectManagement.ProjectWorkflow(Id),
-	UNIQUE(FileExtentionId, ProjectWorkflowId)
+	UNIQUE(FileExtensionId, ProjectWorkflowId)
 );
 
 CREATE TABLE ProjectManagement.IssueWorkflowHistory(

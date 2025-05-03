@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.4.11
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.5.4
 
 entity "Basic.EducationLevel" as educationLevel {
   *Id : bigint(19) <<serial>>
@@ -115,7 +115,7 @@ entity "Basic.DocumentType" as documentType {
   ModifierId : bigint(19)
 }
 
-entity "Basic.FileExtention" as fileExtention {
+entity "Basic.FileExtension" as fileExtension {
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -148,7 +148,7 @@ entity "Basic.TimeUnit" as timeUnit {
   --
   *Title : varchar(200)
   *Code : varchar(20) <<unique>>
-  BasedOnMiliscond : bigint(19)
+  BasedOnMillisecond : bigint(19)
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -617,7 +617,7 @@ entity "DocumentManagement.Document" as document {
   *TableName : varchar(255)
   *TableId : bigint(19)
   *DocumentTypeId : bigint(19) <<FK>>
-  *FileExtentionId : bigint(19) <<FK>>
+  *FileExtensionId : bigint(19) <<FK>>
   *FileAddress: varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -860,11 +860,11 @@ entity "ProjectManagement.WorkLog" as workLog {
   ModifierId : bigint(19)
 }
 
-entity "DocumentManagement.WorkflowEligibleFileExtention" as workflowEligibleFileExtention {
+entity "DocumentManagement.WorkflowEligibleFileExtension" as workflowEligibleFileExtension {
   *Id : bigint(19) <<serial>>
   --
   *WorkflowId : bigint(19) <<FK>> <<composite unique>>
-  *FileExtentionId : bigint(19) <<FK>> <<composite unique>>
+  *FileExtensionId : bigint(19) <<FK>> <<composite unique>>
   *MaxFileSizeForUpload : integer <<default: 5242880>>
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -1158,9 +1158,9 @@ document ||..o{ issueAttachment
 document ||..o{ projectMeeting
 meetingType ||..o{ projectMeeting
 documentType ||..o{ document
-fileExtention ||..o{ document
-projectWorkflow ||..o{ workflowEligibleFileExtention
-fileExtention ||..o{ workflowEligibleFileExtention
+fileExtension ||..o{ document
+projectWorkflow ||..o{ workflowEligibleFileExtension
+fileExtension ||..o{ workflowEligibleFileExtension
 issue ||..o{ workLog
 timeUnit ||..o{ workLog
 issue ||..o{  issueWorkflowHistory
