@@ -57,14 +57,24 @@ The list of technical documentation for the project is as follows:
 1. **Project Architecture:** This document contains necessary information about the overall structure, architecture, and infrastructure of the project. [Click here](https://github.com/mahyaresteki/Horizon/blob/master/2-TechnicalDocuments/Project_Achitecture.pdf) to view it.
 2. **KPIs for Productivity and Staff Satisfaction Assessment:** This document includes research on indicators for evaluating employee productivity and satisfaction. [Click here](https://github.com/mahyaresteki/Horizon/blob/master/2-TechnicalDocuments/KPIs_for_Productivity_and_Staff_Satisfaction_Assessment.pdf) to view it.
 
-## Research Type
+##Project Additional Info
+
+### Research Type
 Based on definitions of [Lawrence Berkeley	National	Laboratory](https://www.sjsu.edu/people/fred.prochaska/courses/ScWk170/s0/Basic-vs.-Applied-Research.pdf), this project is an **"applied research"**.
 
-## Current Status
+### Current Status
 This project is currently in the research and documentation phase. No coding tasks are open yet.
 
-## How to Contribute
+### How to Contribute
 At this stage, contributions are welcome in the form of research, documentation, and theoretical discussion.
+
+### Research Team
+Horizon will be developed by ZURVAN research team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
+
+In the Middle Persian language ([Pahlavi](https://en.wikipedia.org/wiki/Middle_Persian)), "ZURVAN" means God of time and destiny.
+
+### Research Progress Philosophy
+The research progress philosophy of the Horizon project is based on [Kaizen](https://en.wikipedia.org/wiki/Kaizen). Therefore, we will accept any logical and scientific critique or suggestion that helps to improve the project.
 
 ## Use of AI Assistants in the Horizon Project
 As part of the Horizon project development, AI assistants were used to improve the quality and efficiency of both content creation and design tasks. The following tools were utilized:
@@ -83,10 +93,4 @@ For the project’s visual identity, Recraft (an AI-powered design tool) was use
 * Refine and finalize the logo based on iterative AI-generated suggestions
 Recraft enabled the team to experiment with visual directions and produce a logo that represents Horizon’s mission and identity.
 
-## Research Team
-Horizon will be developed by ZURVAN research team which is managed by [Mahyar Esteki](https://www.linkedin.com/in/mahyaresteki/).
 
-In the Middle Persian language ([Pahlavi](https://en.wikipedia.org/wiki/Middle_Persian)), "ZURVAN" means God of time and destiny.
-
-## Research Progress Philosophy
-The research progress philosophy of the Horizon project is based on [Kaizen](https://en.wikipedia.org/wiki/Kaizen). Therefore, we will accept any logical and scientific critique or suggestion that helps to improve the project.
