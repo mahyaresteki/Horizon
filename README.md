@@ -1,6 +1,7 @@
 <div align="center">
-<img src="https://raw.githubusercontent.com/mahyaresteki/Horizon/master/logo.png" width="120" height="120">
+<img src="https://raw.githubusercontent.com/mahyaresteki/Horizon/master/logo.png" width="120" height="120"/>
 # Horizon Research Project (HRP)
+_Organizational Productivity and Justice Management System_
 </div>
 Horizon is a web-based application designed to manage project information, human resources, and allocated resources in companies. It aims to improve employee satisfaction, accelerate project progress, and boost productivity in task management. By organizing information efficiently, Horizon helps technology companies balance individual and collective interests, creating a healthier and more productive work environment.
 
