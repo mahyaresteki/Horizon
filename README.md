@@ -20,23 +20,11 @@ Ethical & Social Impact Indicators – Workplace inclusivity, work-life balance,
 
 By integrating these methods, Horizon System provides actionable insights for both employees and managers, fostering a healthier and more efficient work environment.
 
-## Story of the Project
-At first, the Horizon project was supposed to be a platform for the production of a payment switch with high flexibility. It was decided that any development method and pattern that seems inefficient should be investigated before using or rejecting it. But then something strange happened! During the research, it was found that current development methods in most cases ignore the human rights of developers in order to achieve maximum efficiency.
-
-Creating new applications and providing technical solutions always has many fans and technology companies pay good wages for such systems! But, we chose to walk in a path that others have not yet been willing to talk about. As a result, the Horizon project changed its path towards investigating management deficiencies in the world of technology. The goal of the Horizon project is to create a new management solution based on ethical principles in such a way that in addition to maintaining and improving efficiency, the human rights of the employees involved in the project are also respected.
-
-Therefore, the Horizon project is a humanitarian research activity aimed at creating methods to improve efficiency without violating the rights of employees.
-
-**_"It is always possible to produce a good application software. But time is running out to improve people's living conditions."_**
-
 ## Mindsets
 The following articles are available to the public as mindsets of the project.
 1. **Worldview Mindset:** [Social-Oriented Philosophy](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Social_Oriented_Philosophy.pdf)
 2. **Mindset for the Problem:** [Deceptive Virtualization Theory](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Deceptive_Virtualization_Theory.pdf)
 3. **Mindset for the Soltion:** [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Theory_of_Endurance_Software_Development_Methodology.pdf)
-
-## Research Type
-Based on definitions of [Lawrence Berkeley	National	Laboratory](https://www.sjsu.edu/people/fred.prochaska/courses/ScWk170/s0/Basic-vs.-Applied-Research.pdf), this project is an **"applied research"**.
 
 ## Objectives
 1. **Enhancing Employee Satisfaction**
@@ -58,12 +46,6 @@ Based on definitions of [Lawrence Berkeley	National	Laboratory](https://www.sjsu
 	* Reducing human errors and rework
 	* Establishing a reliable data source for management decision-making
 
-## Current Status
-This project is currently in the research and documentation phase. No coding tasks are open yet.
-
-## How to Contribute
-At this stage, contributions are welcome in the form of research, documentation, and theoretical discussion.
-
 ## Documentation
 
 ### Modeling Outputs
@@ -74,6 +56,15 @@ At this stage, contributions are welcome in the form of research, documentation,
 The list of technical documentation for the project is as follows:
 1. **Project Architecture:** This document contains necessary information about the overall structure, architecture, and infrastructure of the project. [Click here](https://github.com/mahyaresteki/Horizon/blob/master/2-TechnicalDocuments/Project_Achitecture.pdf) to view it.
 2. **KPIs for Productivity and Staff Satisfaction Assessment:** This document includes research on indicators for evaluating employee productivity and satisfaction. [Click here](https://github.com/mahyaresteki/Horizon/blob/master/2-TechnicalDocuments/KPIs_for_Productivity_and_Staff_Satisfaction_Assessment.pdf) to view it.
+
+## Research Type
+Based on definitions of [Lawrence Berkeley	National	Laboratory](https://www.sjsu.edu/people/fred.prochaska/courses/ScWk170/s0/Basic-vs.-Applied-Research.pdf), this project is an **"applied research"**.
+
+## Current Status
+This project is currently in the research and documentation phase. No coding tasks are open yet.
+
+## How to Contribute
+At this stage, contributions are welcome in the form of research, documentation, and theoretical discussion.
 
 ## Use of AI Assistants in the Horizon Project
 As part of the Horizon project development, AI assistants were used to improve the quality and efficiency of both content creation and design tasks. The following tools were utilized:
