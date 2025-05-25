@@ -30,14 +30,14 @@ left to right direction
 title Horizon Research Project (HRP) \n Project Schema \n Version 25.5.25
 
 package "Other Data Source" as otherDataSource{
-    FA5_JIRA(jira, "Jira") #BUSINESS
-    FA5_TRELLO(trello, "Trello") #BUSINESS
-    FA5_GITLAB(gitlab, "GitLab") #BUSINESS
-    FA5_GITHUB(github, "GitHub") #BUSINESS
-    FA5_BITBUCKET(bitbucket, "Bitbucket") #BUSINESS
-    MATERIAL_EMAIL(email, "Email") #BUSINESS
-    FA_CALENDAR(calendar, "Calendar") #BUSINESS
-    FA5_FILE_EXCEL(fileExcel, "File Excel") #BUSINESS
+        FA5_JIRA(jira, "Jira") #BUSINESS
+        FA5_TRELLO(trello, "Trello") #BUSINESS
+        FA5_GITLAB(gitlab, "GitLab") #BUSINESS
+        FA5_GITHUB(github, "GitHub") #BUSINESS
+        FA5_BITBUCKET(bitbucket, "Bitbucket") #BUSINESS
+        MATERIAL_EMAIL(email, "Email") #BUSINESS
+        FA_CALENDAR(calendar, "Calendar") #BUSINESS
+        FA5_FILE_EXCEL(fileExcel, "File Excel") #BUSINESS
 }
 
 package "Application Zone" as HorizonSystem{
@@ -51,7 +51,7 @@ package "Application Zone" as HorizonSystem{
         FA_CUBES(apis, "APIs") #BUSINESS
     }
 
-    package "Connnector Layer" as conectorLayer{
+    package "Connector Layer" as conدectorLayer{
         FA_COGS(connectorService, "Connector Services") #BUSINESS
     }
 
@@ -93,14 +93,23 @@ apis <--> hrService
 apis <--> qcService
 apis <--> projectService
 apis <--> financialService
-connectorService --> jira
-connectorService --> github
-connectorService --> gitlab
-connectorService --> trello
-connectorService --> fileExcel 
-connectorService --> bitbucket
-connectorService --> calendar
-connectorService --> email
+jira <- connectorService
+connectorService -u-> github
+connectorService -> gitlab
+connectorService -> trello
+connectorService -u-> fileExcel 
+connectorService -> bitbucket
+connectorService -> calendar
+connectorService -> email
+
+jira -[#white]-> trello
+trello -[#white]-> gitlab
+gitlab -[#white]-> github
+github -[#white]-> bitbucket
+bitbucket -[#white]-> email
+email -[#white]-> calendar
+calendar -[#white]-> fileExcel
+
 adminService <--> databaseServer
 paService <--> databaseServer
 hrService <--> databaseServer
