@@ -15,28 +15,55 @@ left to right direction
 !include <tupadr3/font-awesome/chrome>
 !include <tupadr3/font-awesome/cubes>
 !include <tupadr3/font-awesome/cogs>
+!include <tupadr3/font-awesome/calendar>
+!include <tupadr3/font-awesome-5/jira>
+!include <tupadr3/font-awesome-5/trello>
+!include <tupadr3/font-awesome-5/gitlab>
+!include <tupadr3/font-awesome-5/github>
+!include <tupadr3/font-awesome-5/bitbucket>
+!include <tupadr3/font-awesome-5/file_excel>
+!include <tupadr3/material/email>
 !include <tupadr3/devicons/postgresql>
 !include <tupadr3/devicons/nginx>
 !include <office/Concepts/firewall_orange>
 
-title Horizon Research Project (HRP) \n Project Schema \n Version 25.3.24
+title Horizon Research Project (HRP) \n Project Schema \n Version 25.5.25
 
-package "Organization Network Zone" as HorizonSystem{
-    package "Microservice Layer" as microserviceLayer{
-        FA_COGS(adminService, "Administration Services") #BUSINESS
-        FA_COGS(paService, "Productivity Assessment Services") #BUSINESS
-        FA_COGS(hrService, "Human Resource Management Microservice") #BUSINESS
-        FA_COGS(qcService, "Quality Management Services") #BUSINESS
-        FA_COGS(projectService, "Project Management Microservice") #BUSINESS
-    }
-    package "API Layer" as apiLayer{
-        DEV_NGINX(webServer1, "Load Balancer") #BUSINESS
-        FA_CUBES(apis, "APIs") #BUSINESS
-    }
+package "Other Data Source" as otherDataSource{
+    FA5_JIRA(jira, "Jira") #BUSINESS
+    FA5_TRELLO(trello, "Trello") #BUSINESS
+    FA5_GITLAB(gitlab, "GitLab") #BUSINESS
+    FA5_GITHUB(github, "GitHub") #BUSINESS
+    FA5_BITBUCKET(bitbucket, "Bitbucket") #BUSINESS
+    MATERIAL_EMAIL(email, "Email") #BUSINESS
+    FA_CALENDAR(calendar, "Calendar") #BUSINESS
+    FA5_FILE_EXCEL(fileExcel, "File Excel") #BUSINESS
+}
+
+package "Application Zone" as HorizonSystem{
     package "App Layer" as appLayer{
         FA_SERVER(mobileAppServer, "Mobile App Server") #BUSINESS
         FA_SERVER(webAppServer, "Web App Server") #BUSINESS
     }
+
+    package "UI Layer" as uiLayer{
+        DEV_NGINX(webServer1, "Load Balancer") #BUSINESS
+        FA_CUBES(apis, "APIs") #BUSINESS
+    }
+
+    package "Connnector Layer" as conectorLayer{
+        FA_COGS(connectorService, "Connector Services") #BUSINESS
+    }
+
+    package "Core Layer" as coreLayer{
+        FA_COGS(adminService, "Administration Services") #BUSINESS
+        FA_COGS(paService, "Productivity Assessment Services") #BUSINESS
+        FA_COGS(hrService, "Human Resource Management Services") #BUSINESS
+        FA_COGS(qcService, "Quality Management Services") #BUSINESS
+        FA_COGS(projectService, "Project Management Services") #BUSINESS
+        FA_COGS(financialService, "Financial Management Services") #BUSINESS
+    }
+
     package "Security Layer" as securityLayer{
         OFF_FIREWALL_ORANGE(firewall,"Firewall") #BUSINESS
     }
@@ -59,16 +86,27 @@ firewall <--> mobileAppServer
 firewall <--> webAppServer
 databaseServer <--> database
 webServer1 <--> apis
+connectorService <-> apis 
 apis <--> adminService
 apis <--> paService
 apis <--> hrService
 apis <--> qcService
 apis <--> projectService
+apis <--> financialService
+connectorService --> jira
+connectorService --> github
+connectorService --> gitlab
+connectorService --> trello
+connectorService --> fileExcel 
+connectorService --> bitbucket
+connectorService --> calendar
+connectorService --> email
 adminService <--> databaseServer
 paService <--> databaseServer
 hrService <--> databaseServer
 qcService <--> databaseServer
 projectService <--> databaseServer
+financialService <--> databaseServer
 mobileAppServer <--> webServer1
 webAppServer <--> webServer1
 userStation <-> firewall
