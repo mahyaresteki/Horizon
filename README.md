@@ -36,6 +36,7 @@ With Horizon Extension Engine, you can effortlessly sync data from popular platf
 3. Google Sheets, Excel, Notion – for financial or resource-related data
 4. Email & Calendar tools – to estimate communication loads and time allocation
 5. Custom APIs & internal systems – for tailored enterprise integrations
+
 **Key Features:**
 1. Modular Plug-ins: Install only what you need. Each connector works independently.
 2. Auto-sync & On-demand Pulling: Keep Horizon updated in real time or via scheduled syncs.
