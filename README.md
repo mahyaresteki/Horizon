@@ -36,9 +36,6 @@ With Horizon Extension Engine, you can effortlessly sync data from popular platf
 3. Google Sheets, Excel, Notion – for financial or resource-related data
 4. Email & Calendar tools – to estimate communication loads and time allocation
 5. Custom APIs & internal systems – for tailored enterprise integrations
-<div align="center">
-<img src="https://github.com/mahyaresteki/Horizon/blob/master/3-HorizonModeling/HorizonUml/out/Architecture/ProjectSchemaDiagram.png" style="margin-left:auto; margin-right:auto">
-</div>
 **Key Features:**
 1. Modular Plug-ins: Install only what you need. Each connector works independently.
 2. Auto-sync & On-demand Pulling: Keep Horizon updated in real time or via scheduled syncs.
@@ -46,6 +43,10 @@ With Horizon Extension Engine, you can effortlessly sync data from popular platf
 4. Customizable & Open Source: Easily extend with your own scripts or data adapters.
 
 The Extension Engine allows Horizon to act not as another siloed system, but as a holistic analytical layer over your organization’s existing infrastructure — combining HR, financial, and project metrics into one coherent picture.
+
+<div align="center">
+<img src="https://github.com/mahyaresteki/Horizon/blob/master/3-HorizonModeling/HorizonUml/out/Architecture/ProjectSchemaDiagram.png" style="margin-left:auto; margin-right:auto">
+</div>
 
 ## Mindsets
 The following articles are available to the public as mindsets of the project.
