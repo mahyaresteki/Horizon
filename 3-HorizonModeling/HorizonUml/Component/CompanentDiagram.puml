@@ -27,7 +27,7 @@ skinparam database{
   BackgroundColor #Lightgreen
 }
 
-title Horizon Research Project (HRP) \n Component Diagram \n Version 25.2.10
+title Horizon Research Project (HRP) \n Component Diagram \n Version 25.5.27
 
 
 
@@ -46,6 +46,7 @@ component "Nginx" as webServer <<web Server>>{
   artifact "Finance Management Services" as hrServices
   artifact "Quality Management Services" as qcServices
   artifact "Productivity Assessment Services" as paServices
+  artifact "Connector Services" as conServices
 }
 
 database "PostgreSQL" as rdbms <<rdbms>>{
@@ -53,13 +54,26 @@ database "PostgreSQL" as rdbms <<rdbms>>{
   artifact "Main Database" as mainDb
 }
 
+package "Third Party Apps" as thirdPartyApps{
+  component "Jira" as jira <<Third Party Api>>
+  component "Trello" as trello <<Third Party Api>>
+  component "File Excel" as fileExcel <<File>>
+  component "GitHub" as gitHub <<Third Party Api>>
+  component "GitLab" as gitLab <<Third Party Api>>
+  component "Bitbucket" as bitbucket <<Third Party Api>>
+  component "Email" as email <<Third Party Api>>
+  component "Calendar" as calendar <<Third Party App>>
+}
+
 component "Python 3.x" as python3<<sdk>>
 component "flask" as flask <<web framework>>
+
 component "SQLAlchamey" as sqlalchamey <<ORM framework>>
 component "psycopg2" as psycopg2 <<data provider>>
 () "User Access" as userAccess
 () "HTTPS" as https1
 () "HTTPS" as https2
+() "HTTPS" as https3
 () "TCP" as tcp
 
 userAccess - browser
@@ -70,18 +84,30 @@ https2 -- ws443
 horizonApp -->  https2
 horizonApis .> flask : <<user>>
 ws443 --> horizonApis 
+horizonApis --> conServices
 horizonApis --> adminServices
 horizonApis --> hrServices
 horizonApis --> proServices
 horizonApis --> qcServices
-horizonApis --> paServices 
+horizonApis --> paServices
 
+conServices --> https3
+
+https3 --> trello
+https3 --> jira
+https3 --> fileExcel
+https3 --> gitHub
+https3 --> gitLab
+https3 --> bitbucket
+https3 --> email
+https3 --> calendar
 
 adminServices --> sqlalchamey
 hrServices --> sqlalchamey
 proServices --> sqlalchamey
 qcServices --> sqlalchamey
 paServices --> sqlalchamey
+conServices --> sqlalchamey
 
 flask .> python3 : <<use>>
 sqlalchamey .> python3 : <<use>>
