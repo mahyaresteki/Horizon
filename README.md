@@ -1,9 +1,8 @@
 <div align="center">
 <img src="https://raw.githubusercontent.com/mahyaresteki/Horizon/master/logo.png" width="120" height="120" style="margin-left:auto; margin-right:auto">
 
-# Horizon Research Project (HRP)
-
-_Organizational Productivity and Justice Management System_
+<h1>Horizon Research Project (HRP)</h1>
+<p style="font-style: italic;">Organizational Productivity and Justice Management System</p>
 </div>
 Horizon is a web-based application designed to manage project information, human resources, and allocated resources in companies. It aims to improve employee satisfaction, accelerate project progress, and boost productivity in task management. By organizing information efficiently, Horizon helps technology companies balance individual and collective interests, creating a healthier and more productive work environment.
 
@@ -46,7 +45,7 @@ With Horizon Extension Engine, you can effortlessly sync data from popular platf
 The Extension Engine allows Horizon to act not as another siloed system, but as a holistic analytical layer over your organization’s existing infrastructure — combining HR, financial, and project metrics into one coherent picture.
 
 <div align="center">
-<img src="https://github.com/mahyaresteki/Horizon/blob/master/3-HorizonModeling/HorizonUml/out/Architecture/ProjectSchemaDiagram.png" style="margin-left:auto; margin-right:auto">
+<img src="https://raw.githubusercontent.com/mahyaresteki/Horizon/refs/heads/master/3-HorizonModeling/HorizonUml/out/Architecture/ProjectSchemaDiagram.png" style="margin-left:auto; margin-right:auto">
 </div>
 
 ## Mindsets
