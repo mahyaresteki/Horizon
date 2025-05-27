@@ -1,7 +1,7 @@
 <div align="center">
 <img src="https://raw.githubusercontent.com/mahyaresteki/Horizon/master/logo.png" width="120" height="120" style="margin-left:auto; margin-right:auto">
 
-# Horizon Research Project (HRP)
+<h1>Horizon Research Project (HRP)</h1>
 
 _Organizational Productivity and Justice Management System_
 </div>
