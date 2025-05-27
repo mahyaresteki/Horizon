@@ -28,7 +28,7 @@ skinparam database {
   BackgroundColor #99FF99
 }
 
-title Horizon Research Project (HRP) \n Deployment Diagram \n Version 25.1.3
+title Horizon Research Project (HRP) \n Deployment Diagram \n Version 25.5.28
 
 package "User Layer" as userLayer {
     node "Client PC" as client <<device>> {
@@ -131,6 +131,46 @@ package "App Layer" as appLayer {
     }
 }
 
+package "App Security Layer 2" as appSecurityLayer2 {
+    node "Firewall Server" as firewallServer2 <<device>> {
+        port "443" as firewall2443
+        portout "any" as firewall2Any
+        component "Firewall App" as firewallApp2 <<service>>
+    }
+}
+
+package "Third Party Layer" as thirdPartyLayer {
+    node "Jira Server" as jiraServer <<virtual machine>> {
+        port "443" as jiraServer443
+        component "Jira" as jira <<web app>>
+    }
+
+    node "Trello Server" as trelloServer <<virtual machine>> {
+        port "443" as trelloServer443
+        component "Trello" as trello <<web app>>
+    }
+
+    node "Bitbucket Server" as bitbucketServer <<virtual machine>> {
+        port "443" as bitbuketServer443
+        component "Bitbucket" as bitbucket <<web app>>
+    }
+
+    node "Github Server" as githubServer <<virtual machine>> {
+        port "443" as githubServer443
+        component "GitHub" as github <<web app>>
+    }
+
+    node "GitLab Server" as gitlabServer <<virtual machine>> {
+        port "443" as gitlabServer443
+        component "GitLab" as gitlab <<web app>>
+    }
+
+    node "File Server" as fileServer <<virtual machine>> {
+        port "20" as fileServer20
+        component "FTP Server" as ftp <<web app>>
+    }
+}
+
 
 python3 ..> flask : <<uses>>
 python3 ..> flaskrestx : <<uses>>
@@ -163,9 +203,20 @@ apiGatewayAny_1 -- docker443_1 : HTTPS
 apiGatewayAny_2 -- docker443_2 : HTTPS
 apiGatewayAny_3 -- docker443_3 : HTTPS
 
-dockerAny_1 -- postgresql5432 : ODBC
-dockerAny_2 -- postgresql5432 : ODBC
-dockerAny_2 -- postgresql5432 : ODBC
+dockerAny_1 --- postgresql5432 : ODBC
+dockerAny_2 --- postgresql5432 : ODBC
+dockerAny_3 --- postgresql5432 : ODBC
+
+dockerAny_1 --- firewall2443 : HTTPS
+dockerAny_2 --- firewall2443 : HTTPS
+dockerAny_3 --- firewall2443 : HTTPS
+firewall2Any --- jiraServer443 : HTTPS
+firewall2Any --- trelloServer443 : HTTPS
+firewall2Any --- bitbuketServer443 : HTTPS
+firewall2Any --- githubServer443 : HTTPS
+firewall2Any --- gitlabServer443 : HTTPS
+firewall2Any --- fileServer20 : HTTPS
+
 
 
 postgresql5432 -- rdbms_replica1 : <<replication>> 
