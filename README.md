@@ -7,7 +7,7 @@
 Horizon is a web-based application designed to manage project information, human resources, and allocated resources in companies. It aims to improve employee satisfaction, accelerate project progress, and boost productivity in task management. By organizing information efficiently, Horizon helps technology companies balance individual and collective interests, creating a healthier and more productive work environment.
 
 ## What is Horizon System?
-Horizon System is a lightweight yet integrated total evaluation solution designed to analyze organizational projects across three key dimensions: financial performance, human resources, and project execution.
+Horizon System is a lightweight yet integrated _**total evaluation solution**_ designed to analyze organizational projects across three key dimensions: financial performance, human resources, and project execution.
 
 By collecting and analyzing relevant data from ongoing workflows, contracts, and employee activity, Horizon provides a comprehensive view of both job satisfaction and operational effectiveness. This multi-dimensional approach allows organizations to evaluate not only how work is being done, but also how it impacts the well-being and motivation of their teams.
 
