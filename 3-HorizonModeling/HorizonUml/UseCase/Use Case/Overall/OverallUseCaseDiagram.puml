@@ -6,19 +6,17 @@ skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 skinparam TitleFontSize 72px
 
-title Horizon Research Project (HRP) \n Overall Use Case Diagram \n Version 25.4.17
+title Horizon Research Project (HRP) \n Overall Use Case Diagram \n Version 25.5.30
 
 :User: as User
 :Senior Manager: as SeniorManager
 :Project Manager: as PMO
-:Network Manager: as NetworkManager
 :Financial Manager: as Fmanager
 :Administrator: as Admin
 :Human Resource: as HR
 :Accountant: as Accountant
 :Staff: as Staff
 :DevOps Manager: as DevOpsManager
-:Logestics Manager: as LogesticsManager
 :Product Manager: as ProductManager
 
 
@@ -188,6 +186,23 @@ package "Document Management"{
     usecase "Workflow Eligible File Extention Activation" as workflowEligibleFileExtentionActivation
 }
 
+package "Connector"{
+    usecase "Set Jira Connection Settings" as setJiraConnection
+    usecase "Set Trello Connection Settings" as setTrelloConnection
+    usecase "Set GitHub Connection Settings" as setGitHubConnection
+    usecase "Set GitLab Connection Settings" as setGitLabConnection
+    usecase "Set Bibucket Connection Settings" as setBitbucketConnection
+    usecase "Set File Server Connection Settings" as setFileServerConnection
+
+    usecase "Sync Project Activities by Jira" as syncByJira
+    usecase "Sync Project Activities by Trello" as syncByTrello
+    usecase "Sync Changes List by GitHub" as syncByGitHub
+    usecase "Sync Changes List by GitLab" as syncByGitLab
+    usecase "Sync Changes List by Bitbucket" as syncByBitbucket
+    usecase "Financial Data Migration by Excel File" as financialDataMigration
+}
+
+
 User <|--Admin
 Admin -- profileManagement
 Admin -- roleManagement
@@ -352,6 +367,27 @@ workflowEligibleFileExtention ..> workflowEligibleFileExtentionRemove : <<includ
 workflowEligibleFileExtention ..> workflowEligibleFileExtentionList : <<include>>
 workflowEligibleFileExtention ..> workflowEligibleFileExtentionView : <<include>>
 workflowEligibleFileExtention ..> workflowEligibleFileExtentionActivation : <<include>>
+
+Admin -- setJiraConnection
+Admin -- setTrelloConnection
+Admin -- setGitHubConnection
+Admin -- setGitLabConnection
+Admin -- setBitbucketConnection
+Admin -- setFileServerConnection
+
+setFileServerConnection <.. financialDataMigration
+setJiraConnection <.. syncByJira
+setTrelloConnection <.. syncByTrello
+setGitHubConnection <.. syncByGitHub
+setGitLabConnection <.. syncByGitLab
+setBitbucketConnection <.. syncByBitbucket
+
+PMO -- syncByJira
+PMO -- syncByTrello
+PMO -- syncByGitHub
+PMO -- syncByGitLab
+PMO -- syncByBitbucket
+Fmanager -- financialDataMigration
 
 package "Financial"{
     

@@ -1,0 +1,50 @@
+@startuml
+left to right direction
+
+skinparam useCaseBackgroundColor #Business
+skinparam actorBackgroundColor #Business
+skinparam Shadowing True
+skinparam TitleFontSize 48px
+
+title Horizon Research Project (HRP) \n Connector Use Cases \n Version 25.5.30
+
+:Project Manager: as PMO
+:Financial Manager: as Fmanager
+:Administrator: as Admin
+
+package "Connector"{
+    usecase "Set Jira Connection Settings" as setJiraConnection
+    usecase "Set Trello Connection Settings" as setTrelloConnection
+    usecase "Set GitHub Connection Settings" as setGitHubConnection
+    usecase "Set GitLab Connection Settings" as setGitLabConnection
+    usecase "Set Bibucket Connection Settings" as setBitbucketConnection
+    usecase "Set File Server Connection Settings" as setFileServerConnection
+
+    usecase "Sync Project Activities by Jira" as syncByJira
+    usecase "Sync Project Activities by Trello" as syncByTrello
+    usecase "Sync Changes List by GitHub" as syncByGitHub
+    usecase "Sync Changes List by GitLab" as syncByGitLab
+    usecase "Sync Changes List by Bitbucket" as syncByBitbucket
+    usecase "Financial Data Migration by Excel File" as financialDataMigration
+}
+
+Admin -- setJiraConnection
+Admin -- setTrelloConnection
+Admin -- setGitHubConnection
+Admin -- setGitLabConnection
+Admin -- setBitbucketConnection
+Admin -- setFileServerConnection
+
+setFileServerConnection <.. financialDataMigration
+setJiraConnection <.. syncByJira
+setTrelloConnection <.. syncByTrello
+setGitHubConnection <.. syncByGitHub
+setGitLabConnection <.. syncByGitLab
+setBitbucketConnection <.. syncByBitbucket
+
+PMO -- syncByJira
+PMO -- syncByTrello
+PMO -- syncByGitHub
+PMO -- syncByGitLab
+PMO -- syncByBitbucket
+Fmanager -- financialDataMigration

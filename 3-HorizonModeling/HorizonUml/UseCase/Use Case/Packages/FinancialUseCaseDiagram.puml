@@ -6,7 +6,7 @@ skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 skinparam TitleFontSize 48px
 
-title Horizon Research Project (HRP) \n Financial Package \n Version 25.4.15
+title Horizon Research Project (HRP) \n Financial Use Cases \n Version 25.4.15
 
 :Financial Manager: as Fmanager
 :Human Resource: as HR
