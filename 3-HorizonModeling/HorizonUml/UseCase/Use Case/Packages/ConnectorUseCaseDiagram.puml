@@ -48,3 +48,4 @@ PMO -- syncByGitHub
 PMO -- syncByGitLab
 PMO -- syncByBitbucket
 Fmanager -- financialDataMigration
+@enduml

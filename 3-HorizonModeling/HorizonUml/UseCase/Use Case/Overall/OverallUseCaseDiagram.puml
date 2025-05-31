@@ -6,7 +6,7 @@ skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 skinparam TitleFontSize 72px
 
-title Horizon Research Project (HRP) \n Overall Use Case Diagram \n Version 25.5.30
+title Horizon Research Project (HRP) \n Overall Use Case Diagram \n Version 25.5.31
 
 :User: as User
 :Senior Manager: as SeniorManager
@@ -1015,5 +1015,20 @@ worklogUpdate  <.. worklogManagement : <<include>>
 worklogRemove  <.. worklogManagement : <<include>>
 worklogList  <.. worklogManagement : <<include>>
 worklogView  <.. worklogManagement : <<include>>
+
+package "Evaluation"{
+    usecase "Productivity Evaluation" as productivityEvaluation
+    usecase "Staff Statisfaction Evaluation" as staffStatisfactoinEvaluation
+    usecase "Customer Statisfaction Evaluation" as customerStatisfactoinEvaluation
+    usecase "Examining the Interaction of Evaluations" as interactionOfEvaluations
+}
+
+HR -- staffStatisfactoinEvaluation
+PMO -- productivityEvaluation
+Fmanager -- productivityEvaluation
+SeniorManager -- productivityEvaluation
+SeniorManager -- staffStatisfactoinEvaluation
+SeniorManager -- customerStatisfactoinEvaluation
+SeniorManager -- interactionOfEvaluations
 
 @enduml
