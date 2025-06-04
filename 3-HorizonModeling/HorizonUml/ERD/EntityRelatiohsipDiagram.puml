@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.5.4
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.6.4
 
 entity "Basic.EducationLevel" as educationLevel {
   *Id : bigint(19) <<serial>>
@@ -567,50 +567,6 @@ entity "HumanResource.QuestionOption" as questionOption {
   ModifierId : bigint(19)
 }
 
-entity "HumanResource.QuestionnaireResult" as questionnaireResult {
-  *Id : bigint(19) <<serial>>
-  --
-  *QuestionnaireId : bigint(19) <<FK>>
-  *ProfileId : bigint(19) <<FK>>
-  *TotalScore : integer
-  *IsActive : boolean <<default: true>>
-  *IsDeleted : boolean <<default: false>>
-  *CreateDate: timestamp <<default: now()>>
-  *CreatorId : bigint(19)
-  ModifyDate: timestamp
-  ModifierId : bigint(19)
-}
-
-entity "HumanResource.QuestionnaireResultDetail" as questionnaireResultDetail {
-  *Id : bigint(19) <<serial>>
-  --
-  *QuestionnaireResultId : bigint(19) <<FK>>
-  *QuestionId : bigint(19) <<FK>>
-  Score : integer
-  Description : varchar(4000)
-  *IsActive : boolean <<default: true>>
-  *IsDeleted : boolean <<default: false>>
-  *CreateDate: timestamp <<default: now()>>
-  *CreatorId : bigint(19)
-  ModifyDate: timestamp
-  ModifierId : bigint(19)
-}
-
-entity "HumanResource.QuestionnaireChoosedOptionResultDetail" as questionnairChoosedOptionResultDetail {
-  *Id : bigint(19) <<serial>>
-  --
-  *QuestionnaireResultDetailId : bigint(19) <<FK>>
-  *ChoosedOptionId : bigint(19) <<FK>>
-  Score : integer
-  Description : varchar(4000)
-  *IsActive : boolean <<default: true>>
-  *IsDeleted : boolean <<default: false>>
-  *CreateDate: timestamp <<default: now()>>
-  *CreatorId : bigint(19)
-  ModifyDate: timestamp
-  ModifierId : bigint(19)
-}
-
 entity "DocumentManagement.Document" as document {
   *Id : bigint(19) <<serial>>
   --
@@ -1117,6 +1073,171 @@ entity "Finance.StaffAdditionalPaymentReceipt" as staffAdditionalPaymentReceipt 
   ModifierId : bigint(19)
 }
 
+entity "Finance.Customer" as customer {
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : varchar(255)
+  Description : varchar(4000)
+  Address : varchar(4000)
+  PhoneNumber : varchar(20)
+  MobileNumber : varchar(20)
+  Email : varchar(100)
+  PostalCode : varchar(20)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Finance.Contract" as contract {
+  *Id : bigint(19) <<serial>>
+  --
+  *CustomerId : bigint(19) <<FK>>
+  *ProjectId : bigint(19) <<FK>>
+  StartDate : date
+  ScheduledEndDate : date
+  RealEndDate : date
+  IsDevelopmentContract : boolean
+  IsSupportContract : boolean
+  TotalAmount : numeric(22,2)
+  *CurrencyId : bigint(19) <<FK>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Finance.ContractPaymentSchedule" as contractPaymentSchedule {
+  *Id : bigint(19) <<serial>>
+  --
+  *ContractId : bigint(19) <<FK>>
+  *PaymentTitle : varchar(255)
+  ScheduledDate : date
+  *Amount : numeric(22,2)
+  *CurrencyId : bigint(19) <<FK>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+
+entity "Finance.ContractPaymentReceipt" as contractPaymentReceipt {
+  *Id : bigint(19) <<serial>>
+  --
+  *ContractPaymentScheduleId : bigint(19) <<FK>>
+  PaymentDate : date
+  ReceiptDocumentId : bigint(19) <<FK>>
+  *Amount : numeric(22,2)
+  *CurrencyId : bigint(19) <<FK>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+
+entity "Evaluation.QuestionnaireResult" as questionnaireResult {
+  *Id : bigint(19) <<serial>>
+  --
+  *QuestionnaireId : bigint(19) <<FK>>
+  *ProfileId : bigint(19) <<FK>>
+  *TotalScore : integer
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Evaluation.QuestionnaireResultDetail" as questionnaireResultDetail {
+  *Id : bigint(19) <<serial>>
+  --
+  *QuestionnaireResultId : bigint(19) <<FK>>
+  *QuestionId : bigint(19) <<FK>>
+  Score : integer
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Evaluation.QuestionnaireChoosedOptionResultDetail" as questionnairChoosedOptionResultDetail {
+  *Id : bigint(19) <<serial>>
+  --
+  *QuestionnaireResultDetailId : bigint(19) <<FK>>
+  *ChoosedOptionId : bigint(19) <<FK>>
+  Score : integer
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Evaluation.CustomerFeedback" as customerFeedback {
+  *Id : bigint(19) <<serial>>
+  --
+  *CustomerId : bigint(19) <<FK>>
+  *ProjectId : bigint(19) <<FK>>
+  *FeedbackDate : date
+  *FeedbackValue : numeric(2,2) <<between 1 and 10>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Evaluation.StaffSatisfactionEvaluation" as staffSatisfactionEvaluation {
+  *Id : bigint(19) <<serial>>
+  --
+  *ProfileId : bigint(19) <<FK>>
+  *EvalationDate : date
+  *EvaluatedValue : numeric(3,2) <<between 1 and 100>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Evaluation.ProjectProductivityEvaluation" as projectProductivityEvaluation {
+  *Id : bigint(19) <<serial>>
+  --
+  *ProjectId : bigint(19) <<FK>>
+  *EvalationDate : datetime
+  *EvaluatedValue : numeric(100,2)
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
 form ||..o{ formPermission
 permission ||..o{ formPermission
 role ||..o{ rolePermission
@@ -1221,4 +1342,16 @@ projectWorkflow ||..o{ projectWorkflowResolvation
 resolvation ||..o{ projectWorkflowResolvation
 profile ||..o{ staffAdditionalPaymentReceipt
 document ||..o{ staffAdditionalPaymentReceipt
+profile ||..o{ staffSatisfactionEvaluation
+project ||..o{ projectProductivityEvaluation
+customer ||..o{ contract
+project ||..o{ contract
+currency ||..o{ contract
+customer ||..o{ customerFeedback
+project ||..o{ customerFeedback
+contract ||..o{ contractPaymentSchedule
+currency ||..o{ contractPaymentSchedule
+contractPaymentSchedule ||..o{ contractPaymentReceipt
+currency ||..o{ contractPaymentReceipt
+document ||..o{ contractPaymentReceipt
 @enduml
