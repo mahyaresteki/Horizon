@@ -1,6 +1,6 @@
 /* 
 	Note: This script is created specifically for PostgreSQL database.
-	Last Version : 25.5.3
+	Last Version : 25.6.5
 	User Guide for Creating Database : 
 	1. Please create a database with "horizondb" name.
 	2. Open connection to created databse.
@@ -13,6 +13,8 @@ CREATE SCHEMA HumanResource;
 CREATE SCHEMA DocumentManagement;
 CREATE SCHEMA ProjectManagement;
 CREATE SCHEMA Finance;
+CREATE SCHEMA Evaluation;
+
 
 
 CREATE TYPE gender AS ENUM ('Male', 'Female');
@@ -529,116 +531,6 @@ CREATE TABLE HumanResource.WorkMission(
 	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
 );
 
-CREATE TABLE HumanResource.Questionnaire(
-    Id serial PRIMARY KEY NOT NULL,
-	Title varchar(255) NOT NULL
-	TotalScore int NOT NULL,
-	AcceptableScore int NOT NULL,
-	WarningScore int NOT NULL,
-	DisasterScore int NOT NULL,
-	Description varchar(4000),
-    IsActive boolean NOT NULL DEFAULT true,
-    IsDeleted boolean NOT NULL DEFAULT false,
-    CreateDate timestamp NOT NULL DEFAULT NOW(),
-	CreatorId bigint NOT NULL,
-    ModifyDate timestamp,
-	ModifierId bigint
-);
-
-CREATE TABLE HumanResource.QuestionnaireTargetDepartment(
-    Id serial PRIMARY KEY NOT NULL, 
-	QuestionnaireId bigint NOT Null,
-	DepartmentId bigint NOT Null,
-    IsActive boolean NOT NULL DEFAULT true,
-    IsDeleted boolean NOT NULL DEFAULT false,
-    CreateDate timestamp NOT NULL DEFAULT NOW(),
-	CreatorId bigint NOT NULL,
-    ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (QuestionnaireId) REFERENCES HumanResource.Questionnaire(Id),
-	FOREIGN KEY (DepartmentId) REFERENCES HumanResource.Department(Id)
-);
-
-CREATE TABLE HumanResource.Question(
-    Id serial PRIMARY KEY NOT NULL, 
-	QuestionnaireId bigint NOT Null,
-	Score int NOT NULL,
-	Question varchar(4000) NOT NULL,
-	IsDescriptive boolean NOT NULL,
-	IsSingleChoice boolean NOT NULL,
-	IsMultiChoice boolean NOT NULL,
-    IsActive boolean NOT NULL DEFAULT true,
-    IsDeleted boolean NOT NULL DEFAULT false,
-    CreateDate timestamp NOT NULL DEFAULT NOW(),
-	CreatorId bigint NOT NULL,
-    ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (QuestionnaireId) REFERENCES HumanResource.Questionnaire(Id)
-);
-
-CREATE TABLE HumanResource.QuestionOption(
-    Id serial PRIMARY KEY NOT NULL, 
-	QuestionId bigint NOT Null,
-	Score int NOT NULL,
-	Title varchar(4000) NOT NULL,
-	IsDescriptionRequired boolean NOT NULL
-	IsSingleChoice boolean NOT NULL,
-	IsMultiChoice boolean NOT NULL,
-    IsActive boolean NOT NULL DEFAULT true,
-    IsDeleted boolean NOT NULL DEFAULT false,
-    CreateDate timestamp NOT NULL DEFAULT NOW(),
-	CreatorId bigint NOT NULL,
-    ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (QuestionId) REFERENCES HumanResource.Question(Id)
-);
-
-CREATE TABLE HumanResource.QuestionnaireResult(
-    Id serial PRIMARY KEY NOT NULL, 
-	QuestionnaireId bigint NOT Null,
-	ProfileId bigint NOT Null,
-	TotalScore int NOT NULL,
-    IsActive boolean NOT NULL DEFAULT true,
-    IsDeleted boolean NOT NULL DEFAULT false,
-    CreateDate timestamp NOT NULL DEFAULT NOW(),
-	CreatorId bigint NOT NULL,
-    ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (QuestionnaireId) REFERENCES HumanResource.Questionnaire(Id),
-	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
-);
-
-CREATE TABLE HumanResource.QuestionnaireResultDetail(
-    Id serial PRIMARY KEY NOT NULL, 
-	QuestionnaireResultId bigint NOT Null,
-	QuestionId bigint NOT Null,
-	Score int,
-	Description varchar(4000),
-    IsActive boolean NOT NULL DEFAULT true,
-    IsDeleted boolean NOT NULL DEFAULT false,
-    CreateDate timestamp NOT NULL DEFAULT NOW(),
-	CreatorId bigint NOT NULL,
-    ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (QuestionnaireResultId) REFERENCES HumanResource.QuestionnaireResult(Id),
-	FOREIGN KEY (QuestionId) REFERENCES HumanResource.Question(Id)
-);
-
-CREATE TABLE HumanResource.QuestionnaireChoosedOptionResultDetail(
-    Id serial PRIMARY KEY NOT NULL, 
-	QuestionnaireResultDetailId bigint NOT Null,
-	QuestionOptionId bigint NOT Null,
-	Score int,
-	Description varchar(4000),
-    IsActive boolean NOT NULL DEFAULT true,
-    IsDeleted boolean NOT NULL DEFAULT false,
-    CreateDate timestamp NOT NULL DEFAULT NOW(),
-	CreatorId bigint NOT NULL,
-    ModifyDate timestamp,
-	ModifierId bigint,
-	FOREIGN KEY (QuestionnaireResultDetailId) REFERENCES HumanResource.QuestionnaireResultDetail(Id),
-	FOREIGN KEY (QuestionOptionId) REFERENCES HumanResource.QuestionOption(Id)
-);
 
 CREATE TABLE ProjectManagement.Project(
     Id serial PRIMARY KEY NOT NULL,
@@ -1177,4 +1069,115 @@ CREATE TABLE Finance.StaffAdditionalPaymentReceipt(
 	FOREIGN KEY (ProfileId) REFERENCES HumanResource.Profile(Id),
 	FOREIGN KEY (CurrencyId) REFERENCES Basic.Currency(Id),
 	FOREIGN KEY (DocumentId) REFERENCES DocumentManagement.Document(Id)
+);
+
+CREATE TABLE Evaluation.Questionnaire(
+    Id serial PRIMARY KEY NOT NULL,
+	Title varchar(255) NOT NULL
+	TotalScore int NOT NULL,
+	AcceptableScore int NOT NULL,
+	WarningScore int NOT NULL,
+	DisasterScore int NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint
+);
+
+CREATE TABLE Evaluation.QuestionnaireTargetDepartment(
+    Id serial PRIMARY KEY NOT NULL, 
+	QuestionnaireId bigint NOT Null,
+	DepartmentId bigint NOT Null,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (QuestionnaireId) REFERENCES Evaluation.Questionnaire(Id),
+	FOREIGN KEY (DepartmentId) REFERENCES HumanResource.Department(Id)
+);
+
+CREATE TABLE Evaluation.Question(
+    Id serial PRIMARY KEY NOT NULL, 
+	QuestionnaireId bigint NOT Null,
+	Score int NOT NULL,
+	Question varchar(4000) NOT NULL,
+	IsDescriptive boolean NOT NULL,
+	IsSingleChoice boolean NOT NULL,
+	IsMultiChoice boolean NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (QuestionnaireId) REFERENCES Evaluation.Questionnaire(Id)
+);
+
+CREATE TABLE Evaluation.QuestionOption(
+    Id serial PRIMARY KEY NOT NULL, 
+	QuestionId bigint NOT Null,
+	Score int NOT NULL,
+	Title varchar(4000) NOT NULL,
+	IsDescriptionRequired boolean NOT NULL
+	IsSingleChoice boolean NOT NULL,
+	IsMultiChoice boolean NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (QuestionId) REFERENCES Evaluation.Question(Id)
+);
+
+CREATE TABLE Evaluation.QuestionnaireResult(
+    Id serial PRIMARY KEY NOT NULL, 
+	QuestionnaireId bigint NOT Null,
+	ProfileId bigint NOT Null,
+	TotalScore int NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (QuestionnaireId) REFERENCES Evaluation.Questionnaire(Id),
+	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
+);
+
+CREATE TABLE Evaluation.QuestionnaireResultDetail(
+    Id serial PRIMARY KEY NOT NULL, 
+	QuestionnaireResultId bigint NOT Null,
+	QuestionId bigint NOT Null,
+	Score int,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (QuestionnaireResultId) REFERENCES Evaluation.QuestionnaireResult(Id),
+	FOREIGN KEY (QuestionId) REFERENCES Evaluation.Question(Id)
+);
+
+CREATE TABLE Evaluation.QuestionnaireChoosedOptionResultDetail(
+    Id serial PRIMARY KEY NOT NULL, 
+	QuestionnaireResultDetailId bigint NOT Null,
+	QuestionOptionId bigint NOT Null,
+	Score int,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (QuestionnaireResultDetailId) REFERENCES Evaluation.QuestionnaireResultDetail(Id),
+	FOREIGN KEY (QuestionOptionId) REFERENCES Evaluation.QuestionOption(Id)
 );

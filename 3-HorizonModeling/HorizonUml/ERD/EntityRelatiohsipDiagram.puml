@@ -505,68 +505,6 @@ entity "HumanResource.WorkMission" as workMission {
   ModifierId : bigint(19)
 }
 
-entity "HumanResource.Questionnaire" as questionnaire {
-  *Id : bigint(19) <<serial>>
-  --
-  *Title : varchar(200)
-  *TotalScore : integer
-  *AcceptableScore : integer
-  *WarningScore : integer
-  *DisasterScore : integer
-  Description : varchar(4000)
-  *IsActive : boolean <<default: true>>
-  *IsDeleted : boolean <<default: false>>
-  *CreateDate: timestamp <<default: now()>>
-  *CreatorId : bigint(19)
-  ModifyDate: timestamp
-  ModifierId : bigint(19)
-}
-
-entity "HumanResource.QuestionnaireTargetDepartment" as questionnaireTargetDepartment {
-  *Id : bigint(19) <<serial>>
-  --
-  *QuestionnaireId : bigint(19) <<FK>>
-  *DepoartmentId : bigint(19) <<FK>>
-  *IsActive : boolean <<default: true>>
-  *IsDeleted : boolean <<default: false>>
-  *CreateDate: timestamp <<default: now()>>
-  *CreatorId : bigint(19)
-  ModifyDate: timestamp
-  ModifierId : bigint(19)
-}
-
-entity "HumanResource.Question" as question {
-  *Id : bigint(19) <<serial>>
-  --
-  *QuestionnaireId : bigint(19) <<FK>>
-  *Question : varchar(4000)
-  *Score : integer
-  *ّIsDescriptive : boolean
-  *IsSingleChoice : boolean
-  *IsMultiChoice : boolean
-  *IsActive : boolean <<default: true>>
-  *IsDeleted : boolean <<default: false>>
-  *CreateDate: timestamp <<default: now()>>
-  *CreatorId : bigint(19)
-  ModifyDate: timestamp
-  ModifierId : bigint(19)
-}
-
-entity "HumanResource.QuestionOption" as questionOption {
-  *Id : bigint(19) <<serial>>
-  --
-  *QuestionId : bigint(19) <<FK>>
-  *Title : varchar(4000)
-  *Score : integer
-  *IsDescriptionRequired : boolean
-  *IsActive : boolean <<default: true>>
-  *IsDeleted : boolean <<default: false>>
-  *CreateDate: timestamp <<default: now()>>
-  *CreatorId : bigint(19)
-  ModifyDate: timestamp
-  ModifierId : bigint(19)
-}
-
 entity "DocumentManagement.Document" as document {
   *Id : bigint(19) <<serial>>
   --
@@ -1139,6 +1077,68 @@ entity "Finance.ContractPaymentReceipt" as contractPaymentReceipt {
   *Amount : numeric(22,2)
   *CurrencyId : bigint(19) <<FK>>
   Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Evaluation.Questionnaire" as questionnaire {
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : varchar(200)
+  *TotalScore : integer
+  *AcceptableScore : integer
+  *WarningScore : integer
+  *DisasterScore : integer
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Evaluation.QuestionnaireTargetDepartment" as questionnaireTargetDepartment {
+  *Id : bigint(19) <<serial>>
+  --
+  *QuestionnaireId : bigint(19) <<FK>>
+  *DepoartmentId : bigint(19) <<FK>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Evaluation.Question" as question {
+  *Id : bigint(19) <<serial>>
+  --
+  *QuestionnaireId : bigint(19) <<FK>>
+  *Question : varchar(4000)
+  *Score : integer
+  *ّIsDescriptive : boolean
+  *IsSingleChoice : boolean
+  *IsMultiChoice : boolean
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Evaluation.QuestionOption" as questionOption {
+  *Id : bigint(19) <<serial>>
+  --
+  *QuestionId : bigint(19) <<FK>>
+  *Title : varchar(4000)
+  *Score : integer
+  *IsDescriptionRequired : boolean
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate: timestamp <<default: now()>>
