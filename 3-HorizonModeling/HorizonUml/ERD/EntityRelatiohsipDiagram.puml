@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.6.4
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.6.5
 
 entity "Basic.EducationLevel" as educationLevel {
   *Id : bigint(19) <<serial>>
@@ -1039,7 +1039,7 @@ entity "Finance.Contract" as contract {
   RealEndDate : date
   IsDevelopmentContract : boolean
   IsSupportContract : boolean
-  TotalAmount : numeric(22,2)
+  *TotalAmount : numeric(22,2)
   *CurrencyId : bigint(19) <<FK>>
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
@@ -1055,7 +1055,8 @@ entity "Finance.ContractPaymentSchedule" as contractPaymentSchedule {
   --
   *ContractId : bigint(19) <<FK>>
   *PaymentTitle : varchar(255)
-  ScheduledDate : date
+  ProjectReleaseId : bigint(19) <<FK>>
+  ScheduledPaymentDate : date
   *Amount : numeric(22,2)
   *CurrencyId : bigint(19) <<FK>>
   Description : varchar(4000)
@@ -1066,7 +1067,6 @@ entity "Finance.ContractPaymentSchedule" as contractPaymentSchedule {
   ModifyDate: timestamp
   ModifierId : bigint(19)
 }
-
 
 entity "Finance.ContractPaymentReceipt" as contractPaymentReceipt {
   *Id : bigint(19) <<serial>>
@@ -1228,7 +1228,23 @@ entity "Evaluation.ProjectProductivityEvaluation" as projectProductivityEvaluati
   --
   *ProjectId : bigint(19) <<FK>>
   *EvalationDate : datetime
-  *EvaluatedValue : numeric(100,2)
+  *EvaluatedValue : numeric(3,2) <<between 1 and 100>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Evaluation.CustomerSatisfactionEvaluation" as customerSatisfactionEvaluation {
+  *Id : bigint(19) <<serial>>
+  --
+  *CustomerId : bigint(19) <<FK>>
+  *ProjectId : bigint(19) <<FK>>
+  *EvalationDate : datetime
+  *EvaluatedValue : numeric(3,2) <<between 1 and 100>>
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -1344,6 +1360,8 @@ profile ||..o{ staffAdditionalPaymentReceipt
 document ||..o{ staffAdditionalPaymentReceipt
 profile ||..o{ staffSatisfactionEvaluation
 project ||..o{ projectProductivityEvaluation
+customer ||..o{ customerSatisfactionEvaluation
+project ||..o{ customerSatisfactionEvaluation
 customer ||..o{ contract
 project ||..o{ contract
 currency ||..o{ contract
@@ -1351,6 +1369,7 @@ customer ||..o{ customerFeedback
 project ||..o{ customerFeedback
 contract ||..o{ contractPaymentSchedule
 currency ||..o{ contractPaymentSchedule
+release ||..o{ contractPaymentSchedule
 contractPaymentSchedule ||..o{ contractPaymentReceipt
 currency ||..o{ contractPaymentReceipt
 document ||..o{ contractPaymentReceipt

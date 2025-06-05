@@ -1071,6 +1071,82 @@ CREATE TABLE Finance.StaffAdditionalPaymentReceipt(
 	FOREIGN KEY (DocumentId) REFERENCES DocumentManagement.Document(Id)
 );
 
+CREATE TABLE Finance.Customer(
+    Id serial PRIMARY KEY NOT NULL,
+	Title varchar(255) NOT NULL,
+	Description varchar(4000),
+	Address varchar(4000),
+	PhoneNumber varchar(20),
+	MobileNumber varchar(20),
+	Email varchar(100),
+	PostalCode varchar(20),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint
+);
+
+CREATE TABLE Finance.Contract(
+    Id serial PRIMARY KEY NOT NULL, 
+	CustomerId bigint NOT Null,
+	ProjectId bigint NOT Null,
+	StartDate date,
+	ScheduledEndDate date,
+	RealEndDate date,
+	IsDevelopmentContract boolean,
+	IsSupportContract boolean,
+	TotalAmount numeric(22, 2) NOT NULL,
+	CurrencyId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (CustomerId) REFERENCES Finance.Customer(Id),
+	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id),
+	FOREIGN KEY (CurrencyId) REFERENCES Basic.Currency(Id)
+);
+
+CREATE TABLE Finance.ContractPaymentSchedule(
+    Id serial PRIMARY KEY NOT NULL, 
+	ContractId bigint NOT Null,
+	PaymentTitle varchar(255) NOT NULL,
+	ProjectReleaseId bigint,
+	ScheduledPaymentDate date,
+	Amount numeric(22, 2) NOT NULL,
+	CurrencyId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ContractId) REFERENCES Finance.Contarct(Id),
+	FOREIGN KEY (ProjectReleaseId) REFERENCES ProjectManagement.ProjectRelease(Id),
+	FOREIGN KEY (CurrencyId) REFERENCES Basic.Currency(Id)
+);
+
+CREATE TABLE Finance.ContractPaymentReceipt(
+    Id serial PRIMARY KEY NOT NULL, 
+	ContractPaymentScheduleId bigint NOT Null,
+	ReceiptDocumentId bigint,
+	PaymentDate date,
+	Amount numeric(22, 2) NOT NULL,
+	CurrencyId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ContractPaymentScheduleId) REFERENCES Finance.ContractPaymentSchedule(Id),
+	FOREIGN KEY (ReceiptDocumentId) REFERENCES DocumentManagement.Document(Id),
+	FOREIGN KEY (CurrencyId) REFERENCES Basic.Currency(Id)
+);
+
 CREATE TABLE Evaluation.Questionnaire(
     Id serial PRIMARY KEY NOT NULL,
 	Title varchar(255) NOT NULL
@@ -1168,8 +1244,7 @@ CREATE TABLE Evaluation.QuestionnaireResultDetail(
 
 CREATE TABLE Evaluation.QuestionnaireChoosedOptionResultDetail(
     Id serial PRIMARY KEY NOT NULL, 
-	QuestionnaireResultDetailId bigint NOT Null,
-	QuestionOptionId bigint NOT Null,
+	QuestionnaireResultDetailId bigint NOT NULL
 	Score int,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
@@ -1180,4 +1255,68 @@ CREATE TABLE Evaluation.QuestionnaireChoosedOptionResultDetail(
 	ModifierId bigint,
 	FOREIGN KEY (QuestionnaireResultDetailId) REFERENCES Evaluation.QuestionnaireResultDetail(Id),
 	FOREIGN KEY (QuestionOptionId) REFERENCES Evaluation.QuestionOption(Id)
+);
+
+CREATE TABLE Evaluation.StaffSatisfactionEvaluation(
+    Id serial PRIMARY KEY NOT NULL, 
+	ProfileId bigint NOT NULL,
+	EvalationDate date NOT NULL,
+	EvaluatedValue numeric(3, 2) NOT NULL CHECK(EvaluatedValue BETWEEN 1 AND 100),
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProfileId) REFERENCES UserManagement.Profile(Id)
+);
+
+CREATE TABLE Evaluation.ProjectProductivityEvaluation(
+    Id serial PRIMARY KEY NOT NULL, 
+	ProjectId bigint NOT NULL,
+	EvalationDate date NOT NULL,
+	EvaluatedValue numeric(3, 2) NOT NULL CHECK(EvaluatedValue BETWEEN 1 AND 100),
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id)
+);
+
+CREATE TABLE Evaluation.CustomerSatisfactionEvaluation(
+    Id serial PRIMARY KEY NOT NULL,
+	CustomerId bigint NOT NULL,
+	ProjectId bigint NOT NULL,
+	EvalationDate date NOT NULL,
+	EvaluatedValue numeric(3, 2) NOT NULL CHECK(EvaluatedValue BETWEEN 1 AND 100),
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (CustomerId) REFERENCES Finance.Customer(Id),
+	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id)
+);
+
+CREATE TABLE Evaluation.CustomerFeedback(
+    Id serial PRIMARY KEY NOT NULL,
+	CustomerId bigint NOT NULL,
+	ProjectId bigint NOT NULL,
+	FeedbackDate date NOT NULL,
+	FeedbackValue numeric(2, 2) NOT NULL CHECK(EvaluatedValue BETWEEN 1 AND 10),
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (CustomerId) REFERENCES Finance.Customer(Id),
+	FOREIGN KEY (ProjectId) REFERENCES ProjectManagement.Project(Id)
 );
