@@ -6,7 +6,7 @@ skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 skinparam TitleFontSize 48px
 
-title Horizon Research Project (HRP) \n Human Resource Management Use Cases \n Version 25.4.15
+title Horizon Research Project (HRP) \n Human Resource Management Use Cases \n Version 25.6.6
 
 :Human Resource: as HR
 :Staff: as Staff
@@ -89,55 +89,14 @@ package "Human Resource Management"{
     usecase "Holidaies Remove" as holidaiesRemove
     usecase "Holidaies List" as holidaiesList
     usecase "Holidaies View" as holidaiesView
-
-    usecase "Questionnaire" as questionnaire
-    usecase "Questionnaire Add" as questionnaireAdd
-    usecase "Questionnaire Update" as questionnaireUpdate
-    usecase "Questionnaire Remove" as questionnaireRemove
-    usecase "Questionnaire List" as questionnaireList
-    usecase "Questionnaire View" as questionnaireView
-    usecase "Questionnaire Target Department" as questionnaireTargetDepartment
-    usecase "Questionnaire Target Department Add" as questionnaireTargetDepartmentAdd
-    usecase "Questionnaire Target Department Update" as questionnaireTargetDepartmentUpdate
-    usecase "Questionnaire Target Department Remove" as questionnaireTargetDepartmentRemove
-    usecase "Questionnaire Target Department List" as questionnaireTargetDepartmentList
-    usecase "Questionnaire Target Department View" as questionnaireTargetDepartmentView
-    usecase "Question" as question
-    usecase "Question Add" as questionAdd
-    usecase "Question Update" as questionUpdate
-    usecase "Question Remove" as questionRemove
-    usecase "Question List" as questionList
-    usecase "Question View" as questionView
-    usecase "Question Option" as questionOption
-    usecase "Question Option Add" as questionOptionAdd
-    usecase "Question Option Update" as questionOptionUpdate
-    usecase "Question Option Remove" as questionOptionRemove
-    usecase "Question Option List" as questionOptionList
-    usecase "Question Option View" as questionOptionView
-
-    usecase "Questionnaire Result" as questionnaireResult
-    usecase "Questionnaire Result Add" as questionnaireResultAdd
-    usecase "Questionnaire Result List" as questionnaireResultList
-    usecase "Questionnaire Result View" as questionnaireResultView
-    usecase "Questionnaire Result Detail" as questionnaireResultDetail
-    usecase "Questionnaire Result Detail Add" as questionnaireResultDetailAdd
-    usecase "Questionnaire Result Detail List" as questionnaireResultDetailList
-    usecase "Questionnaire Result Detail View" as questionnaireResultDetailView
-    usecase "Questionnaire Choosed Option Result Detail" as questionnaireChoosedOptionResultDetail
-    usecase "Questionnaire Choosed Option Result Detail Add" as questionnaireChoosedOptionResultDetailAdd
-    usecase "Questionnaire Choosed Option Result Detail List" as questionnaireChoosedOptionResultDetailList
-    usecase "Questionnaire Choosed Option Result Detail View" as questionnaireChoosedOptionResultDetailView
 }
 
 departmentManagement -- HR
 positionManagement -- HR
 resumeManagement -- HR
 compnayCalendarManagement -- HR
-questionnaire -- HR
 attendanceManagement -- HR
-questionnaireResult -- HR
 attendanceManagement -- Staff
-questionnaireResult -- Staff
 
 departmentRegistration <.. departmentManagement : <<include>>
 departmentUpdate <.. departmentManagement : <<include>>
@@ -213,40 +172,5 @@ holidaiesRemove <.. holidaies : <<include>>
 holidaiesList <.. holidaies : <<include>>
 holidaiesView <.. holidaies : <<include>>
 
-questionnaireAdd <.. questionnaire : <<include>>
-questionnaireUpdate <.. questionnaire : <<include>>
-questionnaireRemove <.. questionnaire : <<include>>
-questionnaireList <.. questionnaire : <<include>>
-questionnaireView <.. questionnaire : <<include>>
-questionnaireTargetDepartment <.. questionnaire : <<include>>
-questionnaireTargetDepartmentAdd <.. questionnaireTargetDepartment : <<include>>
-questionnaireTargetDepartmentUpdate <.. questionnaireTargetDepartment : <<include>>
-questionnaireTargetDepartmentRemove <.. questionnaireTargetDepartment : <<include>>
-questionnaireTargetDepartmentList <.. questionnaireTargetDepartment : <<include>>
-questionnaireTargetDepartmentView <.. questionnaireTargetDepartment : <<include>>
-question <.. questionnaire : <<include>>
-questionAdd <.. question : <<include>>
-questionUpdate <.. question : <<include>>
-questionRemove <.. question : <<include>>
-questionList <.. question : <<include>>
-questionView <.. question : <<include>>
-questionOption <.. question : <<include>>
-questionOptionAdd <.. questionOption : <<include>>
-questionOptionUpdate <.. questionOption : <<include>>
-questionOptionRemove <.. questionOption : <<include>>
-questionOptionList <.. questionOption : <<include>>
-questionOptionView <.. questionOption : <<include>>
 
-questionnaire <. questionnaireResult : <<inculde>>
-questionnaireResultAdd <.. questionnaireResult : <<inculde>>
-questionnaireResultList <.. questionnaireResult : <<inculde>>
-questionnaireResultView <.. questionnaireResult : <<inculde>>
-questionnaireResultDetail <.. questionnaireResult : <<inculde>>
-questionnaireResultDetailAdd <.. questionnaireResultDetail : <<inculde>>
-questionnaireResultDetailList <.. questionnaireResultDetail : <<inculde>>
-questionnaireResultDetailView <.. questionnaireResultDetail : <<inculde>>
-questionnaireChoosedOptionResultDetail <.. questionnaireResultDetail : <<inculde>>
-questionnaireChoosedOptionResultDetailAdd <.. questionnaireChoosedOptionResultDetail : <<inculde>>
-questionnaireChoosedOptionResultDetailList <.. questionnaireChoosedOptionResultDetail : <<inculde>>
-questionnaireChoosedOptionResultDetailView <.. questionnaireChoosedOptionResultDetail : <<inculde>>
 @enduml
