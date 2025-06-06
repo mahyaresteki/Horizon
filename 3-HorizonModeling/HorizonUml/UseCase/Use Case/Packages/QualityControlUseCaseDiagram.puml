@@ -1,0 +1,71 @@
+@startuml
+left to right direction
+
+skinparam useCaseBackgroundColor #Business
+skinparam actorBackgroundColor #Business
+skinparam Shadowing True
+skinparam TitleFontSize 48px
+
+title Horizon Research Project (HRP) \n Quality Control Use Cases \n Version 25.6.6
+
+:Quality Control Staff: as QCStaff
+:Tester: as Tester
+
+package "Quality Control"{
+    usecase "Test Scenario Management" as testScenario
+    usecase "Add Test Scenario" as addTestScenario
+    usecase "Update Test Scenario" as updateTestScenario
+    usecase "Remove Test Scenario" as removeTestScenario
+    usecase "Get Test Scenario" as getTestScenario
+    usecase "Test Scenario List" as testScenarioList
+    usecase "Test Plan Management" as testPlan
+    usecase "Add Test Plan" as addTestPlan
+    usecase "Update Test Plan" as updateTestPlan
+    usecase "Remove Test Plan" as removeTestPlan
+    usecase "Get Test Plan" as getTestPlan
+    usecase "Test Plan List" as testPlanList
+    usecase "Test Result Management" as testResult
+    usecase "Test Result Detail" as testResultDetail
+    usecase "Test Result Report" as testResultReport
+    usecase "Add Test Result" as addTestResult
+    usecase "Update Test Result" as updateTestResult
+    usecase "Remove Test Result" as removeTestResult
+    usecase "Get Test Result" as getTestResult
+    usecase "Test Result List" as testResultList
+    usecase "Add Test Result Detail" as addTestResultDetail
+    usecase "Update Test Result Detail" as updateTestResultDetail
+    usecase "Remove Test Result Detail" as removeTestResultDetail
+    usecase "Get Test Result Detail" as getTestResultDetail
+    usecase "Test Result Detail List" as testResultDetailList
+}
+
+QCStaff -- testScenario
+QCStaff -- testPlan
+Tester -- testResult
+QCStaff -- testResult
+
+testPlan .> testScenario
+testResult .> testPlan
+testScenario ..> addTestScenario : <<include>>
+testScenario ..> updateTestScenario : <<include>>
+testScenario ..> removeTestScenario : <<include>>
+testScenario ..> getTestScenario : <<include>>
+testScenario ..> testScenarioList : <<include>>
+testPlan ..> addTestPlan : <<include>>
+testPlan ..> updateTestPlan : <<include>>
+testPlan ..> removeTestPlan : <<include>>
+testPlan ..> getTestPlan : <<include>>
+testPlan ..> testPlanList : <<include>>
+testResult ..> addTestResult : <<include>>
+testResult ..> updateTestResult : <<include>>
+testResult ..> removeTestResult : <<include>>
+testResult ..> getTestResult : <<include>>
+testResult ..> testResultList : <<include>>
+testResult ..> testResultDetail : <<include>>
+testResult ..> testResultReport : <<include>>
+testResultDetail ..> addTestResultDetail : <<include>>
+testResultDetail ..> updateTestResultDetail : <<include>>
+testResultDetail ..> removeTestResultDetail : <<include>>
+testResultDetail ..> getTestResultDetail : <<include>>
+testResultDetail ..> testResultDetailList : <<include>>
+@enduml
