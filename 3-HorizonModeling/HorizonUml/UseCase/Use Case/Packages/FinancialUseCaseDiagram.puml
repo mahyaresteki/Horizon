@@ -6,7 +6,7 @@ skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 skinparam TitleFontSize 48px
 
-title Horizon Research Project (HRP) \n Financial Use Cases \n Version 25.4.15
+title Horizon Research Project (HRP) \n Financial Use Cases \n Version 25.6.6
 
 :Financial Manager: as Fmanager
 :Human Resource: as HR
@@ -88,16 +88,41 @@ package "Financial"{
     usecase "Monthly Salary Calulation" as monthlySalaryCalculation
     usecase "Annually Salary Calulation" as annuallySalaryCalculation
     usecase "Print Bill Salary" as printBillSalary
+
+    usecase "Customer Management" as customerManagement
+    usecase "Add Customer" as addCustomer
+    usecase "Update Customer" as updateCustomer
+    usecase "Remove Customer" as removeCustomer
+    usecase "Get Customer" as getCustomer
+    usecase "Customer List" as customerList
+    usecase "Contract Management" as contractManagement
+    usecase "Add Contract" as addContract
+    usecase "Update Contract" as updateContract
+    usecase "Remove Contract" as removeContract
+    usecase "Get Contract" as getContract
+    usecase "Contract List" as contractList
+    usecase "Contract Payment Schedule Management" as contractPaymentScheduleManagement
+    usecase "Add Contract Payment Schedule" as addContractPaymentSchedule
+    usecase "Update Contract Payment Schedule" as updateContractPaymentSchedule
+    usecase "Remove Contract Payment Schedule" as removeContractPaymentSchedule
+    usecase "Get Contract Payment Schedule" as getContractPaymentSchedule
+    usecase "Contract Payment Schedule List" as contractPaymentScheduleList
+    usecase "Contract Payment Receipt Management" as contractPaymentReceiptManagement
+    usecase "Add Contract Payment Receipt" as addContractPaymentReceipt
+    usecase "Update Contract Payment Receipt" as updateContractPaymentReceipt
+    usecase "Remove Contract Payment Receipt" as removeContractPaymentReceipt
+    usecase "Get Contract Payment Receipt" as getContractPaymentReceipt
+    usecase "Contract Payment Receipt List" as contractPaymentReceiptList
 }
 
-salaryManagement -- Accountant
-salaryManagement -- Fmanager
-salaryManagement -- HR
-costing -- Accountant
-paymentManagement -- Accountant
-pricing -- Accountant
-bugget -- Fmanager
-bugget -- SeniorManager
+salaryManagement --- Accountant
+salaryManagement --- Fmanager
+salaryManagement --- HR
+costing --- Accountant
+paymentManagement --- Accountant
+pricing --- Accountant
+bugget --- Fmanager
+bugget --- SeniorManager
 
 
 staffContractManagement <.. salaryManagement : <<include>>
@@ -126,6 +151,30 @@ updateSupplier <.. supplierManagement : <<include>>
 removeSupplier <.. supplierManagement : <<include>>
 getSupplier <.. supplierManagement : <<include>>
 supplierList <.. supplierManagement : <<include>>
+customerManagement <.. paymentManagement : <<include>>
+addCustomer <.. customerManagement : <<include>>
+updateCustomer <.. customerManagement : <<include>>
+removeCustomer <.. customerManagement : <<include>>
+getCustomer <.. customerManagement : <<include>>
+customerList <.. customerManagement : <<include>>
+contractManagement .> customerManagement 
+addContract <.. contractManagement : <<include>>
+updateContract <.. contractManagement : <<include>>
+removeContract <.. contractManagement : <<include>>
+getContract <.. contractManagement : <<include>>
+contractList <.. contractManagement : <<include>>
+contractPaymentScheduleManagement .> contractManagement
+addContractPaymentSchedule <.. contractPaymentScheduleManagement : <<include>>
+updateContractPaymentSchedule <.. contractPaymentScheduleManagement : <<include>>
+removeContractPaymentSchedule <.. contractPaymentScheduleManagement : <<include>>
+getContractPaymentSchedule <.. contractPaymentScheduleManagement : <<include>>
+contractPaymentScheduleList <.. contractPaymentScheduleManagement : <<include>>
+contractPaymentReceiptManagement .> contractPaymentScheduleManagement
+addContractPaymentReceipt <.. contractPaymentReceiptManagement : <<include>>
+updateContractPaymentReceipt <.. contractPaymentReceiptManagement : <<include>>
+removeContractPaymentReceipt <.. contractPaymentReceiptManagement : <<include>>
+getContractPaymentReceipt <.. contractPaymentReceiptManagement : <<include>>
+contractPaymentReceiptList <.. contractPaymentReceiptManagement : <<include>>
 salaryPayment <.. paymentManagement : <<include>>
 addSalaryPaymentReceipt <.. salaryPayment : <<include>>
 updateSalaryPaymentReceipt <.. salaryPayment : <<include>>
@@ -163,6 +212,8 @@ updateProjectDirectCostItem <.. projectDirectCostItem : <<include>>
 removeProjectDirectCostItem <.. projectDirectCostItem : <<include>>
 getProjectDirectCostItem <.. projectDirectCostItem : <<include>>
 projectDirectCostItemList <.. projectDirectCostItem : <<include>>
+
+supplierManagement <. costPayment
 
 buggeting <.. bugget : <<include>>
 directCosting <.. pricing : <<include>>
