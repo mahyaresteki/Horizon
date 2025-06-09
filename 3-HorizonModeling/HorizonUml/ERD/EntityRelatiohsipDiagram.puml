@@ -5,9 +5,9 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.6.5
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.6.10
 
-entity "Basic.EducationLevel" as educationLevel {
+entity "Basic.EducationLevel" as educationLevel #LightPink{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -21,7 +21,7 @@ entity "Basic.EducationLevel" as educationLevel {
   ModifierId : bigint(19)
 }
 
-entity "Basic.Priority" as priority {
+entity "Basic.Priority" as priority #LightPink{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -37,7 +37,7 @@ entity "Basic.Priority" as priority {
   ModifierId : bigint(19)
 }
 
-entity "Basic.IssueType" as issueType {
+entity "Basic.IssueType" as issueType #LightPink{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -53,7 +53,7 @@ entity "Basic.IssueType" as issueType {
   ModifierId : bigint(19)
 }
 
-entity "Basic.Status" as status {
+entity "Basic.Status" as status #LightPink{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -71,7 +71,7 @@ entity "Basic.Status" as status {
   ModifierId : bigint(19)
 }
 
-entity "Basic.Resolvation" as resolvation {
+entity "Basic.Resolvation" as resolvation #LightPink{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -87,7 +87,7 @@ entity "Basic.Resolvation" as resolvation {
   ModifierId : bigint(19)
 }
 
-entity "Basic.MeetingType" as meetingType {
+entity "Basic.MeetingType" as meetingType #LightPink{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -101,7 +101,7 @@ entity "Basic.MeetingType" as meetingType {
   ModifierId : bigint(19)
 }
 
-entity "Basic.DocumentType" as documentType {
+entity "Basic.DocumentType" as documentType #LightPink{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -115,7 +115,7 @@ entity "Basic.DocumentType" as documentType {
   ModifierId : bigint(19)
 }
 
-entity "Basic.FileExtension" as fileExtension {
+entity "Basic.FileExtension" as fileExtension #LightPink{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -129,7 +129,7 @@ entity "Basic.FileExtension" as fileExtension {
   ModifierId : bigint(19)
 }
 
-entity "Basic.ContractType" as contractType {
+entity "Basic.ContractType" as contractType #LightPink{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -143,7 +143,38 @@ entity "Basic.ContractType" as contractType {
   ModifierId : bigint(19)
 }
 
-entity "Basic.TimeUnit" as timeUnit {
+entity "Basic.TestApproval" as testApproval #LightPink{
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : varchar(200)
+  *Code : varchar(20) <<unique>>
+  *IsApproved : boolean
+  *Color : varchar(10)
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Basic.TestComplexityLevel" as testComplexityLevel #LightPink{
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : varchar(200)
+  *Code : varchar(20) <<unique>>
+  *ValueNumber : float
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Basic.TimeUnit" as timeUnit #LightPink{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -158,7 +189,7 @@ entity "Basic.TimeUnit" as timeUnit {
   ModifierId : bigint(19)
 }
 
-entity "Basic.Currency" as currency {
+entity "Basic.Currency" as currency #LightPink{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -173,7 +204,7 @@ entity "Basic.Currency" as currency {
   ModifierId : bigint(19)
 }
 
-entity "UserManagement.Role" as role {
+entity "UserManagement.Role" as role #Violet{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -187,7 +218,7 @@ entity "UserManagement.Role" as role {
   ModifierId : bigint(19)
 }
 
-entity "UserManagement.Groups" as groups {
+entity "UserManagement.Groups" as groups #Violet{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -201,7 +232,7 @@ entity "UserManagement.Groups" as groups {
   ModifierId : bigint(19)
 }
 
-entity "UserManagement.Permission" as permission {
+entity "UserManagement.Permission" as permission #Violet{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -215,7 +246,7 @@ entity "UserManagement.Permission" as permission {
   ModifierId : bigint(19)
 }
 
-entity "UserManagement.Form" as form {
+entity "UserManagement.Form" as form #Violet{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -229,7 +260,7 @@ entity "UserManagement.Form" as form {
   ModifierId : bigint(19)
 }
 
-entity "UserManagement.FormPermission" as formPermission {
+entity "UserManagement.FormPermission" as formPermission #Violet{
   *Id : bigint(19) <<serial>>
   --
   *FormId : bigint(19) <<FK>>
@@ -242,7 +273,7 @@ entity "UserManagement.FormPermission" as formPermission {
   ModifierId : bigint(19)
 }
 
-entity "UserManagement.RolePermission" as rolePermission {
+entity "UserManagement.RolePermission" as rolePermission #Violet{
   *Id : bigint(19) <<serial>>
   --
   *RoleId : integer(10) <<FK>>
@@ -257,7 +288,7 @@ entity "UserManagement.RolePermission" as rolePermission {
   ModifierId : bigint(19)
 }
 
-entity "UserManagement.GroupPermission" as groupPermission {
+entity "UserManagement.GroupPermission" as groupPermission #Violet{
   *Id : bigint(19) <<serial>>
   --
   *GroupId : bigint(19) <<FK>>
@@ -270,7 +301,7 @@ entity "UserManagement.GroupPermission" as groupPermission {
   ModifierId : bigint(19)
 }
 
-entity "UserManagement.ProfilePermission" as profilePermission {
+entity "UserManagement.ProfilePermission" as profilePermission #Violet{
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -283,7 +314,7 @@ entity "UserManagement.ProfilePermission" as profilePermission {
   ModifierId : bigint(19)
 }
 
-entity "UserManagement.Profile" as profile {
+entity "UserManagement.Profile" as profile #Violet{
   *Id : bigint(19) <<serial>>
   --
   *FirstName : varchar(200)
@@ -314,7 +345,7 @@ entity "UserManagement.Profile" as profile {
   ModifierId : bigint(19)
 }
 
-entity "UserManagement.ProfileRole" as profileRole {
+entity "UserManagement.ProfileRole" as profileRole #Violet{
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -327,7 +358,7 @@ entity "UserManagement.ProfileRole" as profileRole {
   ModifierId : bigint(19)
 }
 
-entity "UserManagement.ProfileGroup" as profileGroup {
+entity "UserManagement.ProfileGroup" as profileGroup #Violet{
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -340,7 +371,7 @@ entity "UserManagement.ProfileGroup" as profileGroup {
   ModifierId : bigint(19)
 }
 
-entity "HumanResource.Department" as department {
+entity "HumanResource.Department" as department #Lavender{
   *Id : integer(10) <<serial>>
   --
   *Title : varchar(50)
@@ -355,7 +386,7 @@ entity "HumanResource.Department" as department {
   ModifierId : bigint(19)
 }
 
-entity "HumanResource.Position" as position {
+entity "HumanResource.Position" as position #Lavender{
   *Id : integer(10) <<serial>>
   --
   *Title : varchar(50)
@@ -371,7 +402,7 @@ entity "HumanResource.Position" as position {
   ModifierId : bigint(19)
 }
 
-entity "HumanResource.ProfileEducation" as profileEducation {
+entity "HumanResource.ProfileEducation" as profileEducation #Lavender{
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -390,7 +421,7 @@ entity "HumanResource.ProfileEducation" as profileEducation {
   ModifierId : bigint(19)
 }
 
-entity "HumanResource.ProfileJobExperience" as profileJobExperience {
+entity "HumanResource.ProfileJobExperience" as profileJobExperience #Lavender{
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -407,7 +438,7 @@ entity "HumanResource.ProfileJobExperience" as profileJobExperience {
   ModifierId : bigint(19)
 }
 
-entity "HumanResource.ProfileCertificate" as profileCertificate {
+entity "HumanResource.ProfileCertificate" as profileCertificate #Lavender{
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -425,7 +456,7 @@ entity "HumanResource.ProfileCertificate" as profileCertificate {
   ModifierId : bigint(19)
 }
 
-entity "HumanResource.WorkingTimeTable" as workingTimeTable { 
+entity "HumanResource.WorkingTimeTable" as workingTimeTable #Lavender{ 
   *Id : bigint(19) <<serial>>
   --
   *WorkingDay : enum <<Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday>>
@@ -441,7 +472,7 @@ entity "HumanResource.WorkingTimeTable" as workingTimeTable {
   ModifierId : bigint(19)
 }
 
-entity "HumanResource.Holidaies" as holidaies {
+entity "HumanResource.Holidaies" as holidaies #Lavender{
   *Id : bigint(19) <<serial>>
   --
   HolidayDate : date <<unique>> 
@@ -454,7 +485,7 @@ entity "HumanResource.Holidaies" as holidaies {
   ModifierId : bigint(19)
 }
 
-entity "HumanResource.Attendance" as attendance {
+entity "HumanResource.Attendance" as attendance #Lavender{
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -469,7 +500,7 @@ entity "HumanResource.Attendance" as attendance {
   ModifierId : bigint(19)
 }
 
-entity "HumanResource.Leave" as leave {
+entity "HumanResource.Leave" as leave #Lavender{
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -487,7 +518,7 @@ entity "HumanResource.Leave" as leave {
   ModifierId : bigint(19)
 }
 
-entity "HumanResource.WorkMission" as workMission {
+entity "HumanResource.WorkMission" as workMission #Lavender{
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -505,7 +536,7 @@ entity "HumanResource.WorkMission" as workMission {
   ModifierId : bigint(19)
 }
 
-entity "DocumentManagement.Document" as document {
+entity "DocumentManagement.Document" as document #Gold{
   *Id : bigint(19) <<serial>>
   --
   *TableName : varchar(255)
@@ -521,7 +552,7 @@ entity "DocumentManagement.Document" as document {
   ModifierId : bigint(19)
 }
 
-entity "DocumentManagement.ProjectWorkflowDocumentType" as projectWorkflowDocumentType {
+entity "DocumentManagement.ProjectWorkflowDocumentType" as projectWorkflowDocumentType #Gold{
   *Id : bigint(19) <<serial>>
   --
   *DocumentTypeId : bigint(19) <<FK>> <<composite unique>>
@@ -534,7 +565,7 @@ entity "DocumentManagement.ProjectWorkflowDocumentType" as projectWorkflowDocume
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.Project" as project {
+entity "ProjectManagement.Project" as project #Orange{
   *Id : bigint(19) <<serial>>
   --
   *Code : varchar(20) <<unique>>
@@ -550,7 +581,7 @@ entity "ProjectManagement.Project" as project {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.ProjectProfileMember" as projectProfileMember {
+entity "ProjectManagement.ProjectProfileMember" as projectProfileMember #Orange{
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>> <<composite unique>>
@@ -564,7 +595,7 @@ entity "ProjectManagement.ProjectProfileMember" as projectProfileMember {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.ProjectGroupMember" as projectGroupMember {
+entity "ProjectManagement.ProjectGroupMember" as projectGroupMember #Orange{
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>> <<composite unique>>
@@ -577,7 +608,7 @@ entity "ProjectManagement.ProjectGroupMember" as projectGroupMember {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.ProjectRoleMember" as projectRoleMember {
+entity "ProjectManagement.ProjectRoleMember" as projectRoleMember #Orange{
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>> <<composite unique>>
@@ -590,7 +621,7 @@ entity "ProjectManagement.ProjectRoleMember" as projectRoleMember {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.ProjectDepartmentMember" as projectDepartmentMember {
+entity "ProjectManagement.ProjectDepartmentMember" as projectDepartmentMember #Orange{
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>> <<composite unique>>
@@ -603,7 +634,7 @@ entity "ProjectManagement.ProjectDepartmentMember" as projectDepartmentMember {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.ProjectWorkflow" as projectWorkflow {
+entity "ProjectManagement.ProjectWorkflow" as projectWorkflow #Orange{
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
@@ -618,7 +649,7 @@ entity "ProjectManagement.ProjectWorkflow" as projectWorkflow {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.ProjectWorkflowStatus" as projectWorkflowStatus {
+entity "ProjectManagement.ProjectWorkflowStatus" as projectWorkflowStatus #Orange{
   *Id : bigint(19) <<serial>>
   --
   *ProjectWorkflowId : bigint(19) <<FK>>
@@ -631,7 +662,7 @@ entity "ProjectManagement.ProjectWorkflowStatus" as projectWorkflowStatus {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.ProjectWorkflowResolvation" as projectWorkflowResolvation {
+entity "ProjectManagement.ProjectWorkflowResolvation" as projectWorkflowResolvation #Orange{
   *Id : bigint(19) <<serial>>
   --
   *ProjectWorkflowId : bigint(19) <<FK>>
@@ -644,7 +675,7 @@ entity "ProjectManagement.ProjectWorkflowResolvation" as projectWorkflowResolvat
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.ProjectWorkflowProgress" as projectWorkflowProgress {
+entity "ProjectManagement.ProjectWorkflowProgress" as projectWorkflowProgress #Orange{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(255)
@@ -661,7 +692,7 @@ entity "ProjectManagement.ProjectWorkflowProgress" as projectWorkflowProgress {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.Issue" as issue {
+entity "ProjectManagement.Issue" as issue #Orange{
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
@@ -682,7 +713,7 @@ entity "ProjectManagement.Issue" as issue {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.IssueComment" as issueComment {
+entity "ProjectManagement.IssueComment" as issueComment #Orange{
   *Id : bigint(19) <<serial>>
   --
   *IssueId : bigint(19) <<FK>>
@@ -695,7 +726,7 @@ entity "ProjectManagement.IssueComment" as issueComment {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.IssueAttachment" as issueAttachment {
+entity "ProjectManagement.IssueAttachment" as issueAttachment #Orange{
   *Id : bigint(19) <<serial>>
   --
   *IssueId : bigint(19) <<FK>> <<composite unique>>
@@ -708,7 +739,7 @@ entity "ProjectManagement.IssueAttachment" as issueAttachment {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.ProjectRelease" as release {
+entity "ProjectManagement.ProjectRelease" as release #Orange{
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
@@ -723,7 +754,7 @@ entity "ProjectManagement.ProjectRelease" as release {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.ProjectReleaseIssue" as releaseIssue {
+entity "ProjectManagement.ProjectReleaseIssue" as releaseIssue #Orange{
   *Id : bigint(19) <<serial>>
   --
   *ProjectReleaseId : bigint(19) <<FK>> <<composite unique>>
@@ -737,7 +768,7 @@ entity "ProjectManagement.ProjectReleaseIssue" as releaseIssue {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.WorkLog" as workLog {
+entity "ProjectManagement.WorkLog" as workLog #Orange{
   *Id : bigint(19) <<serial>>
   --
   *IssueId : bigint(19) <<FK>>
@@ -754,7 +785,7 @@ entity "ProjectManagement.WorkLog" as workLog {
   ModifierId : bigint(19)
 }
 
-entity "DocumentManagement.WorkflowEligibleFileExtension" as workflowEligibleFileExtension {
+entity "DocumentManagement.WorkflowEligibleFileExtension" as workflowEligibleFileExtension #Gold{
   *Id : bigint(19) <<serial>>
   --
   *WorkflowId : bigint(19) <<FK>> <<composite unique>>
@@ -768,7 +799,7 @@ entity "DocumentManagement.WorkflowEligibleFileExtension" as workflowEligibleFil
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.IssueWorkflowHistory" as issueWorkflowHistory {
+entity "ProjectManagement.IssueWorkflowHistory" as issueWorkflowHistory #Orange{
   *Id : bigint(19) <<serial>>
   --
   *IssueId : bigint(19) <<FK>>
@@ -784,7 +815,7 @@ entity "ProjectManagement.IssueWorkflowHistory" as issueWorkflowHistory {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.ProjectMeeting" as projectMeeting {
+entity "ProjectManagement.ProjectMeeting" as projectMeeting #Orange{
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
@@ -807,7 +838,7 @@ entity "ProjectManagement.ProjectMeeting" as projectMeeting {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.MeetingInvitees" as meetingInvitees {
+entity "ProjectManagement.MeetingInvitees" as meetingInvitees #Orange{
   *Id : bigint(19) <<serial>>
   --
   *ProjectMeetingId : bigint(19) <<FK>>
@@ -824,7 +855,7 @@ entity "ProjectManagement.MeetingInvitees" as meetingInvitees {
   ModifierId : bigint(19)
 }
 
-entity "ProjectManagement.MeetingMinutes" as meetingMinutes {
+entity "ProjectManagement.MeetingMinutes" as meetingMinutes #Orange{
   *Id : bigint(19) <<serial>>
   --
   *ProjectMeetingId : bigint(19) <<FK>>
@@ -840,7 +871,7 @@ entity "ProjectManagement.MeetingMinutes" as meetingMinutes {
   ModifierId : bigint(19)
 }
 
-entity "Finance.StaffContract" as staffContract {
+entity "Finance.StaffContract" as staffContract #Salmon{
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -858,7 +889,7 @@ entity "Finance.StaffContract" as staffContract {
   ModifierId : bigint(19)
 }
 
-entity "Finance.ContractSalaryItem" as contractSalaryItem {
+entity "Finance.ContractSalaryItem" as contractSalaryItem #Salmon{
   *Id : bigint(19) <<serial>>
   --
   *StaffContractId : bigint(19) <<FK>>
@@ -875,7 +906,7 @@ entity "Finance.ContractSalaryItem" as contractSalaryItem {
   ModifierId : bigint(19)
 }
 
-entity "Finance.ContractDeductionItem" as contractDeductionItem {
+entity "Finance.ContractDeductionItem" as contractDeductionItem #Salmon{
   *Id : bigint(19) <<serial>>
   --
   *StaffContractId : bigint(19) <<FK>>
@@ -894,7 +925,7 @@ entity "Finance.ContractDeductionItem" as contractDeductionItem {
   ModifierId : bigint(19)
 }
 
-entity "Finance.Supplier" as supplier {
+entity "Finance.Supplier" as supplier #Salmon{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(255)
@@ -912,7 +943,7 @@ entity "Finance.Supplier" as supplier {
   ModifierId : bigint(19)
 }
 
-entity "Finance.CostReceipt" as costReceipt {
+entity "Finance.CostReceipt" as costReceipt #Salmon{
   *Id : bigint(19) <<serial>>
   --
   *SupplierId : bigint(19) <<FK>>
@@ -929,7 +960,7 @@ entity "Finance.CostReceipt" as costReceipt {
   ModifierId : bigint(19)
 }
 
-entity "Finance.CostReceiptItem" as costReceiptItem {
+entity "Finance.CostReceiptItem" as costReceiptItem #Salmon{
   *Id : bigint(19) <<serial>>
   --
   *CostReceiptId : bigint(19) <<FK>>
@@ -946,7 +977,7 @@ entity "Finance.CostReceiptItem" as costReceiptItem {
   ModifierId : bigint(19)
 }
 
-entity "Finance.ProjectDirectCostItem" as projectDirectCostItem {
+entity "Finance.ProjectDirectCostItem" as projectDirectCostItem #Salmon{
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
@@ -960,7 +991,7 @@ entity "Finance.ProjectDirectCostItem" as projectDirectCostItem {
   ModifierId : bigint(19)
 }
 
-entity "Finance.CostPaymentReceipt" as costPaymentReceipt {
+entity "Finance.CostPaymentReceipt" as costPaymentReceipt #Salmon{
   *Id : bigint(19) <<serial>>
   --
   *CostReceiptId : bigint(19) <<FK>>
@@ -977,7 +1008,7 @@ entity "Finance.CostPaymentReceipt" as costPaymentReceipt {
   ModifierId : bigint(19)
 }
 
-entity "Finance.SalaryPaymentReceipt" as salaryPaymentReceipt {
+entity "Finance.SalaryPaymentReceipt" as salaryPaymentReceipt #Salmon{
   *Id : bigint(19) <<serial>>
   --
   *StaffContractId : bigint(19) <<FK>>
@@ -994,7 +1025,7 @@ entity "Finance.SalaryPaymentReceipt" as salaryPaymentReceipt {
   ModifierId : bigint(19)
 }
 
-entity "Finance.StaffAdditionalPaymentReceipt" as staffAdditionalPaymentReceipt {
+entity "Finance.StaffAdditionalPaymentReceipt" as staffAdditionalPaymentReceipt #Salmon{
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -1011,7 +1042,7 @@ entity "Finance.StaffAdditionalPaymentReceipt" as staffAdditionalPaymentReceipt 
   ModifierId : bigint(19)
 }
 
-entity "Finance.Customer" as customer {
+entity "Finance.Customer" as customer #Salmon{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(255)
@@ -1029,7 +1060,7 @@ entity "Finance.Customer" as customer {
   ModifierId : bigint(19)
 }
 
-entity "Finance.Contract" as contract {
+entity "Finance.Contract" as contract #Salmon{
   *Id : bigint(19) <<serial>>
   --
   *CustomerId : bigint(19) <<FK>>
@@ -1050,7 +1081,7 @@ entity "Finance.Contract" as contract {
   ModifierId : bigint(19)
 }
 
-entity "Finance.ContractPaymentSchedule" as contractPaymentSchedule {
+entity "Finance.ContractPaymentSchedule" as contractPaymentSchedule #Salmon{
   *Id : bigint(19) <<serial>>
   --
   *ContractId : bigint(19) <<FK>>
@@ -1068,7 +1099,7 @@ entity "Finance.ContractPaymentSchedule" as contractPaymentSchedule {
   ModifierId : bigint(19)
 }
 
-entity "Finance.ContractPaymentReceipt" as contractPaymentReceipt {
+entity "Finance.ContractPaymentReceipt" as contractPaymentReceipt #Salmon{
   *Id : bigint(19) <<serial>>
   --
   *ContractPaymentScheduleId : bigint(19) <<FK>>
@@ -1085,7 +1116,108 @@ entity "Finance.ContractPaymentReceipt" as contractPaymentReceipt {
   ModifierId : bigint(19)
 }
 
-entity "Evaluation.Questionnaire" as questionnaire {
+entity "QualityControl.TestScenario" as testScenario #Silver{
+  *Id : bigint(19) <<serial>>
+  --
+  *Code : varchar(20) <<unique>>
+  *Title : varchar(255)
+  TestComplexityLevelId : bigint(19) <<FK>>
+  UsersAndRoles : varchar(4000)
+  Steps : varchar(4000)
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "QualityControl.PrerequisiteTestScenario" as prerequisiteTestScenario #Silver{
+  *Id : bigint(19) <<serial>>
+  --
+  *TestScenarioId : bigint(19) <<FK>>
+  *PrerequisiteTestScenarioId : bigint(19) <<FK>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "QualityControl.TestPlan" as testPlan #Silver{
+  *Id : bigint(19) <<serial>>
+  --
+  *Code : varchar(20) <<unique>>
+  *Title : varchar(255)
+  PlanDate : date
+  ReleaseId : bigint(19) <<FK>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "QualityControl.TestPlanScenario" as testPlanScenario #Silver{
+  *Id : bigint(19) <<serial>>
+  --
+  *TestScenarioId : bigint(19) <<FK>> <<composite unique>>
+  *TestPlanId : bigint(19) <<FK>> <<composite unique>>
+  *Ordering : float <<composite unique>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "QualityControl.TestPlanScenarioIssueCoverage" as testPlanScenarioIssueCoverage #Silver{
+  *Id : bigint(19) <<serial>>
+  --
+  *TestPlanScenarioId : bigint(19) <<FK>> <<composite unique>>
+  *IssueId : bigint(19) <<FK>> <<composite unique>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "QualityControl.TestResult" as testResult #Silver{
+  *Id : bigint(19) <<serial>>
+  --
+  TestDate : date
+  TestPlanId : bigint(19) <<FK>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "QualityControl.TestResultDetail" as testResultDetail #Silver{
+  *Id : bigint(19) <<serial>>
+  --
+  TestPlanScenarioId : bigint(19) <<FK>>
+  *TestApprovalId : bigint(19) <<FK>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate: timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate: timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Evaluation.Questionnaire" as questionnaire #SkyBlue{
   *Id : bigint(19) <<serial>>
   --
   *Title : varchar(200)
@@ -1102,7 +1234,7 @@ entity "Evaluation.Questionnaire" as questionnaire {
   ModifierId : bigint(19)
 }
 
-entity "Evaluation.QuestionnaireTargetDepartment" as questionnaireTargetDepartment {
+entity "Evaluation.QuestionnaireTargetDepartment" as questionnaireTargetDepartment #SkyBlue{
   *Id : bigint(19) <<serial>>
   --
   *QuestionnaireId : bigint(19) <<FK>>
@@ -1115,7 +1247,7 @@ entity "Evaluation.QuestionnaireTargetDepartment" as questionnaireTargetDepartme
   ModifierId : bigint(19)
 }
 
-entity "Evaluation.Question" as question {
+entity "Evaluation.Question" as question #SkyBlue{
   *Id : bigint(19) <<serial>>
   --
   *QuestionnaireId : bigint(19) <<FK>>
@@ -1132,7 +1264,7 @@ entity "Evaluation.Question" as question {
   ModifierId : bigint(19)
 }
 
-entity "Evaluation.QuestionOption" as questionOption {
+entity "Evaluation.QuestionOption" as questionOption #SkyBlue{
   *Id : bigint(19) <<serial>>
   --
   *QuestionId : bigint(19) <<FK>>
@@ -1147,8 +1279,7 @@ entity "Evaluation.QuestionOption" as questionOption {
   ModifierId : bigint(19)
 }
 
-
-entity "Evaluation.QuestionnaireResult" as questionnaireResult {
+entity "Evaluation.QuestionnaireResult" as questionnaireResult #SkyBlue{
   *Id : bigint(19) <<serial>>
   --
   *QuestionnaireId : bigint(19) <<FK>>
@@ -1162,7 +1293,7 @@ entity "Evaluation.QuestionnaireResult" as questionnaireResult {
   ModifierId : bigint(19)
 }
 
-entity "Evaluation.QuestionnaireResultDetail" as questionnaireResultDetail {
+entity "Evaluation.QuestionnaireResultDetail" as questionnaireResultDetail #SkyBlue{
   *Id : bigint(19) <<serial>>
   --
   *QuestionnaireResultId : bigint(19) <<FK>>
@@ -1177,7 +1308,7 @@ entity "Evaluation.QuestionnaireResultDetail" as questionnaireResultDetail {
   ModifierId : bigint(19)
 }
 
-entity "Evaluation.QuestionnaireChoosedOptionResultDetail" as questionnairChoosedOptionResultDetail {
+entity "Evaluation.QuestionnaireChoosedOptionResultDetail" as questionnairChoosedOptionResultDetail #SkyBlue{
   *Id : bigint(19) <<serial>>
   --
   *QuestionnaireResultDetailId : bigint(19) <<FK>>
@@ -1192,7 +1323,7 @@ entity "Evaluation.QuestionnaireChoosedOptionResultDetail" as questionnairChoose
   ModifierId : bigint(19)
 }
 
-entity "Evaluation.CustomerFeedback" as customerFeedback {
+entity "Evaluation.CustomerFeedback" as customerFeedback #SkyBlue{
   *Id : bigint(19) <<serial>>
   --
   *CustomerId : bigint(19) <<FK>>
@@ -1208,7 +1339,7 @@ entity "Evaluation.CustomerFeedback" as customerFeedback {
   ModifierId : bigint(19)
 }
 
-entity "Evaluation.StaffSatisfactionEvaluation" as staffSatisfactionEvaluation {
+entity "Evaluation.StaffSatisfactionEvaluation" as staffSatisfactionEvaluation #SkyBlue{
   *Id : bigint(19) <<serial>>
   --
   *ProfileId : bigint(19) <<FK>>
@@ -1223,7 +1354,7 @@ entity "Evaluation.StaffSatisfactionEvaluation" as staffSatisfactionEvaluation {
   ModifierId : bigint(19)
 }
 
-entity "Evaluation.ProjectProductivityEvaluation" as projectProductivityEvaluation {
+entity "Evaluation.ProjectProductivityEvaluation" as projectProductivityEvaluation #SkyBlue{
   *Id : bigint(19) <<serial>>
   --
   *ProjectId : bigint(19) <<FK>>
@@ -1238,7 +1369,7 @@ entity "Evaluation.ProjectProductivityEvaluation" as projectProductivityEvaluati
   ModifierId : bigint(19)
 }
 
-entity "Evaluation.CustomerSatisfactionEvaluation" as customerSatisfactionEvaluation {
+entity "Evaluation.CustomerSatisfactionEvaluation" as customerSatisfactionEvaluation #SkyBlue{
   *Id : bigint(19) <<serial>>
   --
   *CustomerId : bigint(19) <<FK>>
@@ -1373,4 +1504,17 @@ release ||..o{ contractPaymentSchedule
 contractPaymentSchedule ||..o{ contractPaymentReceipt
 currency ||..o{ contractPaymentReceipt
 document ||..o{ contractPaymentReceipt
+testComplexityLevel |o..o{ testScenario
+testScenario ||..o{ prerequisiteTestScenario
+testScenario ||..o{ prerequisiteTestScenario
+testScenario ||..o{ prerequisiteTestScenario
+release |o..o{ testPlan
+testScenario ||..o{ testPlanScenario
+testPlan ||..o{ testPlanScenario
+testPlanScenario ||..o{ testPlanScenarioIssueCoverage
+issue ||..o{ testPlanScenarioIssueCoverage
+testPlan ||..o{ testResult
+testPlanScenario |o..o{ testResultDetail
+testApproval ||..o{ testResultDetail
+
 @enduml
