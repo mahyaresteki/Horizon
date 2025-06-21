@@ -1,0 +1,191 @@
+@startuml
+hide circle
+skinparam classBackgroundColor #Business
+skinparam linetype ortho
+skinparam Shadowing True
+skinparam TitleFontSize 72pt
+
+title Horizon Research Project (HRP) \n Quality Control Schema Diagram \n Version 25.6.19
+
+entity "Basic.TestApproval" as testApproval #LightPink{
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : varchar(200)
+  *Code : varchar(20) <<unique>>
+  *IsApproved : boolean
+  *Color : varchar(10)
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Basic.TestComplexityLevel" as testComplexityLevel #LightPink{
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : varchar(200)
+  *Code : varchar(20) <<unique>>
+  *ValueNumber : float
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "ProjectManagement.ProjectRelease" as release #Orange{
+  *Id : bigint(19) <<serial>>
+  --
+  *ProjectId : bigint(19) <<FK>>
+  *VersionNumber : varchar(20) <<unique>>
+  ReleaseDate : date
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "ProjectManagement.Issue" as issue #Orange{
+  *Id : bigint(19) <<serial>>
+  --
+  *ProjectId : bigint(19) <<FK>>
+  AssigneeId : bigint(19) <<FK>>
+  *Code : varchar(20) <<unique>>
+  *Title : varchar(200)
+  Description : varchar(4000)
+  DueDate : date
+  PriorityId : bigint(19) <<FK>>
+  *IssueTypeId : bigint(19) <<FK>>
+  *CuurentStatusId : bigint(19) <<FK>>
+  *CurrentResolvationId : bigint(19) <<FK>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "QualityControl.TestScenario" as testScenario #Silver{
+  *Id : bigint(19) <<serial>>
+  --
+  *Code : varchar(20) <<unique>>
+  *Title : varchar(255)
+  TestComplexityLevelId : bigint(19) <<FK>>
+  UsersAndRoles : varchar(4000)
+  Steps : varchar(4000)
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "QualityControl.PrerequisiteTestScenario" as prerequisiteTestScenario #Silver{
+  *Id : bigint(19) <<serial>>
+  --
+  *TestScenarioId : bigint(19) <<FK>>
+  *PrerequisiteTestScenarioId : bigint(19) <<FK>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "QualityControl.TestPlan" as testPlan #Silver{
+  *Id : bigint(19) <<serial>>
+  --
+  *Code : varchar(20) <<unique>>
+  *Title : varchar(255)
+  PlanningDate : date
+  ProjectReleaseId : bigint(19) <<FK>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "QualityControl.TestPlanScenario" as testPlanScenario #Silver{
+  *Id : bigint(19) <<serial>>
+  --
+  *TestScenarioId : bigint(19) <<FK>> <<composite unique>>
+  *TestPlanId : bigint(19) <<FK>> <<composite unique>>
+  *Ordering : float <<composite unique>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "QualityControl.TestPlanScenarioIssueCoverage" as testPlanScenarioIssueCoverage #Silver{
+  *Id : bigint(19) <<serial>>
+  --
+  *TestPlanScenarioId : bigint(19) <<FK>> <<composite unique>>
+  *IssueId : bigint(19) <<FK>> <<composite unique>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "QualityControl.TestResult" as testResult #Silver{
+  *Id : bigint(19) <<serial>>
+  --
+  *TestDate : date
+  *TestPlanId : bigint(19) <<FK>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "QualityControl.TestResultDetail" as testResultDetail #Silver{
+  *Id : bigint(19) <<serial>>
+  --
+  TestPlanScenarioId : bigint(19) <<FK>>
+  *TestApprovalId : bigint(19) <<FK>>
+  *Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+testComplexityLevel |o..o{ testScenario
+testScenario ||..o{ prerequisiteTestScenario
+testScenario ||..o{ prerequisiteTestScenario
+testScenario ||..o{ prerequisiteTestScenario
+release |o..o{ testPlan
+testScenario ||..o{ testPlanScenario
+testPlan ||..o{ testPlanScenario
+testPlanScenario ||..o{ testPlanScenarioIssueCoverage
+issue ||..o{ testPlanScenarioIssueCoverage
+testPlan ||..o{ testResult
+testPlanScenario |o..o{ testResultDetail
+testApproval ||..o{ testResultDetail
+
+@enduml

@@ -1,0 +1,84 @@
+@startuml
+hide circle
+skinparam classBackgroundColor #Business
+skinparam linetype ortho
+skinparam Shadowing True
+skinparam TitleFontSize 72pt
+
+title Horizon Research Project (HRP) \n Evaluation Schema Diagram \n Version 25.6.19
+
+entity "Basic.DocumentType" as documentType #LightPink{
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : varchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "Basic.FileExtension" as fileExtension #LightPink{
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : varchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "DocumentManagement.Document" as document #Gold{
+  *Id : bigint(19) <<serial>>
+  --
+  *TableName : varchar(255)
+  *TableId : bigint(19)
+  *DocumentTypeId : bigint(19) <<FK>>
+  *FileExtensionId : bigint(19) <<FK>>
+  *FileAddress: varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "DocumentManagement.ProjectWorkflowDocumentType" as projectWorkflowDocumentType #Gold{
+  *Id : bigint(19) <<serial>>
+  --
+  *DocumentTypeId : bigint(19) <<FK>> <<composite unique>>
+  *ProjectWorkflowId : bigint(19) <<FK>> <<composite unique>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "DocumentManagement.WorkflowEligibleFileExtension" as workflowEligibleFileExtension #Gold{
+  *Id : bigint(19) <<serial>>
+  --
+  *WorkflowId : bigint(19) <<FK>> <<composite unique>>
+  *FileExtensionId : bigint(19) <<FK>> <<composite unique>>
+  *MaxFileSizeForUpload : integer <<default: 5242880>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+documentType ||..o{ document
+fileExtension ||..o{ document
+
+@enduml

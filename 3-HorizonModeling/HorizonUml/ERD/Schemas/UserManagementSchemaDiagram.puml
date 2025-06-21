@@ -1,0 +1,207 @@
+@startuml
+hide circle
+skinparam classBackgroundColor #Business
+skinparam linetype ortho
+skinparam Shadowing True
+skinparam TitleFontSize 72pt
+
+title Horizon Research Project (HRP) \n User Management Schema Diagram \n Version 25.6.19
+
+entity "HumanResource.Position" as position #Lavender{
+  *Id : integer(10) <<serial>>
+  --
+  *Title : varchar(50)
+  *Code : varchar(20) <<unique>>
+  *DepartmentId : bigint(19) <<FK>>
+  ParentId : bigint(19) <<FK>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "UserManagement.Role" as role #Violet{
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : varchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "UserManagement.Groups" as groups #Violet{
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : varchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "UserManagement.Permission" as permission #Violet{
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : varchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "UserManagement.Form" as form #Violet{
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : varchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "UserManagement.FormPermission" as formPermission #Violet{
+  *Id : bigint(19) <<serial>>
+  --
+  *FormId : bigint(19) <<FK>>
+  *PermissionId : bigint(19) <<FK>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "UserManagement.RolePermission" as rolePermission #Violet{
+  *Id : bigint(19) <<serial>>
+  --
+  *RoleId : integer(10) <<FK>>
+  *FormPermissionId : integer(10) <<FK>>
+  *ActiveFrom : datetime
+  ActiveTo : datetime
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "UserManagement.GroupPermission" as groupPermission #Violet{
+  *Id : bigint(19) <<serial>>
+  --
+  *GroupId : bigint(19) <<FK>>
+  *FormPermissionId : bigint(19) <<FK>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "UserManagement.ProfilePermission" as profilePermission #Violet{
+  *Id : bigint(19) <<serial>>
+  --
+  *ProfileId : bigint(19) <<FK>>
+  *PermissionId : bigint(19) <<FK>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "UserManagement.Profile" as profile #Violet{
+  *Id : bigint(19) <<serial>>
+  --
+  *FirstName : varchar(200)
+  *LastName : varchar(200)
+  *Gender : enum <<male, female>>
+  *StaffNumber : varchar(20) <<unique>>
+  *ActiveFrom : timestamp
+  ActiveTo : timestamp
+  PositionId : bigint(19) <<FK>>
+  Avatar : text
+  Birthday : date
+  PhoneNumber : varchar(20)
+  MobileNumber : varchar(20)
+  EmailAddress : varchar(200)
+  Address : varchar(1000)
+  PostalCode : varchar(20)
+  LastLogInDate : timestamp
+  LogInCount : integer(10) <<default: 0>>
+  WrongLogInCount : integer(10) <<default: 0>>
+  *Username : varchar(200) <<unique>>
+  *Pass : varchar(255)
+  PassSalt : varchar(50)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "UserManagement.ProfileRole" as profileRole #Violet{
+  *Id : bigint(19) <<serial>>
+  --
+  *ProfileId : bigint(19) <<FK>>
+  *RoleId : bigint(19) <<FK>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "UserManagement.ProfileGroup" as profileGroup #Violet{
+  *Id : bigint(19) <<serial>>
+  --
+  *ProfileId : bigint(19) <<FK>>
+  *GroupId : bigint(19) <<FK>>
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+form ||..o{ formPermission
+permission ||..o{ formPermission
+role ||..o{ rolePermission
+permission ||..o{ rolePermission
+groups ||..o{ groupPermission
+permission ||..o{ groupPermission
+profile ||..o{ profilePermission
+permission ||..o{ profilePermission
+profile ||..o{ profileRole
+role ||..o{ profileRole
+profile ||..o{ profileGroup
+groups ||..o{ profileGroup
+position ||..o{ profile
+
+@enduml

@@ -6,7 +6,7 @@ skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 skinparam TitleFontSize 72px
 
-title Horizon Research Project (HRP) \n Overall Use Case Diagram \n Version 25.5.31
+title Horizon Research Project (HRP) \n Overall Use Case Diagram \n Version 25.6.20
 
 :User: as User
 :Senior Manager: as SeniorManager
@@ -18,6 +18,9 @@ title Horizon Research Project (HRP) \n Overall Use Case Diagram \n Version 25.5
 :Staff: as Staff
 :DevOps Manager: as DevOpsManager
 :Product Manager: as ProductManager
+:Quality Control Staff: as QCStaff
+:Tester: as Tester
+:Customer: as Customer
 
 
 package "User Management"{
@@ -186,22 +189,6 @@ package "Document Management"{
     usecase "Workflow Eligible File Extention Activation" as workflowEligibleFileExtentionActivation
 }
 
-package "Connector"{
-    usecase "Set Jira Connection Settings" as setJiraConnection
-    usecase "Set Trello Connection Settings" as setTrelloConnection
-    usecase "Set GitHub Connection Settings" as setGitHubConnection
-    usecase "Set GitLab Connection Settings" as setGitLabConnection
-    usecase "Set Bibucket Connection Settings" as setBitbucketConnection
-    usecase "Set File Server Connection Settings" as setFileServerConnection
-
-    usecase "Sync Project Activities by Jira" as syncByJira
-    usecase "Sync Project Activities by Trello" as syncByTrello
-    usecase "Sync Changes List by GitHub" as syncByGitHub
-    usecase "Sync Changes List by GitLab" as syncByGitLab
-    usecase "Sync Changes List by Bitbucket" as syncByBitbucket
-    usecase "Financial Data Migration by Excel File" as financialDataMigration
-}
-
 
 User <|--Admin
 Admin -- profileManagement
@@ -350,6 +337,7 @@ timeUnit ..> timeUnitActivation : <<include>>
 timeUnit ..> timeUnitList : <<include>>
 timeUnit ..> timeUnitView : <<include>>
 
+
 document ..> documentUpload : <<include>>
 document ..> documentInfoUpdate : <<include>>
 document ..> documentRemove : <<include>>
@@ -367,6 +355,22 @@ workflowEligibleFileExtention ..> workflowEligibleFileExtentionRemove : <<includ
 workflowEligibleFileExtention ..> workflowEligibleFileExtentionList : <<include>>
 workflowEligibleFileExtention ..> workflowEligibleFileExtentionView : <<include>>
 workflowEligibleFileExtention ..> workflowEligibleFileExtentionActivation : <<include>>
+
+package "Connector"{
+    usecase "Set Jira Connection Settings" as setJiraConnection
+    usecase "Set Trello Connection Settings" as setTrelloConnection
+    usecase "Set GitHub Connection Settings" as setGitHubConnection
+    usecase "Set GitLab Connection Settings" as setGitLabConnection
+    usecase "Set Bibucket Connection Settings" as setBitbucketConnection
+    usecase "Set File Server Connection Settings" as setFileServerConnection
+
+    usecase "Sync Project Activities by Jira" as syncByJira
+    usecase "Sync Project Activities by Trello" as syncByTrello
+    usecase "Sync Changes List by GitHub" as syncByGitHub
+    usecase "Sync Changes List by GitLab" as syncByGitLab
+    usecase "Sync Changes List by Bitbucket" as syncByBitbucket
+    usecase "Financial Data Migration by Excel File" as financialDataMigration
+}
 
 Admin -- setJiraConnection
 Admin -- setTrelloConnection
@@ -388,6 +392,122 @@ PMO -- syncByGitHub
 PMO -- syncByGitLab
 PMO -- syncByBitbucket
 Fmanager -- financialDataMigration
+
+package "Evaluation"{
+
+    usecase "Questionnaire" as questionnaire
+    usecase "Questionnaire Add" as questionnaireAdd
+    usecase "Questionnaire Update" as questionnaireUpdate
+    usecase "Questionnaire Remove" as questionnaireRemove
+    usecase "Questionnaire List" as questionnaireList
+    usecase "Questionnaire View" as questionnaireView
+    usecase "Questionnaire Target Department" as questionnaireTargetDepartment
+    usecase "Questionnaire Target Department Add" as questionnaireTargetDepartmentAdd
+    usecase "Questionnaire Target Department Update" as questionnaireTargetDepartmentUpdate
+    usecase "Questionnaire Target Department Remove" as questionnaireTargetDepartmentRemove
+    usecase "Questionnaire Target Department List" as questionnaireTargetDepartmentList
+    usecase "Questionnaire Target Department View" as questionnaireTargetDepartmentView
+    usecase "Question" as question
+    usecase "Question Add" as questionAdd
+    usecase "Question Update" as questionUpdate
+    usecase "Question Remove" as questionRemove
+    usecase "Question List" as questionList
+    usecase "Question View" as questionView
+    usecase "Question Option" as questionOption
+    usecase "Question Option Add" as questionOptionAdd
+    usecase "Question Option Update" as questionOptionUpdate
+    usecase "Question Option Remove" as questionOptionRemove
+    usecase "Question Option List" as questionOptionList
+    usecase "Question Option View" as questionOptionView
+
+    usecase "Questionnaire Result" as questionnaireResult
+    usecase "Questionnaire Result Add" as questionnaireResultAdd
+    usecase "Questionnaire Result List" as questionnaireResultList
+    usecase "Questionnaire Result View" as questionnaireResultView
+    usecase "Questionnaire Result Detail" as questionnaireResultDetail
+    usecase "Questionnaire Result Detail Add" as questionnaireResultDetailAdd
+    usecase "Questionnaire Result Detail List" as questionnaireResultDetailList
+    usecase "Questionnaire Result Detail View" as questionnaireResultDetailView
+    usecase "Questionnaire Choosed Option Result Detail" as questionnaireChoosedOptionResultDetail
+    usecase "Questionnaire Choosed Option Result Detail Add" as questionnaireChoosedOptionResultDetailAdd
+    usecase "Questionnaire Choosed Option Result Detail List" as questionnaireChoosedOptionResultDetailList
+    usecase "Questionnaire Choosed Option Result Detail View" as questionnaireChoosedOptionResultDetailView
+
+    usecase "Customer Feedback" as customerFeedback
+    usecase "Customer Feedback Add" as customerFeedbackAdd
+    usecase "Customer Feedback List" as customerFeedbackList
+    usecase "Customer Feedback View" as customerFeedbackView
+
+    usecase "Productivity Evaluation" as productivityEvaluation
+    usecase "Productivity Evaluation Calculation" as productivityEvaluationCalculation
+    usecase "Productivity Evaluation Report" as productivityEvaluationReport
+    usecase "Staff Statisfaction Evaluation" as staffStatisfactoinEvaluation
+    usecase "Staff Statisfaction Evaluation Calculation" as staffStatisfactoinEvaluationCalculation
+    usecase "Staff Statisfaction Evaluation Report" as staffStatisfactoinEvaluationReport
+    usecase "Customer Statisfaction Evaluation" as customerStatisfactoinEvaluation
+    usecase "Customer Statisfaction Evaluation Calculation" as customerStatisfactoinEvaluationCalculation
+    usecase "Customer Statisfaction Evaluation Report" as customerStatisfactoinEvaluationReport
+    usecase "Examining the Interaction of Evaluations" as interactionOfEvaluations
+}
+HR -- questionnaire
+HR -- questionnaireResult
+Staff -- questionnaireResult
+HR -- staffStatisfactoinEvaluation
+PMO -- productivityEvaluation
+Fmanager -- productivityEvaluation
+SeniorManager -- productivityEvaluation
+SeniorManager -- staffStatisfactoinEvaluation
+SeniorManager -- customerStatisfactoinEvaluation
+SeniorManager -- interactionOfEvaluations
+Customer -- customerFeedback
+
+questionnaire ..> questionnaireAdd  : <<include>>
+questionnaire ..> questionnaireUpdate : <<include>>
+questionnaire ..> questionnaireRemove : <<include>>
+questionnaire ..> questionnaireList : <<include>>
+questionnaire ..> questionnaireView : <<include>>
+questionnaire ..> questionnaireTargetDepartment : <<include>>
+questionnaireTargetDepartment ..> questionnaireTargetDepartmentAdd : <<include>>
+questionnaireTargetDepartment ..> questionnaireTargetDepartmentUpdate : <<include>>
+questionnaireTargetDepartment ..> questionnaireTargetDepartmentRemove : <<include>>
+questionnaireTargetDepartment ..> questionnaireTargetDepartmentList : <<include>>
+questionnaireTargetDepartment ..> questionnaireTargetDepartmentView : <<include>>
+questionnaire ..> question : <<include>>
+question ..> questionAdd : <<include>>
+question ..> questionUpdate : <<include>>
+question ..> questionRemove : <<include>>
+question ..> questionList : <<include>>
+question ..> questionView : <<include>>
+question ..> questionOption : <<include>>
+questionOption ..> questionOptionAdd : <<include>>
+questionOption ..> questionOptionUpdate : <<include>>
+questionOption ..> questionOptionRemove : <<include>>
+questionOption ..> questionOptionList : <<include>>
+questionOption ..> questionOptionView : <<include>>
+
+questionnaireResult ..> questionnaire : <<inculde>>
+questionnaireResult ..> questionnaireResultAdd : <<inculde>>
+questionnaireResult ..> questionnaireResultList : <<inculde>>
+questionnaireResult ..> questionnaireResultView : <<inculde>>
+questionnaireResult ..> questionnaireResultDetail : <<inculde>>
+questionnaireResultDetail ..> questionnaireResultDetailAdd : <<inculde>>
+questionnaireResultDetail ..> questionnaireResultDetailList : <<inculde>>
+questionnaireResultDetail ..> questionnaireResultDetailView : <<inculde>>
+questionnaireResultDetail ..> questionnaireChoosedOptionResultDetail : <<inculde>>
+questionnaireChoosedOptionResultDetail ..> questionnaireChoosedOptionResultDetailAdd : <<inculde>>
+questionnaireChoosedOptionResultDetail ..> questionnaireChoosedOptionResultDetailList : <<inculde>>
+questionnaireChoosedOptionResultDetail ..> questionnaireChoosedOptionResultDetailView : <<inculde>>
+
+customerFeedback ..> customerFeedbackAdd : <<include>>
+customerFeedback ..> customerFeedbackList : <<include>>
+customerFeedback ..> customerFeedbackView : <<include>>
+
+productivityEvaluation ..> productivityEvaluationCalculation : <<include>>
+productivityEvaluation ..> productivityEvaluationReport : <<include>>
+staffStatisfactoinEvaluation ..> staffStatisfactoinEvaluationCalculation : <<include>>
+staffStatisfactoinEvaluation ..> staffStatisfactoinEvaluationReport : <<include>>
+customerStatisfactoinEvaluation ..> customerStatisfactoinEvaluationCalculation : <<include>>
+customerStatisfactoinEvaluation ..> customerStatisfactoinEvaluationReport : <<include>>
 
 package "Financial"{
     
@@ -463,19 +583,41 @@ package "Financial"{
     usecase "Monthly Salary Calulation" as monthlySalaryCalculation
     usecase "Annually Salary Calulation" as annuallySalaryCalculation
     usecase "Print Bill Salary" as printBillSalary
+
+    usecase "Customer Management" as customerManagement
+    usecase "Add Customer" as addCustomer
+    usecase "Update Customer" as updateCustomer
+    usecase "Remove Customer" as removeCustomer
+    usecase "Get Customer" as getCustomer
+    usecase "Customer List" as customerList
+    usecase "Contract Management" as contractManagement
+    usecase "Add Contract" as addContract
+    usecase "Update Contract" as updateContract
+    usecase "Remove Contract" as removeContract
+    usecase "Get Contract" as getContract
+    usecase "Contract List" as contractList
+    usecase "Contract Payment Schedule Management" as contractPaymentScheduleManagement
+    usecase "Add Contract Payment Schedule" as addContractPaymentSchedule
+    usecase "Update Contract Payment Schedule" as updateContractPaymentSchedule
+    usecase "Remove Contract Payment Schedule" as removeContractPaymentSchedule
+    usecase "Get Contract Payment Schedule" as getContractPaymentSchedule
+    usecase "Contract Payment Schedule List" as contractPaymentScheduleList
+    usecase "Contract Payment Receipt Management" as contractPaymentReceiptManagement
+    usecase "Add Contract Payment Receipt" as addContractPaymentReceipt
+    usecase "Update Contract Payment Receipt" as updateContractPaymentReceipt
+    usecase "Remove Contract Payment Receipt" as removeContractPaymentReceipt
+    usecase "Get Contract Payment Receipt" as getContractPaymentReceipt
+    usecase "Contract Payment Receipt List" as contractPaymentReceiptList
 }
 
-Accountant --|> User
-Fmanager --|> User
-SeniorManager --|> User
-salaryManagement -- Accountant
-salaryManagement -- Fmanager
-salaryManagement -- HR
-costing -- Accountant
-paymentManagement -- Accountant
-pricing -- Accountant
-bugget -- Fmanager
-bugget -- SeniorManager
+salaryManagement --- Accountant
+salaryManagement --- Fmanager
+salaryManagement --- HR
+costing --- Accountant
+paymentManagement --- Accountant
+pricing --- Accountant
+bugget --- Fmanager
+bugget --- SeniorManager
 
 
 staffContractManagement <.. salaryManagement : <<include>>
@@ -504,6 +646,30 @@ updateSupplier <.. supplierManagement : <<include>>
 removeSupplier <.. supplierManagement : <<include>>
 getSupplier <.. supplierManagement : <<include>>
 supplierList <.. supplierManagement : <<include>>
+customerManagement <.. paymentManagement : <<include>>
+addCustomer <.. customerManagement : <<include>>
+updateCustomer <.. customerManagement : <<include>>
+removeCustomer <.. customerManagement : <<include>>
+getCustomer <.. customerManagement : <<include>>
+customerList <.. customerManagement : <<include>>
+contractManagement .> customerManagement 
+addContract <.. contractManagement : <<include>>
+updateContract <.. contractManagement : <<include>>
+removeContract <.. contractManagement : <<include>>
+getContract <.. contractManagement : <<include>>
+contractList <.. contractManagement : <<include>>
+contractPaymentScheduleManagement .> contractManagement
+addContractPaymentSchedule <.. contractPaymentScheduleManagement : <<include>>
+updateContractPaymentSchedule <.. contractPaymentScheduleManagement : <<include>>
+removeContractPaymentSchedule <.. contractPaymentScheduleManagement : <<include>>
+getContractPaymentSchedule <.. contractPaymentScheduleManagement : <<include>>
+contractPaymentScheduleList <.. contractPaymentScheduleManagement : <<include>>
+contractPaymentReceiptManagement .> contractPaymentScheduleManagement
+addContractPaymentReceipt <.. contractPaymentReceiptManagement : <<include>>
+updateContractPaymentReceipt <.. contractPaymentReceiptManagement : <<include>>
+removeContractPaymentReceipt <.. contractPaymentReceiptManagement : <<include>>
+getContractPaymentReceipt <.. contractPaymentReceiptManagement : <<include>>
+contractPaymentReceiptList <.. contractPaymentReceiptManagement : <<include>>
 salaryPayment <.. paymentManagement : <<include>>
 addSalaryPaymentReceipt <.. salaryPayment : <<include>>
 updateSalaryPaymentReceipt <.. salaryPayment : <<include>>
@@ -542,12 +708,11 @@ removeProjectDirectCostItem <.. projectDirectCostItem : <<include>>
 getProjectDirectCostItem <.. projectDirectCostItem : <<include>>
 projectDirectCostItemList <.. projectDirectCostItem : <<include>>
 
+supplierManagement <. costPayment
+
 buggeting <.. bugget : <<include>>
 directCosting <.. pricing : <<include>>
 abc <.. pricing : <<include>>
-
-:Human Resource: as HR
-:Staff: as Staff
 
 package "Human Resource Management"{
     usecase "Department Management" as departmentManagement
@@ -627,56 +792,14 @@ package "Human Resource Management"{
     usecase "Holidaies Remove" as holidaiesRemove
     usecase "Holidaies List" as holidaiesList
     usecase "Holidaies View" as holidaiesView
-
-    usecase "Questionnaire" as questionnaire
-    usecase "Questionnaire Add" as questionnaireAdd
-    usecase "Questionnaire Update" as questionnaireUpdate
-    usecase "Questionnaire Remove" as questionnaireRemove
-    usecase "Questionnaire List" as questionnaireList
-    usecase "Questionnaire View" as questionnaireView
-    usecase "Questionnaire Target Department" as questionnaireTargetDepartment
-    usecase "Questionnaire Target Department Add" as questionnaireTargetDepartmentAdd
-    usecase "Questionnaire Target Department Update" as questionnaireTargetDepartmentUpdate
-    usecase "Questionnaire Target Department Remove" as questionnaireTargetDepartmentRemove
-    usecase "Questionnaire Target Department List" as questionnaireTargetDepartmentList
-    usecase "Questionnaire Target Department View" as questionnaireTargetDepartmentView
-    usecase "Question" as question
-    usecase "Question Add" as questionAdd
-    usecase "Question Update" as questionUpdate
-    usecase "Question Remove" as questionRemove
-    usecase "Question List" as questionList
-    usecase "Question View" as questionView
-    usecase "Question Option" as questionOption
-    usecase "Question Option Add" as questionOptionAdd
-    usecase "Question Option Update" as questionOptionUpdate
-    usecase "Question Option Remove" as questionOptionRemove
-    usecase "Question Option List" as questionOptionList
-    usecase "Question Option View" as questionOptionView
-
-    usecase "Questionnaire Result" as questionnaireResult
-    usecase "Questionnaire Result Add" as questionnaireResultAdd
-    usecase "Questionnaire Result List" as questionnaireResultList
-    usecase "Questionnaire Result View" as questionnaireResultView
-    usecase "Questionnaire Result Detail" as questionnaireResultDetail
-    usecase "Questionnaire Result Detail Add" as questionnaireResultDetailAdd
-    usecase "Questionnaire Result Detail List" as questionnaireResultDetailList
-    usecase "Questionnaire Result Detail View" as questionnaireResultDetailView
-    usecase "Questionnaire Choosed Option Result Detail" as questionnaireChoosedOptionResultDetail
-    usecase "Questionnaire Choosed Option Result Detail Add" as questionnaireChoosedOptionResultDetailAdd
-    usecase "Questionnaire Choosed Option Result Detail List" as questionnaireChoosedOptionResultDetailList
-    usecase "Questionnaire Choosed Option Result Detail View" as questionnaireChoosedOptionResultDetailView
 }
 
-HR --|> User
 departmentManagement -- HR
 positionManagement -- HR
 resumeManagement -- HR
 compnayCalendarManagement -- HR
-questionnaire -- HR
 attendanceManagement -- HR
-questionnaireResult -- HR
 attendanceManagement -- Staff
-questionnaireResult -- Staff
 
 departmentRegistration <.. departmentManagement : <<include>>
 departmentUpdate <.. departmentManagement : <<include>>
@@ -751,43 +874,6 @@ holidaiesUpdate <.. holidaies : <<include>>
 holidaiesRemove <.. holidaies : <<include>>
 holidaiesList <.. holidaies : <<include>>
 holidaiesView <.. holidaies : <<include>>
-
-questionnaireAdd <.. questionnaire : <<include>>
-questionnaireUpdate <.. questionnaire : <<include>>
-questionnaireRemove <.. questionnaire : <<include>>
-questionnaireList <.. questionnaire : <<include>>
-questionnaireView <.. questionnaire : <<include>>
-questionnaireTargetDepartment <.. questionnaire : <<include>>
-questionnaireTargetDepartmentAdd <.. questionnaireTargetDepartment : <<include>>
-questionnaireTargetDepartmentUpdate <.. questionnaireTargetDepartment : <<include>>
-questionnaireTargetDepartmentRemove <.. questionnaireTargetDepartment : <<include>>
-questionnaireTargetDepartmentList <.. questionnaireTargetDepartment : <<include>>
-questionnaireTargetDepartmentView <.. questionnaireTargetDepartment : <<include>>
-question <.. questionnaire : <<include>>
-questionAdd <.. question : <<include>>
-questionUpdate <.. question : <<include>>
-questionRemove <.. question : <<include>>
-questionList <.. question : <<include>>
-questionView <.. question : <<include>>
-questionOption <.. question : <<include>>
-questionOptionAdd <.. questionOption : <<include>>
-questionOptionUpdate <.. questionOption : <<include>>
-questionOptionRemove <.. questionOption : <<include>>
-questionOptionList <.. questionOption : <<include>>
-questionOptionView <.. questionOption : <<include>>
-
-questionnaire <. questionnaireResult : <<inculde>>
-questionnaireResultAdd <.. questionnaireResult : <<inculde>>
-questionnaireResultList <.. questionnaireResult : <<inculde>>
-questionnaireResultView <.. questionnaireResult : <<inculde>>
-questionnaireResultDetail <.. questionnaireResult : <<inculde>>
-questionnaireResultDetailAdd <.. questionnaireResultDetail : <<inculde>>
-questionnaireResultDetailList <.. questionnaireResultDetail : <<inculde>>
-questionnaireResultDetailView <.. questionnaireResultDetail : <<inculde>>
-questionnaireChoosedOptionResultDetail <.. questionnaireResultDetail : <<inculde>>
-questionnaireChoosedOptionResultDetailAdd <.. questionnaireChoosedOptionResultDetail : <<inculde>>
-questionnaireChoosedOptionResultDetailList <.. questionnaireChoosedOptionResultDetail : <<inculde>>
-questionnaireChoosedOptionResultDetailView <.. questionnaireChoosedOptionResultDetail : <<inculde>>
 
 package "Project Management"{
     usecase "Project Management" as projectManagement
@@ -894,10 +980,6 @@ package "Project Management"{
     usecase "Worklog View" as worklogView
 }
 
-ProductManager --|> User
-PMO --|> User
-Staff --|> User
-DevOps --|> User
 projectManagement -- ProductManager
 projectManagement -- PMO
 projectTeamManagement -- PMO
@@ -1016,19 +1098,64 @@ worklogRemove  <.. worklogManagement : <<include>>
 worklogList  <.. worklogManagement : <<include>>
 worklogView  <.. worklogManagement : <<include>>
 
-package "Evaluation"{
-    usecase "Productivity Evaluation" as productivityEvaluation
-    usecase "Staff Statisfaction Evaluation" as staffStatisfactoinEvaluation
-    usecase "Customer Statisfaction Evaluation" as customerStatisfactoinEvaluation
-    usecase "Examining the Interaction of Evaluations" as interactionOfEvaluations
+package "Quality Control"{
+    usecase "Test Scenario Management" as testScenario
+    usecase "Add Test Scenario" as addTestScenario
+    usecase "Update Test Scenario" as updateTestScenario
+    usecase "Remove Test Scenario" as removeTestScenario
+    usecase "Get Test Scenario" as getTestScenario
+    usecase "Test Scenario List" as testScenarioList
+    usecase "Test Plan Management" as testPlan
+    usecase "Add Test Plan" as addTestPlan
+    usecase "Update Test Plan" as updateTestPlan
+    usecase "Remove Test Plan" as removeTestPlan
+    usecase "Get Test Plan" as getTestPlan
+    usecase "Test Plan List" as testPlanList
+    usecase "Test Result Management" as testResult
+    usecase "Test Result Detail" as testResultDetail
+    usecase "Test Result Report" as testResultReport
+    usecase "Add Test Result" as addTestResult
+    usecase "Update Test Result" as updateTestResult
+    usecase "Remove Test Result" as removeTestResult
+    usecase "Get Test Result" as getTestResult
+    usecase "Test Result List" as testResultList
+    usecase "Add Test Result Detail" as addTestResultDetail
+    usecase "Update Test Result Detail" as updateTestResultDetail
+    usecase "Remove Test Result Detail" as removeTestResultDetail
+    usecase "Get Test Result Detail" as getTestResultDetail
+    usecase "Test Result Detail List" as testResultDetailList
 }
 
-HR -- staffStatisfactoinEvaluation
-PMO -- productivityEvaluation
-Fmanager -- productivityEvaluation
-SeniorManager -- productivityEvaluation
-SeniorManager -- staffStatisfactoinEvaluation
-SeniorManager -- customerStatisfactoinEvaluation
-SeniorManager -- interactionOfEvaluations
+User -- QCStaff
+User -- Tester
+QCStaff -- testScenario
+QCStaff -- testPlan
+Tester -- testResult
+QCStaff -- testResult
+
+testPlan .> testScenario
+testResult .> testPlan
+testScenario ..> addTestScenario : <<include>>
+testScenario ..> updateTestScenario : <<include>>
+testScenario ..> removeTestScenario : <<include>>
+testScenario ..> getTestScenario : <<include>>
+testScenario ..> testScenarioList : <<include>>
+testPlan ..> addTestPlan : <<include>>
+testPlan ..> updateTestPlan : <<include>>
+testPlan ..> removeTestPlan : <<include>>
+testPlan ..> getTestPlan : <<include>>
+testPlan ..> testPlanList : <<include>>
+testResult ..> addTestResult : <<include>>
+testResult ..> updateTestResult : <<include>>
+testResult ..> removeTestResult : <<include>>
+testResult ..> getTestResult : <<include>>
+testResult ..> testResultList : <<include>>
+testResult ..> testResultDetail : <<include>>
+testResult ..> testResultReport : <<include>>
+testResultDetail ..> addTestResultDetail : <<include>>
+testResultDetail ..> updateTestResultDetail : <<include>>
+testResultDetail ..> removeTestResultDetail : <<include>>
+testResultDetail ..> getTestResultDetail : <<include>>
+testResultDetail ..> testResultDetailList : <<include>>
 
 @enduml

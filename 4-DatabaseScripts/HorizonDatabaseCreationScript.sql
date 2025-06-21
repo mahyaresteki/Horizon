@@ -1,6 +1,6 @@
 /* 
 	Note: This script is created specifically for PostgreSQL database.
-	Last Version : 25.6.5
+	Last Version : 25.6.17
 	User Guide for Creating Database : 
 	1. Please create a database with "horizondb" name.
 	2. Open connection to created databse.
@@ -14,6 +14,7 @@ CREATE SCHEMA DocumentManagement;
 CREATE SCHEMA ProjectManagement;
 CREATE SCHEMA Finance;
 CREATE SCHEMA Evaluation;
+CREATE SCHEMA QualityControl;
 
 
 
@@ -142,6 +143,35 @@ CREATE TABLE Basic.ContractType(
     Id serial PRIMARY KEY NOT NULL, 
     Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint
+);
+
+CREATE TABLE Basic.TestApproval(
+    Id serial PRIMARY KEY NOT NULL, 
+    Code varchar(20) NOT NULL UNIQUE,
+    Title varchar(200) NOT NULL,
+	IsApproved boolean NOT NULL,
+	Color varchar(10) NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint
+);
+
+CREATE TABLE Basic.TestComplexityLevel(
+    Id serial PRIMARY KEY NOT NULL, 
+    Code varchar(20) NOT NULL UNIQUE,
+    Title varchar(200) NOT NULL,
+	ValueNumber float NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
@@ -767,7 +797,6 @@ CREATE TABLE ProjectManagement.ProjectReleaseIssue(
 	UNIQUE(IssueId, ProjectReleaseId)
 );
 
-
 CREATE TABLE ProjectManagement.WorkLog(
     Id serial PRIMARY KEY NOT NULL,
 	IssueId bigint NOT NULL,
@@ -1012,13 +1041,12 @@ CREATE TABLE Finance.ProjectDirectCostItem(
 	FOREIGN KEY (CostReceiptItemId) REFERENCES Finance.CostReceiptItem(Id)
 );
 
-CREATE TABLE Finance.CostReceipt(
+CREATE TABLE Finance.CostPaymentReceipt(
     Id serial PRIMARY KEY NOT NULL,
 	CostReceiptId bigint NOT NULL,
 	DocumentId bigint NOT NULL,
 	PaymentDate date NOT NULL,
 	Amount numeric(22, 2) NOT NULL,
-	CurrencyId bigint NOT NULL,
 	CurrencyId bigint NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
@@ -1147,9 +1175,116 @@ CREATE TABLE Finance.ContractPaymentReceipt(
 	FOREIGN KEY (CurrencyId) REFERENCES Basic.Currency(Id)
 );
 
+CREATE TABLE QualityControl.TestScenario(
+    Id serial PRIMARY KEY NOT NULL, 
+	TestComplexityLevelId bigint NOT Null,
+	Title varchar(255) NOT NULL,
+	Code varchar(10) NOT NULL,
+	UsersAndRoles varchar(4000),
+	Steps varchar(4000),
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (TestComplexityLevelId) REFERENCES Finance.TestComplexityLevel(Id)
+);
+
+CREATE TABLE QualityControl.PrerequisiteTestScenario(
+    Id serial PRIMARY KEY NOT NULL, 
+	TestScenarioId bigint NOT Null,
+	PrerequisiteTestScenarioId bigint NOT Null,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (TestScenarioId) REFERENCES QualityControl.TestScenario(Id),
+	FOREIGN KEY (PrerequisiteTestScenarioId) REFERENCES QualityControl.TestScenario(Id)
+);
+
+CREATE TABLE QualityControl.TestPlan(
+    Id serial PRIMARY KEY NOT NULL, 
+	ProjectReleaseId bigint,
+	Title varchar(255) NOT NULL,
+	Code varchar(10) NOT NULL,
+	PlanningDate date,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (ProjectReleaseId) REFERENCES ProjectManagement.ProjectRelease(Id)
+);
+
+CREATE TABLE QualityControl.TestPlanScenario(
+    Id serial PRIMARY KEY NOT NULL, 
+	TestScenarioId bigint NOT NULL,
+	TestPlanId bigint NOT NULL,
+	Ordering float NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (TestScenarioId) REFERENCES QualityControl.TestScenario(Id),
+	FOREIGN KEY (TestPlanId) REFERENCES QualityControl.TestPlan(Id),
+	UNIQUE(TestScenarioId, TestPlanId, Ordering)
+);
+
+CREATE TABLE QualityControl.TestPlanScenarioIssueCoverage(
+    Id serial PRIMARY KEY NOT NULL, 
+	TestPlanScenarioId bigint NOT NULL,
+	IssueId bigint NOT NULL,
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (TestPlanScenarioId) REFERENCES QualityControl.TestPlanScenario(Id),
+	FOREIGN KEY (IssueId) REFERENCES ProjectManagement.Issue(Id),
+	UNIQUE(TestPlanScenarioId, IssueId)
+);
+
+CREATE TABLE QualityControl.TestResult(
+    Id serial PRIMARY KEY NOT NULL, 
+	TestPlanId bigint NOT NULL,
+	TestDate date NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (TestPlanId) REFERENCES QualityControl.TestPlan(Id)
+);
+
+CREATE TABLE QualityControl.TestResultDetail(
+    Id serial PRIMARY KEY NOT NULL, 
+	TestPlanScenarioId bigint,
+	TestApprovalId bigint NOT NULL,
+	Description varchar(4000),
+    IsActive boolean NOT NULL DEFAULT true,
+    IsDeleted boolean NOT NULL DEFAULT false,
+    CreateDate timestamp NOT NULL DEFAULT NOW(),
+	CreatorId bigint NOT NULL,
+    ModifyDate timestamp,
+	ModifierId bigint,
+	FOREIGN KEY (TestPlanScenarioId) REFERENCES QualityControl.TestPlanScenario(Id),
+	FOREIGN KEY (TestApprovalId) REFERENCES Basic.TestApproval(Id)
+);
+
 CREATE TABLE Evaluation.Questionnaire(
     Id serial PRIMARY KEY NOT NULL,
-	Title varchar(255) NOT NULL
+	Title varchar(255) NOT NULL,
 	TotalScore int NOT NULL,
 	AcceptableScore int NOT NULL,
 	WarningScore int NOT NULL,

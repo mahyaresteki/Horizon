@@ -12,7 +12,6 @@ title Horizon Research Project (HRP) \n Project Management Use Cases \n Version 
 :DevOps Manager: as DevOpsManager
 :Product Manager: as ProductManager
 :Staff: as Staff
-:Project Manager: as PMO
 
 package "Project Management"{
     usecase "Project Management" as projectManagement

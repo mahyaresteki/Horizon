@@ -1,0 +1,249 @@
+@startuml
+hide circle
+skinparam classBackgroundColor #Business
+skinparam linetype ortho
+skinparam Shadowing True
+skinparam TitleFontSize 72pt
+
+title Horizon Research Project (HRP) \n Human Resource Schema Diagram \n Version 25.6.19
+
+entity "Basic.EducationLevel" as educationLevel #LightPink{
+  *Id : bigint(19) <<serial>>
+  --
+  *Title : varchar(200)
+  *Code : varchar(20) <<unique>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "DocumentManagement.Document" as document #Gold{
+  *Id : bigint(19) <<serial>>
+  --
+  *TableName : varchar(255)
+  *TableId : bigint(19)
+  *DocumentTypeId : bigint(19) <<FK>>
+  *FileExtensionId : bigint(19) <<FK>>
+  *FileAddress: varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "UserManagement.Profile" as profile #Violet{
+  *Id : bigint(19) <<serial>>
+  --
+  *FirstName : varchar(200)
+  *LastName : varchar(200)
+  *Gender : enum <<male, female>>
+  *StaffNumber : varchar(20) <<unique>>
+  *ActiveFrom : timestamp
+  ActiveTo : timestamp
+  PositionId : bigint(19) <<FK>>
+  Avatar : text
+  Birthday : date
+  PhoneNumber : varchar(20)
+  MobileNumber : varchar(20)
+  EmailAddress : varchar(200)
+  Address : varchar(1000)
+  PostalCode : varchar(20)
+  LastLogInDate : timestamp
+  LogInCount : integer(10) <<default: 0>>
+  WrongLogInCount : integer(10) <<default: 0>>
+  *Username : varchar(200) <<unique>>
+  *Pass : varchar(255)
+  PassSalt : varchar(50)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "HumanResource.Department" as department #Lavender{
+  *Id : integer(10) <<serial>>
+  --
+  *Title : varchar(50)
+  *Code : varchar(20) <<unique>>
+  ParentId : integer(20) <<FK>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "HumanResource.Position" as position #Lavender{
+  *Id : integer(10) <<serial>>
+  --
+  *Title : varchar(50)
+  *Code : varchar(20) <<unique>>
+  *DepartmentId : bigint(19) <<FK>>
+  ParentId : bigint(19) <<FK>>
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "HumanResource.ProfileEducation" as profileEducation #Lavender{
+  *Id : bigint(19) <<serial>>
+  --
+  *ProfileId : bigint(19) <<FK>>
+  *EducatioLevelId : bigint(19) <<FK>>
+  DocumentId : bigint(19) <<FK>>
+  *Title : varchar(255)
+  CollegeName : varchar(255)
+  StartDate : date
+  EndDate : date
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "HumanResource.ProfileJobExperience" as profileJobExperience #Lavender{
+  *Id : bigint(19) <<serial>>
+  --
+  *ProfileId : bigint(19) <<FK>>
+  *JobTitle : varchar(200)
+  *CompanyName : varchar(200)
+  StartDate : date
+  EndDate : date
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "HumanResource.ProfileCertificate" as profileCertificate #Lavender{
+  *Id : bigint(19) <<serial>>
+  --
+  *ProfileId : bigint(19) <<FK>>
+  *Title : varchar(200)
+  *InstituteName : varchar(200)
+  StartDate : date
+  EndDate : date
+  HasCertificate : boolean
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "HumanResource.WorkingTimeTable" as workingTimeTable #Lavender{ 
+  *Id : bigint(19) <<serial>>
+  --
+  *WorkingDay : enum <<Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday>>
+  *StartTime : time
+  *EndTime : time
+  FloatingStartTime : time
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "HumanResource.Holidaies" as holidaies #Lavender{
+  *Id : bigint(19) <<serial>>
+  --
+  HolidayDate : date <<unique>> 
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "HumanResource.Attendance" as attendance #Lavender{
+  *Id : bigint(19) <<serial>>
+  --
+  *ProfileId : bigint(19) <<FK>>
+  *WorkingDate : date
+  *EnteranceType : enum <<enter, exit>>
+  *EnternaceTime : time
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "HumanResource.Leave" as leave #Lavender{
+  *Id : bigint(19) <<serial>>
+  --
+  *ProfileId : bigint(19) <<FK>>
+  LeaveType : enum <<fulltime, parttime>>
+  *LeavingStartDate : date
+  LeavingEndDate : date
+  *LeavingStartTime : time
+  *LeavingEndTime : time
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+entity "HumanResource.WorkMission" as workMission #Lavender{
+  *Id : bigint(19) <<serial>>
+  --
+  *ProfileId : bigint(19) <<FK>>
+  *MissionStartDate : date
+  MissionEndDate : date
+  *MissionStartTime : time
+  *MissionEndTime : time
+  MissionLocation : varchar(255)
+  Description : varchar(4000)
+  *IsActive : boolean <<default: true>>
+  *IsDeleted : boolean <<default: false>>
+  *CreateDate : timestamp <<default: now()>>
+  *CreatorId : bigint(19)
+  ModifyDate : timestamp
+  ModifierId : bigint(19)
+}
+
+department |o..o{ department
+position |o..o{ position
+department ||..o{ position
+position ||..o{ profile
+profile ||..o{ profileEducation
+educationLevel ||..o{ profileEducation
+profile ||..o{ profileCertificate
+profile ||..o{ profileJobExperience
+profile ||..o{ attendance
+profile ||..o{ leave
+profile ||..o{ workMission
+document ||..o{ profileEducation
+
+@enduml
