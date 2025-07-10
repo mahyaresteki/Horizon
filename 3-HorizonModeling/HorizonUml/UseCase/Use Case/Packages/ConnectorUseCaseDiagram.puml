@@ -6,7 +6,7 @@ skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 skinparam TitleFontSize 48px
 
-title Horizon Research Project (HRP) \n Connector Use Cases \n Version 25.5.30
+title Horizon Research Project (HRP) \n Connector Use Cases \n Version 25.7.10
 
 :Project Manager: as PMO
 :Financial Manager: as Fmanager
@@ -17,7 +17,7 @@ package "Connector"{
     usecase "Set Trello Connection Settings" as setTrelloConnection
     usecase "Set GitHub Connection Settings" as setGitHubConnection
     usecase "Set GitLab Connection Settings" as setGitLabConnection
-    usecase "Set Bibucket Connection Settings" as setBitbucketConnection
+    usecase "Set Bitbucket Connection Settings" as setBitbucketConnection
     usecase "Set File Server Connection Settings" as setFileServerConnection
 
     usecase "Sync Project Activities by Jira" as syncByJira

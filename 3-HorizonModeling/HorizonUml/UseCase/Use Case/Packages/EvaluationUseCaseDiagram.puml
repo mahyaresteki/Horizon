@@ -6,7 +6,7 @@ skinparam actorBackgroundColor #Business
 skinparam Shadowing True
 skinparam TitleFontSize 48px
 
-title Horizon Research Project (HRP) \n Evaluation Use Cases \n Version 25.6.6
+title Horizon Research Project (HRP) \n Evaluation Use Cases \n Version 25.7.9
 
 :Project Manager: as PMO
 :Financial Manager: as Fmanager
@@ -63,12 +63,12 @@ package "Evaluation"{
     usecase "Productivity Evaluation" as productivityEvaluation
     usecase "Productivity Evaluation Calculation" as productivityEvaluationCalculation
     usecase "Productivity Evaluation Report" as productivityEvaluationReport
-    usecase "Staff Statisfaction Evaluation" as staffStatisfactoinEvaluation
-    usecase "Staff Statisfaction Evaluation Calculation" as staffStatisfactoinEvaluationCalculation
-    usecase "Staff Statisfaction Evaluation Report" as staffStatisfactoinEvaluationReport
-    usecase "Customer Statisfaction Evaluation" as customerStatisfactoinEvaluation
-    usecase "Customer Statisfaction Evaluation Calculation" as customerStatisfactoinEvaluationCalculation
-    usecase "Customer Statisfaction Evaluation Report" as customerStatisfactoinEvaluationReport
+    usecase "Staff Satisfaction Evaluation" as staffSatisfactoinEvaluation
+    usecase "Staff Satisfaction Evaluation Calculation" as saffStatisfactoinEvaluationCalculation
+    usecase "Staff Satisfaction Evaluation Report" as staffSatisfactoinEvaluationReport
+    usecase "Customer Satisfaction Evaluation" as customerSatisfactoinEvaluation
+    usecase "Customer Satisfaction Evaluation Calculation" as customerSatisfactoinEvaluationCalculation
+    usecase "Customer Satisfaction Evaluation Report" as customerSatisfactoinEvaluationReport
     usecase "Examining the Interaction of Evaluations" as interactionOfEvaluations
 }
 HR -- questionnaire
@@ -126,10 +126,10 @@ customerFeedback ..> customerFeedbackView : <<include>>
 
 productivityEvaluation ..> productivityEvaluationCalculation : <<include>>
 productivityEvaluation ..> productivityEvaluationReport : <<include>>
-staffStatisfactoinEvaluation ..> staffStatisfactoinEvaluationCalculation : <<include>>
-staffStatisfactoinEvaluation ..> staffStatisfactoinEvaluationReport : <<include>>
-customerStatisfactoinEvaluation ..> customerStatisfactoinEvaluationCalculation : <<include>>
-customerStatisfactoinEvaluation ..> customerStatisfactoinEvaluationReport : <<include>>
+staffSatisfactoinEvaluation ..> staffSatisfactoinEvaluationCalculation : <<include>>
+staffSatisfactoinEvaluation ..> staffSatisfactoinEvaluationReport : <<include>>
+customerSatisfactoinEvaluation ..> customerSatisfactoinEvaluationCalculation : <<include>>
+customerSatisfactoinEvaluation ..> customerSatisfactoinEvaluationReport : <<include>>
 
 
 @enduml
