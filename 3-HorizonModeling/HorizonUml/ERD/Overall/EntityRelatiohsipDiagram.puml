@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.6.18
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.7.10
 
 entity "Basic.EducationLevel" as educationLevel #LightPink{
   *Id : bigint(19) <<serial>>
@@ -60,9 +60,7 @@ entity "Basic.Status" as status #LightPink{
   *Code : varchar(20) <<unique>>
   Description : varchar(4000)
   *Color : varchar(7)
-  *IsToDo : boolean
-  *IsInProgress : boolean
-  *IsDone : boolean
+  *StatusEffect : enum <<To Do, In Progress, Done>>
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
   *CreateDate : timestamp <<default: now()>>

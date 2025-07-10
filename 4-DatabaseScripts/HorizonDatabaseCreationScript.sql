@@ -1,6 +1,6 @@
 /* 
 	Note: This script is created specifically for PostgreSQL database.
-	Last Version : 25.6.17
+	Last Version : 25.7.10
 	User Guide for Creating Database : 
 	1. Please create a database with "horizondb" name.
 	2. Open connection to created databse.
@@ -23,6 +23,8 @@ CREATE TYPE weekday AS ENUM ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frid
 CREATE TYPE enterancetype AS ENUM ('Enter', 'Exit');
 CREATE TYPE leavetype AS ENUM ('FullTime', 'PartTime');
 CREATE TYPE calculationtype AS ENUM ('Percentage', 'FixedAmount');
+CREATE TYPE statusLevel AS ENUM ('To Do', 'In Progress', 'Done');
+
 
 
 CREATE TABLE Basic.EducationLevel(
@@ -73,9 +75,7 @@ CREATE TABLE Basic.Status(
     Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
 	Color varchar(7) NOT NULL,
-	IsToDo boolean NOT NULL,
-	IsInProgress boolean NOT NULL,
-	IsDone boolean NOT NULL,
+	StatusEffect statusLevel NOT NULL,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
