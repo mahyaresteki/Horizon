@@ -75,15 +75,7 @@ The following articles are available to the public as mindsets of the project.
 	* Establishing a reliable data source for management decision-making
 
 ## Documentation
-
-### Modeling Outputs
-1. **Modeling Language:** Horizon system is modeled in [UML 2.0](https://en.wikipedia.org/wiki/Unified_Modeling_Language) format by [PlantUML](https://plantuml.com/). Please [click here](https://github.com/mahyaresteki/Horizon/tree/master/3-HorizonModeling/HorizonUml/out) to see the modeling diagrams.
-2. **Prototyping:** the project is prototyped by [Pencil](https://pencil.evolus.vn/) application. Please [click here](https://github.com/mahyaresteki/Horizon/tree/master/3-HorizonModeling/HorizonUiSketch) to see created prototypes.
-
-### Technical Documents
-The list of technical documentation for the project is as follows:
-1. **Project Architecture:** This document contains necessary information about the overall structure, architecture, and infrastructure of the project. [Click here](https://github.com/mahyaresteki/Horizon/blob/master/2-TechnicalDocuments/Project_Achitecture.pdf) to view it.
-2. **KPIs for Productivity and Staff Satisfaction Assessment:** This document includes research on indicators for evaluating employee productivity and satisfaction. [Click here](https://github.com/mahyaresteki/Horizon/blob/master/2-TechnicalDocuments/KPIs_for_Productivity_and_Staff_Satisfaction_Assessment.pdf) to view it.
+The Horizon Research Project has one of the most complete technical documentations among free and open source software. In this project, even the system modeling is free so that developers can based on it to present ideas for creating more advanced systems. From the perspective of the Horizon Project developers, science is not a proprietary commodity and should be freely available to the public. To view the project documentation, you can read the [Wiki](https://github.com/mahyaresteki/Horizon/wiki) section.
 
 ## Project Additional Info
 ### Current Status
@@ -91,22 +83,4 @@ This project is currently in the research and documentation phase. No coding tas
 
 ### How to Contribute
 At this stage, contributions are welcome in the form of research, documentation, and theoretical discussion.
-
-## Use of AI Assistants in the Horizon Project
-As part of the Horizon project development, AI assistants were used to improve the quality and efficiency of both content creation and design tasks. The following tools were utilized:
-
-### ChatGPT – AI Assistant for Content Writing
-We used ChatGPT to assist in drafting, editing, and refining textual content for the project. This AI model helped:
-* Enhance clarity and coherence in descriptions
-* Maintain a consistent and professional tone
-* Generate structured content such as objectives, summaries, and feature explanations
-ChatGPT supported the writing process while ensuring conceptual accuracy and alignment with the project’s goals.
-
-### Recraft – AI Assistant for Logo Design
-For the project’s visual identity, Recraft (an AI-powered design tool) was used to:
-* Generate logo design ideas aligned with the project’s theme and values
-* Explore various creative concepts quickly and efficiently
-* Refine and finalize the logo based on iterative AI-generated suggestions
-Recraft enabled the team to experiment with visual directions and produce a logo that represents Horizon’s mission and identity.
-
 
