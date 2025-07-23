@@ -1,6 +1,6 @@
 /* 
 	Note: This script is created specifically for PostgreSQL database.
-	Last Version : 25.7.10
+	Last Version : 25.7.23
 	User Guide for Creating Database : 
 	1. Please create a database with "horizondb" name.
 	2. Open connection to created databse.
@@ -167,7 +167,8 @@ CREATE TABLE Basic.TestApproval(
 	ModifierId bigint
 );
 
-CREATE TABLE Basic.TestComplexityLevel(
+CREATE TABLE Basic.
+(
     Id serial PRIMARY KEY NOT NULL, 
     Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
@@ -427,7 +428,7 @@ CREATE TABLE DocumentManagement.Document(
 
 CREATE TABLE HumanResource.ProfileEducation(
     Id serial PRIMARY KEY NOT NULL, 
-	ProfileId bigint Not Null,
+	ProfileId bigint NOT Null,
 	EducationLevelId bigint NOT NULL,
 	DocumentId bigint,
 	Title varchar(255) NOT NULL,
@@ -435,6 +436,7 @@ CREATE TABLE HumanResource.ProfileEducation(
 	StartDate date,
 	EndDate date,
 	Description varchar(4000),
+	CertificateFileAddress varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
     CreateDate timestamp NOT NULL DEFAULT NOW(),
@@ -472,6 +474,7 @@ CREATE TABLE HumanResource.ProfileCertificate(
 	StartDate date,
 	EndDate date,
 	Description varchar(4000),
+	CertificateFileAddress varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
     CreateDate timestamp NOT NULL DEFAULT NOW(),
@@ -483,7 +486,8 @@ CREATE TABLE HumanResource.ProfileCertificate(
 
 
 CREATE TABLE HumanResource.WorkingTimeTable(
-    Id serial PRIMARY KEY NOT NULL, 
+    Id serial PRIMARY KEY NOT NULL,
+	ContractTypeId bigint Not Null,
 	WorkingDay weekday NOT NULL,
 	StartTime time NOT NULL,
 	EndTime time NOT NULL,
@@ -494,7 +498,8 @@ CREATE TABLE HumanResource.WorkingTimeTable(
     CreateDate timestamp NOT NULL DEFAULT NOW(),
 	CreatorId bigint NOT NULL,
     ModifyDate timestamp,
-	ModifierId bigint
+	ModifierId bigint,
+	FOREIGN KEY (ContractTypeId) REFERENCES Basic.ContractType(Id)
 );
 
 CREATE TABLE HumanResource.Holidaies(

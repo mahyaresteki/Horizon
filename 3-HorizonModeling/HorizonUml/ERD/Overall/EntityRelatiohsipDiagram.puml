@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.7.10
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.7.23
 
 entity "Basic.EducationLevel" as educationLevel #LightPink{
   *Id : bigint(19) <<serial>>
@@ -410,6 +410,7 @@ entity "HumanResource.ProfileEducation" as profileEducation #Lavender{
   CollegeName : varchar(255)
   StartDate : date
   EndDate : date
+  CertificateFileAddress : varchar(4000)
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -445,6 +446,7 @@ entity "HumanResource.ProfileCertificate" as profileCertificate #Lavender{
   StartDate : date
   EndDate : date
   HasCertificate : boolean
+  CertificateFileAddress : varchar(4000)
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>
   *IsDeleted : boolean <<default: false>>
@@ -458,6 +460,7 @@ entity "HumanResource.WorkingTimeTable" as workingTimeTable #Lavender{
   *Id : bigint(19) <<serial>>
   --
   *WorkingDay : enum <<Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday>>
+  *ContractTypeId : bigint(19) <<FK>>
   *StartTime : time
   *EndTime : time
   FloatingStartTime : time
@@ -1411,6 +1414,7 @@ profile ||..o{ attendance
 profile ||..o{ leave
 profile ||..o{ workMission
 document ||..o{ profileEducation
+contractType ||..o{ workingTimeTable
 
 project ||..o{ issue
 issueType ||..o{ issue
