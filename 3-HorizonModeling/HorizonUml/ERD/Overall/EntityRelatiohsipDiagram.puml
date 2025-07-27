@@ -5,7 +5,7 @@ skinparam linetype ortho
 skinparam Shadowing True
 skinparam TitleFontSize 72pt
 
-title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.7.23
+title Horizon Research Project (HRP) \n Entity Relationship Diagram \n Version 25.7.28
 
 entity "Basic.EducationLevel" as educationLevel #LightPink{
   *Id : bigint(19) <<serial>>
@@ -476,6 +476,7 @@ entity "HumanResource.WorkingTimeTable" as workingTimeTable #Lavender{
 entity "HumanResource.Holidaies" as holidaies #Lavender{
   *Id : bigint(19) <<serial>>
   --
+  *Title : varchar(255)
   HolidayDate : date <<unique>> 
   Description : varchar(4000)
   *IsActive : boolean <<default: true>>

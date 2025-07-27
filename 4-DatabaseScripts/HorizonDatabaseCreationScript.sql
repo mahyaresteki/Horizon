@@ -1,6 +1,6 @@
 /* 
 	Note: This script is created specifically for PostgreSQL database.
-	Last Version : 25.7.23
+	Last Version : 25.7.28
 	User Guide for Creating Database : 
 	1. Please create a database with "horizondb" name.
 	2. Open connection to created databse.
@@ -167,8 +167,7 @@ CREATE TABLE Basic.TestApproval(
 	ModifierId bigint
 );
 
-CREATE TABLE Basic.
-(
+CREATE TABLE Basic.TestComplexityLevel(
     Id serial PRIMARY KEY NOT NULL, 
     Code varchar(20) NOT NULL UNIQUE,
     Title varchar(200) NOT NULL,
@@ -307,7 +306,7 @@ CREATE TABLE UserManagement.GroupPermission(
 CREATE TABLE HumanResource.Department(
     Id serial PRIMARY KEY NOT NULL, 
     Code varchar(20) NOT NULL UNIQUE,
-    Title varchar(200) NOT NULL,
+    Title varchar(255) NOT NULL,
 	Description varchar(4000),
 	ParentId bigint,
     IsActive boolean NOT NULL DEFAULT true,
@@ -322,7 +321,7 @@ CREATE TABLE HumanResource.Department(
 CREATE TABLE HumanResource.Position(
     Id serial PRIMARY KEY NOT NULL, 
     Code varchar(10) NOT NULL UNIQUE,
-    Title varchar(200) NOT NULL,
+    Title varchar(255) NOT NULL,
 	Description varchar(4000),
 	ParentId bigint,
 	DepartmentId bigint NOT NULL,
@@ -504,6 +503,7 @@ CREATE TABLE HumanResource.WorkingTimeTable(
 
 CREATE TABLE HumanResource.Holidaies(
     Id serial PRIMARY KEY NOT NULL, 
+	Title varchar(255) NOT NULL,
 	HolidayDate date NOT NULL UNIQUE,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
