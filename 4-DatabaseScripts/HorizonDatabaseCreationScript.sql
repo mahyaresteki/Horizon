@@ -1,6 +1,6 @@
 /* 
 	Note: This script is created specifically for PostgreSQL database.
-	Last Version : 25.7.28
+	Last Version : 25.7.31
 	User Guide for Creating Database : 
 	1. Please create a database with "horizondb" name.
 	2. Open connection to created databse.
@@ -20,10 +20,11 @@ CREATE SCHEMA QualityControl;
 
 CREATE TYPE gender AS ENUM ('Male', 'Female');
 CREATE TYPE weekday AS ENUM ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
-CREATE TYPE enterancetype AS ENUM ('Enter', 'Exit');
-CREATE TYPE leavetype AS ENUM ('FullTime', 'PartTime');
-CREATE TYPE calculationtype AS ENUM ('Percentage', 'FixedAmount');
+CREATE TYPE enteranceType AS ENUM ('Enter', 'Exit');
+CREATE TYPE leaveType AS ENUM ('FullTime', 'PartTime');
+CREATE TYPE calculationType AS ENUM ('Percentage', 'FixedAmount');
 CREATE TYPE statusLevel AS ENUM ('To Do', 'In Progress', 'Done');
+CREATE TYPE holidayType AS ENUM ('National', 'Government or Federal', 'Provincial or State', 'Organizational');
 
 
 
@@ -449,7 +450,7 @@ CREATE TABLE HumanResource.ProfileEducation(
 
 CREATE TABLE HumanResource.ProfileJobExperience(
     Id serial PRIMARY KEY NOT NULL, 
-	ProfileId bigint Not Null,
+	ProfileId bigint NOt Null,
 	JobTitle varchar(255) NOT NULL,
 	CompanyName varchar(255) NOT NULL,
 	StartDate date,
@@ -466,7 +467,7 @@ CREATE TABLE HumanResource.ProfileJobExperience(
 
 CREATE TABLE HumanResource.ProfileCertificate(
     Id serial PRIMARY KEY NOT NULL, 
-	ProfileId bigint Not Null,
+	ProfileId bigint NOt Null,
 	Title varchar(255) NOT NULL,
 	InstituteNmae varchar(255) NOT NULL,
 	HasCertificate boolean NOT NULL,
@@ -486,7 +487,7 @@ CREATE TABLE HumanResource.ProfileCertificate(
 
 CREATE TABLE HumanResource.WorkingTimeTable(
     Id serial PRIMARY KEY NOT NULL,
-	ContractTypeId bigint Not Null,
+	ContractTypeId bigint NOt Null,
 	WorkingDay weekday NOT NULL,
 	StartTime time NOT NULL,
 	EndTime time NOT NULL,
@@ -504,6 +505,7 @@ CREATE TABLE HumanResource.WorkingTimeTable(
 CREATE TABLE HumanResource.Holidaies(
     Id serial PRIMARY KEY NOT NULL, 
 	Title varchar(255) NOT NULL,
+	HolidayType holidayType NOT NULL,
 	HolidayDate date NOT NULL UNIQUE,
 	Description varchar(4000),
     IsActive boolean NOT NULL DEFAULT true,
@@ -518,7 +520,7 @@ CREATE TABLE HumanResource.Attendance(
     Id serial PRIMARY KEY NOT NULL, 
 	ProfileId bigint Not Null,
 	WorkingDate date NOT NULL,
-	EnteranceType enterancetype NOT NULL,
+	EnteranceType enteranceType NOT NULL,
 	EnternaceTime time NOT NULL,
     IsActive boolean NOT NULL DEFAULT true,
     IsDeleted boolean NOT NULL DEFAULT false,
@@ -532,7 +534,7 @@ CREATE TABLE HumanResource.Attendance(
 CREATE TABLE HumanResource.Leave(
     Id serial PRIMARY KEY NOT NULL, 
 	ProfileId bigint Not Null,
-	LeaveType leavetype NOT NULL,
+	LeaveType leaveType NOT NULL,
 	LeavingStartDate date NOT NULL,
 	LeavingEndDate date,
 	LeavingStartTime time NOT NULL,
@@ -956,7 +958,7 @@ CREATE TABLE Finance.ContractSalaryItem(
 
 CREATE TABLE Finance.ContractDeductionItem(
     Id serial PRIMARY KEY NOT NULL,
-	CalculationType calculationtype NOT NULL,
+	CalculationType calculationType NOT NULL,
 	StaffContractId bigint NOT NULL,
 	CalculationTimeUnitId bigint NOT NULL,
 	Title varchar(255) NOT NULL,
