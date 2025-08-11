@@ -21,7 +21,7 @@ CREATE SCHEMA QualityControl;
 CREATE TYPE gender AS ENUM ('Male', 'Female');
 CREATE TYPE weekday AS ENUM ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
 CREATE TYPE enteranceType AS ENUM ('Enter', 'Exit');
-CREATE TYPE leaveType AS ENUM ('FullTime', 'PartTime');
+CREATE TYPE leaveType AS ENUM ('FullDay', 'PartofDay');
 CREATE TYPE calculationType AS ENUM ('Percentage', 'FixedAmount');
 CREATE TYPE statusLevel AS ENUM ('To Do', 'In Progress', 'Done');
 CREATE TYPE holidayType AS ENUM ('National', 'Government or Federal', 'Provincial or State', 'Organizational');
