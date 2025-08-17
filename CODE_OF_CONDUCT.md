@@ -1,8 +1,7 @@
 ## Horizon Code of Conduct
 This project has adopted the [Contributor Covenant](https://www.contributor-covenant.org/)
 
-# Contributor Covenant:
-# A Code of Conduct for Digital Communities
+# Contributor Covenant: A Code of Conduct for Digital Communities
 Contributor Covenant is the most widely adopted open source code of conduct in the world. It helps your community express its unique core values while setting clear expectations for how people should treat one another. Adopting Contributor Covenant signals your commitment to creating a welcoming and safe environment for everyone.
 
 ## Philosophy & Purpose
