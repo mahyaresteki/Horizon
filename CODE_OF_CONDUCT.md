@@ -70,8 +70,8 @@ This enforcement ladder is intended as a guideline. It does not limit the abilit
 This Code of Conduct applies within all community spaces, and also applies when an individual is officially representing the community in public or other spaces. Examples of representing our community include using an official email address, posting via an official social media account, or acting as an appointed representative at an online or offline event.
 
 ## Attribution
-This Code of Conduct is adapted from the Contributor Covenant, version 3.0, permanently available at [https://www.contributor-covenant.org/version/3/0/].
+This Code of Conduct is adapted from the Contributor Covenant, version 3.0, permanently available at https://www.contributor-covenant.org/version/3/0/.
 
-Contributor Covenant is stewarded by the Organization for Ethical Source and licensed under CC BY-SA 4.0. To view a copy of this license, visit [https://creativecommons.org/licenses/by-sa/4.0/]
+Contributor Covenant is stewarded by the Organization for Ethical Source and licensed under CC BY-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/
 
-For answers to common questions about Contributor Covenant, see the FAQ at [https://www.contributor-covenant.org/faq]. Translations are provided at [https://www.contributor-covenant.org/translations]. Additional enforcement and community guideline resources can be found at https://www.contributor-covenant.org/resources. The enforcement ladder was inspired by the work of Mozilla’s code of conduct team.
+For answers to common questions about Contributor Covenant, see the FAQ at https://www.contributor-covenant.org/faq. Translations are provided at https://www.contributor-covenant.org/translations. Additional enforcement and community guideline resources can be found at https://www.contributor-covenant.org/resources. The enforcement ladder was inspired by the work of Mozilla’s code of conduct team.
