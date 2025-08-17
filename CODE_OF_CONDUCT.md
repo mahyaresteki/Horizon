@@ -1,5 +1,5 @@
 ## Horizon Code of Conduct
-This project has adopted the [Contributor Covenant](https://www.contributor-covenant.org/](https://www.contributor-covenant.org/adopt/)
+This project has adopted the [Contributor Covenant](https://www.contributor-covenant.org/adopt/)
 
 # Contributor Covenant 3.0 Code of Conduct
 ## Our Pledge
