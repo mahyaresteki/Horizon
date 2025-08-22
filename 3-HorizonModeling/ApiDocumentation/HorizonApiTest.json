@@ -1,0 +1,571 @@
+{
+  "v": 9,
+  "name": "HorizonApiTest",
+  "folders": [
+    {
+      "v": 9,
+      "name": "Basic",
+      "folders": [
+        {
+          "v": 9,
+          "name": "EducationLevel",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "AddEducationLevel",
+              "method": "POST",
+              "endpoint": "https://[MainDomian]/api/basic/educationLevel",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Decription\" : \"[description (optional)]\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "UpdateEducationLevel",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/educationLevel/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Decription\" : \"[description (optional)]\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "DeleteEducationLevel",
+              "method": "DELETE",
+              "endpoint": "https://[MainDomian]/api/basic/educationLevel/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": ""
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/educationLevel/[id]",
+              "name": "GetSpecificEducationLevel",
+              "params": [],
+              "headers": [],
+              "method": "GET",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/getAllEducationLevel/",
+              "name": "GetAllEducationLevel",
+              "params": [
+                {
+                  "key": "title",
+                  "value": "test",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "code",
+                  "value": "123",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "description",
+                  "value": "test",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "limit",
+                  "value": "15",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "sort_by",
+                  "value": "desc(fieldName)",
+                  "active": true,
+                  "description": ""
+                }
+              ],
+              "headers": [],
+              "method": "GET",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/getComboListOfEducationLevel",
+              "name": "GetComboListOfEducationLevel",
+              "params": [],
+              "headers": [],
+              "method": "GET",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "headers": [],
+          "_ref_id": "coll_memqlihu_85485ee5-0944-4abf-b9ce-85e3b0352454"
+        },
+        {
+          "v": 9,
+          "name": "Priority",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/priority",
+              "name": "AddPriority",
+              "params": [],
+              "headers": [],
+              "method": "POST",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Color\" : \"[Color Hex Code]\",\n  \t\"Ordering\" : 0, //integer number\n  \t\"Decription\" : \"[description (optional)]\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/priority/[id]",
+              "name": "UpdatePriority",
+              "params": [],
+              "headers": [],
+              "method": "PUT",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Color\" : \"[Color Hex Code]\",\n  \t\"Ordering\" : 0, //integer number\n  \t\"Decription\" : \"[description (optional)]\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/priority/[id]",
+              "name": "DeletePriority",
+              "params": [],
+              "headers": [],
+              "method": "DELETE",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/priority/[id]",
+              "name": "GetSpecificPriority",
+              "params": [],
+              "headers": [],
+              "method": "GET",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/getAllPriority",
+              "name": "GetAllPriority",
+              "params": [
+                {
+                  "key": "title",
+                  "value": "test",
+                  "active": true,
+                  "description": "optional"
+                },
+                {
+                  "key": "code",
+                  "value": "123",
+                  "active": true,
+                  "description": "optional"
+                },
+                {
+                  "key": "description",
+                  "value": "test",
+                  "active": true,
+                  "description": "optional"
+                },
+                {
+                  "key": "color",
+                  "value": "FFFFFF",
+                  "active": true,
+                  "description": "optional"
+                },
+                {
+                  "key": "ordering",
+                  "value": "1",
+                  "active": true,
+                  "description": "optional"
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "active": true,
+                  "description": "optional"
+                },
+                {
+                  "key": "limit",
+                  "value": "15",
+                  "active": true,
+                  "description": "optional"
+                },
+                {
+                  "key": "sort_by",
+                  "value": "desc(fieldName)",
+                  "active": true,
+                  "description": "optional"
+                }
+              ],
+              "headers": [],
+              "method": "GET",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/getComboListOfPriority",
+              "name": "GetComboListOfPriority",
+              "params": [],
+              "headers": [],
+              "method": "GET",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "headers": [],
+          "_ref_id": "coll_memtk9zj_d60b2a47-e998-4a9e-9395-ac372104fa1d"
+        },
+        {
+          "v": 9,
+          "name": "IssueType",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/issueType",
+              "name": "AddIssueType",
+              "params": [],
+              "headers": [],
+              "method": "POST",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Color\" : \"[Color Hex Code]\",\n  \t\"IconAddress\" : \"[Icon URL]\", \n  \t\"Decription\" : \"[description (optional)]\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/issueType/[id]",
+              "name": "UpdateIssueType",
+              "params": [],
+              "headers": [],
+              "method": "PUT",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Color\" : \"[Color Hex Code]\",\n  \t\"IconAddress\" : \"[Icon URL]\", \n  \t\"Decription\" : \"[description (optional)]\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/issueType/[id]",
+              "name": "DeleteIssueType",
+              "params": [],
+              "headers": [],
+              "method": "DELETE",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/issueType/[id]",
+              "name": "GetSpecificIssueType",
+              "params": [],
+              "headers": [],
+              "method": "GET",
+              "auth": {
+                "authType": "inherit",
+                "authActive": true
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/getAllIssueType",
+              "name": "GetAllIssueType",
+              "params": [
+                {
+                  "key": "title",
+                  "value": "test",
+                  "active": true,
+                  "description": "optional"
+                },
+                {
+                  "key": "code",
+                  "value": "123",
+                  "active": true,
+                  "description": "optional"
+                },
+                {
+                  "key": "color",
+                  "value": "FFFFFF",
+                  "active": true,
+                  "description": "optional"
+                },
+                {
+                  "key": "description",
+                  "value": "test",
+                  "active": true,
+                  "description": "optional"
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "active": true,
+                  "description": "optional"
+                },
+                {
+                  "key": "limit",
+                  "value": "15",
+                  "active": true,
+                  "description": "optional"
+                },
+                {
+                  "key": "sort_by",
+                  "value": "desc(fieldName)",
+                  "active": true,
+                  "description": "optional"
+                }
+              ],
+              "headers": [],
+              "method": "GET",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "endpoint": "https://[MainDomian]/api/basic/getComboListOfIssueType",
+              "name": "GetComboListOfIssueType",
+              "params": [],
+              "headers": [],
+              "method": "GET",
+              "auth": {
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
+              },
+              "preRequestScript": "",
+              "testScript": "",
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "headers": [],
+          "_ref_id": "coll_memuiw9c_839a25df-5808-4afb-98f2-6ba8946a8673"
+        }
+      ],
+      "requests": [],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "_ref_id": "coll_memnr3km_045f4300-df86-4293-9ac4-7f1de4373be7"
+    }
+  ],
+  "requests": [],
+  "auth": {
+    "authType": "none",
+    "authActive": true
+  },
+  "headers": [],
+  "_ref_id": "coll_memnqpfs_d099e791-24b9-48f8-aa5f-b7cd80e90857"
+}
