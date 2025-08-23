@@ -22,8 +22,8 @@
               "testScript": "",
               "auth": {
                 "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
+                "token": "[token]",
+                "authActive": true
               },
               "body": {
                 "contentType": "application/json",
@@ -43,8 +43,8 @@
               "testScript": "",
               "auth": {
                 "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
+                "token": "[token]",
+                "authActive": true
               },
               "body": {
                 "contentType": "application/json",
@@ -64,8 +64,8 @@
               "testScript": "",
               "auth": {
                 "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
+                "token": "[token]",
+                "authActive": true
               },
               "body": {
                 "contentType": "application/json",
@@ -76,18 +76,18 @@
             },
             {
               "v": "15",
-              "endpoint": "https://[MainDomian]/api/basic/educationLevel/[id]",
-              "name": "GetSpecificEducationLevel",
+              "name": "ActiveEducationLevel",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/educationLevel/active/[id]",
               "params": [],
               "headers": [],
-              "method": "GET",
-              "auth": {
-                "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
-              },
               "preRequestScript": "",
               "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
               "body": {
                 "contentType": null,
                 "body": null
@@ -97,8 +97,51 @@
             },
             {
               "v": "15",
-              "endpoint": "https://[MainDomian]/api/basic/getAllEducationLevel/",
+              "name": "InactiveEducationLevel",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/educationLevel/inactive/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "GetSpecificEducationLevel",
+              "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/educationLevel/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
               "name": "GetAllEducationLevel",
+              "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/educationLevel/getAll",
               "params": [
                 {
                   "key": "title",
@@ -138,14 +181,13 @@
                 }
               ],
               "headers": [],
-              "method": "GET",
-              "auth": {
-                "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
-              },
               "preRequestScript": "",
               "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
               "body": {
                 "contentType": null,
                 "body": null
@@ -155,18 +197,18 @@
             },
             {
               "v": "15",
-              "endpoint": "https://[MainDomian]/api/basic/getComboListOfEducationLevel",
               "name": "GetComboListOfEducationLevel",
+              "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/educationLevel/getComboList",
               "params": [],
               "headers": [],
-              "method": "GET",
-              "auth": {
-                "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
-              },
               "preRequestScript": "",
               "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
               "body": {
                 "contentType": null,
                 "body": null
@@ -189,18 +231,18 @@
           "requests": [
             {
               "v": "15",
-              "endpoint": "https://[MainDomian]/api/basic/priority",
               "name": "AddPriority",
-              "params": [],
-              "headers": [],
               "method": "POST",
-              "auth": {
-                "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
-              },
+              "endpoint": "https://[MainDomian]/api/basic/priority",
+              "params": [],
+              "headers": [],
               "preRequestScript": "",
               "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
               "body": {
                 "contentType": "application/json",
                 "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Color\" : \"[Color Hex Code]\",\n  \t\"Ordering\" : 0, //integer number\n  \t\"Decription\" : \"[description (optional)]\"\n}"
@@ -210,18 +252,18 @@
             },
             {
               "v": "15",
-              "endpoint": "https://[MainDomian]/api/basic/priority/[id]",
               "name": "UpdatePriority",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/priority/[id]",
               "params": [],
               "headers": [],
-              "method": "PUT",
-              "auth": {
-                "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
-              },
               "preRequestScript": "",
               "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
               "body": {
                 "contentType": "application/json",
                 "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Color\" : \"[Color Hex Code]\",\n  \t\"Ordering\" : 0, //integer number\n  \t\"Decription\" : \"[description (optional)]\"\n}"
@@ -231,39 +273,18 @@
             },
             {
               "v": "15",
-              "endpoint": "https://[MainDomian]/api/basic/priority/[id]",
               "name": "DeletePriority",
-              "params": [],
-              "headers": [],
               "method": "DELETE",
-              "auth": {
-                "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
-              },
-              "preRequestScript": "",
-              "testScript": "",
-              "body": {
-                "contentType": null,
-                "body": null
-              },
-              "requestVariables": [],
-              "responses": {}
-            },
-            {
-              "v": "15",
               "endpoint": "https://[MainDomian]/api/basic/priority/[id]",
-              "name": "GetSpecificPriority",
               "params": [],
               "headers": [],
-              "method": "GET",
-              "auth": {
-                "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
-              },
               "preRequestScript": "",
               "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
               "body": {
                 "contentType": null,
                 "body": null
@@ -273,8 +294,72 @@
             },
             {
               "v": "15",
-              "endpoint": "https://[MainDomian]/api/basic/getAllPriority",
+              "name": "ActivePriority",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/priority/active/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "InactivePriority",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/priority/inactive/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "GetSpecificPriority",
+              "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/priority/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
               "name": "GetAllPriority",
+              "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/priority/getAll",
               "params": [
                 {
                   "key": "title",
@@ -326,14 +411,13 @@
                 }
               ],
               "headers": [],
-              "method": "GET",
-              "auth": {
-                "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
-              },
               "preRequestScript": "",
               "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
               "body": {
                 "contentType": null,
                 "body": null
@@ -343,18 +427,18 @@
             },
             {
               "v": "15",
-              "endpoint": "https://[MainDomian]/api/basic/getComboListOfPriority",
               "name": "GetComboListOfPriority",
+              "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/priority/getComboList",
               "params": [],
               "headers": [],
-              "method": "GET",
-              "auth": {
-                "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
-              },
               "preRequestScript": "",
               "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
               "body": {
                 "contentType": null,
                 "body": null
@@ -377,18 +461,18 @@
           "requests": [
             {
               "v": "15",
-              "endpoint": "https://[MainDomian]/api/basic/issueType",
               "name": "AddIssueType",
-              "params": [],
-              "headers": [],
               "method": "POST",
-              "auth": {
-                "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
-              },
+              "endpoint": "https://[MainDomian]/api/basic/issueType",
+              "params": [],
+              "headers": [],
               "preRequestScript": "",
               "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
               "body": {
                 "contentType": "application/json",
                 "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Color\" : \"[Color Hex Code]\",\n  \t\"IconAddress\" : \"[Icon URL]\", \n  \t\"Decription\" : \"[description (optional)]\"\n}"
@@ -398,18 +482,18 @@
             },
             {
               "v": "15",
-              "endpoint": "https://[MainDomian]/api/basic/issueType/[id]",
               "name": "UpdateIssueType",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/issueType/[id]",
               "params": [],
               "headers": [],
-              "method": "PUT",
-              "auth": {
-                "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
-              },
               "preRequestScript": "",
               "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
               "body": {
                 "contentType": "application/json",
                 "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Color\" : \"[Color Hex Code]\",\n  \t\"IconAddress\" : \"[Icon URL]\", \n  \t\"Decription\" : \"[description (optional)]\"\n}"
@@ -419,18 +503,18 @@
             },
             {
               "v": "15",
-              "endpoint": "https://[MainDomian]/api/basic/issueType/[id]",
               "name": "DeleteIssueType",
+              "method": "DELETE",
+              "endpoint": "https://[MainDomian]/api/basic/issueType/[id]",
               "params": [],
               "headers": [],
-              "method": "DELETE",
-              "auth": {
-                "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
-              },
               "preRequestScript": "",
               "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
               "body": {
                 "contentType": null,
                 "body": null
@@ -440,17 +524,59 @@
             },
             {
               "v": "15",
-              "endpoint": "https://[MainDomian]/api/basic/issueType/[id]",
-              "name": "GetSpecificIssueType",
+              "name": "ActiveIssueType",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/issueType/active/[id]",
               "params": [],
               "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "InactiveIssueStatus",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/issueType/inactive/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "GetSpecificIssueType",
               "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/issueType/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
               "auth": {
                 "authType": "inherit",
                 "authActive": true
               },
-              "preRequestScript": "",
-              "testScript": "",
               "body": {
                 "contentType": null,
                 "body": null
@@ -460,8 +586,9 @@
             },
             {
               "v": "15",
-              "endpoint": "https://[MainDomian]/api/basic/getAllIssueType",
               "name": "GetAllIssueType",
+              "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/issueType/getAll",
               "params": [
                 {
                   "key": "title",
@@ -507,14 +634,13 @@
                 }
               ],
               "headers": [],
-              "method": "GET",
-              "auth": {
-                "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
-              },
               "preRequestScript": "",
               "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
               "body": {
                 "contentType": null,
                 "body": null
@@ -524,18 +650,18 @@
             },
             {
               "v": "15",
-              "endpoint": "https://[MainDomian]/api/basic/getComboListOfIssueType",
               "name": "GetComboListOfIssueType",
+              "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/issueType/getComboList",
               "params": [],
               "headers": [],
-              "method": "GET",
-              "auth": {
-                "authType": "bearer",
-                "authActive": true,
-                "token": "[token]"
-              },
               "preRequestScript": "",
               "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
               "body": {
                 "contentType": null,
                 "body": null
@@ -550,6 +676,466 @@
           },
           "headers": [],
           "_ref_id": "coll_memuiw9c_839a25df-5808-4afb-98f2-6ba8946a8673"
+        },
+        {
+          "v": 9,
+          "name": "Status",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "AddStatus",
+              "method": "POST",
+              "endpoint": "https://[MainDomian]/api/basic/status",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \t\"code\" : \"[code]\",\n  \t\"title\" : \"[title]\",\n  \t\"color\" : \"[Color Hex Code]\",\n  \t\"statusEffect\" : \"[ENUM ('To Do', 'In Progress', 'Done')]\", \n  \t\"decription\" : \"[description (optional)]\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "UpdateStatus",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/status/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Color\" : \"[Color Hex Code]\",\n  \t\"StatusEffect\" : \"[ENUM ('To Do', 'In Progress', 'Done')]\", \n  \t\"Decription\" : \"[description (optional)]\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "DeleteStatus",
+              "method": "DELETE",
+              "endpoint": "https://[MainDomian]/api/basic/status/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "ActiveStatus",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/status/active/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "InactiveStatus",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/status/inactive/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "GetSpecificStatus",
+              "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/status/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "GetAllStatus",
+              "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/status/getAll",
+              "params": [
+                {
+                  "key": "title",
+                  "value": "test",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "code",
+                  "value": "123",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "color",
+                  "value": "FFFFFF",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "statusEffect",
+                  "value": "To Do/In Progress/Done",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "description",
+                  "value": "test",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "limit",
+                  "value": "15",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "sort_by",
+                  "value": "desc(fieldName)",
+                  "active": true,
+                  "description": ""
+                }
+              ],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "GetComboListOfStatus",
+              "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/status/getComboList",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "headers": [],
+          "_ref_id": "coll_meob0zbj_bcb960ee-d10d-488a-95de-99ef0e135e5e"
+        },
+        {
+          "v": 9,
+          "name": "Resolvation",
+          "folders": [],
+          "requests": [
+            {
+              "v": "15",
+              "name": "AddResolvation",
+              "method": "POST",
+              "endpoint": "https://[MainDomian]/api/basic/resolvation",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \t\"code\" : \"[code]\",\n  \t\"title\" : \"[title]\",\n  \t\"color\" : \"[Color Hex Code]\",\n  \t\"isResolved\" : true/false, \n  \t\"decription\" : \"[description (optional)]\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "UpdateResolvation",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/resolvation/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": "application/json",
+                "body": "{\n  \t\"code\" : \"[code]\",\n  \t\"title\" : \"[title]\",\n  \t\"color\" : \"[Color Hex Code]\",\n  \t\"isResolved\" : true/false, \n  \t\"decription\" : \"[description (optional)]\"\n}"
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "DeleteResolvation",
+              "method": "DELETE",
+              "endpoint": "https://[MainDomian]/api/basic/resolvation/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "ActiveResolvation",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/resolvation/active/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "InactiveResolvation",
+              "method": "PUT",
+              "endpoint": "https://[MainDomian]/api/basic/resolvation/inactive/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "GetSpecificResolvation",
+              "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/resolvation/[id]",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "GetAllResolvation",
+              "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/resolvation/getAll",
+              "params": [
+                {
+                  "key": "title",
+                  "value": "test",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "code",
+                  "value": "123",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "color",
+                  "value": "FFFFFF",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "isResolved",
+                  "value": "true/false",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "description",
+                  "value": "test",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "limit",
+                  "value": "15",
+                  "active": true,
+                  "description": ""
+                },
+                {
+                  "key": "sort_by",
+                  "value": "desc(fieldName)",
+                  "active": true,
+                  "description": ""
+                }
+              ],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            },
+            {
+              "v": "15",
+              "name": "GetComboListOfResolvation",
+              "method": "GET",
+              "endpoint": "https://[MainDomian]/api/basic/status/getAll",
+              "params": [],
+              "headers": [],
+              "preRequestScript": "",
+              "testScript": "",
+              "auth": {
+                "authType": "bearer",
+                "token": "[token]",
+                "authActive": true
+              },
+              "body": {
+                "contentType": null,
+                "body": null
+              },
+              "requestVariables": [],
+              "responses": {}
+            }
+          ],
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "headers": [],
+          "_ref_id": "coll_meobu7lb_2e54d54c-3f2d-437c-92cf-a401e9407f2b"
         }
       ],
       "requests": [],
