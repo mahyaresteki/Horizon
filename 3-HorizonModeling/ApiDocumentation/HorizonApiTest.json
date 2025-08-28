@@ -245,7 +245,7 @@
               },
               "body": {
                 "contentType": "application/json",
-                "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Color\" : \"[Color Hex Code]\",\n  \t\"Ordering\" : 0, //integer number\n  \t\"Decription\" : \"[description (optional)]\"\n}"
+                "body": "{\n  \t\"code\" : \"[code]\",\n  \t\"title\" : \"[title]\",\n  \t\"color\" : \"[Color Hex Code]\",\n  \t\"ordering\" : 0, //integer number\n  \t\"decription\" : \"[description (optional)]\"\n}"
               },
               "requestVariables": [],
               "responses": {}
@@ -266,7 +266,7 @@
               },
               "body": {
                 "contentType": "application/json",
-                "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Color\" : \"[Color Hex Code]\",\n  \t\"Ordering\" : 0, //integer number\n  \t\"Decription\" : \"[description (optional)]\"\n}"
+                "body": "{\n  \t\"code\" : \"[code]\",\n  \t\"title\" : \"[title]\",\n  \t\"color\" : \"[Color Hex Code]\",\n  \t\"ordering\" : 0, //integer number\n  \t\"decription\" : \"[description (optional)]\"\n}"
               },
               "requestVariables": [],
               "responses": {}
@@ -475,7 +475,7 @@
               },
               "body": {
                 "contentType": "application/json",
-                "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Color\" : \"[Color Hex Code]\",\n  \t\"IconAddress\" : \"[Icon URL]\", \n  \t\"Decription\" : \"[description (optional)]\"\n}"
+                "body": "{\n  \t\"code\" : \"[code]\",\n  \t\"title\" : \"[title]\",\n  \t\"color\" : \"[Color Hex Code]\",\n  \t\"iconAddress\" : \"[Icon URL]\", \n  \t\"decription\" : \"[description (optional)]\"\n}"
               },
               "requestVariables": [],
               "responses": {}
@@ -496,7 +496,7 @@
               },
               "body": {
                 "contentType": "application/json",
-                "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Color\" : \"[Color Hex Code]\",\n  \t\"IconAddress\" : \"[Icon URL]\", \n  \t\"Decription\" : \"[description (optional)]\"\n}"
+                "body": "{\n  \t\"code\" : \"[code]\",\n  \t\"title\" : \"[title]\",\n  \t\"color\" : \"[Color Hex Code]\",\n  \t\"iconAddress\" : \"[Icon URL]\", \n  \t\"decription\" : \"[description (optional)]\"\n}"
               },
               "requestVariables": [],
               "responses": {}
@@ -574,8 +574,9 @@
               "preRequestScript": "",
               "testScript": "",
               "auth": {
-                "authType": "inherit",
-                "authActive": true
+                "authType": "bearer",
+                "authActive": true,
+                "token": "[token]"
               },
               "body": {
                 "contentType": null,
@@ -698,7 +699,7 @@
               },
               "body": {
                 "contentType": "application/json",
-                "body": "{\n  \t\"code\" : \"[code]\",\n  \t\"title\" : \"[title]\",\n  \t\"color\" : \"[Color Hex Code]\",\n  \t\"statusEffect\" : \"[ENUM ('To Do', 'In Progress', 'Done')]\", \n  \t\"decription\" : \"[description (optional)]\"\n}"
+                "body": "{\n  \t\"code\" : \"[code]\",\n  \t\"title\" : \"[title]\",\n  \t\"color\" : \"[Color Hex Code]\",\n  \t\"statusEffect\" : \"[ENUM (To Do, In Progress, Done)]\", \n  \t\"decription\" : \"[description (optional)]\"\n}"
               },
               "requestVariables": [],
               "responses": {}
@@ -719,7 +720,7 @@
               },
               "body": {
                 "contentType": "application/json",
-                "body": "{\n  \t\"Code\" : \"[code]\",\n  \t\"Title\" : \"[title]\",\n  \t\"Color\" : \"[Color Hex Code]\",\n  \t\"StatusEffect\" : \"[ENUM ('To Do', 'In Progress', 'Done')]\", \n  \t\"Decription\" : \"[description (optional)]\"\n}"
+                "body": "{\n  \t\"code\" : \"[code]\",\n  \t\"title\" : \"[title]\",\n  \t\"color\" : \"[Color Hex Code]\",\n  \t\"statusEffect\" : \"[ENUM (To Do, In Progress, Done)]\", \n  \t\"decription\" : \"[description (optional)]\"\n}"
               },
               "requestVariables": [],
               "responses": {}
@@ -1112,7 +1113,7 @@
               "v": "15",
               "name": "GetComboListOfResolvation",
               "method": "GET",
-              "endpoint": "https://[MainDomian]/api/basic/status/getAll",
+              "endpoint": "https://[MainDomian]/api/basic/resolvation/getComboList",
               "params": [],
               "headers": [],
               "preRequestScript": "",
