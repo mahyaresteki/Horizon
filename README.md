@@ -50,9 +50,9 @@ The Extension Engine allows Horizon to act not as another siloed system, but as 
 
 ## Mindsets
 The following articles are available to the public as mindsets of the project.
-1. **Worldview Mindset:** [Social-Oriented Philosophy](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Social_Oriented_Philosophy.pdf)
-2. **Mindset for the Problem:** [Deceptive Virtualization Theory](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Deceptive_Virtualization_Theory.pdf)
-3. **Mindset for the Solution:** [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/blob/master/1-Theories/Theory_of_Endurance_Software_Development_Methodology.pdf)
+1. **Worldview Mindset:** [Social-Oriented Philosophy](https://github.com/mahyaresteki/Horizon/raw/refs/heads/master/1-Minesets/1.1-WorldviewMindset/Social_Oriented_Philosophy.odt)
+2. **Mindset for the Problem:** [Deceptive Virtualization Theory](https://github.com/mahyaresteki/Horizon/raw/refs/heads/master/1-Minesets/1.2-MindsetForTheProblem/Deceptive_Virtualization_Theory.odt)
+3. **Mindset for the Solution:** [Theory of Endurance Software Development Methodology](https://github.com/mahyaresteki/Horizon/raw/refs/heads/master/1-Minesets/1.3-MindsetForTheSolution/Theory_of_Endurance_Software_Development_Methodology.odt)
 
 ## Objectives
 1. **Enhancing Employee Satisfaction**
