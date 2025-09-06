@@ -45,7 +45,7 @@ With Horizon Extension Engine, you can effortlessly sync data from popular platf
 The Extension Engine allows Horizon to act not as another siloed system, but as a holistic analytical layer over your organization’s existing infrastructure — combining HR, financial, and project metrics into one coherent picture.
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/mahyaresteki/Horizon/refs/heads/master/3-HorizonModeling/3.1-HorizonUml/out/Deployment/DeploymentDiagram.png" style="margin-left:auto; margin-right:auto">
+<img src="https://raw.githubusercontent.com/mahyaresteki/Horizon/refs/heads/master/3-HorizonModeling/3.1-HorizonUml/out/Architecture/ProjectSchemaDiagram.png" style="margin-left:auto; margin-right:auto">
 </div>
 
 ## Mindsets
